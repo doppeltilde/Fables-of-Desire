@@ -1,7 +1,7 @@
 name: fablesofdesire
 description: A new game.
 publish_to: 'none' 
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
@@ -25,13 +25,32 @@ dependencies:
   flame_audio: ^0.1.0-rc5
   get: ^4.1.4
 
-dependency_overrides:
-  games_services:
-    git:
-      url: https://github.com/jonatadashi/games_services.git
-      ref: master
-      path: games_services
-      
+# dependency_overrides:
+#   games_services:
+#     git:
+#       url: https://github.com/jonatadashi/games_services.git
+#       ref: master
+#       path: games_services
+flutter_icons:
+  android: "launcher_icon" 
+  ios: true
+  remove_alpha_ios: true
+  adaptive_icon_background: "#FFFFFF"
+  image_path: "assets/images/sprites/MC_Blush.png"
+
 flutter:
 
   uses-material-design: true
+
+  assets:
+    - assets/audio/
+
+    - assets/images/
+    - assets/images/sprites/
+
+    - assets/languages/
+
+  fonts:
+    - family: Aleo
+      fonts:
+        - asset: assets/fonts/Aleo-Regular.ttf

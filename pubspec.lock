@@ -135,24 +135,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  games_services:
-    dependency: "direct overridden"
-    description:
-      path: games_services
-      ref: master
-      resolved-ref: b3df163d6c787b2c3c19fecc07bd9459174456c7
-      url: "https://github.com/jonatadashi/games_services.git"
-    source: git
-    version: "2.0.0"
-  games_services_platform_interface:
-    dependency: transitive
-    description:
-      path: games_services_platform_interface
-      ref: master
-      resolved-ref: b3df163d6c787b2c3c19fecc07bd9459174456c7
-      url: "https://github.com/jonatadashi/games_services.git"
-    source: git
-    version: "2.0.0"
   get:
     dependency: "direct main"
     description:
