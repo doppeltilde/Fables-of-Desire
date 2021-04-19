@@ -296,7 +296,8 @@ class _SettingsState extends State<Settings> {
                       ),
                       GestureDetector(
                         onTap: () async {
-                          const url = 'https://starhelix.space/privacy-policy/';
+                          const url =
+                              'https://smalldreams.space/privacy-policy/';
                           if (await canLaunch(url)) {
                             await launch(url);
                           } else {
@@ -311,7 +312,7 @@ class _SettingsState extends State<Settings> {
                       GestureDetector(
                         onTap: () async {
                           const url =
-                              'https://starhelix.space/terms-of-service/';
+                              'https://smalldreams.space/terms-of-service/';
                           if (await canLaunch(url)) {
                             await launch(url);
                           } else {
@@ -625,7 +626,7 @@ class _SettingsIngameState extends State<SettingsIngame> {
                   ),
                   GestureDetector(
                     onTap: () async {
-                      const url = 'https://starhelix.space/privacy-policy/';
+                      const url = 'https://smalldreams.space/privacy-policy/';
                       if (await canLaunch(url)) {
                         await launch(url);
                       } else {
@@ -639,7 +640,7 @@ class _SettingsIngameState extends State<SettingsIngame> {
                   ),
                   GestureDetector(
                     onTap: () async {
-                      const url = 'https://starhelix.space/terms-of-service/';
+                      const url = 'https://smalldreams.space/terms-of-service/';
                       if (await canLaunch(url)) {
                         await launch(url);
                       } else {
@@ -653,6 +654,68 @@ class _SettingsIngameState extends State<SettingsIngame> {
                   ),
                   SizedBox(
                     height: 55,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      final snackBar = SnackBar(
+                        duration: Duration(seconds: 10),
+                        backgroundColor: Colors.amber,
+                        content: GestureDetector(
+                          onTap: () => ScaffoldMessenger.of(context)
+                              .hideCurrentSnackBar(),
+                          child: Text(
+                            'Please long press the button to go back to the Main Menu.\n\nCaution:\nAll your progress will be lost and you will have to start from the beginning!',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: "Arvo",
+                                fontSize: 18),
+                          ),
+                        ),
+                      );
+
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    },
+                    onLongPress: () {
+                      Navigator.of(context).pushReplacementNamed("/home");
+                    },
+                    child: Container(
+                      height: 55,
+                      margin: EdgeInsets.symmetric(
+                        horizontal: 10,
+                      ).copyWith(
+                        bottom: 20,
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.redAccent,
+                      ),
+                      child: Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.menu_outlined,
+                            color: Colors.white,
+                            size: 25,
+                          ),
+                          SizedBox(width: 15),
+                          Text(
+                            "Go to Main Menu",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontFamily: "Arvo"),
+                          ),
+                          Spacer(),
+                          Icon(
+                            Icons.chevron_right_rounded,
+                            color: Colors.white,
+                            size: 25,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),

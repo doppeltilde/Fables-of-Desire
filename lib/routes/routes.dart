@@ -4,7 +4,6 @@ import 'package:fablesofdesire/routes/route_observer.dart';
 import 'package:fablesofdesire/routes/splash_screen.dart';
 import 'package:fablesofdesire/screens/chapter1/chapter1.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 
 import 'package:provider/provider.dart';
 import 'homepage.dart';
@@ -22,7 +21,7 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
-    return GetMaterialApp(
+    return MaterialApp(
       theme: themeProvider.themeData(),
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,

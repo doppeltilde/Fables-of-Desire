@@ -3,6 +3,7 @@ import 'package:fablesofdesire/global/setings.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 class AllowMultipleGestureRecognizer extends TapGestureRecognizer {
   @override
@@ -23,8 +24,10 @@ dynamic settingsClip(context) {
               ),
               primary: Theme.of(context).primaryColor),
           onPressed: () {
-            Navigator.push(context,
-                new MaterialPageRoute(builder: (context) => SettingsIngame()));
+            Navigator.push(
+                context,
+                PageTransition(
+                    type: PageTransitionType.fade, child: SettingsIngame()));
           },
           child: Text(
             "Settings >>",

@@ -23,7 +23,7 @@ dependencies:
   hive: ^2.0.3
   hive_flutter: ^1.0.0
   flame_audio: ^0.1.0-rc5
-  get: ^4.1.4
+  page_transition: ^2.0.1-nullsafety.0
 
 # dependency_overrides:
 #   games_services:
