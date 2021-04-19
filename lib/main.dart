@@ -1,6 +1,6 @@
 /*
 
-Copyright 2021 Jona Feucht & SmallDreams
+Copyright 2021 Jona Feucht
 
 */
 
