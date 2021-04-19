@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
-project(danceoflove LANGUAGES CXX)
+project(fablesofdesire LANGUAGES CXX)
 
-set(BINARY_NAME "danceoflove")
+set(BINARY_NAME "fablesofdesire")
 
 cmake_policy(SET CMP0063 NEW)
 

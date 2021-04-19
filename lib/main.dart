@@ -8,12 +8,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:fablesofdesire/globals/theme.dart';
+import 'package:fablesofdesire/global/theme.dart';
 import 'package:fablesofdesire/routes/routes.dart';
 import 'package:provider/provider.dart';
 import 'package:path_provider/path_provider.dart' as pathProvider;
-
-//const settings = 'settings';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
