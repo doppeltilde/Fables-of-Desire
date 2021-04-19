@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Google Play game services IDs.
+Save this file as res/values/games-ids.xml in your project.
+-->
+<resources>
+  <!-- app_id -->
+  <string name="app_id" translatable="false">797626565836</string>
+  <!-- package_name -->
+  <string name="package_name" translatable="false">de.edenhost.game.danceoflove</string>
+  <!-- achievement Dance of Love -->
+  <string name="achievement_dance_of_love" translatable="false">CgkIzIn-sZsXEAIQAg</string>
+</resources>
