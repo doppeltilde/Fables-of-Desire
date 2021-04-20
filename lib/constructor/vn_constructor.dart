@@ -11,10 +11,10 @@ class InterludeTextSound extends StatefulWidget {
   InterludeTextSound(this.a, this.q, this.n);
 
   @override
-  _InterludeSoundJacobState createState() => _InterludeSoundJacobState();
+  _InterludeState createState() => _InterludeState();
 }
 
-class _InterludeSoundJacobState extends State<InterludeTextSound> {
+class _InterludeState extends State<InterludeTextSound> {
   bool? isNoti;
   @override
   void initState() {
@@ -53,8 +53,8 @@ class _InterludeSoundJacobState extends State<InterludeTextSound> {
               child: Text(
                 widget.a!,
                 style: TextStyle(
-                  fontFamily: "BottleParty",
-                  fontSize: 37,
+                  fontFamily: "Aleo",
+                  fontSize: 35,
                   color: Theme.of(context).accentColor,
                 ),
               ),

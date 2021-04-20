@@ -1,6 +1,8 @@
 // Primary
+import 'dart:io';
 import 'dart:math';
 
+import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/global/setings.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
@@ -36,57 +38,117 @@ class _WildfyreState extends State<HomePage> {
     }
   }
 
+  var _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      endDrawerEnableOpenDragGesture: false,
+      endDrawer: AppDrawerMain(),
       body: AppBody(controller: _controller),
-      bottomNavigationBar: new Theme(
-        data: Theme.of(context).copyWith(
-            // sets the background color of the `BottomNavigationBar`
-            canvasColor: Theme.of(context).primaryColor,
-            // sets the active color of the `BottomNavigationBar` if `Brightness` is light
-            primaryColor: Theme.of(context).primaryColor,
-            textTheme: Theme.of(context).textTheme.copyWith(
-                caption: TextStyle(color: Theme.of(context).accentColor))),
-        child: BottomNavigationBar(
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(
-                _selectedPageId == 0 ? Icons.menu : Icons.menu_outlined,
-                color: Theme.of(context).accentColor,
-              ),
-              label: 'HOME',
-            ),
-            // BottomNavigationBarItem(
-            //   icon: Icon(
-            //     _selectedPageId == 1 ? Icons.info : Icons.info_outline,
-            //     color: Theme.of(context).accentColor,
-            //   ),
-            //   label: 'ABOUT',
-            // ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                  _selectedPageId == 1
-                      ? Icons.category
-                      : Icons.category_outlined,
-                  color: Theme.of(context).accentColor),
-              label: 'MORE',
-            ),
-          ],
-          unselectedLabelStyle: TextStyle(
-              fontFamily: "BottleParty", fontSize: 18, letterSpacing: 1),
-          selectedLabelStyle: TextStyle(
-              fontFamily: "BottleParty", fontSize: 21, letterSpacing: 1),
-          selectedItemColor: Theme.of(context).accentColor,
-          unselectedItemColor: Colors.grey,
-          iconSize: 25.0,
-          currentIndex: _selectedPageId,
-          onTap: (newId) => setState(() {
-            _controller.jumpToPage(newId);
-            _selectedPageId = newId;
-          }),
-        ),
-      ),
+      bottomNavigationBar: new LayoutBuilder(builder: (context, constraints) {
+        if (Platform.isMacOS || Platform.isLinux || Platform.isWindows) {
+          return Theme(
+            data: Theme.of(context).copyWith(
+                canvasColor: Theme.of(context).primaryColor,
+                primaryColor: Theme.of(context).primaryColor,
+                textTheme: Theme.of(context).textTheme.copyWith(
+                    caption: TextStyle(color: Theme.of(context).accentColor))),
+            child: BottomNavigationBar(
+                items: <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                    icon: Icon(
+                      _selectedPageId == 0 ? Icons.menu : Icons.menu_outlined,
+                      color: Theme.of(context).accentColor,
+                    ),
+                    label: 'HOME',
+                  ),
+                  // BottomNavigationBarItem(
+                  //   icon: Icon(
+                  //     _selectedPageId == 1 ? Icons.info : Icons.info_outline,
+                  //     color: Theme.of(context).accentColor,
+                  //   ),
+                  //   label: 'ABOUT',
+                  // ),
+                  BottomNavigationBarItem(
+                    icon: Icon(
+                        _selectedPageId == 1
+                            ? Icons.category
+                            : Icons.category_outlined,
+                        color: Theme.of(context).accentColor),
+                    label: 'MORE',
+                  ),
+                ],
+                unselectedLabelStyle: TextStyle(
+                    fontFamily: "BottleParty", fontSize: 18, letterSpacing: 1),
+                selectedLabelStyle: TextStyle(
+                    fontFamily: "BottleParty", fontSize: 21, letterSpacing: 1),
+                selectedItemColor: Theme.of(context).accentColor,
+                unselectedItemColor: Colors.grey,
+                iconSize: 25.0,
+                currentIndex: _selectedPageId,
+                onTap: (newId) {
+                  if (_selectedPageId == 0) {
+                    _scaffoldKey.currentState!.openEndDrawer();
+                  } else {
+                    setState(() {
+                      _controller.jumpToPage(newId);
+                      _selectedPageId = newId;
+                    });
+                  }
+                }),
+          );
+        } else {
+          return Theme(
+            data: Theme.of(context).copyWith(
+                // sets the background color of the `BottomNavigationBar`
+                canvasColor: Theme.of(context).primaryColor,
+                // sets the active color of the `BottomNavigationBar` if `Brightness` is light
+                primaryColor: Theme.of(context).primaryColor,
+                textTheme: Theme.of(context).textTheme.copyWith(
+                    caption: TextStyle(color: Theme.of(context).accentColor))),
+            child: BottomNavigationBar(
+                items: <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                    icon: Icon(
+                      _selectedPageId == 0 ? Icons.menu : Icons.menu_outlined,
+                      color: Theme.of(context).accentColor,
+                    ),
+                    label: 'HOME',
+                  ),
+                  // BottomNavigationBarItem(
+                  //   icon: Icon(
+                  //     _selectedPageId == 1 ? Icons.info : Icons.info_outline,
+                  //     color: Theme.of(context).accentColor,
+                  //   ),
+                  //   label: 'ABOUT',
+                  // ),
+                  BottomNavigationBarItem(
+                    icon: Icon(
+                        _selectedPageId == 1
+                            ? Icons.category
+                            : Icons.category_outlined,
+                        color: Theme.of(context).accentColor),
+                    label: 'MORE',
+                  ),
+                ],
+                unselectedLabelStyle: TextStyle(
+                    fontFamily: "BottleParty", fontSize: 18, letterSpacing: 1),
+                selectedLabelStyle: TextStyle(
+                    fontFamily: "BottleParty", fontSize: 21, letterSpacing: 1),
+                selectedItemColor: Theme.of(context).accentColor,
+                unselectedItemColor: Colors.grey,
+                iconSize: 25.0,
+                currentIndex: _selectedPageId,
+                onTap: (newId) {
+                  setState(() {
+                    _controller.jumpToPage(newId);
+                    _selectedPageId = newId;
+                  });
+                }),
+          );
+        }
+      }),
     );
   }
 }
@@ -264,62 +326,62 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
                           ),
                         ),
                       ),
-                      // Builder(
-                      //   builder: (context) {
-                      //     // if (chapters == true) {
-                      //     if (true) {
-                      //       return Padding(
-                      //         padding: EdgeInsets.symmetric(
-                      //             horizontal: 30, vertical: 5),
-                      //         child: Container(
-                      //           width: double.infinity,
-                      //           child: TextButton(
-                      //             child: Text(
-                      //               'Chapters',
-                      //               style: TextStyle(
-                      //                   color: Theme.of(context).accentColor,
-                      //                   fontSize: 35,
-                      //                   fontFamily: "BottleParty"),
-                      //             ),
-                      //             style: TextButton.styleFrom(
-                      //               backgroundColor:
-                      //                   Theme.of(context).primaryColor,
-                      //               padding: EdgeInsets.symmetric(vertical: 20),
-                      //             ),
-                      //             onPressed: () {
-                      //               Navigator.push(
-                      //                 context,
-                      //                 MaterialPageRoute(
-                      //                     builder: (context) => Chapters()),
-                      //               );
-                      //             },
-                      //           ),
-                      //         ),
-                      //       );
-                      //     } else
-                      //       return Padding(
-                      //         padding: EdgeInsets.symmetric(
-                      //             horizontal: 30, vertical: 5),
-                      //         child: Container(
-                      //           width: double.infinity,
-                      //           child: TextButton(
-                      //             child: Text(
-                      //               'Chapters',
-                      //               style: TextStyle(
-                      //                   color: Theme.of(context).accentColor,
-                      //                   fontSize: 35,
-                      //                   fontFamily: "BottleParty"),
-                      //             ),
-                      //             style: TextButton.styleFrom(
-                      //               backgroundColor: Colors.grey,
-                      //               padding: EdgeInsets.symmetric(vertical: 20),
-                      //             ),
-                      //             onPressed: () => showAlertDialog(context),
-                      //           ),
-                      //         ),
-                      //       );
-                      //   },
-                      // )
+                      Builder(
+                        builder: (context) {
+                          // if (chapters == true) {
+                          if (chapters == true) {
+                            return Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 30, vertical: 5),
+                              child: Container(
+                                width: double.infinity,
+                                child: TextButton(
+                                  child: Text(
+                                    'Chapters',
+                                    style: TextStyle(
+                                        color: Theme.of(context).accentColor,
+                                        fontSize: 35,
+                                        fontFamily: "BottleParty"),
+                                  ),
+                                  style: TextButton.styleFrom(
+                                    backgroundColor:
+                                        Theme.of(context).primaryColor,
+                                    padding: EdgeInsets.symmetric(vertical: 20),
+                                  ),
+                                  onPressed: () {
+                                    // Navigator.push(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //       builder: (context) => Chapters()),
+                                    // );
+                                  },
+                                ),
+                              ),
+                            );
+                          } else
+                            return Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 30, vertical: 5),
+                              child: Container(
+                                width: double.infinity,
+                                child: TextButton(
+                                  child: Text(
+                                    'Chapters',
+                                    style: TextStyle(
+                                        color: Theme.of(context).accentColor,
+                                        fontSize: 35,
+                                        fontFamily: "BottleParty"),
+                                  ),
+                                  style: TextButton.styleFrom(
+                                    backgroundColor: Colors.grey,
+                                    padding: EdgeInsets.symmetric(vertical: 20),
+                                  ),
+                                  onPressed: () => showAlertDialog(context),
+                                ),
+                              ),
+                            );
+                        },
+                      )
                     ],
                   ),
                 ),
@@ -350,7 +412,7 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
         style: TextStyle(fontFamily: "BottleParty", fontSize: 28),
       ),
       content: Text(
-        "Sorry! You need to advance the game to access ”Chapters”.",
+        "Sorry! Currently not available.",
         textAlign: TextAlign.center,
         style: TextStyle(),
       ),

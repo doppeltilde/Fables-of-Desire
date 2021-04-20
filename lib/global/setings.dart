@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:fablesofdesire/global/settings_widget.dart';
 import 'package:fablesofdesire/global/theme.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:flame_audio/flame_audio.dart';
@@ -7,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class Settings extends StatefulWidget {
   Settings({Key? key, this.title}) : super(key: key);
@@ -205,53 +203,19 @@ class _SettingsState extends State<Settings> {
                           ],
                         ),
                       ),
-                      Container(
-                        height: 55,
-                        margin: EdgeInsets.symmetric(
-                          horizontal: 10,
-                        ).copyWith(
-                          bottom: 20,
-                        ),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 20,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Theme.of(context).cardColor,
-                        ),
-                        child: Row(
-                          children: <Widget>[
-                            isNoti!
-                                ? Icon(
-                                    Icons.notifications_active_outlined,
-                                    size: 25,
-                                  )
-                                : Icon(
-                                    Icons.notifications_off_outlined,
-                                    size: 25,
-                                  ),
-                            SizedBox(width: 15),
-                            Text(
-                              "Message Volume",
-                              style: TextStyle(
-                                fontFamily: "Arvo",
-                                fontSize: 18,
-                              ),
-                            ),
-                            Spacer(),
-                            Switch.adaptive(
-                              value: isNoti!,
-                              onChanged: (bool value) {
-                                setState(() {
-                                  isNoti = value;
-                                  saveNotiState(value);
-                                  //switch works
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
+                      // Slider(
+                      //   value: volumeValue,
+                      //   min: 0,
+                      //   max: 100,
+                      //   divisions: 5,
+                      //   label: _currentSliderValue.round().toString(),
+                      //   onChanged: (double value) {
+                      //     setState(() {
+                      //       _currentSliderValue = value;
+                      //     });
+                      //   },
+                      // ),
+
                       Container(
                         height: 55,
                         margin: EdgeInsets.symmetric(
@@ -294,39 +258,39 @@ class _SettingsState extends State<Settings> {
                       SizedBox(
                         height: 55,
                       ),
-                      GestureDetector(
-                        onTap: () async {
-                          const url =
-                              'https://smalldreams.space/privacy-policy/';
-                          if (await canLaunch(url)) {
-                            await launch(url);
-                          } else {
-                            throw 'Could not launch $url';
-                          }
-                        },
-                        child: ProfileListItem(
-                          icon: Icons.privacy_tip_outlined,
-                          text: 'Privacy',
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () async {
-                          const url =
-                              'https://smalldreams.space/terms-of-service/';
-                          if (await canLaunch(url)) {
-                            await launch(url);
-                          } else {
-                            throw 'Could not launch $url';
-                          }
-                        },
-                        child: ProfileListItem(
-                          icon: Icons.policy_outlined,
-                          text: 'Terms of Service',
-                        ),
-                      ),
-                      SizedBox(
-                        height: 55,
-                      ),
+                      // GestureDetector(
+                      //   onTap: () async {
+                      //     const url =
+                      //         'https://smalldreams.space/privacy-policy/';
+                      //     if (await canLaunch(url)) {
+                      //       await launch(url);
+                      //     } else {
+                      //       throw 'Could not launch $url';
+                      //     }
+                      //   },
+                      //   child: ProfileListItem(
+                      //     icon: Icons.privacy_tip_outlined,
+                      //     text: 'Privacy',
+                      //   ),
+                      // ),
+                      // GestureDetector(
+                      //   onTap: () async {
+                      //     const url =
+                      //         'https://smalldreams.space/terms-of-service/';
+                      //     if (await canLaunch(url)) {
+                      //       await launch(url);
+                      //     } else {
+                      //       throw 'Could not launch $url';
+                      //     }
+                      //   },
+                      //   child: ProfileListItem(
+                      //     icon: Icons.policy_outlined,
+                      //     text: 'Terms of Service',
+                      //   ),
+                      // ),
+                      // SizedBox(
+                      //   height: 55,
+                      // ),
                     ],
                   ),
                 )
@@ -535,53 +499,7 @@ class _SettingsIngameState extends State<SettingsIngame> {
                       ],
                     ),
                   ),
-                  Container(
-                    height: 55,
-                    margin: EdgeInsets.symmetric(
-                      horizontal: 10,
-                    ).copyWith(
-                      bottom: 20,
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Theme.of(context).cardColor,
-                    ),
-                    child: Row(
-                      children: <Widget>[
-                        isNoti!
-                            ? Icon(
-                                Icons.notifications_active_outlined,
-                                size: 25,
-                              )
-                            : Icon(
-                                Icons.notifications_off_outlined,
-                                size: 25,
-                              ),
-                        SizedBox(width: 15),
-                        Text(
-                          "Message Volume",
-                          style: TextStyle(
-                            fontFamily: "Arvo",
-                            fontSize: 18,
-                          ),
-                        ),
-                        Spacer(),
-                        Switch.adaptive(
-                          value: isNoti!,
-                          onChanged: (bool value) {
-                            setState(() {
-                              isNoti = value;
-                              saveNotiState(value);
-                              //switch works
-                            });
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
+
                   Container(
                     height: 55,
                     margin: EdgeInsets.symmetric(
@@ -624,60 +542,39 @@ class _SettingsIngameState extends State<SettingsIngame> {
                   SizedBox(
                     height: 55,
                   ),
-                  GestureDetector(
-                    onTap: () async {
-                      const url = 'https://smalldreams.space/privacy-policy/';
-                      if (await canLaunch(url)) {
-                        await launch(url);
-                      } else {
-                        throw 'Could not launch $url';
-                      }
-                    },
-                    child: ProfileListItem(
-                      icon: Icons.privacy_tip_outlined,
-                      text: 'Privacy',
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () async {
-                      const url = 'https://smalldreams.space/terms-of-service/';
-                      if (await canLaunch(url)) {
-                        await launch(url);
-                      } else {
-                        throw 'Could not launch $url';
-                      }
-                    },
-                    child: ProfileListItem(
-                      icon: Icons.policy_outlined,
-                      text: 'Terms of Service',
-                    ),
-                  ),
+                  // GestureDetector(
+                  //   onTap: () async {
+                  //     const url = 'https://smalldreams.space/privacy-policy/';
+                  //     if (await canLaunch(url)) {
+                  //       await launch(url);
+                  //     } else {
+                  //       throw 'Could not launch $url';
+                  //     }
+                  //   },
+                  //   child: ProfileListItem(
+                  //     icon: Icons.privacy_tip_outlined,
+                  //     text: 'Privacy',
+                  //   ),
+                  // ),
+                  // GestureDetector(
+                  //   onTap: () async {
+                  //     const url = 'https://smalldreams.space/terms-of-service/';
+                  //     if (await canLaunch(url)) {
+                  //       await launch(url);
+                  //     } else {
+                  //       throw 'Could not launch $url';
+                  //     }
+                  //   },
+                  //   child: ProfileListItem(
+                  //     icon: Icons.policy_outlined,
+                  //     text: 'Terms of Service',
+                  //   ),
+                  // ),
                   SizedBox(
                     height: 55,
                   ),
                   GestureDetector(
-                    onTap: () {
-                      final snackBar = SnackBar(
-                        duration: Duration(seconds: 10),
-                        backgroundColor: Colors.amber,
-                        content: GestureDetector(
-                          onTap: () => ScaffoldMessenger.of(context)
-                              .hideCurrentSnackBar(),
-                          child: Text(
-                            'Please long press the button to go back to the Main Menu.\n\nCaution:\nAll your progress will be lost and you will have to start from the beginning!',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: "Arvo",
-                                fontSize: 18),
-                          ),
-                        ),
-                      );
-
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    },
-                    onLongPress: () {
-                      Navigator.of(context).pushReplacementNamed("/home");
-                    },
+                    onTap: () => showAlertDialog(context),
                     child: Container(
                       height: 55,
                       margin: EdgeInsets.symmetric(
@@ -695,7 +592,7 @@ class _SettingsIngameState extends State<SettingsIngame> {
                       child: Row(
                         children: <Widget>[
                           Icon(
-                            Icons.menu_outlined,
+                            Icons.logout,
                             color: Colors.white,
                             size: 25,
                           ),
@@ -719,10 +616,76 @@ class _SettingsIngameState extends State<SettingsIngame> {
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
+    );
+  }
+
+  showAlertDialog(BuildContext context) {
+    // set up the buttons
+
+    Widget continueButton = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              primary: Theme.of(context).accentColor,
+              onPrimary: Theme.of(context).primaryColor),
+          child: Text(
+            "YES",
+            style:
+                TextStyle(fontFamily: "Aleo", fontSize: 18, letterSpacing: .4),
+          ),
+          onPressed: () {
+            Navigator.of(context).pushReplacementNamed("/home");
+          },
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              primary: Theme.of(context).accentColor,
+              onPrimary: Theme.of(context).primaryColor),
+          child: Text(
+            "NO",
+            style:
+                TextStyle(fontFamily: "Aleo", fontSize: 18, letterSpacing: .4),
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ],
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      backgroundColor: Colors.amber,
+      title: Text(
+        "Go to Main Menu",
+        textAlign: TextAlign.center,
+        style: TextStyle(fontFamily: "Aleo", fontSize: 30, letterSpacing: .2),
+      ),
+      content: Text(
+        "Are you sure about that?",
+        textAlign: TextAlign.center,
+        style: TextStyle(fontFamily: "Aleo", fontSize: 20, letterSpacing: .4),
+      ),
+      actions: [
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }
