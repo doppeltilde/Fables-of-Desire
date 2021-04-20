@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.smalldreams.game.fablesofdesire">
    <application
-        android:label="fablesofdesire"
+        android:label="Fables of Desire"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
