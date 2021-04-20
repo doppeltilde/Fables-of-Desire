@@ -21,60 +21,84 @@ class AllowMultipleGestureRecognizer extends TapGestureRecognizer {
 dynamic settingsClip(context, _scaffoldKey) {
   return LayoutBuilder(builder: (context, constraints) {
     if (Platform.isMacOS || Platform.isLinux || Platform.isWindows) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
+      return InkWell(
+        onTap: () => _scaffoldKey.currentState.openEndDrawer(),
+        child: Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            Stack(
+              children: <Widget>[
+                Container(
+                  color: Colors.transparent,
+                  padding: EdgeInsets.all(1),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10.0),
+                    child: Image.asset(
+                      "assets/images/gui/more.png",
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                  primary: Theme.of(context).primaryColor),
-              onPressed: () {
-                _scaffoldKey.currentState.openEndDrawer();
-              },
-              child: Text(
-                "Settings",
-                style: TextStyle(
-                    color: Theme.of(context).accentColor,
-                    fontFamily: "Aleo",
-                    fontSize: 20,
-                    letterSpacing: .2),
-              ),
+                ),
+              ],
             ),
-          ),
-        ],
+          ],
+        ),
       );
     } else {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
+      return InkWell(
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SettingsIngame()),
+        ),
+        child: Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            Stack(
+              children: <Widget>[
+                Container(
+                  color: Colors.transparent,
+                  padding: EdgeInsets.all(1),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10.0),
+                    child: Image.asset(
+                      "assets/images/gui/more.png",
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                  primary: Theme.of(context).primaryColor),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SettingsIngame()),
-                );
-              },
-              child: Text(
-                "Settings",
-                style: TextStyle(
-                    color: Theme.of(context).accentColor,
-                    fontFamily: "Aleo",
-                    fontSize: 20,
-                    letterSpacing: .2),
-              ),
+                ),
+              ],
             ),
-          ),
-        ],
+          ],
+        ),
       );
+      // return Row(
+      //   mainAxisAlignment: MainAxisAlignment.center,
+      //   children: [
+      //     Container(
+      //       child: ElevatedButton(
+      //         style: ElevatedButton.styleFrom(
+      //             shape: RoundedRectangleBorder(
+      //               borderRadius: BorderRadius.circular(18.0),
+      //             ),
+      //             primary: Theme.of(context).primaryColor),
+      //         onPressed: () {
+      //           Navigator.push(
+      //             context,
+      //             MaterialPageRoute(builder: (context) => SettingsIngame()),
+      //           );
+      //         },
+      //         child: Text(
+      //           "Settings",
+      //           style: TextStyle(
+      //               color: Theme.of(context).accentColor,
+      //               fontFamily: "Aleo",
+      //               fontSize: 20,
+      //               letterSpacing: .2),
+      //         ),
+      //       ),
+      //     ),
+      //   ],
+      // );
     }
   });
 }
@@ -83,24 +107,47 @@ dynamic skipClip(context, route) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      Container(
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18.0),
-              ),
-              primary: Theme.of(context).primaryColor),
-          onPressed: () => showAlertDialog(context, route),
-          child: Text(
-            "Skip >>",
-            style: TextStyle(
-                color: Theme.of(context).accentColor,
-                fontFamily: "Aleo",
-                fontSize: 20,
-                letterSpacing: .2),
-          ),
+      InkWell(
+        onTap: () => showAlertDialog(context, route),
+        child: Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            Stack(
+              children: <Widget>[
+                Container(
+                  color: Colors.transparent,
+                  padding: EdgeInsets.all(1),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10.0),
+                    child: Image.asset(
+                      "assets/images/gui/fastforwardhover.png",
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
+      // Container(
+      //   child: ElevatedButton(
+      //     style: ElevatedButton.styleFrom(
+      //         shape: RoundedRectangleBorder(
+      //           borderRadius: BorderRadius.circular(18.0),
+      //         ),
+      //         primary: Theme.of(context).primaryColor),
+      //     onPressed: () => showAlertDialog(context, route),
+      //     child: Text(
+      //       "Skip >>",
+      //       style: TextStyle(
+      //           color: Theme.of(context).accentColor,
+      //           fontFamily: "Aleo",
+      //           fontSize: 20,
+      //           letterSpacing: .2),
+      //     ),
+      //   ),
+      // ),
     ],
   );
 }

@@ -116,9 +116,9 @@ class _WildfyreState extends State<HomePage> {
           return Theme(
             data: Theme.of(context).copyWith(
                 // sets the background color of the `BottomNavigationBar`
-                canvasColor: Theme.of(context).indicatorColor,
+                canvasColor: Theme.of(context).primaryColor,
                 // sets the active color of the `BottomNavigationBar` if `Brightness` is light
-                primaryColor: Theme.of(context).accentColor,
+                primaryColor: Theme.of(context).primaryColor,
                 textTheme: Theme.of(context).textTheme.copyWith(
                     caption: TextStyle(color: Theme.of(context).accentColor))),
             child: BottomNavigationBar(
@@ -126,7 +126,7 @@ class _WildfyreState extends State<HomePage> {
                   BottomNavigationBarItem(
                     icon: Icon(
                       _selectedPageId == 0 ? Icons.menu : Icons.menu_outlined,
-                      color: Colors.white,
+                      color: Theme.of(context).accentColor,
                     ),
                     label: 'HOME',
                   ),
@@ -142,15 +142,15 @@ class _WildfyreState extends State<HomePage> {
                       _selectedPageId == 1
                           ? Icons.category
                           : Icons.category_outlined,
-                      color: Colors.white,
+                      color: Theme.of(context).accentColor,
                     ),
                     label: 'MORE',
                   ),
                 ],
                 unselectedLabelStyle: TextStyle(fontSize: 18, letterSpacing: 1),
                 selectedLabelStyle: TextStyle(fontSize: 21, letterSpacing: 1),
-                selectedItemColor: Colors.white,
-                unselectedItemColor: Colors.white,
+                selectedItemColor: Theme.of(context).accentColor,
+                unselectedItemColor: Theme.of(context).accentColor,
                 iconSize: 25.0,
                 currentIndex: _selectedPageId,
                 onTap: (newId) {
@@ -322,19 +322,39 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
                           children: <Widget>[
                             Stack(
                               children: <Widget>[
-                                Container(
-                                  color: Colors.transparent,
-                                  padding: EdgeInsets.all(5),
-                                  width:
-                                      MediaQuery.of(context).size.width / 1.1,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    child: Image.asset(
-                                      "assets/images/gui/menu_scroll_01.png",
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
+                                Builder(builder: (context) {
+                                  if (Platform.isAndroid || Platform.isIOS) {
+                                    return Container(
+                                      color: Colors.transparent,
+                                      padding: EdgeInsets.all(5),
+                                      width: MediaQuery.of(context).size.width /
+                                          1.1,
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                        child: Image.asset(
+                                          "assets/images/gui/menu_scroll_01.png",
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    );
+                                  } else {
+                                    return Container(
+                                      color: Colors.transparent,
+                                      padding: EdgeInsets.all(5),
+                                      width:
+                                          MediaQuery.of(context).size.width / 3,
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                        child: Image.asset(
+                                          "assets/images/gui/menu_scroll_01.png",
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                })
                               ],
                             ),
                           ],
@@ -347,18 +367,42 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
                           children: <Widget>[
                             Stack(
                               children: <Widget>[
-                                Container(
-                                  color: Colors.transparent,
-                                  padding: EdgeInsets.all(5),
-                                  width:
-                                      MediaQuery.of(context).size.width / 1.1,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    child: Image.asset(
-                                      "assets/images/gui/menu_scroll_03.png",
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
+                                Builder(
+                                  builder: (context) {
+                                    if (Platform.isAndroid || Platform.isIOS) {
+                                      return Container(
+                                        color: Colors.transparent,
+                                        padding: EdgeInsets.all(5),
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                          child: Image.asset(
+                                            "assets/images/gui/menu_scroll_03.png",
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      );
+                                    } else {
+                                      return Container(
+                                        color: Colors.transparent,
+                                        padding: EdgeInsets.all(5),
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                3,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                          child: Image.asset(
+                                            "assets/images/gui/menu_scroll_03.png",
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                  },
                                 ),
                               ],
                             ),

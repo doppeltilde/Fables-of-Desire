@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -60,40 +61,7 @@ class _InterludeState extends State<InterludeTextSound> {
           ),
         ),
         LayoutBuilder(builder: (context, constraints) {
-          if (constraints.maxWidth > 800) {
-            return Stack(
-              alignment: Alignment.center,
-              children: <Widget>[
-                Stack(
-                  children: <Widget>[
-                    Container(
-                      color: Colors.transparent,
-                      padding: EdgeInsets.all(5),
-                      width: MediaQuery.of(context).size.width * 2,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10.0),
-                        child: Image.asset(
-                          "assets/images/gui/textbox_scroll_03.png",
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  child: Text(
-                    widget.a!,
-                    style: TextStyle(
-                      fontFamily: "Aleo",
-                      fontSize: 32,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-              ],
-            );
-          } else {
+          if (Platform.isIOS || Platform.isAndroid) {
             return Stack(
               alignment: Alignment.center,
               children: <Widget>[
@@ -128,6 +96,57 @@ class _InterludeState extends State<InterludeTextSound> {
                   isRepeatingAnimation: false,
                   key: ValueKey(widget.n),
                 ),
+              ],
+            );
+          } else {
+            return Stack(
+              children: <Widget>[
+                Container(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width / 4),
+                    child:
+                        Stack(alignment: Alignment.center, children: <Widget>[
+                      Stack(
+                        children: <Widget>[
+                          Container(
+                            color: Colors.transparent,
+                            padding: EdgeInsets.all(5),
+                            width: MediaQuery.of(context).size.width * 2,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10.0),
+                              child: Image.asset(
+                                "assets/images/gui/textbox_scroll_03.png",
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Stack(
+                        children: <Widget>[
+                          Container(
+                            color: Colors.transparent,
+                            padding: EdgeInsets.all(5),
+                            child: AnimatedTextKit(
+                              animatedTexts: [
+                                TyperAnimatedText(
+                                  widget.q!,
+                                  textAlign: TextAlign.left,
+                                  textStyle: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 25,
+                                  ),
+                                  speed: const Duration(milliseconds: 40),
+                                ),
+                              ],
+                              displayFullTextOnTap: true,
+                              isRepeatingAnimation: false,
+                              key: ValueKey(widget.n),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ])),
               ],
             );
           }
