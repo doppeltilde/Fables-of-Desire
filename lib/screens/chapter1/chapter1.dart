@@ -40,16 +40,11 @@ class _QuizPageState extends State<VN1> {
     }
   }
 
-  var _scaffoldKey = new GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () => getOnWillPop(context),
       child: Scaffold(
-        key: _scaffoldKey,
-        endDrawerEnableOpenDragGesture: false,
-        endDrawer: AppDrawer(),
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.black,
         body: RawGestureDetector(
@@ -96,7 +91,7 @@ class _QuizPageState extends State<VN1> {
                         SizedBox(
                           width: 7,
                         ),
-                        settingsClip(context, _scaffoldKey),
+                        settingsClip(context),
                       ],
                     ),
                   )
