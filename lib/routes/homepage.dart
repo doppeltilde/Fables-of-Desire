@@ -4,13 +4,10 @@ import 'dart:math';
 
 import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/global/setings.dart';
-import 'package:fablesofdesire/global/theme.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -56,7 +53,6 @@ class _WildfyreState extends State<HomePage> {
   var _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       key: _scaffoldKey,
       endDrawerEnableOpenDragGesture: false,
