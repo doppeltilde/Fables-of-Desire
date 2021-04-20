@@ -4,9 +4,11 @@ import 'dart:math';
 
 import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/global/setings.dart';
+import 'package:fablesofdesire/global/theme.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -26,6 +28,18 @@ class _WildfyreState extends State<HomePage> {
   void initState() {
     super.initState();
     getSharedPrefs();
+    isLightValues();
+  }
+
+  isLightValues() async {
+    isLightTheme = await isLight();
+    setState(() {});
+  }
+
+  Future<bool> isLight() async {
+    final settings = await Hive.openBox('settings');
+    bool isLightTheme = settings.get('isLightTheme') ?? true;
+    return isLightTheme;
   }
 
   Future<Null> getSharedPrefs() async {
@@ -38,9 +52,11 @@ class _WildfyreState extends State<HomePage> {
     }
   }
 
+  bool isLightTheme = true;
   var _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       key: _scaffoldKey,
       endDrawerEnableOpenDragGesture: false,
@@ -79,10 +95,8 @@ class _WildfyreState extends State<HomePage> {
                     label: 'MORE',
                   ),
                 ],
-                unselectedLabelStyle: TextStyle(
-                    fontFamily: "BottleParty", fontSize: 18, letterSpacing: 1),
-                selectedLabelStyle: TextStyle(
-                    fontFamily: "BottleParty", fontSize: 21, letterSpacing: 1),
+                unselectedLabelStyle: TextStyle(fontSize: 18, letterSpacing: 1),
+                selectedLabelStyle: TextStyle(fontSize: 21, letterSpacing: 1),
                 selectedItemColor: Theme.of(context).accentColor,
                 unselectedItemColor: Colors.grey,
                 iconSize: 25.0,
@@ -102,9 +116,9 @@ class _WildfyreState extends State<HomePage> {
           return Theme(
             data: Theme.of(context).copyWith(
                 // sets the background color of the `BottomNavigationBar`
-                canvasColor: Theme.of(context).primaryColor,
+                canvasColor: Theme.of(context).indicatorColor,
                 // sets the active color of the `BottomNavigationBar` if `Brightness` is light
-                primaryColor: Theme.of(context).primaryColor,
+                primaryColor: Theme.of(context).accentColor,
                 textTheme: Theme.of(context).textTheme.copyWith(
                     caption: TextStyle(color: Theme.of(context).accentColor))),
             child: BottomNavigationBar(
@@ -112,7 +126,7 @@ class _WildfyreState extends State<HomePage> {
                   BottomNavigationBarItem(
                     icon: Icon(
                       _selectedPageId == 0 ? Icons.menu : Icons.menu_outlined,
-                      color: Theme.of(context).accentColor,
+                      color: Colors.white,
                     ),
                     label: 'HOME',
                   ),
@@ -125,19 +139,18 @@ class _WildfyreState extends State<HomePage> {
                   // ),
                   BottomNavigationBarItem(
                     icon: Icon(
-                        _selectedPageId == 1
-                            ? Icons.category
-                            : Icons.category_outlined,
-                        color: Theme.of(context).accentColor),
+                      _selectedPageId == 1
+                          ? Icons.category
+                          : Icons.category_outlined,
+                      color: Colors.white,
+                    ),
                     label: 'MORE',
                   ),
                 ],
-                unselectedLabelStyle: TextStyle(
-                    fontFamily: "BottleParty", fontSize: 18, letterSpacing: 1),
-                selectedLabelStyle: TextStyle(
-                    fontFamily: "BottleParty", fontSize: 21, letterSpacing: 1),
-                selectedItemColor: Theme.of(context).accentColor,
-                unselectedItemColor: Colors.grey,
+                unselectedLabelStyle: TextStyle(fontSize: 18, letterSpacing: 1),
+                selectedLabelStyle: TextStyle(fontSize: 21, letterSpacing: 1),
+                selectedItemColor: Colors.white,
+                unselectedItemColor: Colors.white,
                 iconSize: 25.0,
                 currentIndex: _selectedPageId,
                 onTap: (newId) {
@@ -299,89 +312,121 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.05,
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 30, vertical: 5),
-                        child: Container(
-                          width: double.infinity,
-                          child: TextButton(
-                            child: Text(
-                              tr('start_game'),
-                              style: TextStyle(
-                                  color: Theme.of(context).accentColor,
-                                  fontSize: 35,
-                                  fontFamily: "Aleo"),
+                      InkWell(
+                        onTap: () async {
+                          FlameAudio.bgm.stop();
+                          Navigator.of(context).pushNamed('/1');
+                        },
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: <Widget>[
+                            Stack(
+                              children: <Widget>[
+                                Container(
+                                  color: Colors.transparent,
+                                  padding: EdgeInsets.all(5),
+                                  width:
+                                      MediaQuery.of(context).size.width / 1.1,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    child: Image.asset(
+                                      "assets/images/gui/menu_scroll_01.png",
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                            style: TextButton.styleFrom(
-                              backgroundColor: Theme.of(context).primaryColor,
-                              padding: EdgeInsets.symmetric(vertical: 20),
-                            ),
-                            onPressed: () async {
-                              FlameAudio.bgm.stop();
-                              Navigator.of(context).pushNamed('/1');
-                            },
-                          ),
+                          ],
                         ),
                       ),
-                      Builder(
-                        builder: (context) {
-                          // if (chapters == true) {
-                          if (chapters == true) {
-                            return Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 30, vertical: 5),
-                              child: Container(
-                                width: double.infinity,
-                                child: TextButton(
-                                  child: Text(
-                                    'Chapters',
-                                    style: TextStyle(
-                                        color: Theme.of(context).accentColor,
-                                        fontSize: 35,
-                                        fontFamily: "BottleParty"),
+                      InkWell(
+                        onTap: () => showAlertDialog(context),
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: <Widget>[
+                            Stack(
+                              children: <Widget>[
+                                Container(
+                                  color: Colors.transparent,
+                                  padding: EdgeInsets.all(5),
+                                  width:
+                                      MediaQuery.of(context).size.width / 1.1,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    child: Image.asset(
+                                      "assets/images/gui/menu_scroll_03.png",
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                  style: TextButton.styleFrom(
-                                    backgroundColor:
-                                        Theme.of(context).primaryColor,
-                                    padding: EdgeInsets.symmetric(vertical: 20),
-                                  ),
-                                  onPressed: () {
-                                    // Navigator.push(
-                                    //   context,
-                                    //   MaterialPageRoute(
-                                    //       builder: (context) => Chapters()),
-                                    // );
-                                  },
                                 ),
-                              ),
-                            );
-                          } else
-                            return Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 30, vertical: 5),
-                              child: Container(
-                                width: double.infinity,
-                                child: TextButton(
-                                  child: Text(
-                                    'Chapters',
-                                    style: TextStyle(
-                                        color: Theme.of(context).accentColor,
-                                        fontSize: 35,
-                                        fontFamily: "BottleParty"),
-                                  ),
-                                  style: TextButton.styleFrom(
-                                    backgroundColor: Colors.grey,
-                                    padding: EdgeInsets.symmetric(vertical: 20),
-                                  ),
-                                  onPressed: () => showAlertDialog(context),
-                                ),
-                              ),
-                            );
-                        },
-                      )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // Builder(
+                      //   builder: (context) {
+                      //     // if (chapters == true) {
+                      //     if (chapters == true) {
+                      //       return Padding(
+                      //         padding: EdgeInsets.symmetric(
+                      //             horizontal: 30, vertical: 5),
+                      //         child: Container(
+                      //           width: double.infinity,
+                      //           child: TextButton(
+                      //             child: Text(
+                      //               'Chapters',
+                      //               style: TextStyle(
+                      //                 color: Theme.of(context).accentColor,
+                      //                 fontSize: 35,
+                      //               ),
+                      //             ),
+                      //             style: TextButton.styleFrom(
+                      //               backgroundColor:
+                      //                   Theme.of(context).primaryColor,
+                      //               padding: EdgeInsets.symmetric(vertical: 20),
+                      //             ),
+                      //             onPressed: () {
+                      //               // Navigator.push(
+                      //               //   context,
+                      //               //   MaterialPageRoute(
+                      //               //       builder: (context) => Chapters()),
+                      //               // );
+                      //             },
+                      //           ),
+                      //         ),
+                      //       );
+                      //     } else
+                      //       return Container(
+                      //         decoration: BoxDecoration(
+                      //           borderRadius: BorderRadius.circular(40),
+                      //           image: DecorationImage(
+                      //             image: AssetImage(
+                      //                 "assets/images/gui/menu_scroll_03.png"),
+                      //             fit: BoxFit.cover,
+                      //           ),
+                      //         ),
+                      //         padding: EdgeInsets.symmetric(
+                      //             horizontal: 30, vertical: 5),
+                      //         child: TextButton(
+                      //           child: Text(
+                      //             '',
+                      //             style: TextStyle(
+                      //               color: Theme.of(context).accentColor,
+                      //               fontSize: 35,
+                      //             ),
+                      //           ),
+                      //           style: TextButton.styleFrom(
+                      //             backgroundColor: Colors.transparent,
+                      //             padding: EdgeInsets.symmetric(vertical: 20),
+                      //           ),
+                      //           onPressed: () => showAlertDialog(context),
+                      //         ),
+                      //       );
+                      //   },
+                      // )
                     ],
                   ),
                 ),
@@ -409,7 +454,7 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
       title: Text(
         "Not available",
         textAlign: TextAlign.center,
-        style: TextStyle(fontFamily: "BottleParty", fontSize: 28),
+        style: TextStyle(fontSize: 28),
       ),
       content: Text(
         "Sorry! Currently not available.",

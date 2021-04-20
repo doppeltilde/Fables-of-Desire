@@ -47,6 +47,7 @@ flutter:
 
     - assets/images/
     - assets/images/sprites/
+    - assets/images/gui/
 
     - assets/languages/
 
@@ -54,3 +55,6 @@ flutter:
     - family: Aleo
       fonts:
         - asset: assets/fonts/Aleo-Regular.ttf
+    - family: NanumBrush
+      fonts:
+        - asset: assets/fonts/NanumBrushScript-Regular.ttf

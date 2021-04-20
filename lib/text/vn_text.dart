@@ -34,8 +34,11 @@ class TextConstructor1 {
         "hidetake_neutral"),
     TextSound(tr("hidetake.speech2"), tr("hidetake_name"), "silence",
         "hidetake_neutral"),
-    TextSound(tr("hidetake.speech3"), tr("hidetake_name"), "silence",
-        "hidetake_neutral"),
+    TextSound(
+        """This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.""", tr("hidetake_name"), "silence", "hidetake_neutral"),
   ];
 
   void nextQuestion() {

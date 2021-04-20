@@ -42,25 +42,27 @@ class ThemeProvider with ChangeNotifier {
   // Global theme data we are always check if the light theme is enabled #isLightTheme
   ThemeData themeData() {
     return ThemeData(
-      hintColor: Colors.white,
-      splashColor: Colors.transparent,
-      visualDensity: VisualDensity.adaptivePlatformDensity,
-      primarySwatch: isLightTheme! ? Colors.grey : Colors.grey,
-      primaryColor: isLightTheme! ? Colors.white : Colors.black,
-      backgroundColor: isLightTheme! ? Colors.white : Colors.black,
-      buttonColor: isLightTheme! ? Colors.white : Colors.black,
-      brightness: isLightTheme! ? Brightness.light : Brightness.dark,
-      cardColor: isLightTheme! ? Colors.grey[200] : Color(0xFF242424),
-      canvasColor: isLightTheme! ? Colors.blue : Color(0xFF1c1c1c),
-      accentColor: isLightTheme! ? Colors.black : Colors.white,
-      highlightColor: Colors.transparent,
-      accentColorBrightness: isLightTheme! ? Brightness.light : Brightness.dark,
-      accentIconTheme: IconThemeData(
-        color: isLightTheme! ? Colors.white : Colors.white,
-      ),
-      scaffoldBackgroundColor:
-          isLightTheme! ? Color(0xFFFFFFFF) : Color(0xFF000000),
-    );
+        fontFamily: 'NanumBrush',
+        hintColor: Colors.white,
+        splashColor: Colors.transparent,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        primarySwatch: isLightTheme! ? Colors.grey : Colors.grey,
+        primaryColor: isLightTheme! ? Colors.white : Colors.black,
+        backgroundColor: isLightTheme! ? Colors.white : Colors.black,
+        buttonColor: isLightTheme! ? Colors.white : Colors.black,
+        brightness: isLightTheme! ? Brightness.light : Brightness.dark,
+        cardColor: isLightTheme! ? Colors.grey[200] : Color(0xFF242424),
+        canvasColor: isLightTheme! ? Colors.blue : Color(0xFF1c1c1c),
+        accentColor: isLightTheme! ? Colors.black : Colors.white,
+        highlightColor: Colors.transparent,
+        accentColorBrightness:
+            isLightTheme! ? Brightness.light : Brightness.dark,
+        accentIconTheme: IconThemeData(
+          color: isLightTheme! ? Colors.white : Colors.white,
+        ),
+        scaffoldBackgroundColor:
+            isLightTheme! ? Color(0xFFFFFFFF) : Color(0xFF000000),
+        indicatorColor: isLightTheme! ? Colors.green[500] : Colors.green[900]);
   }
 
   // Theme mode to display unique properties not cover in theme data

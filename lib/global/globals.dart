@@ -90,11 +90,7 @@ dynamic skipClip(context, route) {
                 borderRadius: BorderRadius.circular(18.0),
               ),
               primary: Theme.of(context).primaryColor),
-          onPressed: () => showAlertDialog(context),
-          onLongPress: () {
-            FlameAudio.bgm.stop();
-            Navigator.of(context).pushReplacementNamed(route);
-          },
+          onPressed: () => showAlertDialog(context, route),
           child: Text(
             "Skip >>",
             style: TextStyle(
@@ -109,20 +105,42 @@ dynamic skipClip(context, route) {
   );
 }
 
-showAlertDialog(BuildContext context) {
+showAlertDialog(BuildContext context, route) {
   // set up the buttons
 
-  Widget continueButton = ElevatedButton(
-    style: ElevatedButton.styleFrom(
-        primary: Theme.of(context).accentColor,
-        onPrimary: Theme.of(context).primaryColor),
-    child: Text(
-      "Okay",
-      style: TextStyle(fontFamily: "Aleo", fontSize: 18, letterSpacing: .4),
-    ),
-    onPressed: () {
-      Navigator.pop(context);
-    },
+  Widget continueButton = Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            primary: Theme.of(context).accentColor,
+            onPrimary: Theme.of(context).primaryColor),
+        child: Text(
+          "YES",
+          style: TextStyle(fontFamily: "Aleo", fontSize: 18, letterSpacing: .4),
+        ),
+        onPressed: () {
+          FlameAudio.bgm.stop();
+          Navigator.of(context).pushNamed(route);
+        },
+      ),
+      SizedBox(
+        width: 10,
+      ),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            primary: Theme.of(context).accentColor,
+            onPrimary: Theme.of(context).primaryColor),
+        child: Text(
+          "NO",
+          style: TextStyle(fontFamily: "Aleo", fontSize: 18, letterSpacing: .4),
+        ),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
+    ],
   );
 
   // set up the AlertDialog
@@ -131,12 +149,20 @@ showAlertDialog(BuildContext context) {
     title: Text(
       "CHAPTER SKIP!",
       textAlign: TextAlign.center,
-      style: TextStyle(fontFamily: "Aleo", fontSize: 30, letterSpacing: .2),
+      style: TextStyle(
+          fontFamily: "Aleo",
+          fontSize: 30,
+          letterSpacing: .2,
+          color: Colors.black),
     ),
     content: Text(
-      "Are you sure about that? If so please long press the skip button.",
+      "Are you sure about that?",
       textAlign: TextAlign.center,
-      style: TextStyle(fontFamily: "Aleo", fontSize: 20, letterSpacing: .4),
+      style: TextStyle(
+          fontFamily: "Aleo",
+          fontSize: 20,
+          letterSpacing: .4,
+          color: Colors.black),
     ),
     actions: [
       continueButton,
