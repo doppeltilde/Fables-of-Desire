@@ -1,4 +1,5 @@
 // Gestures
+import 'package:just_audio/just_audio.dart';
 import 'package:universal_io/io.dart';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -88,7 +89,7 @@ dynamic settingsClip(context, _scaffoldKey) {
       //         child: Text(
       //           "Settings",
       //           style: TextStyle(
-      //               color: Theme.of(context).accentColor,
+      //               color: Colors.black,
       //               fontFamily: "Aleo",
       //               fontSize: 20,
       //               letterSpacing: .2),
@@ -139,7 +140,7 @@ dynamic skipClip(context, route) {
       //     child: Text(
       //       "Skip >>",
       //       style: TextStyle(
-      //           color: Theme.of(context).accentColor,
+      //           color: Colors.black,
       //           fontFamily: "Aleo",
       //           fontSize: 20,
       //           letterSpacing: .2),
@@ -159,8 +160,7 @@ showAlertDialog(BuildContext context, route) {
     children: [
       ElevatedButton(
         style: ElevatedButton.styleFrom(
-            primary: Theme.of(context).accentColor,
-            onPrimary: Theme.of(context).primaryColor),
+            primary: Colors.black, onPrimary: Theme.of(context).primaryColor),
         child: Text(
           "YES",
           style: TextStyle(fontFamily: "Aleo", fontSize: 18, letterSpacing: .4),
@@ -175,8 +175,7 @@ showAlertDialog(BuildContext context, route) {
       ),
       ElevatedButton(
         style: ElevatedButton.styleFrom(
-            primary: Theme.of(context).accentColor,
-            onPrimary: Theme.of(context).primaryColor),
+            primary: Colors.black, onPrimary: Theme.of(context).primaryColor),
         child: Text(
           "NO",
           style: TextStyle(fontFamily: "Aleo", fontSize: 18, letterSpacing: .4),
@@ -296,7 +295,7 @@ class _AppDrawerState extends State<AppDrawer> {
 
     return new Drawer(
         child: Container(
-      color: Theme.of(context).primaryColor,
+      color: Colors.white,
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -535,8 +534,7 @@ class _AppDrawerState extends State<AppDrawer> {
       children: [
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-              primary: Theme.of(context).accentColor,
-              onPrimary: Theme.of(context).primaryColor),
+              primary: Colors.black, onPrimary: Theme.of(context).primaryColor),
           child: Text(
             "YES",
             style:
@@ -551,8 +549,7 @@ class _AppDrawerState extends State<AppDrawer> {
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-              primary: Theme.of(context).accentColor,
-              onPrimary: Theme.of(context).primaryColor),
+              primary: Colors.black, onPrimary: Theme.of(context).primaryColor),
           child: Text(
             "NO",
             style:
@@ -594,70 +591,16 @@ class _AppDrawerState extends State<AppDrawer> {
 }
 
 class AppDrawerMain extends StatefulWidget {
+  final player;
+  AppDrawerMain({Key? key, this.player});
   @override
   _AppDrawerState2 createState() => new _AppDrawerState2();
 }
 
 class _AppDrawerState2 extends State<AppDrawerMain> {
-  bool? isSwitchedFT = true;
-  bool? isNoti = true;
   @override
   void initState() {
     super.initState();
-    _initPackageInfo();
-    getSwitchValues();
-    getNotiValues();
-  }
-
-  PackageInfo _packageInfo = PackageInfo(
-    appName: 'Unknown',
-    packageName: 'Unknown',
-    version: 'Unknown',
-    buildNumber: 'Unknown',
-  );
-  Future<void> _initPackageInfo() async {
-    final PackageInfo info = await PackageInfo.fromPlatform();
-    setState(() {
-      _packageInfo = info;
-    });
-  }
-
-  getSwitchValues() async {
-    isSwitchedFT = await getSwitchState();
-    setState(() {});
-  }
-
-  Future<bool> saveSwitchState(bool value) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool("switchState", value);
-    return prefs.setBool("switchState", value);
-  }
-
-  Future<bool?> getSwitchState() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? isSwitchedFT = prefs.getBool("switchState");
-    print(isSwitchedFT);
-
-    return isSwitchedFT;
-  }
-
-  getNotiValues() async {
-    isNoti = await getNotiState();
-    setState(() {});
-  }
-
-  Future<bool> saveNotiState(bool value) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool("notiState", value);
-    return prefs.setBool("notiState", value);
-  }
-
-  Future<bool?> getNotiState() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? isNoti = prefs.getBool("notiState");
-    print(isNoti);
-
-    return isNoti;
   }
 
   @override
@@ -666,7 +609,7 @@ class _AppDrawerState2 extends State<AppDrawerMain> {
 
     return new Drawer(
         child: Container(
-      color: Theme.of(context).primaryColor,
+      color: Colors.white,
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -677,178 +620,63 @@ class _AppDrawerState2 extends State<AppDrawerMain> {
                 style: TextStyle(fontSize: 30, fontFamily: "Aleo"),
               )),
             ),
-
-            Container(
-              height: 55,
-              margin: EdgeInsets.symmetric(
-                horizontal: 10,
-              ).copyWith(
-                bottom: 20,
-              ),
-              padding: EdgeInsets.symmetric(
-                horizontal: 20,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Theme.of(context).cardColor,
-              ),
-              child: Row(
-                children: <Widget>[
-                  isSwitchedFT!
-                      ? Icon(
-                          Icons.music_note,
-                          size: 25,
-                        )
-                      : Icon(
-                          Icons.music_off,
-                          size: 25,
-                        ),
-                  SizedBox(width: 15),
-                  Text(
-                    "Music Volume",
-                    style: TextStyle(
-                      fontFamily: "Arvo",
-                      fontSize: 18,
-                    ),
-                  ),
-                  Spacer(),
-                  Switch.adaptive(
-                    value: isSwitchedFT!,
-                    onChanged: (bool value) {
-                      setState(() {
-                        isSwitchedFT!
-                            ? FlameAudio.bgm.pause()
-                            : FlameAudio.bgm.resume();
-
-                        isSwitchedFT = value;
-                        saveSwitchState(value);
-                        //switch works
-                      });
-                    },
-                  ),
-                ],
-              ),
+            IconButton(
+              icon: Icon(Icons.volume_up),
+              onPressed: () {
+                _showSliderDialog(
+                  context: context,
+                  title: "Adjust volume",
+                  divisions: 10,
+                  min: 0.0,
+                  max: 1.0,
+                  stream: widget.player.volumeStream,
+                  onChanged: widget.player.setVolume,
+                );
+              },
             ),
-            // Container(
-            //   height: 55,
-            //   margin: EdgeInsets.symmetric(
-            //     horizontal: 10,
-            //   ).copyWith(
-            //     bottom: 20,
-            //   ),
-            //   padding: EdgeInsets.symmetric(
-            //     horizontal: 20,
-            //   ),
-            //   decoration: BoxDecoration(
-            //     borderRadius: BorderRadius.circular(30),
-            //     color: Theme.of(context).cardColor,
-            //   ),
-            //   child: Row(
-            //     children: <Widget>[
-            //       isNoti!
-            //           ? Icon(
-            //               Icons.notifications_active_outlined,
-            //               size: 25,
-            //             )
-            //           : Icon(
-            //               Icons.notifications_off_outlined,
-            //               size: 25,
-            //             ),
-            //       SizedBox(width: 15),
-            //       Text(
-            //         "Message Volume",
-            //         style: TextStyle(
-            //           fontFamily: "Arvo",
-            //           fontSize: 18,
-            //         ),
-            //       ),
-            //       Spacer(),
-            //       Switch.adaptive(
-            //         value: isNoti!,
-            //         onChanged: (bool value) {
-            //           setState(() {
-            //             isNoti = value;
-            //             saveNotiState(value);
-            //             //switch works
-            //           });
-            //         },
-            //       ),
-            //     ],
-            //   ),
-            // ),
-            Container(
-              height: 55,
-              margin: EdgeInsets.symmetric(
-                horizontal: 10,
-              ).copyWith(
-                bottom: 20,
-              ),
-              padding: EdgeInsets.symmetric(
-                horizontal: 20,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Theme.of(context).cardColor,
-              ),
-              child: Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.check_circle_outline,
-                    size: 25,
-                  ),
-                  SizedBox(width: 15),
-                  Text(
-                    "Game Version",
-                    style: TextStyle(
-                      fontFamily: "Arvo",
-                      fontSize: 18,
-                    ),
-                  ),
-                  Spacer(),
-                  Text(
-                    _packageInfo.version,
-                    style: TextStyle(
-                      fontFamily: "Arvo",
-                      fontSize: 18,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            // SizedBox(
-            //   height: 55,
-            // ),
-            // GestureDetector(
-            //   onTap: () async {
-            //     const url = 'https://smalldreams.space/privacy-policy/';
-            //     if (await canLaunch(url)) {
-            //       await launch(url);
-            //     } else {
-            //       throw 'Could not launch $url';
-            //     }
-            //   },
-            //   child: ProfileListItem(
-            //     icon: Icons.privacy_tip_outlined,
-            //     text: 'Privacy',
-            //   ),
-            // ),
-            // GestureDetector(
-            //   onTap: () async {
-            //     const url = 'https://smalldreams.space/terms-of-service/';
-            //     if (await canLaunch(url)) {
-            //       await launch(url);
-            //     } else {
-            //       throw 'Could not launch $url';
-            //     }
-            //   },
-            //   child: ProfileListItem(
-            //     icon: Icons.policy_outlined,
-            //     text: 'Terms of Service',
-            //   ),
-            // ),
           ],
         ),
       ),
     ));
+  }
+
+  void _showSliderDialog({
+    required BuildContext context,
+    required String title,
+    required int divisions,
+    required double min,
+    required double max,
+    String valueSuffix = '',
+    required Stream<double> stream,
+    required ValueChanged<double> onChanged,
+  }) {
+    showDialog<void>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(title, textAlign: TextAlign.center),
+        content: StreamBuilder<double>(
+          stream: stream,
+          builder: (context, snapshot) => Container(
+            height: 100.0,
+            child: Column(
+              children: [
+                Text('${snapshot.data?.toStringAsFixed(1)}$valueSuffix',
+                    style: TextStyle(
+                        fontFamily: 'Fixed',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24.0)),
+                Slider(
+                  divisions: divisions,
+                  min: min,
+                  max: max,
+                  value: snapshot.data ?? 1.0,
+                  onChanged: onChanged,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

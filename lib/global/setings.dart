@@ -1,9 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:fablesofdesire/global/theme.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
-import 'package:package_info/package_info.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Settings extends StatefulWidget {
@@ -15,70 +14,15 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
-  bool? isSwitchedFT = true;
-  bool? isNoti = true;
+  late AudioPlayer player;
   @override
   void initState() {
     super.initState();
-    _initPackageInfo();
-    getSwitchValues();
-    getNotiValues();
-  }
-
-  PackageInfo _packageInfo = PackageInfo(
-    appName: 'Unknown',
-    packageName: 'Unknown',
-    version: 'Unknown',
-    buildNumber: 'Unknown',
-  );
-  Future<void> _initPackageInfo() async {
-    final PackageInfo info = await PackageInfo.fromPlatform();
-    setState(() {
-      _packageInfo = info;
-    });
-  }
-
-  getSwitchValues() async {
-    isSwitchedFT = await getSwitchState();
-    setState(() {});
-  }
-
-  Future<bool> saveSwitchState(bool value) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool("switchState", value);
-    return prefs.setBool("switchState", value);
-  }
-
-  Future<bool?> getSwitchState() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? isSwitchedFT = prefs.getBool("switchState");
-    print(isSwitchedFT);
-
-    return isSwitchedFT;
-  }
-
-  getNotiValues() async {
-    isNoti = await getNotiState();
-    setState(() {});
-  }
-
-  Future<bool> saveNotiState(bool value) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool("notiState", value);
-    return prefs.setBool("notiState", value);
-  }
-
-  Future<bool?> getNotiState() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? isNoti = prefs.getBool("notiState");
-    print(isNoti);
-
-    return isNoti;
+    player = AudioPlayer();
   }
 
   @override
   Widget build(BuildContext context) {
-    //final themeProvider = Provider.of<ThemeProvider>(context);
     return WillPopScope(
       onWillPop: () => getOnWillPop(context),
       child: SafeArea(
@@ -109,56 +53,19 @@ class _SettingsState extends State<Settings> {
                         height: 20,
                       ),
 
-                      Container(
-                        height: 55,
-                        margin: EdgeInsets.symmetric(
-                          horizontal: 10,
-                        ).copyWith(
-                          bottom: 20,
-                        ),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 20,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Theme.of(context).cardColor,
-                        ),
-                        child: Row(
-                          children: <Widget>[
-                            isSwitchedFT!
-                                ? Icon(
-                                    Icons.music_note,
-                                    size: 25,
-                                  )
-                                : Icon(
-                                    Icons.music_off,
-                                    size: 25,
-                                  ),
-                            SizedBox(width: 15),
-                            Text(
-                              "Music Volume",
-                              style: TextStyle(
-                                fontFamily: "Arvo",
-                                fontSize: 18,
-                              ),
-                            ),
-                            Spacer(),
-                            Switch.adaptive(
-                              value: isSwitchedFT!,
-                              onChanged: (bool value) {
-                                setState(() {
-                                  isSwitchedFT!
-                                      ? FlameAudio.bgm.pause()
-                                      : FlameAudio.bgm.resume();
-
-                                  isSwitchedFT = value;
-                                  saveSwitchState(value);
-                                  //switch works
-                                });
-                              },
-                            ),
-                          ],
-                        ),
+                      IconButton(
+                        icon: Icon(Icons.volume_up),
+                        onPressed: () {
+                          _showSliderDialog(
+                            context: context,
+                            title: "Adjust volume",
+                            divisions: 10,
+                            min: 0.0,
+                            max: 1.0,
+                            stream: player.volumeStream,
+                            onChanged: player.setVolume,
+                          );
+                        },
                       ),
                       // Slider(
                       //   value: volumeValue,
@@ -173,45 +80,6 @@ class _SettingsState extends State<Settings> {
                       //   },
                       // ),
 
-                      Container(
-                        height: 55,
-                        margin: EdgeInsets.symmetric(
-                          horizontal: 10,
-                        ).copyWith(
-                          bottom: 20,
-                        ),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 20,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Theme.of(context).cardColor,
-                        ),
-                        child: Row(
-                          children: <Widget>[
-                            Icon(
-                              Icons.check_circle_outline,
-                              size: 25,
-                            ),
-                            SizedBox(width: 15),
-                            Text(
-                              "Game Version",
-                              style: TextStyle(
-                                fontFamily: "Arvo",
-                                fontSize: 18,
-                              ),
-                            ),
-                            Spacer(),
-                            Text(
-                              _packageInfo.version,
-                              style: TextStyle(
-                                fontFamily: "Arvo",
-                                fontSize: 18,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
                       SizedBox(
                         height: 55,
                       ),
@@ -258,6 +126,46 @@ class _SettingsState extends State<Settings> {
       ),
     );
   }
+
+  void _showSliderDialog({
+    required BuildContext context,
+    required String title,
+    required int divisions,
+    required double min,
+    required double max,
+    String valueSuffix = '',
+    required Stream<double> stream,
+    required ValueChanged<double> onChanged,
+  }) {
+    showDialog<void>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(title, textAlign: TextAlign.center),
+        content: StreamBuilder<double>(
+          stream: stream,
+          builder: (context, snapshot) => Container(
+            height: 100.0,
+            child: Column(
+              children: [
+                Text('${snapshot.data?.toStringAsFixed(1)}$valueSuffix',
+                    style: TextStyle(
+                        fontFamily: 'Fixed',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24.0)),
+                Slider(
+                  divisions: divisions,
+                  min: min,
+                  max: max,
+                  value: snapshot.data ?? 1.0,
+                  onChanged: onChanged,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class SettingsIngame extends StatefulWidget {
@@ -274,22 +182,8 @@ class _SettingsIngameState extends State<SettingsIngame> {
   @override
   void initState() {
     super.initState();
-    _initPackageInfo();
     getSwitchValues();
     getNotiValues();
-  }
-
-  PackageInfo _packageInfo = PackageInfo(
-    appName: 'Unknown',
-    packageName: 'Unknown',
-    version: 'Unknown',
-    buildNumber: 'Unknown',
-  );
-  Future<void> _initPackageInfo() async {
-    final PackageInfo info = await PackageInfo.fromPlatform();
-    setState(() {
-      _packageInfo = info;
-    });
   }
 
   getSwitchValues() async {
@@ -444,13 +338,6 @@ class _SettingsIngameState extends State<SettingsIngame> {
                           ),
                         ),
                         Spacer(),
-                        Text(
-                          _packageInfo.version,
-                          style: TextStyle(
-                            fontFamily: "Arvo",
-                            fontSize: 18,
-                          ),
-                        ),
                       ],
                     ),
                   ),
@@ -547,8 +434,7 @@ class _SettingsIngameState extends State<SettingsIngame> {
       children: [
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-              primary: Theme.of(context).accentColor,
-              onPrimary: Theme.of(context).primaryColor),
+              primary: Colors.black, onPrimary: Theme.of(context).primaryColor),
           child: Text(
             "YES",
             style:
@@ -563,8 +449,7 @@ class _SettingsIngameState extends State<SettingsIngame> {
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-              primary: Theme.of(context).accentColor,
-              onPrimary: Theme.of(context).primaryColor),
+              primary: Colors.black, onPrimary: Theme.of(context).primaryColor),
           child: Text(
             "NO",
             style:

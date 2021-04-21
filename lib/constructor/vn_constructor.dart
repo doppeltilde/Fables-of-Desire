@@ -43,7 +43,7 @@ class _InterludeState extends State<InterludeTextSound> {
         Opacity(
           opacity: 0.8,
           child: Card(
-            color: Theme.of(context).primaryColor,
+            color: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
@@ -54,7 +54,7 @@ class _InterludeState extends State<InterludeTextSound> {
                 style: TextStyle(
                   fontFamily: "Aleo",
                   fontSize: 25,
-                  color: Theme.of(context).accentColor,
+                  color: Colors.black,
                 ),
               ),
             ),
@@ -164,7 +164,7 @@ class _InterludeState extends State<InterludeTextSound> {
           //           shape: RoundedRectangleBorder(
           //             borderRadius: BorderRadius.circular(15.0),
           //           ),
-          //           color: Theme.of(context).primaryColor,
+          //           color: Colors.white,
           //           child: Padding(
           //             padding: EdgeInsets.all(15.0),
           //             child: Center(
@@ -177,7 +177,7 @@ class _InterludeState extends State<InterludeTextSound> {
           //                       widget.q!,
           //                       textAlign: TextAlign.left,
           //                       textStyle: TextStyle(
-          //                         color: Theme.of(context).accentColor,
+          //                         color: Colors.black,
           //                         fontSize: 21,
           //                       ),
           //                       speed: const Duration(milliseconds: 40),
@@ -200,7 +200,7 @@ class _InterludeState extends State<InterludeTextSound> {
           //         shape: RoundedRectangleBorder(
           //           borderRadius: BorderRadius.circular(15.0),
           //         ),
-          //         color: Theme.of(context).primaryColor,
+          //         color: Colors.white,
           //         child: Padding(
           //           padding: EdgeInsets.all(15.0),
           //           child: Center(
@@ -213,7 +213,7 @@ class _InterludeState extends State<InterludeTextSound> {
           //                     widget.q!,
           //                     textAlign: TextAlign.left,
           //                     textStyle: TextStyle(
-          //                       color: Theme.of(context).accentColor,
+          //                       color: Colors.black,
           //                       fontSize: 21,
           //                     ),
           //                     speed: const Duration(milliseconds: 40),
@@ -256,12 +256,6 @@ class _BackgroundBuilderState extends State<BackgroundBuilder> {
         image: DecorationImage(
           image: AssetImage(widget.image!),
           fit: BoxFit.cover,
-        ),
-      ),
-      child: new BackdropFilter(
-        filter: new ImageFilter.blur(sigmaX: 0, sigmaY: 0),
-        child: new Container(
-          decoration: new BoxDecoration(color: Colors.black.withOpacity(0)),
         ),
       ),
     );

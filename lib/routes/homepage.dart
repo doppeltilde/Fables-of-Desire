@@ -1,4 +1,5 @@
 // Primary
+import 'package:just_audio/just_audio.dart';
 import 'package:universal_io/io.dart';
 import 'dart:math';
 
@@ -6,8 +7,8 @@ import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/global/setings.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:audio_session/audio_session.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,6 +16,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _WildfyreState extends State<HomePage> {
+  late AudioPlayer _player;
+  final _playlist = ConcatenatingAudioSource(children: [
+    AudioSource.uri(
+      Uri.parse(
+          "https://starhelix.space/wp-content/uploads/2021/04/thousandyearoldforest.mp3"),
+    ),
+  ]);
   static const int _startingPageId = 0;
   bool? isSwitchedFT;
   int _selectedPageId = _startingPageId;
@@ -25,18 +33,32 @@ class _WildfyreState extends State<HomePage> {
   void initState() {
     super.initState();
     getSharedPrefs();
-    isLightValues();
+    _player = AudioPlayer();
+    _player.play();
+    _player.setLoopMode(LoopMode.one);
+    _init();
   }
 
-  isLightValues() async {
-    isLightTheme = await isLight();
-    setState(() {});
+  Future<void> _init() async {
+    final session = await AudioSession.instance;
+    await session.configure(AudioSessionConfiguration.speech());
+    // Listen to errors during playback.
+    _player.playbackEventStream.listen((event) {},
+        onError: (Object e, StackTrace stackTrace) {
+      print('A stream error occurred: $e');
+    });
+    try {
+      await _player.setAudioSource(_playlist);
+    } catch (e) {
+      // Catch load errors: 404, invalid url ...
+      print("Error loading playlist: $e");
+    }
   }
 
-  Future<bool> isLight() async {
-    final settings = await Hive.openBox('settings');
-    bool isLightTheme = settings.get('isLightTheme') ?? true;
-    return isLightTheme;
+  @override
+  void dispose() {
+    _player.dispose();
+    super.dispose();
   }
 
   Future<Null> getSharedPrefs() async {
@@ -59,14 +81,16 @@ class _WildfyreState extends State<HomePage> {
     return Scaffold(
       key: _scaffoldKey,
       endDrawerEnableOpenDragGesture: false,
-      endDrawer: AppDrawerMain(),
-      body: AppBody(controller: _controller),
+      endDrawer: AppDrawerMain(
+        player: _player,
+      ),
+      body: AppBody(player: _player, controller: _controller),
       bottomNavigationBar: new LayoutBuilder(builder: (context, constraints) {
         if (Platform.isMacOS || Platform.isLinux || Platform.isWindows) {
           return Theme(
             data: Theme.of(context).copyWith(
-                canvasColor: Theme.of(context).primaryColor,
-                primaryColor: Theme.of(context).primaryColor,
+                canvasColor: Colors.white,
+                primaryColor: Colors.white,
                 textTheme: Theme.of(context).textTheme.copyWith(
                     caption: TextStyle(color: Theme.of(context).accentColor))),
             child: BottomNavigationBar(
@@ -74,14 +98,14 @@ class _WildfyreState extends State<HomePage> {
                   BottomNavigationBarItem(
                     icon: Icon(
                       _selectedPageId == 0 ? Icons.menu : Icons.menu_outlined,
-                      color: Theme.of(context).accentColor,
+                      color: Colors.black,
                     ),
                     label: 'HOME',
                   ),
                   // BottomNavigationBarItem(
                   //   icon: Icon(
                   //     _selectedPageId == 1 ? Icons.info : Icons.info_outline,
-                  //     color: Theme.of(context).accentColor,
+                  //     color: Colors.black,
                   //   ),
                   //   label: 'ABOUT',
                   // ),
@@ -96,7 +120,7 @@ class _WildfyreState extends State<HomePage> {
                 ],
                 unselectedLabelStyle: TextStyle(fontSize: 18, letterSpacing: 1),
                 selectedLabelStyle: TextStyle(fontSize: 21, letterSpacing: 1),
-                selectedItemColor: Theme.of(context).accentColor,
+                selectedItemColor: Colors.black,
                 unselectedItemColor: Colors.grey,
                 iconSize: 25.0,
                 currentIndex: _selectedPageId,
@@ -115,9 +139,9 @@ class _WildfyreState extends State<HomePage> {
           return Theme(
             data: Theme.of(context).copyWith(
                 // sets the background color of the `BottomNavigationBar`
-                canvasColor: Theme.of(context).primaryColor,
+                canvasColor: Colors.white,
                 // sets the active color of the `BottomNavigationBar` if `Brightness` is light
-                primaryColor: Theme.of(context).primaryColor,
+                primaryColor: Colors.white,
                 textTheme: Theme.of(context).textTheme.copyWith(
                     caption: TextStyle(color: Theme.of(context).accentColor))),
             child: BottomNavigationBar(
@@ -125,14 +149,14 @@ class _WildfyreState extends State<HomePage> {
                   BottomNavigationBarItem(
                     icon: Icon(
                       _selectedPageId == 0 ? Icons.menu : Icons.menu_outlined,
-                      color: Theme.of(context).accentColor,
+                      color: Colors.black,
                     ),
                     label: 'HOME',
                   ),
                   // BottomNavigationBarItem(
                   //   icon: Icon(
                   //     _selectedPageId == 1 ? Icons.info : Icons.info_outline,
-                  //     color: Theme.of(context).accentColor,
+                  //     color: Colors.black,
                   //   ),
                   //   label: 'ABOUT',
                   // ),
@@ -141,15 +165,15 @@ class _WildfyreState extends State<HomePage> {
                       _selectedPageId == 1
                           ? Icons.category
                           : Icons.category_outlined,
-                      color: Theme.of(context).accentColor,
+                      color: Colors.black,
                     ),
                     label: 'MORE',
                   ),
                 ],
                 unselectedLabelStyle: TextStyle(fontSize: 18, letterSpacing: 1),
                 selectedLabelStyle: TextStyle(fontSize: 21, letterSpacing: 1),
-                selectedItemColor: Theme.of(context).accentColor,
-                unselectedItemColor: Theme.of(context).accentColor,
+                selectedItemColor: Colors.black,
+                unselectedItemColor: Colors.black,
                 iconSize: 25.0,
                 currentIndex: _selectedPageId,
                 onTap: (newId) {
@@ -166,8 +190,10 @@ class _WildfyreState extends State<HomePage> {
 }
 
 class AppBody extends StatelessWidget {
+  final player;
   const AppBody({
     Key? key,
+    this.player,
     required PageController controller,
   })   : _controller = controller,
         super(key: key);
@@ -180,7 +206,9 @@ class AppBody extends StatelessWidget {
       physics: NeverScrollableScrollPhysics(),
       controller: _controller,
       children: [
-        HomePage2(),
+        HomePage2(
+          player: player,
+        ),
         // About(),
         Settings(),
       ],
@@ -190,6 +218,8 @@ class AppBody extends StatelessWidget {
 
 // HomePage
 class HomePage2 extends StatefulWidget {
+  final player;
+  HomePage2({Key? key, this.player});
   @override
   _BaseScreenState createState() => _BaseScreenState();
 }
@@ -203,7 +233,6 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    isLightValues();
     getSharedPrefs();
     animationController = AnimationController(
       vsync: this,
@@ -222,17 +251,6 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
   dispose() {
     animationController.dispose();
     super.dispose();
-  }
-
-  isLightValues() async {
-    isLightTheme = await isLight();
-    setState(() {});
-  }
-
-  Future<bool> isLight() async {
-    final settings = await Hive.openBox('settings');
-    bool isLightTheme = settings.get('isLightTheme') ?? true;
-    return isLightTheme;
   }
 
   Future<Null> getSharedPrefs() async {
@@ -314,6 +332,7 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
                       InkWell(
                         onTap: () async {
                           if (Platform.isWindows || Platform.isLinux) {
+                            await widget.player.pause();
                           } else {
                             FlameAudio.bgm.stop();
                           }
@@ -426,13 +445,13 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
                       //             child: Text(
                       //               'Chapters',
                       //               style: TextStyle(
-                      //                 color: Theme.of(context).accentColor,
+                      //                 color: Colors.black,
                       //                 fontSize: 35,
                       //               ),
                       //             ),
                       //             style: TextButton.styleFrom(
                       //               backgroundColor:
-                      //                   Theme.of(context).primaryColor,
+                      //                   Colors.white,
                       //               padding: EdgeInsets.symmetric(vertical: 20),
                       //             ),
                       //             onPressed: () {
@@ -461,7 +480,7 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
                       //           child: Text(
                       //             '',
                       //             style: TextStyle(
-                      //               color: Theme.of(context).accentColor,
+                      //               color: Colors.black,
                       //               fontSize: 35,
                       //             ),
                       //           ),
@@ -497,7 +516,7 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       contentPadding: EdgeInsets.all(5),
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: Colors.white,
       title: Text(
         "Not available",
         textAlign: TextAlign.center,
