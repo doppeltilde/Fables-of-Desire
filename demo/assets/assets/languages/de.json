@@ -1,0 +1,34 @@
+{
+    "start_game": "SPIELEN",
+    "load_game": "CHAPTERS",
+    "settings": "EINSTELLUNGEN",
+    "game_name": "Fables of Desire",
+    "shareapp": "Check out the ”Fables of Desire”.",
+    "mc_name": "MC",
+    "tom_name": "Tomiichi",
+    "naoki_name": "Naoki",
+    "hidetake_name": "Hidetake",
+    "narrator": {
+        "narrator1": "Just as I was beginning to eat, Anna came down with a huge smile on her face."
+    },
+    "mc": {
+        "speech1": "Hi, this is the MC's first speech.",
+        "speech2": "Second",
+        "speech3": "Third with\na breakline."
+    },
+    "tom": {
+        "speech1": "Hi, this is Tomiichi's first speech.",
+        "speech2": "Second",
+        "speech3": "Third with\na breakline."
+    },
+    "naoki": {
+        "speech1": "Hi, this is Naoki's first speech.",
+        "speech2": "Second",
+        "speech3": "Third with\na breakline."
+    },
+    "hidetake": {
+        "speech1": "Hi, this is Hidetake's first speech.",
+        "speech2": "Second",
+        "speech3": "Third with\na breakline."
+    }
+}
