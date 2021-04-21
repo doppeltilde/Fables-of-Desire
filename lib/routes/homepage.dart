@@ -1,5 +1,5 @@
 // Primary
-import 'dart:io';
+import 'package:universal_io/io.dart';
 import 'dart:math';
 
 import 'package:fablesofdesire/global/globals.dart';
@@ -43,7 +43,10 @@ class _WildfyreState extends State<HomePage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     isSwitchedFT = (prefs.getBool("switchState"));
     if (isSwitchedFT == true) {
-      FlameAudio.bgm.play("warmth-of-the-sun-adi-goldstein.mp3", volume: 1.0);
+      if (Platform.isWindows || Platform.isLinux) {
+      } else {
+        FlameAudio.bgm.play("warmth-of-the-sun-adi-goldstein.mp3", volume: 1.0);
+      }
     } else {
       //Flame.bgm.stop();
     }
@@ -310,7 +313,11 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
                     children: <Widget>[
                       InkWell(
                         onTap: () async {
-                          FlameAudio.bgm.stop();
+                          if (Platform.isWindows || Platform.isLinux) {
+                          } else {
+                            FlameAudio.bgm.stop();
+                          }
+
                           Navigator.of(context).pushNamed('/1');
                         },
                         child: Stack(

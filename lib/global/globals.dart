@@ -1,14 +1,12 @@
 // Gestures
-import 'dart:io';
+import 'package:universal_io/io.dart';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fablesofdesire/global/setings.dart';
-import 'package:fablesofdesire/global/theme.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AllowMultipleGestureRecognizer extends TapGestureRecognizer {
@@ -294,7 +292,7 @@ class _AppDrawerState extends State<AppDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
+    // final themeProvider = Provider.of<ThemeProvider>(context);
 
     return new Drawer(
         child: Container(
@@ -309,49 +307,7 @@ class _AppDrawerState extends State<AppDrawer> {
                 style: TextStyle(fontSize: 30, fontFamily: "Aleo"),
               )),
             ),
-            Container(
-              height: 55,
-              margin: EdgeInsets.symmetric(
-                horizontal: 10,
-              ).copyWith(
-                bottom: 20,
-              ),
-              padding: EdgeInsets.symmetric(
-                horizontal: 20,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Theme.of(context).cardColor,
-              ),
-              child: Row(
-                children: <Widget>[
-                  themeProvider.isLightTheme!
-                      ? Icon(
-                          Icons.wb_sunny_rounded,
-                          size: 25,
-                        )
-                      : Icon(
-                          Icons.nights_stay,
-                          size: 25,
-                        ),
-                  SizedBox(width: 15),
-                  Text(
-                    "Change Theme",
-                    style: TextStyle(
-                      fontFamily: "Arvo",
-                      fontSize: 18,
-                    ),
-                  ),
-                  Spacer(),
-                  Switch.adaptive(
-                      value: themeProvider.isLightTheme!,
-                      onChanged: (bool value) async {
-                        await themeProvider.toggleThemeData();
-                        themeProvider.isLightTheme = value;
-                      }),
-                ],
-              ),
-            ),
+
             Container(
               height: 55,
               margin: EdgeInsets.symmetric(
@@ -706,7 +662,7 @@ class _AppDrawerState2 extends State<AppDrawerMain> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
+    // final themeProvider = Provider.of<ThemeProvider>(context);
 
     return new Drawer(
         child: Container(
@@ -721,49 +677,7 @@ class _AppDrawerState2 extends State<AppDrawerMain> {
                 style: TextStyle(fontSize: 30, fontFamily: "Aleo"),
               )),
             ),
-            Container(
-              height: 55,
-              margin: EdgeInsets.symmetric(
-                horizontal: 10,
-              ).copyWith(
-                bottom: 20,
-              ),
-              padding: EdgeInsets.symmetric(
-                horizontal: 20,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Theme.of(context).cardColor,
-              ),
-              child: Row(
-                children: <Widget>[
-                  themeProvider.isLightTheme!
-                      ? Icon(
-                          Icons.wb_sunny_rounded,
-                          size: 25,
-                        )
-                      : Icon(
-                          Icons.nights_stay,
-                          size: 25,
-                        ),
-                  SizedBox(width: 15),
-                  Text(
-                    "Change Theme",
-                    style: TextStyle(
-                      fontFamily: "Arvo",
-                      fontSize: 18,
-                    ),
-                  ),
-                  Spacer(),
-                  Switch.adaptive(
-                      value: themeProvider.isLightTheme!,
-                      onChanged: (bool value) async {
-                        await themeProvider.toggleThemeData();
-                        themeProvider.isLightTheme = value;
-                      }),
-                ],
-              ),
-            ),
+
             Container(
               height: 55,
               margin: EdgeInsets.symmetric(
