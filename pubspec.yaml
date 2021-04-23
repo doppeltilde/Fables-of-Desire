@@ -23,6 +23,7 @@ dependencies:
   just_audio: ^0.7.4
 
   universal_io: ^2.0.4
+  dart_vlc: ^0.0.4
 
   
 
@@ -59,13 +60,6 @@ flutter:
     - family: NanumBrush
       fonts:
         - asset: assets/fonts/NanumBrushScript-Regular.ttf
-
-msix_config:
-  display_name: Fables of Desire
-  publisher_display_name: SmallDreams
-  identity_name: de.smalldreams.game.fablesofdesire
-  msix_version: 1.0.0.0
-  publisher: CN=SmallDreams, O=SmallDreams, L=Berlin, S=Berlin, C=DE
-  icons_background_color: #ffffff
-  architecture: x64
-  capabilities: ''
+    - family: Julee
+      fonts:
+        - asset: assets/fonts/Julee-Regular.ttf

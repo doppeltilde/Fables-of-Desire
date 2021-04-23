@@ -1,4 +1,5 @@
 // Primary
+import 'package:fablesofdesire/routes/sub/homepage_desktop.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:universal_io/io.dart';
 import 'dart:math';
@@ -25,9 +26,9 @@ class _WildfyreState extends State<HomePage> {
   ]);
   static const int _startingPageId = 0;
   bool? isSwitchedFT;
-  int _selectedPageId = _startingPageId;
+  int selectedPageId = _startingPageId;
   TabController? tabscon;
-  final _controller = PageController(
+  final controller = PageController(
     initialPage: 0,
   );
   void initState() {
@@ -61,7 +62,7 @@ class _WildfyreState extends State<HomePage> {
     super.dispose();
   }
 
-  Future<Null> getSharedPrefs() async {
+  Future<dynamic> getSharedPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     isSwitchedFT = (prefs.getBool("switchState"));
     if (isSwitchedFT == true) {
@@ -75,66 +76,19 @@ class _WildfyreState extends State<HomePage> {
   }
 
   bool isLightTheme = true;
-  var _scaffoldKey = new GlobalKey<ScaffoldState>();
+  var scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
+      key: scaffoldKey,
       endDrawerEnableOpenDragGesture: false,
       endDrawer: AppDrawerMain(
         player: _player,
       ),
-      body: AppBody(player: _player, controller: _controller),
+      body: AppBody(player: _player, controller: controller),
       bottomNavigationBar: new LayoutBuilder(builder: (context, constraints) {
         if (Platform.isMacOS || Platform.isLinux || Platform.isWindows) {
-          return Theme(
-            data: Theme.of(context).copyWith(
-                canvasColor: Colors.white,
-                primaryColor: Colors.white,
-                textTheme: Theme.of(context).textTheme.copyWith(
-                    caption: TextStyle(color: Theme.of(context).accentColor))),
-            child: BottomNavigationBar(
-                items: <BottomNavigationBarItem>[
-                  BottomNavigationBarItem(
-                    icon: Icon(
-                      _selectedPageId == 0 ? Icons.menu : Icons.menu_outlined,
-                      color: Colors.black,
-                    ),
-                    label: 'HOME',
-                  ),
-                  // BottomNavigationBarItem(
-                  //   icon: Icon(
-                  //     _selectedPageId == 1 ? Icons.info : Icons.info_outline,
-                  //     color: Colors.black,
-                  //   ),
-                  //   label: 'ABOUT',
-                  // ),
-                  BottomNavigationBarItem(
-                    icon: Icon(
-                        _selectedPageId == 1
-                            ? Icons.category
-                            : Icons.category_outlined,
-                        color: Theme.of(context).accentColor),
-                    label: 'MORE',
-                  ),
-                ],
-                unselectedLabelStyle: TextStyle(fontSize: 18, letterSpacing: 1),
-                selectedLabelStyle: TextStyle(fontSize: 21, letterSpacing: 1),
-                selectedItemColor: Colors.black,
-                unselectedItemColor: Colors.grey,
-                iconSize: 25.0,
-                currentIndex: _selectedPageId,
-                onTap: (newId) {
-                  if (_selectedPageId == 0) {
-                    _scaffoldKey.currentState!.openEndDrawer();
-                  } else {
-                    setState(() {
-                      _controller.jumpToPage(newId);
-                      _selectedPageId = newId;
-                    });
-                  }
-                }),
-          );
+          return SizedBox.shrink();
         } else {
           return Theme(
             data: Theme.of(context).copyWith(
@@ -148,21 +102,14 @@ class _WildfyreState extends State<HomePage> {
                 items: <BottomNavigationBarItem>[
                   BottomNavigationBarItem(
                     icon: Icon(
-                      _selectedPageId == 0 ? Icons.menu : Icons.menu_outlined,
+                      selectedPageId == 0 ? Icons.menu : Icons.menu_outlined,
                       color: Colors.black,
                     ),
                     label: 'HOME',
                   ),
-                  // BottomNavigationBarItem(
-                  //   icon: Icon(
-                  //     _selectedPageId == 1 ? Icons.info : Icons.info_outline,
-                  //     color: Colors.black,
-                  //   ),
-                  //   label: 'ABOUT',
-                  // ),
                   BottomNavigationBarItem(
                     icon: Icon(
-                      _selectedPageId == 1
+                      selectedPageId == 1
                           ? Icons.category
                           : Icons.category_outlined,
                       color: Colors.black,
@@ -175,11 +122,11 @@ class _WildfyreState extends State<HomePage> {
                 selectedItemColor: Colors.black,
                 unselectedItemColor: Colors.black,
                 iconSize: 25.0,
-                currentIndex: _selectedPageId,
+                currentIndex: selectedPageId,
                 onTap: (newId) {
                   setState(() {
-                    _controller.jumpToPage(newId);
-                    _selectedPageId = newId;
+                    controller.jumpToPage(newId);
+                    selectedPageId = newId;
                   });
                 }),
           );
@@ -282,22 +229,7 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
     return stars;
   }
 
-  dynamic listImages = [
-    "assets/images/main.jpg",
-    "assets/images/main2.jpg",
-    "assets/images/main3.jpg",
-    "assets/images/main4.jpg"
-  ];
   Random? rnd;
-
-  buildImage() {
-    int min = 0;
-    int max = listImages.length - 1;
-    rnd = new Random();
-    int r = min + rnd!.nextInt(max - min);
-    String imageName = listImages[r].toString();
-    return AssetImage(imageName);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -349,8 +281,9 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
                                     return Container(
                                       color: Colors.transparent,
                                       padding: EdgeInsets.all(5),
-                                      width: MediaQuery.of(context).size.width /
-                                          1.1,
+                                      width:
+                                          MediaQuery.of(context).size.height /
+                                              1.1,
                                       child: ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(10.0),
@@ -361,19 +294,51 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
                                       ),
                                     );
                                   } else {
-                                    return Container(
-                                      color: Colors.transparent,
-                                      padding: EdgeInsets.all(5),
-                                      width:
-                                          MediaQuery.of(context).size.width / 3,
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                        child: Image.asset(
-                                          "assets/images/gui/menu_scroll_01.png",
-                                          fit: BoxFit.cover,
+                                    return Column(
+                                      children: [
+                                        /* Container(
+                                          color: Colors.transparent,
+                                          padding: EdgeInsets.all(5),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            child: Image.asset(
+                                              "assets/images/gui/menu_scroll_01.png",
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ), */
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 30, vertical: 5),
+                                          child: Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                3,
+                                            child: ElevatedButton(
+                                              child: Text(
+                                                "START",
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 35,
+                                                    fontFamily: "Julee"),
+                                              ),
+                                              style: TextButton.styleFrom(
+                                                elevation: 2,
+                                                backgroundColor: Colors.white,
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 20),
+                                              ),
+                                              onPressed: () async {
+                                                FlameAudio.bgm.stop();
+                                                Navigator.of(context)
+                                                    .pushNamed('/chapterone');
+                                              },
+                                            ),
+                                          ),
                                         ),
-                                      ),
+                                      ],
                                     );
                                   }
                                 })
@@ -408,20 +373,51 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
                                         ),
                                       );
                                     } else {
-                                      return Container(
-                                        color: Colors.transparent,
-                                        padding: EdgeInsets.all(5),
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                3,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          child: Image.asset(
-                                            "assets/images/gui/menu_scroll_03.png",
-                                            fit: BoxFit.cover,
+                                      return Column(
+                                        children: [
+                                          /* Container(
+                                            color: Colors.transparent,
+                                            padding: EdgeInsets.all(5),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                              child: Image.asset(
+                                                "assets/images/gui/menu_scroll_03.png",
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ), */
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 30, vertical: 5),
+                                            child: Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  3,
+                                              child: ElevatedButton(
+                                                child: Text(
+                                                  "LOAD",
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 35,
+                                                      fontFamily: "Julee"),
+                                                ),
+                                                style: TextButton.styleFrom(
+                                                  elevation: 2,
+                                                  backgroundColor: Colors.white,
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 20),
+                                                ),
+                                                onPressed: () async {
+                                                  FlameAudio.bgm.stop();
+                                                  Navigator.of(context)
+                                                      .pushNamed('/chapterone');
+                                                },
+                                              ),
+                                            ),
                                           ),
-                                        ),
+                                        ],
                                       );
                                     }
                                   },
