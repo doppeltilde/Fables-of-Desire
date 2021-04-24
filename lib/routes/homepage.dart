@@ -1,4 +1,5 @@
 // Primary
+import 'package:dart_vlc/dart_vlc.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:universal_io/io.dart';
 import 'dart:math';
@@ -16,6 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _WildfyreState extends State<HomePage> {
+  Player? player;
   late AudioPlayer _player;
   final _playlist = ConcatenatingAudioSource(children: [
     AudioSource.uri(
@@ -66,6 +68,14 @@ class _WildfyreState extends State<HomePage> {
     isSwitchedFT = (prefs.getBool("switchState"));
     if (isSwitchedFT == true) {
       if (Platform.isWindows || Platform.isLinux) {
+        this.player?.open(
+              new Playlist(
+                medias: [
+                  await Media.asset(
+                      'assets/audio/warmth-of-the-sun-adi-goldstein.mp3'),
+                ],
+              ),
+            );
       } else {
         FlameAudio.bgm.play("warmth-of-the-sun-adi-goldstein.mp3", volume: 1.0);
       }
