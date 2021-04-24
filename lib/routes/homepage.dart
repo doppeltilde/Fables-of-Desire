@@ -1,5 +1,4 @@
 // Primary
-import 'package:fablesofdesire/routes/sub/homepage_desktop.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:universal_io/io.dart';
 import 'dart:math';
@@ -142,7 +141,7 @@ class AppBody extends StatelessWidget {
     Key? key,
     this.player,
     required PageController controller,
-  })   : _controller = controller,
+  })  : _controller = controller,
         super(key: key);
 
   final PageController _controller;
@@ -294,51 +293,17 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
                                       ),
                                     );
                                   } else {
-                                    return Column(
-                                      children: [
-                                        /* Container(
-                                          color: Colors.transparent,
-                                          padding: EdgeInsets.all(5),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                            child: Image.asset(
-                                              "assets/images/gui/menu_scroll_01.png",
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ), */
-                                        Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 30, vertical: 5),
-                                          child: Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                3,
-                                            child: ElevatedButton(
-                                              child: Text(
-                                                "START",
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 35,
-                                                    fontFamily: "Julee"),
-                                              ),
-                                              style: TextButton.styleFrom(
-                                                elevation: 2,
-                                                backgroundColor: Colors.white,
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: 20),
-                                              ),
-                                              onPressed: () async {
-                                                FlameAudio.bgm.stop();
-                                                Navigator.of(context)
-                                                    .pushNamed('/chapterone');
-                                              },
-                                            ),
-                                          ),
+                                    return Container(
+                                      color: Colors.transparent,
+                                      padding: EdgeInsets.all(5),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                        child: Image.asset(
+                                          "assets/images/gui/menu_scroll_01.png",
+                                          fit: BoxFit.cover,
                                         ),
-                                      ],
+                                      ),
                                     );
                                   }
                                 })
@@ -375,7 +340,7 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
                                     } else {
                                       return Column(
                                         children: [
-                                          /* Container(
+                                          Container(
                                             color: Colors.transparent,
                                             padding: EdgeInsets.all(5),
                                             child: ClipRRect(
@@ -386,7 +351,7 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
-                                          ), */
+                                          ),
                                           Padding(
                                             padding: EdgeInsets.symmetric(
                                                 horizontal: 30, vertical: 5),
@@ -395,16 +360,16 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
                                                       .size
                                                       .width /
                                                   3,
-                                              child: ElevatedButton(
+                                              child: TextButton(
                                                 child: Text(
                                                   "LOAD",
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 35,
-                                                      fontFamily: "Julee"),
+                                                      fontFamily:
+                                                          "BottleParty"),
                                                 ),
                                                 style: TextButton.styleFrom(
-                                                  elevation: 2,
                                                   backgroundColor: Colors.white,
                                                   padding: EdgeInsets.symmetric(
                                                       vertical: 20),

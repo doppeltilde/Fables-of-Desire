@@ -15,7 +15,7 @@ dependencies:
   url_launcher: ^6.0.3
   share: ^2.0.1
   package_info: ^2.0.0
-  animated_text_kit: ^4.2.0
+  animated_text_kit: ^4.2.1
   flutter_launcher_icons: ^0.9.0
   easy_localization: ^3.0.0
   flame_audio: ^0.1.0-rc5
@@ -23,7 +23,7 @@ dependencies:
   just_audio: ^0.7.4
 
   universal_io: ^2.0.4
-  dart_vlc: ^0.0.4
+  dart_vlc: ^0.0.5
 
   
 
@@ -63,3 +63,19 @@ flutter:
     - family: Julee
       fonts:
         - asset: assets/fonts/Julee-Regular.ttf
+
+# flutter pub run msix:create
+msix_config:
+  display_name: Fables of Desire
+  publisher_display_name: SmallDreams
+  identity_name: 35475SmallDreams.FablesofDesire
+  publisher: CN=E96D5E05-B3DD-4875-8CF1-5DA32F770BCE
+  logo_path: windows\runner\resources\app_icon.png
+  start_menu_icon_path: windows\runner\resources\app_icon.png
+  tile_icon_path: windows\runner\resources\app_icon.png
+  certificate_path: C:\Users\jonaf\OneDrive\Documents\keys\openssl\fablesofdesire\CERT.pfx
+  certificate_password: fablesofdesire
+  msix_version: 1.0.0.0
+  icons_background_color: "#ffffff"
+  architecture: x64
+  # See https://docs.microsoft.com/en-us/windows/uwp/packaging/app-capability-declarations

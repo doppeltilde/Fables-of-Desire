@@ -1,5 +1,4 @@
 // Gestures
-import 'package:just_audio/just_audio.dart';
 import 'package:universal_io/io.dart';
 
 import 'package:easy_localization/easy_localization.dart';
