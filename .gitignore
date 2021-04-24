@@ -84,3 +84,4 @@ android/key.properties
 *.crt
 *.pfx
 *.key
+*.jks
