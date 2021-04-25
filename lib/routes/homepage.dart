@@ -137,7 +137,7 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
   late AnimationController animationController;
   var random = Random();
   bool isLightTheme = true;
-  bool init = true;
+  bool sound = true;
   @override
   void initState() {
     super.initState();
@@ -157,7 +157,7 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
 
   @override
   void didChangeDependencies() async {
-    if (this.init = true) {
+    if (this.sound == true) {
       super.didChangeDependencies();
       this.player = await Player.create(
         id: 0,
@@ -248,7 +248,7 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
                           if (Platform.isWindows || Platform.isLinux) {
                             setState(() {
                               this.player?.stop();
-                              init = false;
+                              sound = false;
                             });
                           } else {
                             FlameAudio.bgm.stop();
