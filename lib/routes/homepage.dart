@@ -1,15 +1,12 @@
 // Primary
 import 'package:dart_vlc/dart_vlc.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:universal_io/io.dart';
 import 'dart:math';
-
 import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/global/setings.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:audio_session/audio_session.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -18,69 +15,26 @@ class HomePage extends StatefulWidget {
 
 class _WildfyreState extends State<HomePage> {
   Player? player;
-  late AudioPlayer _player;
-  final _playlist = ConcatenatingAudioSource(children: [
-    AudioSource.uri(
-      Uri.parse(
-          "https://starhelix.space/wp-content/uploads/2021/04/thousandyearoldforest.mp3"),
-    ),
-  ]);
+
   static const int _startingPageId = 0;
   bool? isSwitchedFT;
   int selectedPageId = _startingPageId;
   TabController? tabscon;
+  bool init = true;
   final controller = PageController(
     initialPage: 0,
   );
   void initState() {
     super.initState();
-    getSharedPrefs();
-    _player = AudioPlayer();
-    _player.play();
-    _player.setLoopMode(LoopMode.one);
-    _init();
-  }
-
-  Future<void> _init() async {
-    final session = await AudioSession.instance;
-    await session.configure(AudioSessionConfiguration.speech());
-    // Listen to errors during playback.
-    _player.playbackEventStream.listen((event) {},
-        onError: (Object e, StackTrace stackTrace) {
-      print('A stream error occurred: $e');
-    });
-    try {
-      await _player.setAudioSource(_playlist);
-    } catch (e) {
-      // Catch load errors: 404, invalid url ...
-      print("Error loading playlist: $e");
+    if (!Platform.isWindows || !Platform.isLinux) {
+      getSharedPrefs();
     }
   }
 
-  @override
-  void dispose() {
-    _player.dispose();
-    super.dispose();
-  }
-
   Future<dynamic> getSharedPrefs() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    isSwitchedFT = (prefs.getBool("switchState"));
-    if (isSwitchedFT == true) {
-      if (Platform.isWindows || Platform.isLinux) {
-        this.player?.open(
-              new Playlist(
-                medias: [
-                  await Media.asset(
-                      'assets/audio/warmth-of-the-sun-adi-goldstein.mp3'),
-                ],
-              ),
-            );
-      } else {
-        FlameAudio.bgm.play("warmth-of-the-sun-adi-goldstein.mp3", volume: 1.0);
-      }
+    if (Platform.isWindows || Platform.isLinux) {
     } else {
-      //Flame.bgm.stop();
+      FlameAudio.bgm.play("warmth-of-the-sun-adi-goldstein.mp3", volume: 1.0);
     }
   }
 
@@ -91,10 +45,8 @@ class _WildfyreState extends State<HomePage> {
     return Scaffold(
       key: scaffoldKey,
       endDrawerEnableOpenDragGesture: false,
-      endDrawer: AppDrawerMain(
-        player: _player,
-      ),
-      body: AppBody(player: _player, controller: controller),
+      endDrawer: AppDrawerMain(),
+      body: AppBody(controller: controller),
       bottomNavigationBar: new LayoutBuilder(builder: (context, constraints) {
         if (Platform.isMacOS || Platform.isLinux || Platform.isWindows) {
           return SizedBox.shrink();
@@ -185,11 +137,11 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
   late AnimationController animationController;
   var random = Random();
   bool isLightTheme = true;
-
+  bool init = true;
   @override
   void initState() {
     super.initState();
-    getSharedPrefs();
+
     animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1000),
@@ -204,7 +156,27 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
   }
 
   @override
-  dispose() {
+  void didChangeDependencies() async {
+    if (this.init = true) {
+      super.didChangeDependencies();
+      this.player = await Player.create(
+        id: 0,
+      );
+      getSound();
+    }
+  }
+
+  Future<dynamic> getSound() async {
+    if (Platform.isWindows || Platform.isLinux) {
+      this.player?.open(
+            await Media.asset(
+                'assets/audio/warmth-of-the-sun-adi-goldstein.mp3'),
+          );
+    } else {}
+  }
+
+  @override
+  dispose() async {
     animationController.dispose();
     super.dispose();
   }
@@ -239,6 +211,7 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
   }
 
   Random? rnd;
+  Player? player;
 
   @override
   Widget build(BuildContext context) {
@@ -273,7 +246,10 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
                       InkWell(
                         onTap: () async {
                           if (Platform.isWindows || Platform.isLinux) {
-                            await widget.player.pause();
+                            setState(() {
+                              this.player?.stop();
+                              init = false;
+                            });
                           } else {
                             FlameAudio.bgm.stop();
                           }

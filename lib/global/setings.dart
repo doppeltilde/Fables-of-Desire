@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Settings extends StatefulWidget {
@@ -14,11 +13,9 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
-  late AudioPlayer player;
   @override
   void initState() {
     super.initState();
-    player = AudioPlayer();
   }
 
   @override
@@ -53,20 +50,6 @@ class _SettingsState extends State<Settings> {
                         height: 20,
                       ),
 
-                      IconButton(
-                        icon: Icon(Icons.volume_up),
-                        onPressed: () {
-                          _showSliderDialog(
-                            context: context,
-                            title: "Adjust volume",
-                            divisions: 10,
-                            min: 0.0,
-                            max: 1.0,
-                            stream: player.volumeStream,
-                            onChanged: player.setVolume,
-                          );
-                        },
-                      ),
                       // Slider(
                       //   value: volumeValue,
                       //   min: 0,
