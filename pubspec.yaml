@@ -23,8 +23,6 @@ dependencies:
   universal_io: ^2.0.4
   dart_vlc: ^0.0.5
 
-  
-
 # dependency_overrides:
 #   games_services:
 #     git:

@@ -169,8 +169,12 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
   Future<dynamic> getSound() async {
     if (Platform.isWindows || Platform.isLinux) {
       this.player?.open(
-            await Media.asset(
-                'assets/audio/warmth-of-the-sun-adi-goldstein.mp3'),
+            new Playlist(
+              medias: [
+                await Media.asset(
+                    'assets/audio/warmth-of-the-sun-adi-goldstein.mp3'),
+              ],
+            ),
           );
     } else {}
   }
