@@ -103,7 +103,7 @@ class AppBody extends StatelessWidget {
     Key? key,
     this.player,
     required PageController controller,
-  })  : _controller = controller,
+  })   : _controller = controller,
         super(key: key);
 
   final PageController _controller;
@@ -157,12 +157,14 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
 
   @override
   void didChangeDependencies() async {
-    if (this.sound == true) {
-      super.didChangeDependencies();
-      this.player = await Player.create(
-        id: 0,
-      );
-      getSound();
+    if (Platform.isWindows || Platform.isLinux) {
+      if (this.sound == true) {
+        super.didChangeDependencies();
+        this.player = await Player.create(
+          id: 0,
+        );
+        getSound();
+      }
     }
   }
 
