@@ -1,12 +1,11 @@
 // Primary
-import 'dart:io';
+import 'package:dart_vlc/dart_vlc.dart';
+import 'package:universal_io/io.dart';
 import 'dart:math';
-
 import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/global/setings.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,144 +14,80 @@ class HomePage extends StatefulWidget {
 }
 
 class _WildfyreState extends State<HomePage> {
+  Player? player;
+
   static const int _startingPageId = 0;
   bool? isSwitchedFT;
-  int _selectedPageId = _startingPageId;
+  int selectedPageId = _startingPageId;
   TabController? tabscon;
-  final _controller = PageController(
+  bool init = true;
+  final controller = PageController(
     initialPage: 0,
   );
   void initState() {
     super.initState();
-    getSharedPrefs();
-    isLightValues();
+    if (!Platform.isWindows || !Platform.isLinux) {
+      getSharedPrefs();
+    }
   }
 
-  isLightValues() async {
-    isLightTheme = await isLight();
-    setState(() {});
-  }
-
-  Future<bool> isLight() async {
-    final settings = await Hive.openBox('settings');
-    bool isLightTheme = settings.get('isLightTheme') ?? true;
-    return isLightTheme;
-  }
-
-  Future<Null> getSharedPrefs() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    isSwitchedFT = (prefs.getBool("switchState"));
-    if (isSwitchedFT == true) {
-      FlameAudio.bgm.play("warmth-of-the-sun-adi-goldstein.mp3", volume: 1.0);
+  Future<dynamic> getSharedPrefs() async {
+    if (Platform.isWindows || Platform.isLinux) {
     } else {
-      //Flame.bgm.stop();
+      FlameAudio.bgm.play("warmth-of-the-sun-adi-goldstein.mp3", volume: 1.0);
     }
   }
 
   bool isLightTheme = true;
-  var _scaffoldKey = new GlobalKey<ScaffoldState>();
+  var scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
+      key: scaffoldKey,
       endDrawerEnableOpenDragGesture: false,
       endDrawer: AppDrawerMain(),
-      body: AppBody(controller: _controller),
+      body: AppBody(controller: controller),
       bottomNavigationBar: new LayoutBuilder(builder: (context, constraints) {
         if (Platform.isMacOS || Platform.isLinux || Platform.isWindows) {
-          return Theme(
-            data: Theme.of(context).copyWith(
-                canvasColor: Theme.of(context).primaryColor,
-                primaryColor: Theme.of(context).primaryColor,
-                textTheme: Theme.of(context).textTheme.copyWith(
-                    caption: TextStyle(color: Theme.of(context).accentColor))),
-            child: BottomNavigationBar(
-                items: <BottomNavigationBarItem>[
-                  BottomNavigationBarItem(
-                    icon: Icon(
-                      _selectedPageId == 0 ? Icons.menu : Icons.menu_outlined,
-                      color: Theme.of(context).accentColor,
-                    ),
-                    label: 'HOME',
-                  ),
-                  // BottomNavigationBarItem(
-                  //   icon: Icon(
-                  //     _selectedPageId == 1 ? Icons.info : Icons.info_outline,
-                  //     color: Theme.of(context).accentColor,
-                  //   ),
-                  //   label: 'ABOUT',
-                  // ),
-                  BottomNavigationBarItem(
-                    icon: Icon(
-                        _selectedPageId == 1
-                            ? Icons.category
-                            : Icons.category_outlined,
-                        color: Theme.of(context).accentColor),
-                    label: 'MORE',
-                  ),
-                ],
-                unselectedLabelStyle: TextStyle(fontSize: 18, letterSpacing: 1),
-                selectedLabelStyle: TextStyle(fontSize: 21, letterSpacing: 1),
-                selectedItemColor: Theme.of(context).accentColor,
-                unselectedItemColor: Colors.grey,
-                iconSize: 25.0,
-                currentIndex: _selectedPageId,
-                onTap: (newId) {
-                  if (_selectedPageId == 0) {
-                    _scaffoldKey.currentState!.openEndDrawer();
-                  } else {
-                    setState(() {
-                      _controller.jumpToPage(newId);
-                      _selectedPageId = newId;
-                    });
-                  }
-                }),
-          );
+          return SizedBox.shrink();
         } else {
           return Theme(
             data: Theme.of(context).copyWith(
                 // sets the background color of the `BottomNavigationBar`
-                canvasColor: Theme.of(context).primaryColor,
+                canvasColor: Colors.white,
                 // sets the active color of the `BottomNavigationBar` if `Brightness` is light
-                primaryColor: Theme.of(context).primaryColor,
+                primaryColor: Colors.white,
                 textTheme: Theme.of(context).textTheme.copyWith(
                     caption: TextStyle(color: Theme.of(context).accentColor))),
             child: BottomNavigationBar(
                 items: <BottomNavigationBarItem>[
                   BottomNavigationBarItem(
                     icon: Icon(
-                      _selectedPageId == 0 ? Icons.menu : Icons.menu_outlined,
-                      color: Theme.of(context).accentColor,
+                      selectedPageId == 0 ? Icons.menu : Icons.menu_outlined,
+                      color: Colors.black,
                     ),
                     label: 'HOME',
                   ),
-                  // BottomNavigationBarItem(
-                  //   icon: Icon(
-                  //     _selectedPageId == 1 ? Icons.info : Icons.info_outline,
-                  //     color: Theme.of(context).accentColor,
-                  //   ),
-                  //   label: 'ABOUT',
-                  // ),
                   BottomNavigationBarItem(
                     icon: Icon(
-                      _selectedPageId == 1
+                      selectedPageId == 1
                           ? Icons.category
                           : Icons.category_outlined,
-                      color: Theme.of(context).accentColor,
+                      color: Colors.black,
                     ),
                     label: 'MORE',
                   ),
                 ],
                 unselectedLabelStyle: TextStyle(fontSize: 18, letterSpacing: 1),
                 selectedLabelStyle: TextStyle(fontSize: 21, letterSpacing: 1),
-                selectedItemColor: Theme.of(context).accentColor,
-                unselectedItemColor: Theme.of(context).accentColor,
+                selectedItemColor: Colors.black,
+                unselectedItemColor: Colors.black,
                 iconSize: 25.0,
-                currentIndex: _selectedPageId,
+                currentIndex: selectedPageId,
                 onTap: (newId) {
                   setState(() {
-                    _controller.jumpToPage(newId);
-                    _selectedPageId = newId;
+                    controller.jumpToPage(newId);
+                    selectedPageId = newId;
                   });
                 }),
           );
@@ -163,8 +98,10 @@ class _WildfyreState extends State<HomePage> {
 }
 
 class AppBody extends StatelessWidget {
+  final player;
   const AppBody({
     Key? key,
+    this.player,
     required PageController controller,
   })   : _controller = controller,
         super(key: key);
@@ -177,7 +114,9 @@ class AppBody extends StatelessWidget {
       physics: NeverScrollableScrollPhysics(),
       controller: _controller,
       children: [
-        HomePage2(),
+        HomePage2(
+          player: player,
+        ),
         // About(),
         Settings(),
       ],
@@ -187,49 +126,51 @@ class AppBody extends StatelessWidget {
 
 // HomePage
 class HomePage2 extends StatefulWidget {
+  final player;
+  HomePage2({Key? key, this.player});
   @override
   _BaseScreenState createState() => _BaseScreenState();
 }
 
 /// The main widget state.
-class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
-  late AnimationController animationController;
-  var random = Random();
+class _BaseScreenState extends State<HomePage2> {
   bool isLightTheme = true;
+  bool sound = true;
 
   @override
   void initState() {
     super.initState();
-    isLightValues();
-    getSharedPrefs();
-    animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1000),
-    )..addStatusListener(
-        (AnimationStatus status) {
-          if (status == AnimationStatus.completed) {
-            if (!mounted) return;
-            animationController.reverse();
-          }
-        },
-      );
   }
 
   @override
-  dispose() {
-    animationController.dispose();
+  void didChangeDependencies() async {
+    if (Platform.isWindows || Platform.isLinux) {
+      if (this.sound == true) {
+        super.didChangeDependencies();
+        this.player = await Player.create(
+          id: 0,
+        );
+        getSound();
+      }
+    }
+  }
+
+  Future<dynamic> getSound() async {
+    if (Platform.isWindows || Platform.isLinux) {
+      this.player?.open(
+            new Playlist(
+              medias: [
+                await Media.asset(
+                    'assets/audio/warmth-of-the-sun-adi-goldstein.mp3'),
+              ],
+            ),
+          );
+    } else {}
+  }
+
+  @override
+  dispose() async {
     super.dispose();
-  }
-
-  isLightValues() async {
-    isLightTheme = await isLight();
-    setState(() {});
-  }
-
-  Future<bool> isLight() async {
-    final settings = await Hive.openBox('settings');
-    bool isLightTheme = settings.get('isLightTheme') ?? true;
-    return isLightTheme;
   }
 
   Future<Null> getSharedPrefs() async {
@@ -241,46 +182,14 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
 
   bool? chapters;
 
-  List<Widget> makeStar(double width, double height) {
-    double starsInRow = width / 50;
-    double starsInColumn = height / 50;
-    double starsNum = starsInRow != 0
-        ? starsInRow * (starsInColumn != 0 ? starsInColumn : starsInRow)
-        : starsInColumn;
-
-    List<Widget> stars = [];
-
-    for (int i = 0; i < starsNum; i++) {
-      stars.add(Star(
-        top: random.nextInt(height.floor()).toDouble(),
-        right: random.nextInt(width.floor()).toDouble(),
-        animationController: animationController,
-      ));
-    }
-
-    return stars;
-  }
-
-  dynamic listImages = [
-    "assets/images/main.jpg",
-    "assets/images/main2.jpg",
-    "assets/images/main3.jpg",
-    "assets/images/main4.jpg"
-  ];
-  Random? rnd;
-
-  buildImage() {
-    int min = 0;
-    int max = listImages.length - 1;
-    rnd = new Random();
-    int r = min + rnd!.nextInt(max - min);
-    String imageName = listImages[r].toString();
-    return AssetImage(imageName);
-  }
-
+  Player? player;
+  var scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
+      endDrawerEnableOpenDragGesture: false,
+      endDrawer: AppDrawerMain(),
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.transparent,
       body: Stack(
@@ -298,8 +207,6 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
               ),
             ),
           ),
-          ...makeStar(MediaQuery.of(context).size.width,
-              MediaQuery.of(context).size.height / 4),
           Center(
             child: new Container(
               child: SafeArea(
@@ -310,7 +217,15 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
                     children: <Widget>[
                       InkWell(
                         onTap: () async {
-                          FlameAudio.bgm.stop();
+                          if (Platform.isWindows || Platform.isLinux) {
+                            setState(() {
+                              this.player?.stop();
+                              sound = false;
+                            });
+                          } else {
+                            FlameAudio.bgm.stop();
+                          }
+
                           Navigator.of(context).pushNamed('/1');
                         },
                         child: Stack(
@@ -323,8 +238,9 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
                                     return Container(
                                       color: Colors.transparent,
                                       padding: EdgeInsets.all(5),
-                                      width: MediaQuery.of(context).size.width /
-                                          1.1,
+                                      width:
+                                          MediaQuery.of(context).size.height /
+                                              1.1,
                                       child: ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(10.0),
@@ -338,8 +254,6 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
                                     return Container(
                                       color: Colors.transparent,
                                       padding: EdgeInsets.all(5),
-                                      width:
-                                          MediaQuery.of(context).size.width / 3,
                                       child: ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(10.0),
@@ -382,20 +296,50 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
                                         ),
                                       );
                                     } else {
-                                      return Container(
-                                        color: Colors.transparent,
-                                        padding: EdgeInsets.all(5),
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                3,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          child: Image.asset(
-                                            "assets/images/gui/menu_scroll_03.png",
-                                            fit: BoxFit.cover,
+                                      return Column(
+                                        children: [
+                                          Container(
+                                            color: Colors.transparent,
+                                            padding: EdgeInsets.all(5),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                              child: Image.asset(
+                                                "assets/images/gui/menu_scroll_03.png",
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
                                           ),
-                                        ),
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 30, vertical: 5),
+                                            child: Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  3,
+                                              child: TextButton(
+                                                child: Text(
+                                                  "OPTIONS",
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 35,
+                                                      fontFamily:
+                                                          "BottleParty"),
+                                                ),
+                                                style: TextButton.styleFrom(
+                                                  backgroundColor: Colors.white,
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 20),
+                                                ),
+                                                onPressed: () async {
+                                                  scaffoldKey.currentState!
+                                                      .openEndDrawer();
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       );
                                     }
                                   },
@@ -405,68 +349,6 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
                           ],
                         ),
                       ),
-
-                      // Builder(
-                      //   builder: (context) {
-                      //     // if (chapters == true) {
-                      //     if (chapters == true) {
-                      //       return Padding(
-                      //         padding: EdgeInsets.symmetric(
-                      //             horizontal: 30, vertical: 5),
-                      //         child: Container(
-                      //           width: double.infinity,
-                      //           child: TextButton(
-                      //             child: Text(
-                      //               'Chapters',
-                      //               style: TextStyle(
-                      //                 color: Theme.of(context).accentColor,
-                      //                 fontSize: 35,
-                      //               ),
-                      //             ),
-                      //             style: TextButton.styleFrom(
-                      //               backgroundColor:
-                      //                   Theme.of(context).primaryColor,
-                      //               padding: EdgeInsets.symmetric(vertical: 20),
-                      //             ),
-                      //             onPressed: () {
-                      //               // Navigator.push(
-                      //               //   context,
-                      //               //   MaterialPageRoute(
-                      //               //       builder: (context) => Chapters()),
-                      //               // );
-                      //             },
-                      //           ),
-                      //         ),
-                      //       );
-                      //     } else
-                      //       return Container(
-                      //         decoration: BoxDecoration(
-                      //           borderRadius: BorderRadius.circular(40),
-                      //           image: DecorationImage(
-                      //             image: AssetImage(
-                      //                 "assets/images/gui/menu_scroll_03.png"),
-                      //             fit: BoxFit.cover,
-                      //           ),
-                      //         ),
-                      //         padding: EdgeInsets.symmetric(
-                      //             horizontal: 30, vertical: 5),
-                      //         child: TextButton(
-                      //           child: Text(
-                      //             '',
-                      //             style: TextStyle(
-                      //               color: Theme.of(context).accentColor,
-                      //               fontSize: 35,
-                      //             ),
-                      //           ),
-                      //           style: TextButton.styleFrom(
-                      //             backgroundColor: Colors.transparent,
-                      //             padding: EdgeInsets.symmetric(vertical: 20),
-                      //           ),
-                      //           onPressed: () => showAlertDialog(context),
-                      //         ),
-                      //       );
-                      //   },
-                      // )
                     ],
                   ),
                 ),
@@ -490,7 +372,7 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       contentPadding: EdgeInsets.all(5),
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: Colors.white,
       title: Text(
         "Not available",
         textAlign: TextAlign.center,
