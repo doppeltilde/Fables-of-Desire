@@ -1,7 +1,6 @@
 // Primary
 import 'package:dart_vlc/dart_vlc.dart';
 import 'package:universal_io/io.dart';
-import 'dart:math';
 import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/global/setings.dart';
 import 'package:flame_audio/flame_audio.dart';
@@ -103,7 +102,7 @@ class AppBody extends StatelessWidget {
     Key? key,
     this.player,
     required PageController controller,
-  })   : _controller = controller,
+  })  : _controller = controller,
         super(key: key);
 
   final PageController _controller;

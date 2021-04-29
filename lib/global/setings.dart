@@ -42,106 +42,12 @@ class _SettingsState extends State<Settings> {
                             fontWeight: FontWeight.w700,
                             fontFamily: "BottleParty"),
                       ),
-                      SizedBox(height: 15),
-                      Divider(
-                        height: 20,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-
-                      // Slider(
-                      //   value: volumeValue,
-                      //   min: 0,
-                      //   max: 100,
-                      //   divisions: 5,
-                      //   label: _currentSliderValue.round().toString(),
-                      //   onChanged: (double value) {
-                      //     setState(() {
-                      //       _currentSliderValue = value;
-                      //     });
-                      //   },
-                      // ),
-
                       SizedBox(
                         height: 55,
                       ),
-                      // GestureDetector(
-                      //   onTap: () async {
-                      //     const url =
-                      //         'https://smalldreams.space/privacy-policy/';
-                      //     if (await canLaunch(url)) {
-                      //       await launch(url);
-                      //     } else {
-                      //       throw 'Could not launch $url';
-                      //     }
-                      //   },
-                      //   child: ProfileListItem(
-                      //     icon: Icons.privacy_tip_outlined,
-                      //     text: 'Privacy',
-                      //   ),
-                      // ),
-                      // GestureDetector(
-                      //   onTap: () async {
-                      //     const url =
-                      //         'https://smalldreams.space/terms-of-service/';
-                      //     if (await canLaunch(url)) {
-                      //       await launch(url);
-                      //     } else {
-                      //       throw 'Could not launch $url';
-                      //     }
-                      //   },
-                      //   child: ProfileListItem(
-                      //     icon: Icons.policy_outlined,
-                      //     text: 'Terms of Service',
-                      //   ),
-                      // ),
-                      // SizedBox(
-                      //   height: 55,
-                      // ),
                     ],
                   ),
                 )
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  void _showSliderDialog({
-    required BuildContext context,
-    required String title,
-    required int divisions,
-    required double min,
-    required double max,
-    String valueSuffix = '',
-    required Stream<double> stream,
-    required ValueChanged<double> onChanged,
-  }) {
-    showDialog<void>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(title, textAlign: TextAlign.center),
-        content: StreamBuilder<double>(
-          stream: stream,
-          builder: (context, snapshot) => Container(
-            height: 100.0,
-            child: Column(
-              children: [
-                Text('${snapshot.data?.toStringAsFixed(1)}$valueSuffix',
-                    style: TextStyle(
-                        fontFamily: 'Fixed',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24.0)),
-                Slider(
-                  divisions: divisions,
-                  min: min,
-                  max: max,
-                  value: snapshot.data ?? 1.0,
-                  onChanged: onChanged,
-                ),
               ],
             ),
           ),
