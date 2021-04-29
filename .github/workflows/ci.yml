@@ -24,6 +24,7 @@ jobs:
         run: flutter pub get
       - name: Build Windows
         run: |
+          flutter config --enable-windows-desktop
           flutter build windows
           cd build/windows/runner/Release
           zip -r windows.zip .
