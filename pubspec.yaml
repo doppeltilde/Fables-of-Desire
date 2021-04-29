@@ -24,7 +24,7 @@ dependencies:
   dart_vlc: ^0.0.5
 
 # dependency_overrides:
-#   games_services:
+#   dart_vlc:
 #     git:
 #       url: https://github.com/jonatadashi/games_services.git
 #       ref: master

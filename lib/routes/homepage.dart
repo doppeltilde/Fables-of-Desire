@@ -133,26 +133,13 @@ class HomePage2 extends StatefulWidget {
 }
 
 /// The main widget state.
-class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
-  late AnimationController animationController;
-  var random = Random();
+class _BaseScreenState extends State<HomePage2> {
   bool isLightTheme = true;
   bool sound = true;
+
   @override
   void initState() {
     super.initState();
-
-    animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1000),
-    )..addStatusListener(
-        (AnimationStatus status) {
-          if (status == AnimationStatus.completed) {
-            if (!mounted) return;
-            animationController.reverse();
-          }
-        },
-      );
   }
 
   @override
@@ -181,7 +168,6 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
 
   @override
   dispose() async {
-    animationController.dispose();
     super.dispose();
   }
 
@@ -194,32 +180,14 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
 
   bool? chapters;
 
-  List<Widget> makeStar(double width, double height) {
-    double starsInRow = width / 50;
-    double starsInColumn = height / 50;
-    double starsNum = starsInRow != 0
-        ? starsInRow * (starsInColumn != 0 ? starsInColumn : starsInRow)
-        : starsInColumn;
-
-    List<Widget> stars = [];
-
-    for (int i = 0; i < starsNum; i++) {
-      stars.add(Star(
-        top: random.nextInt(height.floor()).toDouble(),
-        right: random.nextInt(width.floor()).toDouble(),
-        animationController: animationController,
-      ));
-    }
-
-    return stars;
-  }
-
-  Random? rnd;
   Player? player;
-
+  var scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
+      endDrawerEnableOpenDragGesture: false,
+      endDrawer: AppDrawerMain(),
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.transparent,
       body: Stack(
@@ -237,8 +205,6 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
               ),
             ),
           ),
-          ...makeStar(MediaQuery.of(context).size.width,
-              MediaQuery.of(context).size.height / 4),
           Center(
             child: new Container(
               child: SafeArea(
@@ -352,7 +318,7 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
                                                   3,
                                               child: TextButton(
                                                 child: Text(
-                                                  "LOAD",
+                                                  "OPTIONS",
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 35,
@@ -365,9 +331,8 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
                                                       vertical: 20),
                                                 ),
                                                 onPressed: () async {
-                                                  FlameAudio.bgm.stop();
-                                                  Navigator.of(context)
-                                                      .pushNamed('/chapterone');
+                                                  scaffoldKey.currentState!
+                                                      .openEndDrawer();
                                                 },
                                               ),
                                             ),
@@ -382,68 +347,6 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
                           ],
                         ),
                       ),
-
-                      // Builder(
-                      //   builder: (context) {
-                      //     // if (chapters == true) {
-                      //     if (chapters == true) {
-                      //       return Padding(
-                      //         padding: EdgeInsets.symmetric(
-                      //             horizontal: 30, vertical: 5),
-                      //         child: Container(
-                      //           width: double.infinity,
-                      //           child: TextButton(
-                      //             child: Text(
-                      //               'Chapters',
-                      //               style: TextStyle(
-                      //                 color: Colors.black,
-                      //                 fontSize: 35,
-                      //               ),
-                      //             ),
-                      //             style: TextButton.styleFrom(
-                      //               backgroundColor:
-                      //                   Colors.white,
-                      //               padding: EdgeInsets.symmetric(vertical: 20),
-                      //             ),
-                      //             onPressed: () {
-                      //               // Navigator.push(
-                      //               //   context,
-                      //               //   MaterialPageRoute(
-                      //               //       builder: (context) => Chapters()),
-                      //               // );
-                      //             },
-                      //           ),
-                      //         ),
-                      //       );
-                      //     } else
-                      //       return Container(
-                      //         decoration: BoxDecoration(
-                      //           borderRadius: BorderRadius.circular(40),
-                      //           image: DecorationImage(
-                      //             image: AssetImage(
-                      //                 "assets/images/gui/menu_scroll_03.png"),
-                      //             fit: BoxFit.cover,
-                      //           ),
-                      //         ),
-                      //         padding: EdgeInsets.symmetric(
-                      //             horizontal: 30, vertical: 5),
-                      //         child: TextButton(
-                      //           child: Text(
-                      //             '',
-                      //             style: TextStyle(
-                      //               color: Colors.black,
-                      //               fontSize: 35,
-                      //             ),
-                      //           ),
-                      //           style: TextButton.styleFrom(
-                      //             backgroundColor: Colors.transparent,
-                      //             padding: EdgeInsets.symmetric(vertical: 20),
-                      //           ),
-                      //           onPressed: () => showAlertDialog(context),
-                      //         ),
-                      //       );
-                      //   },
-                      // )
                     ],
                   ),
                 ),
