@@ -23,5 +23,5 @@ jobs:
       - name: Build Windows
         run: |
           flutter config --enable-windows-desktop
-          flutter run
+          flutter run -d windows
           flutter build windows
