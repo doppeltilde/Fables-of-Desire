@@ -26,12 +26,12 @@ jobs:
         run: |
           flutter config --enable-windows-desktop
           flutter build windows
-          cd build/windows/runner/Release
-          zip -r windows.zip .
+          tar -zcvf windows.tar.gz build/windows/runner/Release
+          ls
       - name: Release Windows
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ env.APP_VERSION }}
           name: ${{ env.APP_VERSION }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          artifacts: "build/windows/runner/Release/windows.zip"
+          artifacts: "windows.tar.gz"
