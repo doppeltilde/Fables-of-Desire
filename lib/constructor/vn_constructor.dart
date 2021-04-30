@@ -52,7 +52,7 @@ class _InterludeState extends State<InterludeTextSound> {
               child: Text(
                 widget.a!,
                 style: TextStyle(
-                  fontFamily: "Aleo",
+                  fontFamily: "Julee",
                   fontSize: 25,
                   color: Colors.black,
                 ),
@@ -104,49 +104,54 @@ class _InterludeState extends State<InterludeTextSound> {
                 Container(
                     padding: EdgeInsets.symmetric(
                         horizontal: MediaQuery.of(context).size.width / 4),
-                    child:
-                        Stack(alignment: Alignment.center, children: <Widget>[
-                      Stack(
+                    child: Stack(
+                        alignment: Alignment.centerLeft,
                         children: <Widget>[
-                          Container(
-                            color: Colors.transparent,
-                            padding: EdgeInsets.all(5),
-                            width: MediaQuery.of(context).size.width * 2,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10.0),
-                              child: Image.asset(
-                                "assets/images/gui/textbox_scroll_03.png",
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Stack(
-                        children: <Widget>[
-                          Container(
-                            color: Colors.transparent,
-                            padding: EdgeInsets.all(5),
-                            child: AnimatedTextKit(
-                              animatedTexts: [
-                                TyperAnimatedText(
-                                  widget.q!,
-                                  textAlign: TextAlign.left,
-                                  textStyle: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 25,
+                          Stack(
+                            children: <Widget>[
+                              Container(
+                                color: Colors.transparent,
+                                padding: EdgeInsets.all(5),
+                                width: MediaQuery.of(context).size.width * 2,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  child: Image.asset(
+                                    "assets/images/gui/textbox_scroll_03.png",
+                                    fit: BoxFit.cover,
                                   ),
-                                  speed: const Duration(milliseconds: 40),
                                 ),
-                              ],
-                              displayFullTextOnTap: true,
-                              isRepeatingAnimation: false,
-                              key: ValueKey(widget.n),
-                            ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ])),
+                          Stack(
+                            children: <Widget>[
+                              Container(
+                                color: Colors.transparent,
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 15,
+                                    horizontal:
+                                        MediaQuery.of(context).size.width / 15),
+                                child: AnimatedTextKit(
+                                  animatedTexts: [
+                                    TyperAnimatedText(
+                                      widget.q!,
+                                      textAlign: TextAlign.left,
+                                      textStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 22,
+                                        fontFamily: "Aleo",
+                                      ),
+                                      speed: const Duration(milliseconds: 40),
+                                    ),
+                                  ],
+                                  displayFullTextOnTap: true,
+                                  isRepeatingAnimation: false,
+                                  key: ValueKey(widget.n),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ])),
               ],
             );
           }

@@ -222,6 +222,8 @@ showAlertDialog(BuildContext context, route) {
 }
 
 class AppDrawer extends StatefulWidget {
+  final player;
+  AppDrawer({Key? key, this.player});
   @override
   _AppDrawerState createState() => new _AppDrawerState();
 }
@@ -232,22 +234,8 @@ class _AppDrawerState extends State<AppDrawer> {
   @override
   void initState() {
     super.initState();
-    _initPackageInfo();
     getSwitchValues();
     getNotiValues();
-  }
-
-  PackageInfo _packageInfo = PackageInfo(
-    appName: 'Unknown',
-    packageName: 'Unknown',
-    version: 'Unknown',
-    buildNumber: 'Unknown',
-  );
-  Future<void> _initPackageInfo() async {
-    final PackageInfo info = await PackageInfo.fromPlatform();
-    setState(() {
-      _packageInfo = info;
-    });
   }
 
   getSwitchValues() async {
@@ -305,14 +293,8 @@ class _AppDrawerState extends State<AppDrawer> {
                 style: TextStyle(fontSize: 30, fontFamily: "Aleo"),
               )),
             ),
-
             Container(
               height: 55,
-              margin: EdgeInsets.symmetric(
-                horizontal: 10,
-              ).copyWith(
-                bottom: 20,
-              ),
               padding: EdgeInsets.symmetric(
                 horizontal: 20,
               ),
@@ -322,161 +304,36 @@ class _AppDrawerState extends State<AppDrawer> {
               ),
               child: Row(
                 children: <Widget>[
-                  isSwitchedFT!
+                  widget.player?.general.volume == 0
                       ? Icon(
-                          Icons.music_note,
+                          Icons.music_off,
                           size: 25,
                         )
                       : Icon(
-                          Icons.music_off,
+                          Icons.music_note,
                           size: 25,
                         ),
                   SizedBox(width: 15),
                   Text(
-                    "Music Volume",
-                    style: TextStyle(
-                      fontFamily: "Arvo",
-                      fontSize: 18,
-                    ),
+                    "Change Audio",
                   ),
                   Spacer(),
-                  Switch.adaptive(
-                    value: isSwitchedFT!,
-                    onChanged: (bool value) {
-                      setState(() {
-                        isSwitchedFT!
-                            ? FlameAudio.bgm.pause()
-                            : FlameAudio.bgm.resume();
-
-                        isSwitchedFT = value;
-                        saveSwitchState(value);
-                        //switch works
-                      });
-                    },
-                  ),
                 ],
               ),
             ),
-            // Container(
-            //   height: 55,
-            //   margin: EdgeInsets.symmetric(
-            //     horizontal: 10,
-            //   ).copyWith(
-            //     bottom: 20,
-            //   ),
-            //   padding: EdgeInsets.symmetric(
-            //     horizontal: 20,
-            //   ),
-            //   decoration: BoxDecoration(
-            //     borderRadius: BorderRadius.circular(30),
-            //     color: Theme.of(context).cardColor,
-            //   ),
-            //   child: Row(
-            //     children: <Widget>[
-            //       isNoti!
-            //           ? Icon(
-            //               Icons.notifications_active_outlined,
-            //               size: 25,
-            //             )
-            //           : Icon(
-            //               Icons.notifications_off_outlined,
-            //               size: 25,
-            //             ),
-            //       SizedBox(width: 15),
-            //       Text(
-            //         "Message Volume",
-            //         style: TextStyle(
-            //           fontFamily: "Arvo",
-            //           fontSize: 18,
-            //         ),
-            //       ),
-            //       Spacer(),
-            //       Switch.adaptive(
-            //         value: isNoti!,
-            //         onChanged: (bool value) {
-            //           setState(() {
-            //             isNoti = value;
-            //             saveNotiState(value);
-            //             //switch works
-            //           });
-            //         },
-            //       ),
-            //     ],
-            //   ),
-            // ),
-            Container(
-              height: 55,
-              margin: EdgeInsets.symmetric(
-                horizontal: 10,
-              ).copyWith(
-                bottom: 20,
-              ),
-              padding: EdgeInsets.symmetric(
-                horizontal: 20,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Theme.of(context).cardColor,
-              ),
-              child: Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.check_circle_outline,
-                    size: 25,
-                  ),
-                  SizedBox(width: 15),
-                  Text(
-                    "Game Version",
-                    style: TextStyle(
-                      fontFamily: "Arvo",
-                      fontSize: 18,
-                    ),
-                  ),
-                  Spacer(),
-                  Text(
-                    _packageInfo.version,
-                    style: TextStyle(
-                      fontFamily: "Arvo",
-                      fontSize: 18,
-                    ),
-                  ),
-                ],
-              ),
+            Slider.adaptive(
+              min: 0.0,
+              max: 1.0,
+              value: widget.player?.general.volume ?? 0.5,
+              onChanged: (volume) {
+                widget.player?.setVolume(volume);
+                this.setState(() {});
+              },
             ),
+            Divider(),
             SizedBox(
-              height: 55,
+              height: 20,
             ),
-            // GestureDetector(
-            //   onTap: () async {
-            //     const url = 'https://smalldreams.space/privacy-policy/';
-            //     if (await canLaunch(url)) {
-            //       await launch(url);
-            //     } else {
-            //       throw 'Could not launch $url';
-            //     }
-            //   },
-            //   child: ProfileListItem(
-            //     icon: Icons.privacy_tip_outlined,
-            //     text: 'Privacy',
-            //   ),
-            // ),
-            // GestureDetector(
-            //   onTap: () async {
-            //     const url = 'https://smalldreams.space/terms-of-service/';
-            //     if (await canLaunch(url)) {
-            //       await launch(url);
-            //     } else {
-            //       throw 'Could not launch $url';
-            //     }
-            //   },
-            //   child: ProfileListItem(
-            //     icon: Icons.policy_outlined,
-            //     text: 'Terms of Service',
-            //   ),
-            // ),
-            // SizedBox(
-            //   height: 55,
-            // ),
             GestureDetector(
               onTap: () => showAlertDialog(context),
               child: Container(
@@ -522,6 +379,46 @@ class _AppDrawerState extends State<AppDrawer> {
         ),
       ),
     ));
+  }
+
+  void _showSliderDialog({
+    required BuildContext context,
+    required String title,
+    required int divisions,
+    required double min,
+    required double max,
+    String valueSuffix = '',
+    required Stream<double> stream,
+    required ValueChanged<double> onChanged,
+  }) {
+    showDialog<void>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(title, textAlign: TextAlign.center),
+        content: StreamBuilder<double>(
+          stream: stream,
+          builder: (context, snapshot) => Container(
+            height: 100.0,
+            child: Column(
+              children: [
+                Text('${snapshot.data?.toStringAsFixed(1)}$valueSuffix',
+                    style: TextStyle(
+                        fontFamily: 'Fixed',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24.0)),
+                Slider(
+                  divisions: divisions,
+                  min: min,
+                  max: max,
+                  value: snapshot.data ?? 1.0,
+                  onChanged: onChanged,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   showAlertDialog(BuildContext context) {
