@@ -146,7 +146,7 @@ class _BaseScreenState extends State<HomePage2> {
     if (Platform.isWindows || Platform.isLinux) {
       if (this.sound == true) {
         super.didChangeDependencies();
-        this.player = await Player.create(
+        this.player = Player(
           id: 0,
         );
         getSound();
@@ -158,6 +158,7 @@ class _BaseScreenState extends State<HomePage2> {
     if (Platform.isWindows || Platform.isLinux) {
       this.player?.open(
             new Playlist(
+              playlistMode: PlaylistMode.loop,
               medias: [
                 await Media.asset(
                     'assets/audio/warmth-of-the-sun-adi-goldstein.mp3'),
