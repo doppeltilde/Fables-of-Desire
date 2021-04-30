@@ -619,6 +619,44 @@ class _AppDrawerState2 extends State<AppDrawerMain> {
                 style: TextStyle(fontSize: 30, fontFamily: "Aleo"),
               )),
             ),
+            Container(
+              height: 55,
+              padding: EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: Theme.of(context).cardColor,
+              ),
+              child: Row(
+                children: <Widget>[
+                  widget.player?.general.volume == 0
+                      ? Icon(
+                          Icons.music_off,
+                          size: 25,
+                        )
+                      : Icon(
+                          Icons.music_note,
+                          size: 25,
+                        ),
+                  SizedBox(width: 15),
+                  Text(
+                    "Change Audio",
+                  ),
+                  Spacer(),
+                ],
+              ),
+            ),
+            Slider.adaptive(
+              min: 0.0,
+              max: 1.0,
+              value: widget.player?.general.volume ?? 0.5,
+              onChanged: (volume) {
+                widget.player?.setVolume(volume);
+                this.setState(() {});
+              },
+            ),
+            Divider(),
             IconButton(
               icon: Icon(Icons.volume_up),
               onPressed: () {

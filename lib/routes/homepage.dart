@@ -189,7 +189,9 @@ class _BaseScreenState extends State<HomePage2> {
     return Scaffold(
       key: scaffoldKey,
       endDrawerEnableOpenDragGesture: false,
-      endDrawer: AppDrawerMain(),
+      endDrawer: AppDrawerMain(
+        player: player,
+      ),
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.transparent,
       body: Stack(
@@ -215,138 +217,80 @@ class _BaseScreenState extends State<HomePage2> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      InkWell(
-                        onTap: () async {
-                          if (Platform.isWindows || Platform.isLinux) {
-                            setState(() {
-                              this.player?.stop();
-                              sound = false;
-                            });
-                          } else {
-                            FlameAudio.bgm.stop();
-                          }
-
-                          Navigator.of(context).pushNamed('/1');
-                        },
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: <Widget>[
-                            Stack(
-                              children: <Widget>[
-                                Builder(builder: (context) {
-                                  if (Platform.isAndroid || Platform.isIOS) {
-                                    return Container(
-                                      color: Colors.transparent,
-                                      padding: EdgeInsets.all(5),
-                                      width:
-                                          MediaQuery.of(context).size.height /
-                                              1.1,
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                        child: Image.asset(
-                                          "assets/images/gui/menu_scroll_01.png",
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    );
-                                  } else {
-                                    return Container(
-                                      color: Colors.transparent,
-                                      padding: EdgeInsets.all(5),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                        child: Image.asset(
-                                          "assets/images/gui/menu_scroll_01.png",
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                })
-                              ],
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width / 3,
+                          child: ElevatedButton(
+                            child: Text(
+                              "START",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 35,
+                                  fontFamily: "Julee"),
                             ),
-                          ],
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.white,
+                              padding: EdgeInsets.symmetric(vertical: 20),
+                            ),
+                            onPressed: () async {
+                              if (Platform.isWindows || Platform.isLinux) {
+                                setState(() {
+                                  this.player?.stop();
+                                  sound = false;
+                                });
+                              } else {
+                                FlameAudio.bgm.stop();
+                              }
+
+                              Navigator.of(context).pushNamed('/1');
+                            },
+                          ),
                         ),
                       ),
-                      InkWell(
-                        onTap: () => showAlertDialog(context),
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: <Widget>[
-                            Stack(
-                              children: <Widget>[
-                                Builder(
-                                  builder: (context) {
-                                    if (Platform.isAndroid || Platform.isIOS) {
-                                      return Container(
-                                        color: Colors.transparent,
-                                        padding: EdgeInsets.all(5),
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                1,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          child: Image.asset(
-                                            "assets/images/gui/menu_scroll_03.png",
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      );
-                                    } else {
-                                      return Column(
-                                        children: [
-                                          Container(
-                                            color: Colors.transparent,
-                                            padding: EdgeInsets.all(5),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                              child: Image.asset(
-                                                "assets/images/gui/menu_scroll_03.png",
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 30, vertical: 5),
-                                            child: Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  3,
-                                              child: TextButton(
-                                                child: Text(
-                                                  "OPTIONS",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 35,
-                                                      fontFamily:
-                                                          "BottleParty"),
-                                                ),
-                                                style: TextButton.styleFrom(
-                                                  backgroundColor: Colors.white,
-                                                  padding: EdgeInsets.symmetric(
-                                                      vertical: 20),
-                                                ),
-                                                onPressed: () async {
-                                                  scaffoldKey.currentState!
-                                                      .openEndDrawer();
-                                                },
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      );
-                                    }
-                                  },
-                                ),
-                              ],
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width / 3,
+                          child: ElevatedButton(
+                            child: Text(
+                              "LOAD",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 35,
+                                  fontFamily: "Julee"),
                             ),
-                          ],
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.white,
+                              padding: EdgeInsets.symmetric(vertical: 20),
+                            ),
+                            onPressed: () => showAlertDialog(context),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width / 3,
+                          child: ElevatedButton(
+                            child: Text(
+                              "OPTIONS",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 35,
+                                  fontFamily: "Julee"),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.white,
+                              padding: EdgeInsets.symmetric(vertical: 20),
+                            ),
+                            onPressed: () async {
+                              scaffoldKey.currentState!.openEndDrawer();
+                            },
+                          ),
                         ),
                       ),
                     ],
