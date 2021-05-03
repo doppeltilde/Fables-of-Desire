@@ -134,7 +134,6 @@ class HomePage2 extends StatefulWidget {
 /// The main widget state.
 class _BaseScreenState extends State<HomePage2> {
   bool isLightTheme = true;
-  bool sound = true;
 
   @override
   void initState() {
@@ -144,13 +143,11 @@ class _BaseScreenState extends State<HomePage2> {
   @override
   void didChangeDependencies() async {
     if (Platform.isWindows || Platform.isLinux) {
-      if (this.sound == true) {
-        super.didChangeDependencies();
-        this.player = Player(
-          id: 0,
-        );
-        getSound();
-      }
+      super.didChangeDependencies();
+      this.player = Player(
+        id: 0,
+      );
+      getSound();
     }
   }
 
@@ -203,11 +200,6 @@ class _BaseScreenState extends State<HomePage2> {
                 fit: BoxFit.cover,
               ),
             ),
-            child: Container(
-              decoration: new BoxDecoration(
-                color: Colors.black.withOpacity(isLightTheme ? 0 : 0.4),
-              ),
-            ),
           ),
           Center(
             child: new Container(
@@ -238,7 +230,6 @@ class _BaseScreenState extends State<HomePage2> {
                               if (Platform.isWindows || Platform.isLinux) {
                                 setState(() {
                                   this.player?.stop();
-                                  sound = false;
                                 });
                               } else {
                                 FlameAudio.bgm.stop();

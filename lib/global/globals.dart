@@ -282,6 +282,7 @@ class _AppDrawerState extends State<AppDrawer> {
 
     return new Drawer(
         child: Container(
+      width: MediaQuery.of(context).size.width / 4,
       color: Colors.white,
       child: SingleChildScrollView(
         child: Column(
@@ -503,75 +504,117 @@ class _AppDrawerState2 extends State<AppDrawerMain> {
   Widget build(BuildContext context) {
     // final themeProvider = Provider.of<ThemeProvider>(context);
 
-    return new Drawer(
-        child: Container(
-      color: Colors.white,
-      child: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            new DrawerHeader(
-              child: Center(
-                  child: Text(
-                tr("game_name"),
-                style: TextStyle(fontSize: 30, fontFamily: "Aleo"),
-              )),
-            ),
-            Container(
-              height: 55,
-              padding: EdgeInsets.symmetric(
-                horizontal: 20,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Theme.of(context).cardColor,
-              ),
-              child: Row(
+    return new SizedBox(
+        width: MediaQuery.of(context).size.width / 2, //20.0,
+        child: Drawer(
+          child: Container(
+            color: Colors.white,
+            child: SingleChildScrollView(
+              child: Column(
                 children: <Widget>[
-                  widget.player?.general.volume == 0
-                      ? Icon(
-                          Icons.music_off,
-                          size: 25,
-                        )
-                      : Icon(
-                          Icons.music_note,
-                          size: 25,
-                        ),
-                  SizedBox(width: 15),
-                  Text(
-                    "Change Audio",
+                  new DrawerHeader(
+                    child: Center(
+                        child: Text(
+                      tr("game_name"),
+                      style: TextStyle(fontSize: 30, fontFamily: "Aleo"),
+                    ),),
                   ),
-                  Spacer(),
+                  Container(
+                    height: 55,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20,
+                    ),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.transparent),
+                    child: Row(
+                      children: <Widget>[
+                        widget.player?.general.volume == 0
+                            ? Icon(
+                                Icons.music_off,
+                                size: 35,
+                              )
+                            : Icon(
+                                Icons.music_note,
+                                size: 35,
+                              ),
+                        SizedBox(width: 15),
+                        Text(
+                          "CHANGE AUDIO",
+                          style: TextStyle(fontFamily: "Julee", fontSize: 28),
+                        ),
+                        Spacer(),
+                        SliderTheme(
+                          data: SliderTheme.of(context).copyWith(
+                            activeTrackColor: Colors.green,
+                            inactiveTrackColor: Colors.red,
+                            thumbShape:
+                                RoundSliderThumbShape(enabledThumbRadius: 10.0),
+                            overlayShape:
+                                RoundSliderOverlayShape(overlayRadius: 10.0),
+                          ),
+                          child: Slider.adaptive(
+                            min: 0.0,
+                            max: 1.0,
+                            value: widget.player?.general.volume ?? 0.5,
+                            onChanged: (volume) {
+                              widget.player?.setVolume(volume);
+                              this.setState(() {});
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Divider(),
+                  Container(
+                    height: 55,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20,
+                    ),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.transparent),
+                    child: Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.face_outlined,
+                          size: 35,
+                        ),
+                        SizedBox(width: 15),
+                        Text(
+                          "CREDITS",
+                          style: TextStyle(fontFamily: "Julee", fontSize: 28),
+                        ),
+                        Spacer(),
+                        SliderTheme(
+                          data: SliderTheme.of(context).copyWith(
+                            activeTrackColor: Colors.green,
+                            inactiveTrackColor: Colors.red,
+                            thumbShape:
+                                RoundSliderThumbShape(enabledThumbRadius: 10.0),
+                            overlayShape:
+                                RoundSliderOverlayShape(overlayRadius: 10.0),
+                          ),
+                          child: Slider.adaptive(
+                            min: 0.0,
+                            max: 1.0,
+                            value: widget.player?.general.volume ?? 0.5,
+                            onChanged: (volume) {
+                              widget.player?.setVolume(volume);
+                              this.setState(() {});
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Divider(),
                 ],
               ),
             ),
-            Slider.adaptive(
-              min: 0.0,
-              max: 1.0,
-              value: widget.player?.general.volume ?? 0.5,
-              onChanged: (volume) {
-                widget.player?.setVolume(volume);
-                this.setState(() {});
-              },
-            ),
-            Divider(),
-            IconButton(
-              icon: Icon(Icons.volume_up),
-              onPressed: () {
-                _showSliderDialog(
-                  context: context,
-                  title: "Adjust volume",
-                  divisions: 10,
-                  min: 0.0,
-                  max: 1.0,
-                  stream: widget.player.volumeStream,
-                  onChanged: widget.player.setVolume,
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-    ));
+          ),
+        ));
   }
 
   void _showSliderDialog({
