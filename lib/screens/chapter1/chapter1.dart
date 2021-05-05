@@ -40,14 +40,14 @@ class _QuizPageState extends State<VN1> {
     }
   }
 
-  var _scaffoldKey = new GlobalKey<ScaffoldState>();
+  var scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () => getOnWillPop(context),
       child: Scaffold(
-        key: _scaffoldKey,
+        key: scaffoldKey,
         endDrawerEnableOpenDragGesture: false,
         endDrawer: AppDrawer(),
         resizeToAvoidBottomInset: false,
@@ -84,23 +84,24 @@ class _QuizPageState extends State<VN1> {
                       textSound.getCorrectAnswer(),
                       textSound.getQuestionText(),
                       textSound.getNumber(),
+                      route,
+                      scaffoldKey,
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).size.height / 7),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        skipClip(context, route),
-                        SizedBox(
-                          width: 7,
-                        ),
-                        settingsClip(context, _scaffoldKey),
-                      ],
-                    ),
-                  )
                 ],
+              ),
+              SafeArea(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    skipClip(context, route),
+                    SizedBox(
+                      width: 7,
+                    ),
+                    settingsClip(context, scaffoldKey),
+                  ],
+                ),
               ),
             ],
           ),

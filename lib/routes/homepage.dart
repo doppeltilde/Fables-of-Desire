@@ -45,53 +45,54 @@ class _WildfyreState extends State<HomePage> {
       key: scaffoldKey,
       endDrawerEnableOpenDragGesture: false,
       endDrawer: AppDrawerMain(),
+
       body: AppBody(controller: controller),
-      bottomNavigationBar: new LayoutBuilder(builder: (context, constraints) {
-        if (Platform.isMacOS || Platform.isLinux || Platform.isWindows) {
-          return SizedBox.shrink();
-        } else {
-          return Theme(
-            data: Theme.of(context).copyWith(
-                // sets the background color of the `BottomNavigationBar`
-                canvasColor: Colors.white,
-                // sets the active color of the `BottomNavigationBar` if `Brightness` is light
-                primaryColor: Colors.white,
-                textTheme: Theme.of(context).textTheme.copyWith(
-                    caption: TextStyle(color: Theme.of(context).accentColor))),
-            child: BottomNavigationBar(
-                items: <BottomNavigationBarItem>[
-                  BottomNavigationBarItem(
-                    icon: Icon(
-                      selectedPageId == 0 ? Icons.menu : Icons.menu_outlined,
-                      color: Colors.black,
-                    ),
-                    label: 'HOME',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(
-                      selectedPageId == 1
-                          ? Icons.category
-                          : Icons.category_outlined,
-                      color: Colors.black,
-                    ),
-                    label: 'MORE',
-                  ),
-                ],
-                unselectedLabelStyle: TextStyle(fontSize: 18, letterSpacing: 1),
-                selectedLabelStyle: TextStyle(fontSize: 21, letterSpacing: 1),
-                selectedItemColor: Colors.black,
-                unselectedItemColor: Colors.black,
-                iconSize: 25.0,
-                currentIndex: selectedPageId,
-                onTap: (newId) {
-                  setState(() {
-                    controller.jumpToPage(newId);
-                    selectedPageId = newId;
-                  });
-                }),
-          );
-        }
-      }),
+      // bottomNavigationBar: new LayoutBuilder(builder: (context, constraints) {
+      //   if (Platform.isMacOS || Platform.isLinux || Platform.isWindows) {
+      //     return SizedBox.shrink();
+      //   } else {
+      //     return Theme(
+      //       data: Theme.of(context).copyWith(
+      //           // sets the background color of the `BottomNavigationBar`
+      //           canvasColor: Colors.white,
+      //           // sets the active color of the `BottomNavigationBar` if `Brightness` is light
+      //           primaryColor: Colors.white,
+      //           textTheme: Theme.of(context).textTheme.copyWith(
+      //               caption: TextStyle(color: Theme.of(context).accentColor))),
+      //       child: BottomNavigationBar(
+      //           items: <BottomNavigationBarItem>[
+      //             BottomNavigationBarItem(
+      //               icon: Icon(
+      //                 selectedPageId == 0 ? Icons.menu : Icons.menu_outlined,
+      //                 color: Colors.black,
+      //               ),
+      //               label: 'HOME',
+      //             ),
+      //             BottomNavigationBarItem(
+      //               icon: Icon(
+      //                 selectedPageId == 1
+      //                     ? Icons.category
+      //                     : Icons.category_outlined,
+      //                 color: Colors.black,
+      //               ),
+      //               label: 'MORE',
+      //             ),
+      //           ],
+      //           unselectedLabelStyle: TextStyle(fontSize: 18, letterSpacing: 1),
+      //           selectedLabelStyle: TextStyle(fontSize: 21, letterSpacing: 1),
+      //           selectedItemColor: Colors.black,
+      //           unselectedItemColor: Colors.black,
+      //           iconSize: 25.0,
+      //           currentIndex: selectedPageId,
+      //           onTap: (newId) {
+      //             setState(() {
+      //               controller.jumpToPage(newId);
+      //               selectedPageId = newId;
+      //             });
+      //           }),
+      //     );
+      //   }
+      // }),
     );
   }
 }
@@ -102,7 +103,7 @@ class AppBody extends StatelessWidget {
     Key? key,
     this.player,
     required PageController controller,
-  })  : _controller = controller,
+  })   : _controller = controller,
         super(key: key);
 
   final PageController _controller;
