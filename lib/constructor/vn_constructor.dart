@@ -101,7 +101,9 @@ class _InterludeState extends State<InterludeTextSound> {
                                   widget.q!,
                                   textAlign: TextAlign.left,
                                   textStyle: TextStyle(
-                                      color: Colors.black, fontFamily: "Aleo"),
+                                      color: Colors.black,
+                                      fontFamily: "Aleo",
+                                      fontSize: 18),
                                   speed: const Duration(milliseconds: 40),
                                 ),
                               ],
@@ -199,7 +201,9 @@ class ImageBuilderMC extends StatefulWidget {
 class _ImageBuilderMCState extends State<ImageBuilderMC> {
   @override
   Widget build(BuildContext context) {
-    return Positioned.fill(
+    return Positioned(
+      right: 0,
+      top: (MediaQuery.of(context).size.height / 2) + 25,
       child: Align(
         alignment: Alignment.bottomRight,
         child: AnimatedSwitcher(
@@ -207,7 +211,7 @@ class _ImageBuilderMCState extends State<ImageBuilderMC> {
           child: Image.asset(
             "assets/images/sprites/" + widget.image! + ".png",
             fit: BoxFit.cover,
-            height: MediaQuery.of(context).size.height / 1.4,
+            height: MediaQuery.of(context).size.height / 2,
             key: UniqueKey(),
           ),
         ),

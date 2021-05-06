@@ -65,7 +65,9 @@ class _QuizPageState extends State<VN1> {
               Builder(
                 builder: (BuildContext context) {
                   if (textSound.getCorrectAnswer() == "MC") {
-                    return ImageBuilderMC(image: textSound.getImage());
+                    return ImageBuilderMC(
+                      image: textSound.getImage(),
+                    );
                   } else {
                     return ImageBuilder(image: textSound.getImage());
                   }

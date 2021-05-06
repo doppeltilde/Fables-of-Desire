@@ -1,7 +1,7 @@
 name: fablesofdesire
 description: A new game.
 publish_to: 'none' 
-version: 1.0.0+9
+version: 1.0.0+11
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
@@ -22,7 +22,6 @@ dependencies:
   msix: ^2.0.0
   universal_io: ^2.0.4
   dart_vlc: ^0.0.6
-  auto_size_text: ^3.0.0-nullsafety.0
 
 # dependency_overrides:
 #   dart_vlc:
@@ -30,12 +29,14 @@ dependencies:
 #       url: https://github.com/jonatadashi/games_services.git
 #       ref: master
 #       path: games_services
+
+# flutter pub run flutter_launcher_icons:main
 flutter_icons:
   android: "launcher_icon" 
   ios: true
   remove_alpha_ios: true
   adaptive_icon_background: "#FFFFFF"
-  image_path: "assets/images/sprites/MC_Blush.png"
+  image_path: "assets/images/sprites/Cast/MC_Happy.png"
 
 flutter:
 
