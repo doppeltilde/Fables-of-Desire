@@ -84,34 +84,34 @@ class _InterludeState extends State<InterludeTextSound> {
                       ),
                     ],
                   ),
-                  Stack(
-                    children: <Widget>[
-                      IgnorePointer(
-                        child: Container(
-                          color: Colors.transparent,
-                          padding: EdgeInsets.symmetric(
-                              vertical: 15,
-                              horizontal:
-                                  MediaQuery.of(context).size.width / 15),
-                          child: AnimatedTextKit(
-                            animatedTexts: [
-                              TyperAnimatedText(
-                                widget.q!,
-                                textAlign: TextAlign.left,
-                                textStyle: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontFamily: "Aleo",
+                  ConstrainedBox(
+                    constraints: BoxConstraints(maxHeight: 80),
+                    child: Stack(
+                      children: <Widget>[
+                        IgnorePointer(
+                          child: Container(
+                            color: Colors.transparent,
+                            padding: EdgeInsets.symmetric(
+                                vertical: 15,
+                                horizontal:
+                                    MediaQuery.of(context).size.width / 15),
+                            child: AnimatedTextKit(
+                              animatedTexts: [
+                                TyperAnimatedText(
+                                  widget.q!,
+                                  textAlign: TextAlign.left,
+                                  textStyle: TextStyle(
+                                      color: Colors.black, fontFamily: "Aleo"),
+                                  speed: const Duration(milliseconds: 40),
                                 ),
-                                speed: const Duration(milliseconds: 40),
-                              ),
-                            ],
-                            isRepeatingAnimation: false,
-                            key: ValueKey(widget.n),
+                              ],
+                              isRepeatingAnimation: false,
+                              key: ValueKey(widget.n),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ])),
           ],
@@ -163,7 +163,7 @@ class _ImageBuilderState extends State<ImageBuilder> {
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
-      duration: Duration(milliseconds: 300),
+      duration: Duration(milliseconds: 0),
       child: ListView(
         key: UniqueKey(),
         shrinkWrap: true,
@@ -203,7 +203,7 @@ class _ImageBuilderMCState extends State<ImageBuilderMC> {
       child: Align(
         alignment: Alignment.bottomRight,
         child: AnimatedSwitcher(
-          duration: Duration(milliseconds: 300),
+          duration: Duration(milliseconds: 0),
           child: Image.asset(
             "assets/images/sprites/" + widget.image! + ".png",
             fit: BoxFit.cover,

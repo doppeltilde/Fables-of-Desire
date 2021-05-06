@@ -23,11 +23,33 @@ class _WildfyreState extends State<HomePage> {
   final controller = PageController(
     initialPage: 0,
   );
+
+  List<Map<String, dynamic>> images = [
+    {
+      "image": "assets/images/sprites/Cast/MC_Sad.png",
+    },
+    {
+      "image": "assets/images/sprites/Cast/MC_Angry.png",
+    },
+    {
+      "image": "assets/images/sprites/Cast/MC_Blush.png",
+    },
+    {
+      "image": "assets/images/sprites/Cast/MC_Happy.png",
+    },
+  ];
   void initState() {
     super.initState();
     if (!Platform.isWindows || !Platform.isLinux) {
       getSharedPrefs();
     }
+  }
+
+  // PRECACHE IMAGES
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    for (var i in images) precacheImage(AssetImage(i["image"]), context);
   }
 
   Future<dynamic> getSharedPrefs() async {
