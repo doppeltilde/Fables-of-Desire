@@ -18,9 +18,9 @@ class TextConstructor1 {
   int textNumber = 0;
 
   List<TextSound> textBank = [
-    TextSound(tr("mc.speech1"), tr("mc_name"), "silence", "transparent"),
-    TextSound(tr("mc.speech2"), tr("mc_name"), "silence", "transparent"),
-    TextSound(tr("mc.speech3"), tr("mc_name"), "silence", "transparent"),
+    TextSound(tr("mc.speech1"), tr("mc_name"), "silence", "Cast/MC_Neutral"),
+    TextSound(tr("mc.speech2"), tr("mc_name"), "silence", "Cast/MC_Blush"),
+    TextSound(tr("mc.speech3"), tr("mc_name"), "silence", "Cast/MC_Happy"),
     TextSound(tr("tom.speech1"), tr("tom_name"), "silence", "tom_neutral"),
     TextSound(tr("tom.speech2"), tr("tom_name"), "silence", "tom_neutral"),
     TextSound(tr("tom.speech3"), tr("tom_name"), "silence", "tom_neutral"),

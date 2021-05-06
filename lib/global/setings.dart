@@ -118,6 +118,14 @@ class _SettingsIngameState extends State<SettingsIngame> {
     // final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
+        leading: GestureDetector(
+          onTap: () => Navigator.pop(context),
+          child: Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
+        ),
+        backgroundColor: Colors.white,
         elevation: 0,
       ),
       resizeToAvoidBottomInset: false,
@@ -136,7 +144,7 @@ class _SettingsIngameState extends State<SettingsIngame> {
                     style: TextStyle(
                         fontSize: 40,
                         fontWeight: FontWeight.w700,
-                        fontFamily: "BottleParty"),
+                        fontFamily: "Julee"),
                   ),
                   SizedBox(height: 15),
                   Divider(
@@ -147,6 +155,7 @@ class _SettingsIngameState extends State<SettingsIngame> {
                   ),
 
                   Container(
+                    width: MediaQuery.of(context).size.width / 2,
                     height: 55,
                     margin: EdgeInsets.symmetric(
                       horizontal: 10,
@@ -175,7 +184,7 @@ class _SettingsIngameState extends State<SettingsIngame> {
                         Text(
                           "Music Volume",
                           style: TextStyle(
-                            fontFamily: "Arvo",
+                            fontFamily: "Aleo",
                             fontSize: 18,
                           ),
                         ),
@@ -199,6 +208,7 @@ class _SettingsIngameState extends State<SettingsIngame> {
                   ),
 
                   Container(
+                    width: MediaQuery.of(context).size.width / 2,
                     height: 55,
                     margin: EdgeInsets.symmetric(
                       horizontal: 10,
@@ -222,7 +232,7 @@ class _SettingsIngameState extends State<SettingsIngame> {
                         Text(
                           "Game Version",
                           style: TextStyle(
-                            fontFamily: "Arvo",
+                            fontFamily: "Aleo",
                             fontSize: 18,
                           ),
                         ),
@@ -267,6 +277,7 @@ class _SettingsIngameState extends State<SettingsIngame> {
                   GestureDetector(
                     onTap: () => showAlertDialog(context),
                     child: Container(
+                      width: MediaQuery.of(context).size.width / 2,
                       height: 55,
                       margin: EdgeInsets.symmetric(
                         horizontal: 10,
@@ -322,12 +333,14 @@ class _SettingsIngameState extends State<SettingsIngame> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         ElevatedButton(
-          style: ElevatedButton.styleFrom(
-              primary: Colors.black, onPrimary: Theme.of(context).primaryColor),
+          style: ElevatedButton.styleFrom(primary: Colors.white),
           child: Text(
             "YES",
-            style:
-                TextStyle(fontFamily: "Aleo", fontSize: 18, letterSpacing: .4),
+            style: TextStyle(
+                color: Colors.black,
+                fontFamily: "Aleo",
+                fontSize: 18,
+                letterSpacing: .4),
           ),
           onPressed: () {
             Navigator.of(context).pushReplacementNamed("/home");
@@ -338,11 +351,14 @@ class _SettingsIngameState extends State<SettingsIngame> {
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-              primary: Colors.black, onPrimary: Theme.of(context).primaryColor),
+              primary: Colors.white, onPrimary: Theme.of(context).primaryColor),
           child: Text(
             "NO",
-            style:
-                TextStyle(fontFamily: "Aleo", fontSize: 18, letterSpacing: .4),
+            style: TextStyle(
+                color: Colors.black,
+                fontFamily: "Aleo",
+                fontSize: 18,
+                letterSpacing: .4),
           ),
           onPressed: () {
             Navigator.pop(context);

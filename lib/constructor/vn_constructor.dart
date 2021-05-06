@@ -1,4 +1,3 @@
-import 'package:fablesofdesire/global/globals.dart';
 import 'dart:ui';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -50,12 +49,12 @@ class _InterludeState extends State<InterludeTextSound> {
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+              padding: EdgeInsets.symmetric(vertical: 2, horizontal: 15),
               child: Text(
                 widget.a!,
                 style: TextStyle(
                   fontFamily: "Julee",
-                  fontSize: 25,
+                  fontSize: 21,
                   color: Colors.black,
                 ),
               ),
@@ -87,27 +86,29 @@ class _InterludeState extends State<InterludeTextSound> {
                   ),
                   Stack(
                     children: <Widget>[
-                      Container(
-                        color: Colors.transparent,
-                        padding: EdgeInsets.symmetric(
-                            vertical: 15,
-                            horizontal: MediaQuery.of(context).size.width / 15),
-                        child: AnimatedTextKit(
-                          animatedTexts: [
-                            TyperAnimatedText(
-                              widget.q!,
-                              textAlign: TextAlign.left,
-                              textStyle: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontFamily: "Aleo",
+                      IgnorePointer(
+                        child: Container(
+                          color: Colors.transparent,
+                          padding: EdgeInsets.symmetric(
+                              vertical: 15,
+                              horizontal:
+                                  MediaQuery.of(context).size.width / 15),
+                          child: AnimatedTextKit(
+                            animatedTexts: [
+                              TyperAnimatedText(
+                                widget.q!,
+                                textAlign: TextAlign.left,
+                                textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                  fontFamily: "Aleo",
+                                ),
+                                speed: const Duration(milliseconds: 40),
                               ),
-                              speed: const Duration(milliseconds: 40),
-                            ),
-                          ],
-                          displayFullTextOnTap: true,
-                          isRepeatingAnimation: false,
-                          key: ValueKey(widget.n),
+                            ],
+                            isRepeatingAnimation: false,
+                            key: ValueKey(widget.n),
+                          ),
                         ),
                       ),
                     ],
@@ -164,25 +165,53 @@ class _ImageBuilderState extends State<ImageBuilder> {
     return AnimatedSwitcher(
       duration: Duration(milliseconds: 300),
       child: ListView(
-          key: UniqueKey(),
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                SizedBox(
-                  height: 50,
-                ),
-                Image.asset(
-                  "assets/images/sprites/" + widget.image! + ".png",
-                  fit: BoxFit.cover,
-                  height: MediaQuery.of(context).size.height / 1,
-                )
-              ],
-            )
-          ]),
+        key: UniqueKey(),
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        children: <Widget>[
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              SizedBox(
+                height: 50,
+              ),
+              Image.asset(
+                "assets/images/sprites/" + widget.image! + ".png",
+                fit: BoxFit.cover,
+                height: MediaQuery.of(context).size.height / 1,
+              )
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class ImageBuilderMC extends StatefulWidget {
+  final String? image;
+  ImageBuilderMC({Key? key, this.image}) : super(key: key);
+  @override
+  _ImageBuilderMCState createState() => _ImageBuilderMCState();
+}
+
+class _ImageBuilderMCState extends State<ImageBuilderMC> {
+  @override
+  Widget build(BuildContext context) {
+    return Positioned.fill(
+      child: Align(
+        alignment: Alignment.bottomRight,
+        child: AnimatedSwitcher(
+          duration: Duration(milliseconds: 300),
+          child: Image.asset(
+            "assets/images/sprites/" + widget.image! + ".png",
+            fit: BoxFit.cover,
+            height: MediaQuery.of(context).size.height / 1.4,
+            key: UniqueKey(),
+          ),
+        ),
+      ),
     );
   }
 }

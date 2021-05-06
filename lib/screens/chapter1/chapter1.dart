@@ -52,29 +52,29 @@ class _QuizPageState extends State<VN1> {
         endDrawer: AppDrawer(),
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.black,
-        body: RawGestureDetector(
-          gestures: {
-            AllowMultipleGestureRecognizer:
-                GestureRecognizerFactoryWithHandlers<
-                    AllowMultipleGestureRecognizer>(
-              () => AllowMultipleGestureRecognizer(),
-              (AllowMultipleGestureRecognizer instance) {
-                instance.onTap = () {
-                  checkAnswer(true);
-                };
-              },
-            )
+        body: InkWell(
+          onTap: () {
+            checkAnswer(true);
           },
-          behavior: HitTestBehavior.opaque,
           child: Stack(
             fit: StackFit.expand,
             children: <Widget>[
-              BackgroundBuilder(image: "assets/images/img1.jpg"),
+              BackgroundBuilder(
+                  image: "assets/images/bgs/mininature_001_19201440.jpg"),
               // Character here
-              ImageBuilder(image: textSound.getImage()),
+              Builder(
+                builder: (BuildContext context) {
+                  if (textSound.getCorrectAnswer() == "MC") {
+                    return ImageBuilderMC(image: textSound.getImage());
+                  } else {
+                    return ImageBuilder(image: textSound.getImage());
+                  }
+                },
+              ),
+
               // Sprites here
               //spriteBuilder(context, quizBrain.getNumber()),
-
+              buttons(context, route, scaffoldKey),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -89,19 +89,6 @@ class _QuizPageState extends State<VN1> {
                     ),
                   ),
                 ],
-              ),
-              SafeArea(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    skipClip(context, route),
-                    SizedBox(
-                      width: 7,
-                    ),
-                    settingsClip(context, scaffoldKey),
-                  ],
-                ),
               ),
             ],
           ),

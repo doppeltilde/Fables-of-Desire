@@ -45,7 +45,12 @@ flutter:
 
     - assets/images/
     - assets/images/sprites/
+    - assets/images/sprites/Cast/
+    - assets/images/sprites/Cast/Tomiichi/
+    - assets/images/sprites/Cast/Naoki/
+    - assets/images/sprites/Cast/Hidetake/
     - assets/images/gui/
+    - assets/images/bgs/
 
     - assets/languages/
 

@@ -6,7 +6,6 @@ import 'package:fablesofdesire/global/setings.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:package_info/package_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AllowMultipleGestureRecognizer extends TapGestureRecognizer {
@@ -14,6 +13,25 @@ class AllowMultipleGestureRecognizer extends TapGestureRecognizer {
   void rejectGesture(int pointer) {
     acceptGesture(pointer);
   }
+}
+
+dynamic buttons(context, route, scaffoldKey) {
+  return SafeArea(
+    child: Padding(
+      padding: EdgeInsets.only(right: 15, bottom: 15),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          skipClip(context, route),
+          SizedBox(
+            width: 7,
+          ),
+          settingsClip(context, scaffoldKey),
+        ],
+      ),
+    ),
+  );
 }
 
 dynamic settingsClip(context, _scaffoldKey) {
@@ -128,24 +146,6 @@ dynamic skipClip(context, route) {
           ],
         ),
       ),
-      // Container(
-      //   child: ElevatedButton(
-      //     style: ElevatedButton.styleFrom(
-      //         shape: RoundedRectangleBorder(
-      //           borderRadius: BorderRadius.circular(18.0),
-      //         ),
-      //         primary: Theme.of(context).primaryColor),
-      //     onPressed: () => showAlertDialog(context, route),
-      //     child: Text(
-      //       "Skip >>",
-      //       style: TextStyle(
-      //           color: Colors.black,
-      //           fontFamily: "Aleo",
-      //           fontSize: 20,
-      //           letterSpacing: .2),
-      //     ),
-      //   ),
-      // ),
     ],
   );
 }
@@ -159,10 +159,14 @@ showAlertDialog(BuildContext context, route) {
     children: [
       ElevatedButton(
         style: ElevatedButton.styleFrom(
-            primary: Colors.black, onPrimary: Theme.of(context).primaryColor),
+            primary: Colors.white, onPrimary: Theme.of(context).primaryColor),
         child: Text(
           "YES",
-          style: TextStyle(fontFamily: "Aleo", fontSize: 18, letterSpacing: .4),
+          style: TextStyle(
+              color: Colors.black,
+              fontFamily: "Aleo",
+              fontSize: 18,
+              letterSpacing: .4),
         ),
         onPressed: () {
           FlameAudio.bgm.stop();
@@ -174,10 +178,14 @@ showAlertDialog(BuildContext context, route) {
       ),
       ElevatedButton(
         style: ElevatedButton.styleFrom(
-            primary: Colors.black, onPrimary: Theme.of(context).primaryColor),
+            primary: Colors.white, onPrimary: Theme.of(context).primaryColor),
         child: Text(
           "NO",
-          style: TextStyle(fontFamily: "Aleo", fontSize: 18, letterSpacing: .4),
+          style: TextStyle(
+              color: Colors.black,
+              fontFamily: "Aleo",
+              fontSize: 18,
+              letterSpacing: .4),
         ),
         onPressed: () {
           Navigator.pop(context);
@@ -503,74 +511,72 @@ class _AppDrawerState2 extends State<AppDrawerMain> {
   Widget build(BuildContext context) {
     // final themeProvider = Provider.of<ThemeProvider>(context);
 
-    return new SafeArea(
-        child: Drawer(
-      child: Container(
-        color: Colors.white,
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              new DrawerHeader(
-                child: Center(
-                    child: Text(
-                  tr("game_name"),
-                  style: TextStyle(fontSize: 30, fontFamily: "Aleo"),
-                )),
+    return Drawer(
+        child: Container(
+      color: Colors.white,
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            new DrawerHeader(
+              child: Center(
+                  child: Text(
+                tr("game_name"),
+                style: TextStyle(fontSize: 30, fontFamily: "Aleo"),
+              )),
+            ),
+            Container(
+              height: 55,
+              padding: EdgeInsets.symmetric(
+                horizontal: 20,
               ),
-              Container(
-                height: 55,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Theme.of(context).cardColor,
-                ),
-                child: Row(
-                  children: <Widget>[
-                    widget.player?.general.volume == 0
-                        ? Icon(
-                            Icons.music_off,
-                            size: 25,
-                          )
-                        : Icon(
-                            Icons.music_note,
-                            size: 25,
-                          ),
-                    SizedBox(width: 15),
-                    Text(
-                      "Change Audio",
-                    ),
-                    Spacer(),
-                  ],
-                ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: Theme.of(context).cardColor,
               ),
-              Slider.adaptive(
-                min: 0.0,
-                max: 1.0,
-                value: widget.player?.general.volume ?? 0.5,
-                onChanged: (volume) {
-                  widget.player?.setVolume(volume);
-                  this.setState(() {});
-                },
+              child: Row(
+                children: <Widget>[
+                  widget.player?.general.volume == 0
+                      ? Icon(
+                          Icons.music_off,
+                          size: 25,
+                        )
+                      : Icon(
+                          Icons.music_note,
+                          size: 25,
+                        ),
+                  SizedBox(width: 15),
+                  Text(
+                    "Change Audio",
+                  ),
+                  Spacer(),
+                ],
               ),
-              Divider(),
-              IconButton(
-                icon: Icon(Icons.volume_up),
-                onPressed: () {
-                  _showSliderDialog(
-                    context: context,
-                    title: "Adjust volume",
-                    divisions: 10,
-                    min: 0.0,
-                    max: 1.0,
-                    stream: widget.player.volumeStream,
-                    onChanged: widget.player.setVolume,
-                  );
-                },
-              ),
-            ],
-          ),
+            ),
+            Slider.adaptive(
+              min: 0.0,
+              max: 1.0,
+              value: widget.player?.general.volume ?? 0.5,
+              onChanged: (volume) {
+                widget.player?.setVolume(volume);
+                this.setState(() {});
+              },
+            ),
+            Divider(),
+            IconButton(
+              icon: Icon(Icons.volume_up),
+              onPressed: () {
+                _showSliderDialog(
+                  context: context,
+                  title: "Adjust volume",
+                  divisions: 10,
+                  min: 0.0,
+                  max: 1.0,
+                  stream: widget.player.volumeStream,
+                  onChanged: widget.player.setVolume,
+                );
+              },
+            ),
+          ],
         ),
       ),
     ));

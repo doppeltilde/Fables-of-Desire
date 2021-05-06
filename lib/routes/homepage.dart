@@ -43,8 +43,8 @@ class _WildfyreState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      endDrawerEnableOpenDragGesture: false,
-      endDrawer: AppDrawerMain(),
+      drawerEnableOpenDragGesture: false,
+      drawer: AppDrawerMain(),
 
       body: AppBody(controller: controller),
       // bottomNavigationBar: new LayoutBuilder(builder: (context, constraints) {
@@ -189,8 +189,8 @@ class _BaseScreenState extends State<HomePage2> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      endDrawerEnableOpenDragGesture: false,
-      endDrawer: AppDrawerMain(
+      drawerEnableOpenDragGesture: false,
+      drawer: AppDrawerMain(
         player: player,
       ),
       resizeToAvoidBottomInset: false,
@@ -289,7 +289,7 @@ class _BaseScreenState extends State<HomePage2> {
                               padding: EdgeInsets.symmetric(vertical: 20),
                             ),
                             onPressed: () async {
-                              scaffoldKey.currentState!.openEndDrawer();
+                              scaffoldKey.currentState!.openDrawer();
                             },
                           ),
                         ),
