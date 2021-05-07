@@ -88,28 +88,27 @@ class _InterludeState extends State<InterludeTextSound> {
                     constraints: BoxConstraints(maxHeight: 80),
                     child: Stack(
                       children: <Widget>[
-                        IgnorePointer(
-                          child: Container(
-                            color: Colors.transparent,
-                            padding: EdgeInsets.symmetric(
-                                vertical: 15,
-                                horizontal:
-                                    MediaQuery.of(context).size.width / 15),
-                            child: AnimatedTextKit(
-                              animatedTexts: [
-                                TyperAnimatedText(
-                                  widget.q!,
-                                  textAlign: TextAlign.left,
-                                  textStyle: TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: "Aleo",
-                                      fontSize: 18),
-                                  speed: const Duration(milliseconds: 40),
-                                ),
-                              ],
-                              isRepeatingAnimation: false,
-                              key: ValueKey(widget.n),
-                            ),
+                        Container(
+                          color: Colors.transparent,
+                          padding: EdgeInsets.symmetric(
+                              vertical: 15,
+                              horizontal:
+                                  MediaQuery.of(context).size.width / 15),
+                          child: AnimatedTextKit(
+                            animatedTexts: [
+                              TyperAnimatedText(
+                                widget.q!,
+                                textAlign: TextAlign.left,
+                                textStyle: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: "Aleo",
+                                    fontSize: 18),
+                                speed: const Duration(milliseconds: 40),
+                              ),
+                            ],
+                            displayFullTextOnTap: true,
+                            isRepeatingAnimation: false,
+                            key: ValueKey(widget.n),
                           ),
                         ),
                       ],
@@ -203,6 +202,7 @@ class _ImageBuilderMCState extends State<ImageBuilderMC> {
   Widget build(BuildContext context) {
     return Positioned(
       right: 0,
+      // Just crop the image!
       top: (MediaQuery.of(context).size.height / 2) + 25,
       child: Align(
         alignment: Alignment.bottomRight,
