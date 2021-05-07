@@ -6,7 +6,6 @@ import 'package:fablesofdesire/global/setings.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:package_info/package_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AllowMultipleGestureRecognizer extends TapGestureRecognizer {
@@ -14,6 +13,46 @@ class AllowMultipleGestureRecognizer extends TapGestureRecognizer {
   void rejectGesture(int pointer) {
     acceptGesture(pointer);
   }
+}
+
+dynamic buttons(context, route, scaffoldKey) {
+  return Builder(builder: (BuildContext context) {
+    if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
+      return SafeArea(
+        child: Padding(
+          padding: EdgeInsets.only(left: 50, bottom: 50),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              skipClip(context, route),
+              SizedBox(
+                width: 7,
+              ),
+              settingsClip(context, scaffoldKey),
+            ],
+          ),
+        ),
+      );
+    } else {
+      return SafeArea(
+        child: Padding(
+          padding: EdgeInsets.only(left: 15, bottom: 15),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              skipClip(context, route),
+              SizedBox(
+                width: 7,
+              ),
+              settingsClip(context, scaffoldKey),
+            ],
+          ),
+        ),
+      );
+    }
+  });
 }
 
 dynamic settingsClip(context, _scaffoldKey) {
@@ -128,24 +167,6 @@ dynamic skipClip(context, route) {
           ],
         ),
       ),
-      // Container(
-      //   child: ElevatedButton(
-      //     style: ElevatedButton.styleFrom(
-      //         shape: RoundedRectangleBorder(
-      //           borderRadius: BorderRadius.circular(18.0),
-      //         ),
-      //         primary: Theme.of(context).primaryColor),
-      //     onPressed: () => showAlertDialog(context, route),
-      //     child: Text(
-      //       "Skip >>",
-      //       style: TextStyle(
-      //           color: Colors.black,
-      //           fontFamily: "Aleo",
-      //           fontSize: 20,
-      //           letterSpacing: .2),
-      //     ),
-      //   ),
-      // ),
     ],
   );
 }
@@ -159,10 +180,14 @@ showAlertDialog(BuildContext context, route) {
     children: [
       ElevatedButton(
         style: ElevatedButton.styleFrom(
-            primary: Colors.black, onPrimary: Theme.of(context).primaryColor),
+            primary: Colors.white, onPrimary: Theme.of(context).primaryColor),
         child: Text(
           "YES",
-          style: TextStyle(fontFamily: "Aleo", fontSize: 18, letterSpacing: .4),
+          style: TextStyle(
+              color: Colors.black,
+              fontFamily: "Aleo",
+              fontSize: 18,
+              letterSpacing: .4),
         ),
         onPressed: () {
           FlameAudio.bgm.stop();
@@ -174,10 +199,14 @@ showAlertDialog(BuildContext context, route) {
       ),
       ElevatedButton(
         style: ElevatedButton.styleFrom(
-            primary: Colors.black, onPrimary: Theme.of(context).primaryColor),
+            primary: Colors.white, onPrimary: Theme.of(context).primaryColor),
         child: Text(
           "NO",
-          style: TextStyle(fontFamily: "Aleo", fontSize: 18, letterSpacing: .4),
+          style: TextStyle(
+              color: Colors.black,
+              fontFamily: "Aleo",
+              fontSize: 18,
+              letterSpacing: .4),
         ),
         onPressed: () {
           Navigator.pop(context);
@@ -504,117 +533,136 @@ class _AppDrawerState2 extends State<AppDrawerMain> {
   Widget build(BuildContext context) {
     // final themeProvider = Provider.of<ThemeProvider>(context);
 
-    return new SizedBox(
-        width: MediaQuery.of(context).size.width / 2, //20.0,
-        child: Drawer(
-          child: Container(
+    return Drawer(
+        child: Container(
             color: Colors.white,
             child: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  new DrawerHeader(
-                    child: Center(
-                        child: Text(
-                      tr("game_name"),
-                      style: TextStyle(fontSize: 30, fontFamily: "Aleo"),
-                    ),),
+                child: Column(
+              children: <Widget>[
+                new DrawerHeader(
+                  child: Center(
+                      child: Text(
+                    tr("game_name"),
+                    style: TextStyle(fontSize: 30, fontFamily: "Aleo"),
+                  )),
+                ),
+                Container(
+                  height: 55,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20,
                   ),
-                  Container(
-                    height: 55,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20,
-                    ),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.transparent),
-                    child: Row(
-                      children: <Widget>[
-                        widget.player?.general.volume == 0
-                            ? Icon(
-                                Icons.music_off,
-                                size: 35,
-                              )
-                            : Icon(
-                                Icons.music_note,
-                                size: 35,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Theme.of(context).cardColor,
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      new DrawerHeader(
+                        child: Center(
+                          child: Text(
+                            tr("game_name"),
+                            style: TextStyle(fontSize: 30, fontFamily: "Aleo"),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 55,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20,
+                        ),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color: Colors.transparent),
+                        child: Row(
+                          children: <Widget>[
+                            widget.player?.general.volume == 0
+                                ? Icon(
+                                    Icons.music_off,
+                                    size: 35,
+                                  )
+                                : Icon(
+                                    Icons.music_note,
+                                    size: 35,
+                                  ),
+                            SizedBox(width: 15),
+                            Text(
+                              "CHANGE AUDIO",
+                              style:
+                                  TextStyle(fontFamily: "Julee", fontSize: 28),
+                            ),
+                            Spacer(),
+                            SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                activeTrackColor: Colors.green,
+                                inactiveTrackColor: Colors.red,
+                                thumbShape: RoundSliderThumbShape(
+                                    enabledThumbRadius: 10.0),
+                                overlayShape: RoundSliderOverlayShape(
+                                    overlayRadius: 10.0),
                               ),
-                        SizedBox(width: 15),
-                        Text(
-                          "CHANGE AUDIO",
-                          style: TextStyle(fontFamily: "Julee", fontSize: 28),
+                              child: Slider.adaptive(
+                                min: 0.0,
+                                max: 1.0,
+                                value: widget.player?.general.volume ?? 0.5,
+                                onChanged: (volume) {
+                                  widget.player?.setVolume(volume);
+                                  this.setState(() {});
+                                },
+                              ),
+                            ),
+                          ],
                         ),
-                        Spacer(),
-                        SliderTheme(
-                          data: SliderTheme.of(context).copyWith(
-                            activeTrackColor: Colors.green,
-                            inactiveTrackColor: Colors.red,
-                            thumbShape:
-                                RoundSliderThumbShape(enabledThumbRadius: 10.0),
-                            overlayShape:
-                                RoundSliderOverlayShape(overlayRadius: 10.0),
-                          ),
-                          child: Slider.adaptive(
-                            min: 0.0,
-                            max: 1.0,
-                            value: widget.player?.general.volume ?? 0.5,
-                            onChanged: (volume) {
-                              widget.player?.setVolume(volume);
-                              this.setState(() {});
-                            },
-                          ),
+                      ),
+                      Divider(),
+                      Container(
+                        height: 55,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20,
                         ),
-                      ],
-                    ),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color: Colors.transparent),
+                        child: Row(
+                          children: <Widget>[
+                            Icon(
+                              Icons.face_outlined,
+                              size: 35,
+                            ),
+                            SizedBox(width: 15),
+                            Text(
+                              "CREDITS",
+                              style:
+                                  TextStyle(fontFamily: "Julee", fontSize: 28),
+                            ),
+                            Spacer(),
+                            SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                activeTrackColor: Colors.green,
+                                inactiveTrackColor: Colors.red,
+                                thumbShape: RoundSliderThumbShape(
+                                    enabledThumbRadius: 10.0),
+                                overlayShape: RoundSliderOverlayShape(
+                                    overlayRadius: 10.0),
+                              ),
+                              child: Slider.adaptive(
+                                min: 0.0,
+                                max: 1.0,
+                                value: widget.player?.general.volume ?? 0.5,
+                                onChanged: (volume) {
+                                  widget.player?.setVolume(volume);
+                                  this.setState(() {});
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Divider(),
+                    ],
                   ),
-                  Divider(),
-                  Container(
-                    height: 55,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20,
-                    ),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.transparent),
-                    child: Row(
-                      children: <Widget>[
-                        Icon(
-                          Icons.face_outlined,
-                          size: 35,
-                        ),
-                        SizedBox(width: 15),
-                        Text(
-                          "CREDITS",
-                          style: TextStyle(fontFamily: "Julee", fontSize: 28),
-                        ),
-                        Spacer(),
-                        SliderTheme(
-                          data: SliderTheme.of(context).copyWith(
-                            activeTrackColor: Colors.green,
-                            inactiveTrackColor: Colors.red,
-                            thumbShape:
-                                RoundSliderThumbShape(enabledThumbRadius: 10.0),
-                            overlayShape:
-                                RoundSliderOverlayShape(overlayRadius: 10.0),
-                          ),
-                          child: Slider.adaptive(
-                            min: 0.0,
-                            max: 1.0,
-                            value: widget.player?.general.volume ?? 0.5,
-                            onChanged: (volume) {
-                              widget.player?.setVolume(volume);
-                              this.setState(() {});
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Divider(),
-                ],
-              ),
-            ),
-          ),
-        ));
+                ),
+              ],
+            ))));
   }
 
   void _showSliderDialog({

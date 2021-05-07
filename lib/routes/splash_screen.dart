@@ -26,6 +26,47 @@ class _SplashScreenState extends State<SplashScreen> {
                     fontWeight: FontWeight.bold))));
   }
 
+  // PRECACHE IMAGES
+
+  List<Map<String, dynamic>> images = [
+    // MC
+    {
+      "image": "assets/images/sprites/Cast/MC_Sad.png",
+    },
+    {
+      "image": "assets/images/sprites/Cast/MC_Angry.png",
+    },
+    {
+      "image": "assets/images/sprites/Cast/MC_Blush.png",
+    },
+    {
+      "image": "assets/images/sprites/Cast/MC_Happy.png",
+    },
+    // Hidetake
+    {
+      "image": "assets/images/sprites/Cast/Hidetake/2sad.png",
+    },
+    {
+      "image": "assets/images/sprites/Cast/Hidetake/2blush.png",
+    },
+    {
+      "image": "assets/images/sprites/Cast/Hidetake/2frown.png",
+    },
+    {
+      "image": "assets/images/sprites/Cast/Hidetake/2happy.png",
+    },
+    {
+      "image": "assets/images/sprites/Cast/Hidetake/2neutral.png",
+    },
+  ];
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    for (var i in images) precacheImage(AssetImage(i["image"]), context);
+  }
+  // PRECACHE IMAGES
+
   @override
   void initState() {
     super.initState();

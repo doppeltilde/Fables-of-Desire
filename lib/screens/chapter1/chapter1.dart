@@ -40,41 +40,43 @@ class _QuizPageState extends State<VN1> {
     }
   }
 
-  var _scaffoldKey = new GlobalKey<ScaffoldState>();
+  var scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () => getOnWillPop(context),
       child: Scaffold(
-        key: _scaffoldKey,
+        key: scaffoldKey,
         endDrawerEnableOpenDragGesture: false,
         endDrawer: AppDrawer(),
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.black,
-        body: RawGestureDetector(
-          gestures: {
-            AllowMultipleGestureRecognizer:
-                GestureRecognizerFactoryWithHandlers<
-                    AllowMultipleGestureRecognizer>(
-              () => AllowMultipleGestureRecognizer(),
-              (AllowMultipleGestureRecognizer instance) {
-                instance.onTap = () {
-                  checkAnswer(true);
-                };
-              },
-            )
+        body: InkWell(
+          onTap: () {
+            checkAnswer(true);
           },
-          behavior: HitTestBehavior.opaque,
           child: Stack(
             fit: StackFit.expand,
             children: <Widget>[
-              BackgroundBuilder(image: "assets/images/img1.jpg"),
+              BackgroundBuilder(
+                  image: "assets/images/bgs/mininature_001_19201440.jpg"),
               // Character here
-              ImageBuilder(image: textSound.getImage()),
+              Builder(
+                builder: (BuildContext context) {
+                  if (textSound.getCorrectAnswer() == "MC") {
+                    return ImageBuilderMC(
+                      image: textSound.getImage(),
+                    );
+                  } else {
+                    return ImageBuilder(image: textSound.getImage());
+                  }
+                },
+              ),
+
               // Sprites here
               //spriteBuilder(context, quizBrain.getNumber()),
-
+              buttons(context, route, scaffoldKey),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -84,22 +86,10 @@ class _QuizPageState extends State<VN1> {
                       textSound.getCorrectAnswer(),
                       textSound.getQuestionText(),
                       textSound.getNumber(),
+                      route,
+                      scaffoldKey,
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).size.height / 7),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        skipClip(context, route),
-                        SizedBox(
-                          width: 7,
-                        ),
-                        settingsClip(context, _scaffoldKey),
-                      ],
-                    ),
-                  )
                 ],
               ),
             ],

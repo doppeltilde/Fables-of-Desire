@@ -18,9 +18,9 @@ class TextConstructor1 {
   int textNumber = 0;
 
   List<TextSound> textBank = [
-    TextSound(tr("mc.speech1"), tr("mc_name"), "silence", "transparent"),
-    TextSound(tr("mc.speech2"), tr("mc_name"), "silence", "transparent"),
-    TextSound(tr("mc.speech3"), tr("mc_name"), "silence", "transparent"),
+    TextSound(tr("mc.speech1"), tr("mc_name"), "silence", "Cast/MC_Neutral"),
+    TextSound(tr("mc.speech2"), tr("mc_name"), "silence", "Cast/MC_Blush"),
+    TextSound(tr("mc.speech3"), tr("mc_name"), "silence", "Cast/MC_Happy"),
     TextSound(tr("tom.speech1"), tr("tom_name"), "silence", "tom_neutral"),
     TextSound(tr("tom.speech2"), tr("tom_name"), "silence", "tom_neutral"),
     TextSound(tr("tom.speech3"), tr("tom_name"), "silence", "tom_neutral"),
@@ -32,7 +32,10 @@ class TextConstructor1 {
         tr("naoki.speech3"), tr("naoki_name"), "silence", "naoki_neutral"),
     TextSound(tr("hidetake.speech1"), tr("hidetake_name"), "silence",
         "hidetake_neutral"),
-    TextSound(tr("hidetake.speech2"), tr("hidetake_name"), "silence",
+    TextSound(
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        tr("hidetake_name"),
+        "silence",
         "hidetake_neutral"),
     TextSound(
         """This is considered an error condition because it indicates that there is content that cannot be

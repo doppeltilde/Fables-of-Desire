@@ -23,11 +23,33 @@ class _WildfyreState extends State<HomePage> {
   final controller = PageController(
     initialPage: 0,
   );
+
+  List<Map<String, dynamic>> images = [
+    {
+      "image": "assets/images/sprites/Cast/MC_Sad.png",
+    },
+    {
+      "image": "assets/images/sprites/Cast/MC_Angry.png",
+    },
+    {
+      "image": "assets/images/sprites/Cast/MC_Blush.png",
+    },
+    {
+      "image": "assets/images/sprites/Cast/MC_Happy.png",
+    },
+  ];
   void initState() {
     super.initState();
     if (!Platform.isWindows || !Platform.isLinux) {
       getSharedPrefs();
     }
+  }
+
+  // PRECACHE IMAGES
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    for (var i in images) precacheImage(AssetImage(i["image"]), context);
   }
 
   Future<dynamic> getSharedPrefs() async {
@@ -43,55 +65,56 @@ class _WildfyreState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      endDrawerEnableOpenDragGesture: false,
-      endDrawer: AppDrawerMain(),
+      drawerEnableOpenDragGesture: false,
+      drawer: AppDrawerMain(),
+
       body: AppBody(controller: controller),
-      bottomNavigationBar: new LayoutBuilder(builder: (context, constraints) {
-        if (Platform.isMacOS || Platform.isLinux || Platform.isWindows) {
-          return SizedBox.shrink();
-        } else {
-          return Theme(
-            data: Theme.of(context).copyWith(
-                // sets the background color of the `BottomNavigationBar`
-                canvasColor: Colors.white,
-                // sets the active color of the `BottomNavigationBar` if `Brightness` is light
-                primaryColor: Colors.white,
-                textTheme: Theme.of(context).textTheme.copyWith(
-                    caption: TextStyle(color: Theme.of(context).accentColor))),
-            child: BottomNavigationBar(
-                items: <BottomNavigationBarItem>[
-                  BottomNavigationBarItem(
-                    icon: Icon(
-                      selectedPageId == 0 ? Icons.menu : Icons.menu_outlined,
-                      color: Colors.black,
-                    ),
-                    label: 'HOME',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(
-                      selectedPageId == 1
-                          ? Icons.category
-                          : Icons.category_outlined,
-                      color: Colors.black,
-                    ),
-                    label: 'MORE',
-                  ),
-                ],
-                unselectedLabelStyle: TextStyle(fontSize: 18, letterSpacing: 1),
-                selectedLabelStyle: TextStyle(fontSize: 21, letterSpacing: 1),
-                selectedItemColor: Colors.black,
-                unselectedItemColor: Colors.black,
-                iconSize: 25.0,
-                currentIndex: selectedPageId,
-                onTap: (newId) {
-                  setState(() {
-                    controller.jumpToPage(newId);
-                    selectedPageId = newId;
-                  });
-                }),
-          );
-        }
-      }),
+      // bottomNavigationBar: new LayoutBuilder(builder: (context, constraints) {
+      //   if (Platform.isMacOS || Platform.isLinux || Platform.isWindows) {
+      //     return SizedBox.shrink();
+      //   } else {
+      //     return Theme(
+      //       data: Theme.of(context).copyWith(
+      //           // sets the background color of the `BottomNavigationBar`
+      //           canvasColor: Colors.white,
+      //           // sets the active color of the `BottomNavigationBar` if `Brightness` is light
+      //           primaryColor: Colors.white,
+      //           textTheme: Theme.of(context).textTheme.copyWith(
+      //               caption: TextStyle(color: Theme.of(context).accentColor))),
+      //       child: BottomNavigationBar(
+      //           items: <BottomNavigationBarItem>[
+      //             BottomNavigationBarItem(
+      //               icon: Icon(
+      //                 selectedPageId == 0 ? Icons.menu : Icons.menu_outlined,
+      //                 color: Colors.black,
+      //               ),
+      //               label: 'HOME',
+      //             ),
+      //             BottomNavigationBarItem(
+      //               icon: Icon(
+      //                 selectedPageId == 1
+      //                     ? Icons.category
+      //                     : Icons.category_outlined,
+      //                 color: Colors.black,
+      //               ),
+      //               label: 'MORE',
+      //             ),
+      //           ],
+      //           unselectedLabelStyle: TextStyle(fontSize: 18, letterSpacing: 1),
+      //           selectedLabelStyle: TextStyle(fontSize: 21, letterSpacing: 1),
+      //           selectedItemColor: Colors.black,
+      //           unselectedItemColor: Colors.black,
+      //           iconSize: 25.0,
+      //           currentIndex: selectedPageId,
+      //           onTap: (newId) {
+      //             setState(() {
+      //               controller.jumpToPage(newId);
+      //               selectedPageId = newId;
+      //             });
+      //           }),
+      //     );
+      //   }
+      // }),
     );
   }
 }
@@ -102,7 +125,7 @@ class AppBody extends StatelessWidget {
     Key? key,
     this.player,
     required PageController controller,
-  })  : _controller = controller,
+  })   : _controller = controller,
         super(key: key);
 
   final PageController _controller;
@@ -185,8 +208,8 @@ class _BaseScreenState extends State<HomePage2> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      endDrawerEnableOpenDragGesture: false,
-      endDrawer: AppDrawerMain(
+      drawerEnableOpenDragGesture: false,
+      drawer: AppDrawerMain(
         player: player,
       ),
       resizeToAvoidBottomInset: false,
@@ -279,7 +302,7 @@ class _BaseScreenState extends State<HomePage2> {
                               padding: EdgeInsets.symmetric(vertical: 20),
                             ),
                             onPressed: () async {
-                              scaffoldKey.currentState!.openEndDrawer();
+                              scaffoldKey.currentState!.openDrawer();
                             },
                           ),
                         ),

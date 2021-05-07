@@ -8,6 +8,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:fablesofdesire/routes/routes.dart';
+import 'package:flutter/services.dart';
 import 'package:universal_io/io.dart';
 
 Future<void> main() async {
@@ -18,16 +19,20 @@ Future<void> main() async {
     FlameAudio.bgm.initialize();
   }
 
-  runApp(EasyLocalization(
-    saveLocale: true,
-    supportedLocales: [
-      Locale('en'),
-      Locale('de'),
-      // Locale('fr'),
-    ],
-    path: 'assets/languages',
-    fallbackLocale: Locale('en'),
-    useOnlyLangCode: true,
-    child: Home(),
-  ));
+  SystemChrome.setPreferredOrientations(
+          [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight])
+      .then((_) {
+    runApp(EasyLocalization(
+      saveLocale: true,
+      supportedLocales: [
+        Locale('en'),
+        Locale('de'),
+        // Locale('fr'),
+      ],
+      path: 'assets/languages',
+      fallbackLocale: Locale('en'),
+      useOnlyLangCode: true,
+      child: Home(),
+    ));
+  });
 }
