@@ -84,8 +84,8 @@ class _InterludeState extends State<InterludeTextSound> {
                       ),
                     ],
                   ),
-                  ConstrainedBox(
-                    constraints: BoxConstraints(maxHeight: 80),
+                  FittedBox(
+                    fit: BoxFit.fitWidth,
                     child: Stack(
                       children: <Widget>[
                         Container(
@@ -93,7 +93,7 @@ class _InterludeState extends State<InterludeTextSound> {
                           padding: EdgeInsets.symmetric(
                               vertical: 15,
                               horizontal:
-                                  MediaQuery.of(context).size.width / 15),
+                                  MediaQuery.of(context).size.width / 12),
                           child: AnimatedTextKit(
                             animatedTexts: [
                               TyperAnimatedText(

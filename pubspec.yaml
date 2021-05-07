@@ -1,7 +1,7 @@
 name: fablesofdesire
 description: A new game.
 publish_to: 'none' 
-version: 1.0.0+11
+version: 1.0.0+12
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
