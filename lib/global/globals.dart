@@ -527,14 +527,31 @@ class _AppDrawerState2 extends State<AppDrawerMain> {
   @override
   void initState() {
     super.initState();
+    getVolume();
+  }
+
+  double? vol = 0.5;
+  getVolume() async {
+    vol = await getVolumeState();
+    setState(() {});
+  }
+
+  saveVolumeState(value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setDouble("volValue", value);
+  }
+
+  getVolumeState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    double? vol = prefs.getDouble('volValue');
+
+    return vol;
   }
 
   @override
   Widget build(BuildContext context) {
-    // final themeProvider = Provider.of<ThemeProvider>(context);
-
     return new SizedBox(
-        width: MediaQuery.of(context).size.width / 2, //20.0,
+        width: MediaQuery.of(context).size.width / 2,
         child: Drawer(
           child: Container(
             color: Colors.white,
@@ -559,7 +576,7 @@ class _AppDrawerState2 extends State<AppDrawerMain> {
                         color: Colors.transparent),
                     child: Row(
                       children: <Widget>[
-                        widget.player?.general.volume == 0
+                        vol == 0
                             ? Icon(
                                 Icons.music_off,
                                 size: 35,
@@ -577,7 +594,8 @@ class _AppDrawerState2 extends State<AppDrawerMain> {
                         SliderTheme(
                           data: SliderTheme.of(context).copyWith(
                             activeTrackColor: Colors.green,
-                            inactiveTrackColor: Colors.red,
+                            inactiveTrackColor: Colors.grey,
+                            thumbColor: Colors.green,
                             thumbShape:
                                 RoundSliderThumbShape(enabledThumbRadius: 10.0),
                             overlayShape:
@@ -586,10 +604,13 @@ class _AppDrawerState2 extends State<AppDrawerMain> {
                           child: Slider.adaptive(
                             min: 0.0,
                             max: 1.0,
-                            value: widget.player?.general.volume ?? 0.5,
+                            value: vol!,
                             onChanged: (volume) {
-                              widget.player?.setVolume(volume);
-                              this.setState(() {});
+                              setState(() {
+                                widget.player?.setVolume(volume);
+                                vol = volume;
+                                saveVolumeState(volume);
+                              });
                             },
                           ),
                         ),
@@ -631,8 +652,11 @@ class _AppDrawerState2 extends State<AppDrawerMain> {
                             max: 1.0,
                             value: widget.player?.general.volume ?? 0.5,
                             onChanged: (volume) {
-                              widget.player?.setVolume(volume);
-                              this.setState(() {});
+                              setState(() {
+                                widget.player?.setVolume(volume);
+                                vol = volume;
+                                saveVolumeState(volume);
+                              });
                             },
                           ),
                         ),
@@ -645,45 +669,5 @@ class _AppDrawerState2 extends State<AppDrawerMain> {
             ),
           ),
         ));
-  }
-
-  void _showSliderDialog({
-    required BuildContext context,
-    required String title,
-    required int divisions,
-    required double min,
-    required double max,
-    String valueSuffix = '',
-    required Stream<double> stream,
-    required ValueChanged<double> onChanged,
-  }) {
-    showDialog<void>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(title, textAlign: TextAlign.center),
-        content: StreamBuilder<double>(
-          stream: stream,
-          builder: (context, snapshot) => Container(
-            height: 100.0,
-            child: Column(
-              children: [
-                Text('${snapshot.data?.toStringAsFixed(1)}$valueSuffix',
-                    style: TextStyle(
-                        fontFamily: 'Fixed',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24.0)),
-                Slider(
-                  divisions: divisions,
-                  min: min,
-                  max: max,
-                  value: snapshot.data ?? 1.0,
-                  onChanged: onChanged,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }
