@@ -2,15 +2,15 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SaveGame extends StatefulWidget {
+class LoadGame extends StatefulWidget {
   final route;
-  SaveGame({Key? key, this.route});
+  LoadGame({Key? key, this.route});
 
   @override
-  _SaveGameState createState() => _SaveGameState();
+  _LoadGameState createState() => _LoadGameState();
 }
 
-class _SaveGameState extends State<SaveGame> {
+class _LoadGameState extends State<LoadGame> {
   @override
   void initState() {
     super.initState();
@@ -59,7 +59,7 @@ class _SaveGameState extends State<SaveGame> {
                 new DrawerHeader(
                   child: Center(
                     child: Text(
-                      "SAVE GAME",
+                      "LOAD GAME",
                       style: TextStyle(
                           fontSize: 45,
                           fontFamily: "Aleo",
@@ -78,13 +78,10 @@ class _SaveGameState extends State<SaveGame> {
                               onTap: () {
                                 if (saveSlotOne == null ||
                                     saveSlotOne!.isEmpty) {
-                                  setState(() {
-                                    saveSlotOne = widget.route;
-                                    saveSlotOneState(widget.route);
-                                    print(saveSlotOne);
-                                  });
+                                  print("EMPTY");
                                 } else {
-                                  showAlertDialog(context);
+                                  Navigator.of(context)
+                                      .pushNamed('$saveSlotOne');
                                 }
                               },
                               child: Builder(builder: (context) {
@@ -206,80 +203,6 @@ class _SaveGameState extends State<SaveGame> {
           ),
         ),
       ),
-    );
-  }
-
-  showAlertDialog(BuildContext context) {
-    // set up the buttons
-
-    Widget continueButton = Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(primary: Colors.white),
-          child: Text(
-            "YES",
-            style: TextStyle(
-                color: Colors.black,
-                fontFamily: "Aleo",
-                fontSize: 18,
-                letterSpacing: .4),
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-            setState(() {
-              saveSlotOne = widget.route;
-              saveSlotOneState(widget.route);
-              print(saveSlotOne);
-            });
-          },
-        ),
-        SizedBox(
-          width: 10,
-        ),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-              primary: Colors.white, onPrimary: Theme.of(context).primaryColor),
-          child: Text(
-            "NO",
-            style: TextStyle(
-                color: Colors.black,
-                fontFamily: "Aleo",
-                fontSize: 18,
-                letterSpacing: .4),
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ],
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      backgroundColor: Colors.amber,
-      title: Text(
-        "Override Save",
-        textAlign: TextAlign.center,
-        style: TextStyle(fontFamily: "Aleo", fontSize: 30, letterSpacing: .2),
-      ),
-      content: Text(
-        "Are you sure about that?",
-        textAlign: TextAlign.center,
-        style: TextStyle(fontFamily: "Aleo", fontSize: 20, letterSpacing: .4),
-      ),
-      actions: [
-        continueButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fablesofdesire/global/settings_widget.dart';
+import 'package:fablesofdesire/routes/save_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:universal_io/io.dart';
@@ -386,7 +387,8 @@ class _SettingsState extends State<Settings> {
 class SettingsIngame extends StatefulWidget {
   final player;
   final audioPlayer;
-  SettingsIngame({Key? key, this.player, this.audioPlayer});
+  final route;
+  SettingsIngame({Key? key, this.player, this.audioPlayer, this.route});
 
   @override
   _SettingsIngameState createState() => _SettingsIngameState();
@@ -707,6 +709,50 @@ class _SettingsIngameState extends State<SettingsIngame> {
                             ),
                           ),
                         ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 55,
+                  ),
+                  InkWell(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SaveGame(
+                                route: widget.route,
+                              )),
+                    ),
+                    child: Card(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width / 2,
+                        height: 55,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20,
+                        ),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color: Colors.transparent),
+                        child: Row(
+                          children: <Widget>[
+                            Icon(
+                              Icons.save,
+                              size: 35,
+                            ),
+                            SizedBox(width: 15),
+                            Text(
+                              "SAVE GAME",
+                              style:
+                                  TextStyle(fontFamily: "Julee", fontSize: 28),
+                            ),
+                            Spacer(),
+                            Icon(
+                              Icons.chevron_right_rounded,
+                              color: Colors.black,
+                              size: 25,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

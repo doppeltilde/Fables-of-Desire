@@ -29,7 +29,7 @@ dynamic buttons(context, route, scaffoldKey) {
               SizedBox(
                 width: 7,
               ),
-              settingsClip(context, scaffoldKey),
+              settingsClip(context, scaffoldKey, route),
             ],
           ),
         ),
@@ -46,7 +46,7 @@ dynamic buttons(context, route, scaffoldKey) {
               SizedBox(
                 width: 7,
               ),
-              settingsClip(context, scaffoldKey),
+              settingsClip(context, scaffoldKey, route),
             ],
           ),
         ),
@@ -55,12 +55,15 @@ dynamic buttons(context, route, scaffoldKey) {
   });
 }
 
-dynamic settingsClip(context, _scaffoldKey) {
+dynamic settingsClip(context, _scaffoldKey, route) {
   return LayoutBuilder(builder: (context, constraints) {
     return InkWell(
         onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => SettingsIngame()),
+              MaterialPageRoute(
+                  builder: (context) => SettingsIngame(
+                        route: route,
+                      )),
             ),
         child: Stack(
           alignment: Alignment.center,

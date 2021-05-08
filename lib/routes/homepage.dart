@@ -1,9 +1,9 @@
 // Primary
 import 'package:dart_vlc/dart_vlc.dart';
+import 'package:fablesofdesire/routes/load_game.dart';
 import 'package:universal_io/io.dart';
 import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/global/setings.dart';
-import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -66,7 +66,7 @@ class AppBody extends StatelessWidget {
   const AppBody({
     Key? key,
     required PageController controller,
-  })   : _controller = controller,
+  })  : _controller = controller,
         super(key: key);
 
   final PageController _controller;
@@ -222,7 +222,11 @@ class _BaseScreenState extends State<HomePage2> {
                               primary: Colors.white,
                               padding: EdgeInsets.symmetric(vertical: 20),
                             ),
-                            onPressed: () => showAlertDialog(context),
+                            onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoadGame()),
+                            ),
                           ),
                         ),
                       ),
