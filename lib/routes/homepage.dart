@@ -6,6 +6,8 @@ import 'package:fablesofdesire/global/setings.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:audioplayers/audio_cache.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -13,8 +15,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _WildfyreState extends State<HomePage> {
-  Player? player;
-
   static const int _startingPageId = 0;
   bool? isSwitchedFT;
   int selectedPageId = _startingPageId;
@@ -40,9 +40,6 @@ class _WildfyreState extends State<HomePage> {
   ];
   void initState() {
     super.initState();
-    if (!Platform.isWindows || !Platform.isLinux) {
-      getSharedPrefs();
-    }
   }
 
   // PRECACHE IMAGES
@@ -50,13 +47,6 @@ class _WildfyreState extends State<HomePage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     for (var i in images) precacheImage(AssetImage(i["image"]), context);
-  }
-
-  Future<dynamic> getSharedPrefs() async {
-    if (Platform.isWindows || Platform.isLinux) {
-    } else {
-      FlameAudio.bgm.play("warmth-of-the-sun-adi-goldstein.mp3", volume: 1.0);
-    }
   }
 
   bool isLightTheme = true;
@@ -67,65 +57,16 @@ class _WildfyreState extends State<HomePage> {
       key: scaffoldKey,
       drawerEnableOpenDragGesture: false,
       drawer: AppDrawerMain(),
-
       body: AppBody(controller: controller),
-      // bottomNavigationBar: new LayoutBuilder(builder: (context, constraints) {
-      //   if (Platform.isMacOS || Platform.isLinux || Platform.isWindows) {
-      //     return SizedBox.shrink();
-      //   } else {
-      //     return Theme(
-      //       data: Theme.of(context).copyWith(
-      //           // sets the background color of the `BottomNavigationBar`
-      //           canvasColor: Colors.white,
-      //           // sets the active color of the `BottomNavigationBar` if `Brightness` is light
-      //           primaryColor: Colors.white,
-      //           textTheme: Theme.of(context).textTheme.copyWith(
-      //               caption: TextStyle(color: Theme.of(context).accentColor))),
-      //       child: BottomNavigationBar(
-      //           items: <BottomNavigationBarItem>[
-      //             BottomNavigationBarItem(
-      //               icon: Icon(
-      //                 selectedPageId == 0 ? Icons.menu : Icons.menu_outlined,
-      //                 color: Colors.black,
-      //               ),
-      //               label: 'HOME',
-      //             ),
-      //             BottomNavigationBarItem(
-      //               icon: Icon(
-      //                 selectedPageId == 1
-      //                     ? Icons.category
-      //                     : Icons.category_outlined,
-      //                 color: Colors.black,
-      //               ),
-      //               label: 'MORE',
-      //             ),
-      //           ],
-      //           unselectedLabelStyle: TextStyle(fontSize: 18, letterSpacing: 1),
-      //           selectedLabelStyle: TextStyle(fontSize: 21, letterSpacing: 1),
-      //           selectedItemColor: Colors.black,
-      //           unselectedItemColor: Colors.black,
-      //           iconSize: 25.0,
-      //           currentIndex: selectedPageId,
-      //           onTap: (newId) {
-      //             setState(() {
-      //               controller.jumpToPage(newId);
-      //               selectedPageId = newId;
-      //             });
-      //           }),
-      //     );
-      //   }
-      // }),
     );
   }
 }
 
 class AppBody extends StatelessWidget {
-  final player;
   const AppBody({
     Key? key,
-    this.player,
     required PageController controller,
-  })  : _controller = controller,
+  })   : _controller = controller,
         super(key: key);
 
   final PageController _controller;
@@ -136,9 +77,7 @@ class AppBody extends StatelessWidget {
       physics: NeverScrollableScrollPhysics(),
       controller: _controller,
       children: [
-        HomePage2(
-          player: player,
-        ),
+        HomePage2(),
         // About(),
         Settings(),
       ],
@@ -148,8 +87,6 @@ class AppBody extends StatelessWidget {
 
 // HomePage
 class HomePage2 extends StatefulWidget {
-  final player;
-  HomePage2({Key? key, this.player});
   @override
   _BaseScreenState createState() => _BaseScreenState();
 }
@@ -157,10 +94,33 @@ class HomePage2 extends StatefulWidget {
 /// The main widget state.
 class _BaseScreenState extends State<HomePage2> {
   bool isLightTheme = true;
+  Player? player;
+  AudioPlayer audioPlayer = AudioPlayer();
+  late AudioCache _audioCache;
+  double? vol = 1.0;
 
   @override
   void initState() {
     super.initState();
+    _audioCache = AudioCache(prefix: "assets/audio/");
+    if (!Platform.isWindows || !Platform.isLinux) {
+      getSharedPrefs();
+    }
+  }
+
+  Future<void> getSharedPrefs() async {
+    playAudio();
+  }
+
+  void playAudio() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    vol = (prefs.getDouble("volValue"));
+    audioPlayer = await _audioCache.loop('warmth-of-the-sun-adi-goldstein.mp3',
+        volume: vol!);
+  }
+
+  void stopAudio() {
+    audioPlayer.stop();
   }
 
   @override
@@ -193,16 +153,8 @@ class _BaseScreenState extends State<HomePage2> {
     super.dispose();
   }
 
-  Future<Null> getSharedPrefs() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      chapters = (prefs.getBool('chapterState'));
-    });
-  }
-
   bool? chapters;
 
-  Player? player;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -250,7 +202,7 @@ class _BaseScreenState extends State<HomePage2> {
                                   this.player?.stop();
                                 });
                               } else {
-                                FlameAudio.bgm.stop();
+                                audioPlayer.stop();
                               }
 
                               Navigator.of(context).pushNamed('/1');
@@ -301,6 +253,7 @@ class _BaseScreenState extends State<HomePage2> {
                               MaterialPageRoute(
                                   builder: (context) => Settings(
                                         player: player,
+                                        audioPlayer: audioPlayer,
                                       )),
                             ),
                           ),

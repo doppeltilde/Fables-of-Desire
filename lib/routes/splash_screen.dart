@@ -9,10 +9,12 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   String spKey = "switchState";
   String notiKey = "notiState";
+
   SharedPreferences? sharedPreferences;
 
   bool? isNoti = true;
   bool? isSwitchedFT = true;
+  double? vol = 0.5;
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +92,16 @@ class _SplashScreenState extends State<SplashScreen> {
         persist(isSwitchedFT!); // set an initial value
       }
     });
+    SharedPreferences.getInstance().then((SharedPreferences sp) {
+      sharedPreferences = sp;
+      vol = sharedPreferences!.getDouble("volValue");
+      // will be null if never previously saved
+      if (vol == null) {
+        vol = 1.0;
+        persistVol(vol!); // set an initial value
+      }
+    });
+    print(vol);
     initSplash();
   }
 
@@ -105,6 +117,13 @@ class _SplashScreenState extends State<SplashScreen> {
       isNoti = value;
     });
     sharedPreferences?.setBool(notiKey, value);
+  }
+
+  void persistVol(double value) {
+    setState(() {
+      vol = value;
+    });
+    sharedPreferences?.setDouble("volValue", value);
   }
 
   //
