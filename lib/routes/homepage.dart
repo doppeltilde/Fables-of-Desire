@@ -222,11 +222,20 @@ class _BaseScreenState extends State<HomePage2> {
                               primary: Colors.white,
                               padding: EdgeInsets.symmetric(vertical: 20),
                             ),
-                            onPressed: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LoadGame()),
-                            ),
+                            onPressed: () async {
+                              if (Platform.isWindows || Platform.isLinux) {
+                                setState(() {
+                                  this.player?.stop();
+                                });
+                              } else {
+                                stopAudio();
+                              }
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoadGame()),
+                              );
+                            },
                           ),
                         ),
                       ),
