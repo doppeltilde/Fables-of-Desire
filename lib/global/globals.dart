@@ -57,36 +57,11 @@ dynamic buttons(context, route, scaffoldKey) {
 
 dynamic settingsClip(context, _scaffoldKey) {
   return LayoutBuilder(builder: (context, constraints) {
-    if (Platform.isMacOS || Platform.isLinux || Platform.isWindows) {
-      return InkWell(
-        onTap: () => _scaffoldKey.currentState.openEndDrawer(),
-        child: Stack(
-          alignment: Alignment.center,
-          children: <Widget>[
-            Stack(
-              children: <Widget>[
-                Container(
-                  color: Colors.transparent,
-                  padding: EdgeInsets.all(1),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: Image.asset(
-                      "assets/images/gui/more.png",
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      );
-    } else {
-      return InkWell(
+    return InkWell(
         onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => SettingsIngame()),
-        ),
+              context,
+              MaterialPageRoute(builder: (context) => SettingsIngame()),
+            ),
         child: Stack(
           alignment: Alignment.center,
           children: <Widget>[
@@ -106,37 +81,7 @@ dynamic settingsClip(context, _scaffoldKey) {
               ],
             ),
           ],
-        ),
-      );
-      // return Row(
-      //   mainAxisAlignment: MainAxisAlignment.center,
-      //   children: [
-      //     Container(
-      //       child: ElevatedButton(
-      //         style: ElevatedButton.styleFrom(
-      //             shape: RoundedRectangleBorder(
-      //               borderRadius: BorderRadius.circular(18.0),
-      //             ),
-      //             primary: Theme.of(context).primaryColor),
-      //         onPressed: () {
-      //           Navigator.push(
-      //             context,
-      //             MaterialPageRoute(builder: (context) => SettingsIngame()),
-      //           );
-      //         },
-      //         child: Text(
-      //           "Settings",
-      //           style: TextStyle(
-      //               color: Colors.black,
-      //               fontFamily: "Aleo",
-      //               fontSize: 20,
-      //               letterSpacing: .2),
-      //         ),
-      //       ),
-      //     ),
-      //   ],
-      // );
-    }
+        ));
   });
 }
 

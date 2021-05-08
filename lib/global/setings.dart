@@ -1,7 +1,5 @@
-import 'package:dart_vlc/dart_vlc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fablesofdesire/global/settings_widget.dart';
-import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:universal_io/io.dart';
@@ -386,59 +384,37 @@ class _SettingsState extends State<Settings> {
 }
 
 class SettingsIngame extends StatefulWidget {
-  SettingsIngame({Key? key, this.title}) : super(key: key);
-  final String? title;
+  final player;
+  final audioPlayer;
+  SettingsIngame({Key? key, this.player, this.audioPlayer});
 
   @override
   _SettingsIngameState createState() => _SettingsIngameState();
 }
 
 class _SettingsIngameState extends State<SettingsIngame> {
-  bool? isSwitchedFT = true;
-  bool? isNoti = true;
   @override
   void initState() {
     super.initState();
-    getSwitchValues();
-    getNotiValues();
+    getVolume();
   }
 
-  getSwitchValues() async {
-    isSwitchedFT = await getSwitchState();
+  double? vol = 1.0;
+  getVolume() async {
+    vol = await getVolumeState();
     setState(() {});
   }
 
-  Future<bool> saveSwitchState(bool value) async {
+  saveVolumeState(value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool("switchState", value);
-    return prefs.setBool("switchState", value);
+    prefs.setDouble("volValue", value);
   }
 
-  Future<bool?> getSwitchState() async {
+  getVolumeState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? isSwitchedFT = prefs.getBool("switchState");
-    print(isSwitchedFT);
+    double? vol = prefs.getDouble('volValue');
 
-    return isSwitchedFT;
-  }
-
-  getNotiValues() async {
-    isNoti = await getNotiState();
-    setState(() {});
-  }
-
-  Future<bool> saveNotiState(bool value) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool("notiState", value);
-    return prefs.setBool("notiState", value);
-  }
-
-  Future<bool?> getNotiState() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? isNoti = prefs.getBool("notiState");
-    print(isNoti);
-
-    return isNoti;
+    return vol;
   }
 
   @override
@@ -481,124 +457,259 @@ class _SettingsIngameState extends State<SettingsIngame> {
                   SizedBox(
                     height: 20,
                   ),
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      if (constraints.maxWidth > 1200) {
+                        return Card(
+                          child: Container(
+                            width: MediaQuery.of(context).size.width / 2,
+                            height: 55,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 20,
+                            ),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: Colors.transparent),
+                            child: Row(
+                              children: <Widget>[
+                                vol == 0
+                                    ? Icon(
+                                        Icons.music_off,
+                                        size: 35,
+                                      )
+                                    : Icon(
+                                        Icons.music_note,
+                                        size: 35,
+                                      ),
+                                SizedBox(width: 15),
+                                Text(
+                                  "CHANGE AUDIO",
+                                  style: TextStyle(
+                                      fontFamily: "Julee", fontSize: 28),
+                                ),
+                                Spacer(),
+                                Flexible(
+                                  child: SliderTheme(
+                                    data: SliderTheme.of(context).copyWith(
+                                      activeTrackColor: Colors.lightGreen,
+                                      inactiveTrackColor: Colors.grey,
+                                      thumbColor: Colors.green,
+                                      thumbShape: RoundSliderThumbShape(
+                                          enabledThumbRadius: 10.0),
+                                      overlayShape: RoundSliderOverlayShape(
+                                          overlayRadius: 10.0),
+                                    ),
+                                    child: Slider.adaptive(
+                                      min: 0.0,
+                                      max: 1.0,
+                                      value: vol!,
+                                      onChanged: (volume) {
+                                        setState(() {
+                                          if (Platform.isWindows ||
+                                              Platform.isLinux) {
+                                            widget.player?.setVolume(volume);
+                                          } else {
+                                            widget.audioPlayer
+                                                ?.setVolume(volume);
+                                          }
 
-                  Container(
-                    width: MediaQuery.of(context).size.width / 2,
-                    height: 55,
-                    margin: EdgeInsets.symmetric(
-                      horizontal: 10,
-                    ).copyWith(
-                      bottom: 20,
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Theme.of(context).cardColor,
-                    ),
-                    child: Row(
-                      children: <Widget>[
-                        isSwitchedFT!
-                            ? Icon(
-                                Icons.music_note,
-                                size: 25,
-                              )
-                            : Icon(
-                                Icons.music_off,
-                                size: 25,
+                                          vol = volume;
+                                          saveVolumeState(volume);
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      } else {
+                        return Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 50),
+                          child: Card(
+                            child: Container(
+                              height: 55,
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 20,
                               ),
-                        SizedBox(width: 15),
-                        Text(
-                          "Music Volume",
-                          style: TextStyle(
-                            fontFamily: "Aleo",
-                            fontSize: 18,
-                          ),
-                        ),
-                        Spacer(),
-                        Switch.adaptive(
-                          value: isSwitchedFT!,
-                          onChanged: (bool value) {
-                            setState(() {
-                              isSwitchedFT!
-                                  ? FlameAudio.bgm.pause()
-                                  : FlameAudio.bgm.resume();
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: Colors.transparent),
+                              child: Row(
+                                children: <Widget>[
+                                  vol == 0
+                                      ? Icon(
+                                          Icons.music_off,
+                                          size: 35,
+                                        )
+                                      : Icon(
+                                          Icons.music_note,
+                                          size: 35,
+                                        ),
+                                  SizedBox(width: 15),
+                                  Text(
+                                    "CHANGE AUDIO",
+                                    style: TextStyle(
+                                        fontFamily: "Julee", fontSize: 28),
+                                  ),
+                                  Spacer(),
+                                  Flexible(
+                                    child: SliderTheme(
+                                      data: SliderTheme.of(context).copyWith(
+                                        activeTrackColor: Colors.lightGreen,
+                                        inactiveTrackColor: Colors.grey,
+                                        thumbColor: Colors.green,
+                                        thumbShape: RoundSliderThumbShape(
+                                            enabledThumbRadius: 10.0),
+                                        overlayShape: RoundSliderOverlayShape(
+                                            overlayRadius: 10.0),
+                                      ),
+                                      child: Slider.adaptive(
+                                        min: 0.0,
+                                        max: 1.0,
+                                        value: vol!,
+                                        onChanged: (volume) {
+                                          setState(() {
+                                            if (Platform.isWindows ||
+                                                Platform.isLinux) {
+                                              widget.player?.setVolume(volume);
+                                            } else {
+                                              widget.audioPlayer
+                                                  ?.setVolume(volume);
+                                            }
 
-                              isSwitchedFT = value;
-                              saveSwitchState(value);
-                              //switch works
-                            });
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  Container(
-                    width: MediaQuery.of(context).size.width / 2,
-                    height: 55,
-                    margin: EdgeInsets.symmetric(
-                      horizontal: 10,
-                    ).copyWith(
-                      bottom: 20,
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Theme.of(context).cardColor,
-                    ),
-                    child: Row(
-                      children: <Widget>[
-                        Icon(
-                          Icons.check_circle_outline,
-                          size: 25,
-                        ),
-                        SizedBox(width: 15),
-                        Text(
-                          "Game Version",
-                          style: TextStyle(
-                            fontFamily: "Aleo",
-                            fontSize: 18,
+                                            vol = volume;
+                                            saveVolumeState(volume);
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
-                        Spacer(),
-                      ],
+                        );
+                      }
+                    },
+                  ),
+                  Card(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width / 2,
+                      height: 55,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                      ),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Colors.transparent),
+                      child: Row(
+                        children: <Widget>[
+                          vol == 0
+                              ? Icon(
+                                  Icons.music_off,
+                                  size: 35,
+                                )
+                              : Icon(
+                                  Icons.music_note,
+                                  size: 35,
+                                ),
+                          SizedBox(width: 15),
+                          Text(
+                            "CHANGE VOICE",
+                            style: TextStyle(fontFamily: "Julee", fontSize: 28),
+                          ),
+                          Spacer(),
+                          Flexible(
+                            child: SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                activeTrackColor: Colors.lightGreen,
+                                inactiveTrackColor: Colors.grey,
+                                thumbColor: Colors.green,
+                                thumbShape: RoundSliderThumbShape(
+                                    enabledThumbRadius: 10.0),
+                                overlayShape: RoundSliderOverlayShape(
+                                    overlayRadius: 10.0),
+                              ),
+                              child: Slider.adaptive(
+                                divisions: 4,
+                                label: "$vol",
+                                min: 0.0,
+                                max: 1.0,
+                                value: vol!,
+                                onChanged: (volume) {
+                                  setState(() {
+                                    widget.player?.setVolume(volume);
+                                    vol = volume;
+                                    saveVolumeState(volume);
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  SizedBox(
-                    height: 55,
+                  Card(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width / 2,
+                      height: 55,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                      ),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Colors.transparent),
+                      child: Row(
+                        children: <Widget>[
+                          vol == 0
+                              ? Icon(
+                                  Icons.music_off,
+                                  size: 35,
+                                )
+                              : Icon(
+                                  Icons.music_note,
+                                  size: 35,
+                                ),
+                          SizedBox(width: 15),
+                          Text(
+                            "TEXT SPEED",
+                            style: TextStyle(fontFamily: "Julee", fontSize: 28),
+                          ),
+                          Spacer(),
+                          Flexible(
+                            child: SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                activeTrackColor: Colors.lightGreen,
+                                inactiveTrackColor: Colors.grey,
+                                thumbColor: Colors.green,
+                                thumbShape: RoundSliderThumbShape(
+                                    enabledThumbRadius: 10.0),
+                                overlayShape: RoundSliderOverlayShape(
+                                    overlayRadius: 10.0),
+                              ),
+                              child: Slider.adaptive(
+                                divisions: 4,
+                                label: "$vol",
+                                min: 0.0,
+                                max: 1.0,
+                                value: vol!,
+                                onChanged: (volume) {
+                                  setState(() {
+                                    widget.player?.setVolume(volume);
+                                    vol = volume;
+                                    saveVolumeState(volume);
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                  // GestureDetector(
-                  //   onTap: () async {
-                  //     const url = 'https://smalldreams.space/privacy-policy/';
-                  //     if (await canLaunch(url)) {
-                  //       await launch(url);
-                  //     } else {
-                  //       throw 'Could not launch $url';
-                  //     }
-                  //   },
-                  //   child: ProfileListItem(
-                  //     icon: Icons.privacy_tip_outlined,
-                  //     text: 'Privacy',
-                  //   ),
-                  // ),
-                  // GestureDetector(
-                  //   onTap: () async {
-                  //     const url = 'https://smalldreams.space/terms-of-service/';
-                  //     if (await canLaunch(url)) {
-                  //       await launch(url);
-                  //     } else {
-                  //       throw 'Could not launch $url';
-                  //     }
-                  //   },
-                  //   child: ProfileListItem(
-                  //     icon: Icons.policy_outlined,
-                  //     text: 'Terms of Service',
-                  //   ),
-                  // ),
                   SizedBox(
                     height: 55,
                   ),

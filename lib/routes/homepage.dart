@@ -148,11 +148,6 @@ class _BaseScreenState extends State<HomePage2> {
     } else {}
   }
 
-  @override
-  dispose() async {
-    super.dispose();
-  }
-
   bool? chapters;
 
   @override
@@ -202,7 +197,7 @@ class _BaseScreenState extends State<HomePage2> {
                                   this.player?.stop();
                                 });
                               } else {
-                                audioPlayer.stop();
+                                stopAudio();
                               }
 
                               Navigator.of(context).pushNamed('/1');
