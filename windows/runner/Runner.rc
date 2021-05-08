@@ -90,10 +90,10 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "de.smalldreams.game" "\0"
-            VALUE "FileDescription", "A new Flutter project." "\0"
+            VALUE "FileDescription", "Fables of Desire" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "fablesofdesire" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2021 de.smalldreams.game. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2021 SmallDreams. All rights reserved." "\0"
             VALUE "OriginalFilename", "fablesofdesire.exe" "\0"
             VALUE "ProductName", "fablesofdesire" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"

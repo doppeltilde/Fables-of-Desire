@@ -125,7 +125,7 @@ class AppBody extends StatelessWidget {
     Key? key,
     this.player,
     required PageController controller,
-  })   : _controller = controller,
+  })  : _controller = controller,
         super(key: key);
 
   final PageController _controller;
@@ -203,15 +203,9 @@ class _BaseScreenState extends State<HomePage2> {
   bool? chapters;
 
   Player? player;
-  var scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
-      drawerEnableOpenDragGesture: false,
-      drawer: AppDrawerMain(
-        player: player,
-      ),
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.transparent,
       body: Stack(
@@ -219,7 +213,8 @@ class _BaseScreenState extends State<HomePage2> {
           new Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/images/main.jpg"),
+                image:
+                    AssetImage("assets/images/bgs/mininature_001_19201440.jpg"),
                 fit: BoxFit.cover,
               ),
             ),
@@ -301,9 +296,13 @@ class _BaseScreenState extends State<HomePage2> {
                               primary: Colors.white,
                               padding: EdgeInsets.symmetric(vertical: 20),
                             ),
-                            onPressed: () async {
-                              scaffoldKey.currentState!.openDrawer();
-                            },
+                            onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Settings(
+                                        player: player,
+                                      )),
+                            ),
                           ),
                         ),
                       ),

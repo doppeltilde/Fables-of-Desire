@@ -1,12 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:fablesofdesire/global/will_pop.dart';
+import 'package:fablesofdesire/global/settings_widget.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Settings extends StatefulWidget {
-  Settings({Key? key, this.title}) : super(key: key);
-  final String? title;
+  final player;
+  Settings({Key? key, this.player});
 
   @override
   _SettingsState createState() => _SettingsState();
@@ -16,38 +17,278 @@ class _SettingsState extends State<Settings> {
   @override
   void initState() {
     super.initState();
+    getVolume();
+  }
+
+  double? vol = 0.5;
+  getVolume() async {
+    vol = await getVolumeState();
+    setState(() {});
+  }
+
+  saveVolumeState(value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setDouble("volValue", value);
+  }
+
+  getVolumeState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    double? vol = prefs.getDouble('volValue');
+
+    return vol;
   }
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => getOnWillPop(context),
+    return Container(
+      decoration: BoxDecoration(
+          image: DecorationImage(
+        colorFilter: new ColorFilter.mode(
+            Colors.black.withOpacity(0.4), BlendMode.dstATop),
+        image: AssetImage("assets/images/bgs/mininature_001_19201440.jpg"),
+        fit: BoxFit.cover,
+      )),
       child: SafeArea(
         child: Scaffold(
+          appBar: AppBar(
+              leadingWidth: 25,
+              title: InkWell(
+                onTap: () => Navigator.pop(context),
+                child: Text(
+                  "Back",
+                  style: TextStyle(
+                    fontFamily: "Aleo",
+                  ),
+                ),
+              ),
+              automaticallyImplyLeading: true,
+              elevation: 0,
+              backgroundColor: Colors.transparent),
+          backgroundColor: Colors.transparent,
           resizeToAvoidBottomInset: false,
           body: SingleChildScrollView(
-            child: Stack(
+            child: Column(
               children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width * 0.05,
-                      vertical: MediaQuery.of(context).size.height * 0.02),
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(height: 30),
-                      Text(
-                        tr('game_name'),
-                        style: TextStyle(
-                            fontSize: 40,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: "BottleParty"),
-                      ),
-                      SizedBox(
-                        height: 55,
-                      ),
-                    ],
+                new DrawerHeader(
+                  child: Center(
+                    child: Text(
+                      tr("game_name"),
+                      style: TextStyle(
+                          fontSize: 45,
+                          fontFamily: "Aleo",
+                          color: Colors.white),
+                    ),
                   ),
-                )
+                ),
+                Card(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width / 2,
+                    height: 55,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20,
+                    ),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.transparent),
+                    child: Row(
+                      children: <Widget>[
+                        vol == 0
+                            ? Icon(
+                                Icons.music_off,
+                                size: 35,
+                              )
+                            : Icon(
+                                Icons.music_note,
+                                size: 35,
+                              ),
+                        SizedBox(width: 15),
+                        Text(
+                          "CHANGE AUDIO",
+                          style: TextStyle(fontFamily: "Julee", fontSize: 28),
+                        ),
+                        Spacer(),
+                        SliderTheme(
+                          data: SliderTheme.of(context).copyWith(
+                            activeTrackColor: Colors.lightGreen,
+                            inactiveTrackColor: Colors.grey,
+                            thumbColor: Colors.green,
+                            thumbShape:
+                                RoundSliderThumbShape(enabledThumbRadius: 10.0),
+                            overlayShape:
+                                RoundSliderOverlayShape(overlayRadius: 10.0),
+                          ),
+                          child: Slider.adaptive(
+                            divisions: 4,
+                            label: "$vol",
+                            min: 0.0,
+                            max: 1.0,
+                            value: vol!,
+                            onChanged: (volume) {
+                              setState(() {
+                                widget.player?.setVolume(volume);
+                                vol = volume;
+                                saveVolumeState(volume);
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Card(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width / 2,
+                    height: 55,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20,
+                    ),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.transparent),
+                    child: Row(
+                      children: <Widget>[
+                        vol == 0
+                            ? Icon(
+                                Icons.music_off,
+                                size: 35,
+                              )
+                            : Icon(
+                                Icons.music_note,
+                                size: 35,
+                              ),
+                        SizedBox(width: 15),
+                        Text(
+                          "CHANGE VOICE",
+                          style: TextStyle(fontFamily: "Julee", fontSize: 28),
+                        ),
+                        Spacer(),
+                        SliderTheme(
+                          data: SliderTheme.of(context).copyWith(
+                            activeTrackColor: Colors.lightGreen,
+                            inactiveTrackColor: Colors.grey,
+                            thumbColor: Colors.green,
+                            thumbShape:
+                                RoundSliderThumbShape(enabledThumbRadius: 10.0),
+                            overlayShape:
+                                RoundSliderOverlayShape(overlayRadius: 10.0),
+                          ),
+                          child: Slider.adaptive(
+                            divisions: 4,
+                            label: "$vol",
+                            min: 0.0,
+                            max: 1.0,
+                            value: vol!,
+                            onChanged: (volume) {
+                              setState(() {
+                                widget.player?.setVolume(volume);
+                                vol = volume;
+                                saveVolumeState(volume);
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Card(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width / 2,
+                    height: 55,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20,
+                    ),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.transparent),
+                    child: Row(
+                      children: <Widget>[
+                        vol == 0
+                            ? Icon(
+                                Icons.music_off,
+                                size: 35,
+                              )
+                            : Icon(
+                                Icons.music_note,
+                                size: 35,
+                              ),
+                        SizedBox(width: 15),
+                        Text(
+                          "TEXT SPEED",
+                          style: TextStyle(fontFamily: "Julee", fontSize: 28),
+                        ),
+                        Spacer(),
+                        SliderTheme(
+                          data: SliderTheme.of(context).copyWith(
+                            activeTrackColor: Colors.lightGreen,
+                            inactiveTrackColor: Colors.grey,
+                            thumbColor: Colors.green,
+                            thumbShape:
+                                RoundSliderThumbShape(enabledThumbRadius: 10.0),
+                            overlayShape:
+                                RoundSliderOverlayShape(overlayRadius: 10.0),
+                          ),
+                          child: Slider.adaptive(
+                            divisions: 4,
+                            label: "$vol",
+                            min: 0.0,
+                            max: 1.0,
+                            value: vol!,
+                            onChanged: (volume) {
+                              setState(() {
+                                widget.player?.setVolume(volume);
+                                vol = volume;
+                                saveVolumeState(volume);
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 55,
+                ),
+                ProfileListItem(
+                  icon: Icons.face_outlined,
+                  text: 'Credits',
+                ),
+                SizedBox(
+                  height: 55,
+                ),
+                GestureDetector(
+                  onTap: () async {
+                    const url = 'https://smalldreams.space/privacy-policy/';
+                    if (await canLaunch(url)) {
+                      await launch(url);
+                    } else {
+                      throw 'Could not launch $url';
+                    }
+                  },
+                  child: ProfileListItem(
+                    icon: Icons.privacy_tip_outlined,
+                    text: 'Privacy',
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () async {
+                    const url = 'https://smalldreams.space/terms-of-service/';
+                    if (await canLaunch(url)) {
+                      await launch(url);
+                    } else {
+                      throw 'Could not launch $url';
+                    }
+                  },
+                  child: ProfileListItem(
+                    icon: Icons.policy_outlined,
+                    text: 'Terms of Service',
+                  ),
+                ),
+                SizedBox(
+                  height: 55,
+                ),
               ],
             ),
           ),

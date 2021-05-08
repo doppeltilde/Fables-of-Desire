@@ -551,123 +551,133 @@ class _AppDrawerState2 extends State<AppDrawerMain> {
   @override
   Widget build(BuildContext context) {
     return new SizedBox(
-        width: MediaQuery.of(context).size.width / 2,
         child: Drawer(
-          child: Container(
-            color: Colors.white,
-            child: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  new DrawerHeader(
-                    child: Center(
-                      child: Text(
-                        tr("game_name"),
-                        style: TextStyle(fontSize: 30, fontFamily: "Aleo"),
+      child: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          colors: [
+            Colors.lightGreen,
+            Colors.green,
+          ],
+        )),
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              new DrawerHeader(
+                child: Center(
+                  child: Text(
+                    tr("game_name"),
+                    style: TextStyle(
+                        fontSize: 45, fontFamily: "Aleo", color: Colors.white),
+                  ),
+                ),
+              ),
+              Card(
+                child: Container(
+                  width: MediaQuery.of(context).size.width / 2,
+                  height: 55,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20,
+                  ),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Colors.transparent),
+                  child: Row(
+                    children: <Widget>[
+                      vol == 0
+                          ? Icon(
+                              Icons.music_off,
+                              size: 35,
+                            )
+                          : Icon(
+                              Icons.music_note,
+                              size: 35,
+                            ),
+                      SizedBox(width: 15),
+                      Text(
+                        "CHANGE AUDIO",
+                        style: TextStyle(fontFamily: "Julee", fontSize: 28),
+                      ),
+                      Spacer(),
+                      SliderTheme(
+                        data: SliderTheme.of(context).copyWith(
+                          activeTrackColor: Colors.lightGreen,
+                          inactiveTrackColor: Colors.grey,
+                          thumbColor: Colors.green,
+                          thumbShape:
+                              RoundSliderThumbShape(enabledThumbRadius: 10.0),
+                          overlayShape:
+                              RoundSliderOverlayShape(overlayRadius: 10.0),
+                        ),
+                        child: Slider.adaptive(
+                          min: 0.0,
+                          max: 1.0,
+                          value: vol!,
+                          onChanged: (volume) {
+                            setState(() {
+                              widget.player?.setVolume(volume);
+                              vol = volume;
+                              saveVolumeState(volume);
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                height: 55,
+                padding: EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Colors.transparent),
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.face_outlined,
+                      size: 35,
+                    ),
+                    SizedBox(width: 15),
+                    Text(
+                      "CREDITS",
+                      style: TextStyle(fontFamily: "Julee", fontSize: 28),
+                    ),
+                    Spacer(),
+                    SliderTheme(
+                      data: SliderTheme.of(context).copyWith(
+                        activeTrackColor: Colors.green,
+                        inactiveTrackColor: Colors.red,
+                        thumbShape:
+                            RoundSliderThumbShape(enabledThumbRadius: 10.0),
+                        overlayShape:
+                            RoundSliderOverlayShape(overlayRadius: 10.0),
+                      ),
+                      child: Slider.adaptive(
+                        min: 0.0,
+                        max: 1.0,
+                        value: widget.player?.general.volume ?? 0.5,
+                        onChanged: (volume) {
+                          setState(() {
+                            widget.player?.setVolume(volume);
+                            vol = volume;
+                            saveVolumeState(volume);
+                          });
+                        },
                       ),
                     ),
-                  ),
-                  Container(
-                    height: 55,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20,
-                    ),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.transparent),
-                    child: Row(
-                      children: <Widget>[
-                        vol == 0
-                            ? Icon(
-                                Icons.music_off,
-                                size: 35,
-                              )
-                            : Icon(
-                                Icons.music_note,
-                                size: 35,
-                              ),
-                        SizedBox(width: 15),
-                        Text(
-                          "CHANGE AUDIO",
-                          style: TextStyle(fontFamily: "Julee", fontSize: 28),
-                        ),
-                        Spacer(),
-                        SliderTheme(
-                          data: SliderTheme.of(context).copyWith(
-                            activeTrackColor: Colors.green,
-                            inactiveTrackColor: Colors.grey,
-                            thumbColor: Colors.green,
-                            thumbShape:
-                                RoundSliderThumbShape(enabledThumbRadius: 10.0),
-                            overlayShape:
-                                RoundSliderOverlayShape(overlayRadius: 10.0),
-                          ),
-                          child: Slider.adaptive(
-                            min: 0.0,
-                            max: 1.0,
-                            value: vol!,
-                            onChanged: (volume) {
-                              setState(() {
-                                widget.player?.setVolume(volume);
-                                vol = volume;
-                                saveVolumeState(volume);
-                              });
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Divider(),
-                  Container(
-                    height: 55,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20,
-                    ),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.transparent),
-                    child: Row(
-                      children: <Widget>[
-                        Icon(
-                          Icons.face_outlined,
-                          size: 35,
-                        ),
-                        SizedBox(width: 15),
-                        Text(
-                          "CREDITS",
-                          style: TextStyle(fontFamily: "Julee", fontSize: 28),
-                        ),
-                        Spacer(),
-                        SliderTheme(
-                          data: SliderTheme.of(context).copyWith(
-                            activeTrackColor: Colors.green,
-                            inactiveTrackColor: Colors.red,
-                            thumbShape:
-                                RoundSliderThumbShape(enabledThumbRadius: 10.0),
-                            overlayShape:
-                                RoundSliderOverlayShape(overlayRadius: 10.0),
-                          ),
-                          child: Slider.adaptive(
-                            min: 0.0,
-                            max: 1.0,
-                            value: widget.player?.general.volume ?? 0.5,
-                            onChanged: (volume) {
-                              setState(() {
-                                widget.player?.setVolume(volume);
-                                vol = volume;
-                                saveVolumeState(volume);
-                              });
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Divider(),
-                ],
+                  ],
+                ),
               ),
-            ),
+              Divider(),
+            ],
           ),
-        ));
+        ),
+      ),
+    ));
   }
 }

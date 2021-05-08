@@ -15,6 +15,7 @@ class ProfileListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: MediaQuery.of(context).size.width / 2,
       height: 55,
       margin: EdgeInsets.symmetric(
         horizontal: 10,
@@ -37,9 +38,7 @@ class ProfileListItem extends StatelessWidget {
           SizedBox(width: 15),
           Text(
             this.text!,
-            style: TextStyle(
-              fontSize: 18,
-            ),
+            style: TextStyle(fontFamily: "Julee", fontSize: 28),
           ),
           Spacer(),
           if (this.hasNavigation)
