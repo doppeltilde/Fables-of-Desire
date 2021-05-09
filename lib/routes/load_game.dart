@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:universal_io/io.dart';
 
 class LoadGame extends StatefulWidget {
   final route;
@@ -90,15 +91,23 @@ class _LoadGameState extends State<LoadGame> {
           backgroundColor: Colors.transparent,
           resizeToAvoidBottomInset: false,
           body: Stack(children: <Widget>[
-            new DrawerHeader(
-              child: Center(
-                child: Text(
-                  "LOAD GAME",
-                  style: TextStyle(
-                      fontSize: 40, fontFamily: "Aleo", color: Colors.white),
-                ),
-              ),
-            ),
+            Builder(builder: (context) {
+              if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
+                return new DrawerHeader(
+                  child: Center(
+                    child: Text(
+                      "LOAD GAME",
+                      style: TextStyle(
+                          fontSize: 40,
+                          fontFamily: "Aleo",
+                          color: Colors.white),
+                    ),
+                  ),
+                );
+              } else {
+                return SizedBox.shrink();
+              }
+            }),
             Center(
                 child: new Container(
                     child: SafeArea(

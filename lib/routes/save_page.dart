@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:universal_io/io.dart';
 
 class SaveGame extends StatefulWidget {
   final route;
@@ -90,15 +91,23 @@ class _LoadGameState extends State<SaveGame> {
           backgroundColor: Colors.transparent,
           resizeToAvoidBottomInset: false,
           body: Stack(children: <Widget>[
-            new DrawerHeader(
-              child: Center(
-                child: Text(
-                  "SAVE GAME",
-                  style: TextStyle(
-                      fontSize: 40, fontFamily: "Aleo", color: Colors.white),
-                ),
-              ),
-            ),
+            Builder(builder: (context) {
+              if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
+                return new DrawerHeader(
+                  child: Center(
+                    child: Text(
+                      "SAVE GAME",
+                      style: TextStyle(
+                          fontSize: 40,
+                          fontFamily: "Aleo",
+                          color: Colors.white),
+                    ),
+                  ),
+                );
+              } else {
+                return SizedBox.shrink();
+              }
+            }),
             Center(
                 child: new Container(
                     child: SafeArea(
@@ -197,22 +206,7 @@ class _LoadGameState extends State<SaveGame> {
                                   if (saveSlotOne == null ||
                                       saveSlotOne!.isEmpty) {
                                     return Column(children: [
-                                      TextButton(
-                                          style: TextButton.styleFrom(
-                                              primary: Colors.white,
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 20,
-                                                  horizontal: 30)),
-                                          onPressed: () => null,
-                                          child: Container()),
-                                      TextButton(
-                                          style: TextButton.styleFrom(
-                                              primary: Colors.white,
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 20,
-                                                  horizontal: 30)),
-                                          onPressed: () => null,
-                                          child: Container()),
+                                      SizedBox.shrink(),
                                     ]);
                                   } else {
                                     return Column(
@@ -355,22 +349,7 @@ class _LoadGameState extends State<SaveGame> {
                                 builder: (context) {
                                   if (saveSlot2 == null || saveSlot2!.isEmpty) {
                                     return Column(children: [
-                                      TextButton(
-                                          style: TextButton.styleFrom(
-                                              primary: Colors.white,
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 20,
-                                                  horizontal: 30)),
-                                          onPressed: () => null,
-                                          child: Container()),
-                                      TextButton(
-                                          style: TextButton.styleFrom(
-                                              primary: Colors.white,
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 20,
-                                                  horizontal: 30)),
-                                          onPressed: () => null,
-                                          child: Container()),
+                                      SizedBox.shrink(),
                                     ]);
                                   } else {
                                     return Column(
@@ -513,22 +492,7 @@ class _LoadGameState extends State<SaveGame> {
                                 builder: (context) {
                                   if (saveSlot3 == null || saveSlot3!.isEmpty) {
                                     return Column(children: [
-                                      TextButton(
-                                          style: TextButton.styleFrom(
-                                              primary: Colors.white,
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 20,
-                                                  horizontal: 30)),
-                                          onPressed: () => null,
-                                          child: Container()),
-                                      TextButton(
-                                          style: TextButton.styleFrom(
-                                              primary: Colors.white,
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 20,
-                                                  horizontal: 30)),
-                                          onPressed: () => null,
-                                          child: Container()),
+                                      SizedBox.shrink(),
                                     ]);
                                   } else {
                                     return Column(

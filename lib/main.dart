@@ -6,6 +6,7 @@ Copyright 2021 Jona Feucht & SmallDreams
 
 import 'package:desktop_window/desktop_window.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:fablesofdesire/routes/routes.dart';
@@ -35,6 +36,7 @@ Future<void> main() async {
         // Locale('fr'),
       ],
       path: 'assets/languages',
+      assetLoader: YamlAssetLoader(),
       fallbackLocale: Locale('en'),
       useOnlyLangCode: true,
       child: Home(),

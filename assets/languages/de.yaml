@@ -1,0 +1,37 @@
+"start_game": "PLAY"
+"load_game": "CHAPTERS"
+"settings": "SETTINGS"
+"game_name": "Fables of Desire"
+"shareapp": "Check out the ”Fables of Desire” Game."
+"mc_name": "MC"
+"tom_name": "Tomiichi"
+"naoki_name": "Naoki"
+"hidetake_name": "Hidetake"
+
+"narrator":
+  "narrator1": "Some random text."
+
+# MC
+"mc":
+  "speech1": "Hi, this is the MC's first speech."
+  "speech2": "Second"
+  # Here a breakline
+  "speech3": "Third with\na breakline."
+
+# TOMIICHI
+"tom":
+  "speech1": "Hi, this is Tomiichi's first speech."
+  "speech2": "Second"
+  "speech3": "Third with\na breakline."
+
+# NAOKI
+"naoki":
+  "speech1": "Hi, this is Naoki's first speech."
+  "speech2": "Second"
+  "speech3": "Third with\na breakline."
+
+# HIDETAKE
+"hidetake":
+  "speech1": "Hi, this is Hidetake's first speech."
+  "speech2": "Second"
+  "speech3": "Third with\na breakline."
