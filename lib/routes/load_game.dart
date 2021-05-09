@@ -15,6 +15,8 @@ class _LoadGameState extends State<LoadGame> {
   void initState() {
     super.initState();
     getSlot1();
+    getSlot2();
+    getSlot3();
   }
 
   String? saveSlotOne;

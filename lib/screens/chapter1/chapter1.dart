@@ -12,13 +12,14 @@ class VN1 extends StatefulWidget {
 
 class _QuizPageState extends State<VN1> {
   final String route = "/1";
+  final String nextRoute = "/1";
   TextConstructor1 textSound = TextConstructor1();
   bool? isNoti;
 
   void checkAnswer(bool userPickedAnswer) {
     setState(() {
       if (textSound.isFinished() == true) {
-        Navigator.of(context).pushNamed(route);
+        Navigator.of(context).pushNamed(nextRoute);
       } else {
         textSound.nextQuestion();
       }
