@@ -53,106 +53,23 @@ class _SettingsState extends State<Settings> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-              leadingWidth: 25,
-              title: InkWell(
-                onTap: () => Navigator.pop(context),
-                child: Text(
-                  "Back",
-                  style: TextStyle(
-                    fontFamily: "Aleo",
-                  ),
-                ),
-              ),
               automaticallyImplyLeading: true,
               elevation: 0,
               backgroundColor: Colors.transparent),
           backgroundColor: Colors.transparent,
           resizeToAvoidBottomInset: false,
           body: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                new DrawerHeader(
-                  child: Center(
-                    child: Text(
-                      tr("game_name"),
-                      style: TextStyle(
-                          fontSize: 45,
-                          fontFamily: "Aleo",
-                          color: Colors.white),
-                    ),
-                  ),
-                ),
-                LayoutBuilder(
-                  builder: (context, constraints) {
-                    if (constraints.maxWidth > 1200) {
-                      return Card(
-                        child: Container(
-                          width: MediaQuery.of(context).size.width / 2,
-                          height: 55,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 20,
-                          ),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color: Colors.transparent),
-                          child: Row(
-                            children: <Widget>[
-                              vol == 0
-                                  ? Icon(
-                                      Icons.music_off,
-                                      size: 35,
-                                    )
-                                  : Icon(
-                                      Icons.music_note,
-                                      size: 35,
-                                    ),
-                              SizedBox(width: 15),
-                              Text(
-                                "CHANGE AUDIO",
-                                style: TextStyle(
-                                    fontFamily: "Julee", fontSize: 28),
-                              ),
-                              Spacer(),
-                              Flexible(
-                                child: SliderTheme(
-                                  data: SliderTheme.of(context).copyWith(
-                                    activeTrackColor: Colors.lightGreen,
-                                    inactiveTrackColor: Colors.grey,
-                                    thumbColor: Colors.green,
-                                    thumbShape: RoundSliderThumbShape(
-                                        enabledThumbRadius: 10.0),
-                                    overlayShape: RoundSliderOverlayShape(
-                                        overlayRadius: 10.0),
-                                  ),
-                                  child: Slider.adaptive(
-                                    min: 0.0,
-                                    max: 1.0,
-                                    value: vol!,
-                                    onChanged: (volume) {
-                                      setState(() {
-                                        if (Platform.isWindows ||
-                                            Platform.isLinux) {
-                                          widget.player?.setVolume(volume);
-                                        } else {
-                                          widget.audioPlayer?.setVolume(volume);
-                                        }
-
-                                        vol = volume;
-                                        saveVolumeState(volume);
-                                      });
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    } else {
-                      return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 50),
-                        child: Card(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      if (constraints.maxWidth > 1200) {
+                        return Card(
                           child: Container(
+                            width: MediaQuery.of(context).size.width / 2,
                             height: 55,
                             padding: EdgeInsets.symmetric(
                               horizontal: 20,
@@ -213,169 +130,236 @@ class _SettingsState extends State<Settings> {
                               ],
                             ),
                           ),
-                        ),
-                      );
-                    }
-                  },
-                ),
-                Card(
-                  child: Container(
-                    width: MediaQuery.of(context).size.width / 2,
-                    height: 55,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20,
-                    ),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.transparent),
-                    child: Row(
-                      children: <Widget>[
-                        vol == 0
-                            ? Icon(
-                                Icons.music_off,
-                                size: 35,
-                              )
-                            : Icon(
-                                Icons.music_note,
-                                size: 35,
+                        );
+                      } else {
+                        return Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 50),
+                          child: Card(
+                            child: Container(
+                              height: 55,
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 20,
                               ),
-                        SizedBox(width: 15),
-                        Text(
-                          "CHANGE VOICE",
-                          style: TextStyle(fontFamily: "Julee", fontSize: 28),
-                        ),
-                        Spacer(),
-                        Flexible(
-                          child: SliderTheme(
-                            data: SliderTheme.of(context).copyWith(
-                              activeTrackColor: Colors.lightGreen,
-                              inactiveTrackColor: Colors.grey,
-                              thumbColor: Colors.green,
-                              thumbShape: RoundSliderThumbShape(
-                                  enabledThumbRadius: 10.0),
-                              overlayShape:
-                                  RoundSliderOverlayShape(overlayRadius: 10.0),
-                            ),
-                            child: Slider.adaptive(
-                              divisions: 4,
-                              label: "$vol",
-                              min: 0.0,
-                              max: 1.0,
-                              value: vol!,
-                              onChanged: (volume) {
-                                setState(() {
-                                  widget.player?.setVolume(volume);
-                                  vol = volume;
-                                  saveVolumeState(volume);
-                                });
-                              },
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: Colors.transparent),
+                              child: Row(
+                                children: <Widget>[
+                                  vol == 0
+                                      ? Icon(
+                                          Icons.music_off,
+                                          size: 35,
+                                        )
+                                      : Icon(
+                                          Icons.music_note,
+                                          size: 35,
+                                        ),
+                                  SizedBox(width: 15),
+                                  Text(
+                                    "CHANGE AUDIO",
+                                    style: TextStyle(
+                                        fontFamily: "Julee", fontSize: 28),
+                                  ),
+                                  Spacer(),
+                                  Flexible(
+                                    child: SliderTheme(
+                                      data: SliderTheme.of(context).copyWith(
+                                        activeTrackColor: Colors.lightGreen,
+                                        inactiveTrackColor: Colors.grey,
+                                        thumbColor: Colors.green,
+                                        thumbShape: RoundSliderThumbShape(
+                                            enabledThumbRadius: 10.0),
+                                        overlayShape: RoundSliderOverlayShape(
+                                            overlayRadius: 10.0),
+                                      ),
+                                      child: Slider.adaptive(
+                                        min: 0.0,
+                                        max: 1.0,
+                                        value: vol!,
+                                        onChanged: (volume) {
+                                          setState(() {
+                                            if (Platform.isWindows ||
+                                                Platform.isLinux) {
+                                              widget.player?.setVolume(volume);
+                                            } else {
+                                              widget.audioPlayer
+                                                  ?.setVolume(volume);
+                                            }
+
+                                            vol = volume;
+                                            saveVolumeState(volume);
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
+                        );
+                      }
+                    },
                   ),
-                ),
-                Card(
-                  child: Container(
-                    width: MediaQuery.of(context).size.width / 2,
-                    height: 55,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20,
-                    ),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.transparent),
-                    child: Row(
-                      children: <Widget>[
-                        vol == 0
-                            ? Icon(
-                                Icons.music_off,
-                                size: 35,
-                              )
-                            : Icon(
-                                Icons.music_note,
-                                size: 35,
+                  Card(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width / 2,
+                      height: 55,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                      ),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Colors.transparent),
+                      child: Row(
+                        children: <Widget>[
+                          vol == 0
+                              ? Icon(
+                                  Icons.music_off,
+                                  size: 35,
+                                )
+                              : Icon(
+                                  Icons.music_note,
+                                  size: 35,
+                                ),
+                          SizedBox(width: 15),
+                          Text(
+                            "CHANGE VOICE",
+                            style: TextStyle(fontFamily: "Julee", fontSize: 28),
+                          ),
+                          Spacer(),
+                          Flexible(
+                            child: SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                activeTrackColor: Colors.lightGreen,
+                                inactiveTrackColor: Colors.grey,
+                                thumbColor: Colors.green,
+                                thumbShape: RoundSliderThumbShape(
+                                    enabledThumbRadius: 10.0),
+                                overlayShape: RoundSliderOverlayShape(
+                                    overlayRadius: 10.0),
                               ),
-                        SizedBox(width: 15),
-                        Text(
-                          "TEXT SPEED",
-                          style: TextStyle(fontFamily: "Julee", fontSize: 28),
-                        ),
-                        Spacer(),
-                        Flexible(
-                          child: SliderTheme(
-                            data: SliderTheme.of(context).copyWith(
-                              activeTrackColor: Colors.lightGreen,
-                              inactiveTrackColor: Colors.grey,
-                              thumbColor: Colors.green,
-                              thumbShape: RoundSliderThumbShape(
-                                  enabledThumbRadius: 10.0),
-                              overlayShape:
-                                  RoundSliderOverlayShape(overlayRadius: 10.0),
-                            ),
-                            child: Slider.adaptive(
-                              divisions: 4,
-                              label: "$vol",
-                              min: 0.0,
-                              max: 1.0,
-                              value: vol!,
-                              onChanged: (volume) {
-                                setState(() {
-                                  widget.player?.setVolume(volume);
-                                  vol = volume;
-                                  saveVolumeState(volume);
-                                });
-                              },
+                              child: Slider.adaptive(
+                                divisions: 4,
+                                label: "$vol",
+                                min: 0.0,
+                                max: 1.0,
+                                value: vol!,
+                                onChanged: (volume) {
+                                  setState(() {
+                                    widget.player?.setVolume(volume);
+                                    vol = volume;
+                                    saveVolumeState(volume);
+                                  });
+                                },
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 55,
-                ),
-                ProfileListItem(
-                  icon: Icons.face_outlined,
-                  text: 'Credits',
-                ),
-                SizedBox(
-                  height: 55,
-                ),
-                GestureDetector(
-                  onTap: () async {
-                    const url = 'https://smalldreams.space/privacy-policy/';
-                    if (await canLaunch(url)) {
-                      await launch(url);
-                    } else {
-                      throw 'Could not launch $url';
-                    }
-                  },
-                  child: ProfileListItem(
-                    icon: Icons.privacy_tip_outlined,
-                    text: 'Privacy',
+                  Card(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width / 2,
+                      height: 55,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                      ),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Colors.transparent),
+                      child: Row(
+                        children: <Widget>[
+                          vol == 0
+                              ? Icon(
+                                  Icons.music_off,
+                                  size: 35,
+                                )
+                              : Icon(
+                                  Icons.music_note,
+                                  size: 35,
+                                ),
+                          SizedBox(width: 15),
+                          Text(
+                            "TEXT SPEED",
+                            style: TextStyle(fontFamily: "Julee", fontSize: 28),
+                          ),
+                          Spacer(),
+                          Flexible(
+                            child: SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                activeTrackColor: Colors.lightGreen,
+                                inactiveTrackColor: Colors.grey,
+                                thumbColor: Colors.green,
+                                thumbShape: RoundSliderThumbShape(
+                                    enabledThumbRadius: 10.0),
+                                overlayShape: RoundSliderOverlayShape(
+                                    overlayRadius: 10.0),
+                              ),
+                              child: Slider.adaptive(
+                                divisions: 4,
+                                label: "$vol",
+                                min: 0.0,
+                                max: 1.0,
+                                value: vol!,
+                                onChanged: (volume) {
+                                  setState(() {
+                                    widget.player?.setVolume(volume);
+                                    vol = volume;
+                                    saveVolumeState(volume);
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () async {
-                    const url = 'https://smalldreams.space/terms-of-service/';
-                    if (await canLaunch(url)) {
-                      await launch(url);
-                    } else {
-                      throw 'Could not launch $url';
-                    }
-                  },
-                  child: ProfileListItem(
-                    icon: Icons.policy_outlined,
-                    text: 'Terms of Service',
+                  SizedBox(
+                    height: 55,
                   ),
-                ),
-                SizedBox(
-                  height: 55,
-                ),
-              ],
+                  ProfileListItem(
+                    icon: Icons.face_outlined,
+                    text: 'Credits',
+                  ),
+                  SizedBox(
+                    height: 55,
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      const url = 'https://smalldreams.space/privacy-policy/';
+                      if (await canLaunch(url)) {
+                        await launch(url);
+                      } else {
+                        throw 'Could not launch $url';
+                      }
+                    },
+                    child: ProfileListItem(
+                      icon: Icons.privacy_tip_outlined,
+                      text: 'Privacy',
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      const url = 'https://smalldreams.space/terms-of-service/';
+                      if (await canLaunch(url)) {
+                        await launch(url);
+                      } else {
+                        throw 'Could not launch $url';
+                      }
+                    },
+                    child: ProfileListItem(
+                      icon: Icons.policy_outlined,
+                      text: 'Terms of Service',
+                    ),
+                  ),
+                  SizedBox(
+                    height: 55,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
