@@ -192,52 +192,85 @@ class _LoadGameState extends State<SaveGame> {
                                   );
                                 }
                               }),
-                              ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      primary: Colors.white,
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 20, horizontal: 30)),
-                                  onPressed: () {
-                                    if (saveSlotOne == null ||
-                                        saveSlotOne!.isEmpty) {
-                                      print("EMPTY");
-                                    } else {
-                                      Navigator.of(context)
-                                          .pushNamed('$saveSlotOne');
-                                    }
-                                  },
-                                  child: Text(
-                                    "LOAD SAVE",
-                                    style: TextStyle(
-                                        fontFamily: "Aleo",
-                                        color: Colors.black,
-                                        fontSize: 18),
-                                  )),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      primary: Colors.redAccent,
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 20, horizontal: 30)),
-                                  onPressed: () async {
-                                    SharedPreferences prefs =
-                                        await SharedPreferences.getInstance();
+                              Builder(
+                                builder: (context) {
+                                  if (saveSlotOne == null ||
+                                      saveSlotOne!.isEmpty) {
+                                    return Column(children: [
+                                      TextButton(
+                                          style: TextButton.styleFrom(
+                                              primary: Colors.white,
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 20,
+                                                  horizontal: 30)),
+                                          onPressed: () => null,
+                                          child: Container()),
+                                      TextButton(
+                                          style: TextButton.styleFrom(
+                                              primary: Colors.white,
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 20,
+                                                  horizontal: 30)),
+                                          onPressed: () => null,
+                                          child: Container()),
+                                    ]);
+                                  } else {
+                                    return Column(
+                                      children: [
+                                        ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                              primary: Colors.white,
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 20,
+                                                  horizontal: 30)),
+                                          onPressed: () {
+                                            if (saveSlotOne == null ||
+                                                saveSlotOne!.isEmpty) {
+                                              print("EMPTY");
+                                            } else {
+                                              Navigator.of(context)
+                                                  .pushNamed('$saveSlotOne');
+                                            }
+                                          },
+                                          child: Text(
+                                            "LOAD SAVE",
+                                            style: TextStyle(
+                                                fontFamily: "Aleo",
+                                                color: Colors.black,
+                                                fontSize: 18),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                primary: Colors.redAccent,
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 20,
+                                                    horizontal: 30)),
+                                            onPressed: () async {
+                                              SharedPreferences prefs =
+                                                  await SharedPreferences
+                                                      .getInstance();
 
-                                    setState(() {
-                                      prefs.remove("saveSlot2");
-                                      saveSlotOne = null;
-                                      print(saveSlotOne);
-                                    });
-                                  },
-                                  child: Text(
-                                    "DELETE SAVE",
-                                    style: TextStyle(
-                                        fontFamily: "Aleo",
-                                        color: Colors.white,
-                                        fontSize: 18),
-                                  ))
+                                              setState(() {
+                                                prefs.remove("saveSlotOne");
+                                                saveSlotOne = null;
+                                              });
+                                            },
+                                            child: Text(
+                                              "DELETE SAVE",
+                                              style: TextStyle(
+                                                  fontFamily: "Aleo",
+                                                  color: Colors.white,
+                                                  fontSize: 18),
+                                            ))
+                                      ],
+                                    );
+                                  }
+                                },
+                              ),
                             ],
                           ),
                           Spacer(),
@@ -318,52 +351,84 @@ class _LoadGameState extends State<SaveGame> {
                                   );
                                 }
                               }),
-                              ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      primary: Colors.white,
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 20, horizontal: 30)),
-                                  onPressed: () {
-                                    if (saveSlot2 == null ||
-                                        saveSlot2!.isEmpty) {
-                                      print("EMPTY");
-                                    } else {
-                                      Navigator.of(context)
-                                          .pushNamed('$saveSlot2');
-                                    }
-                                  },
-                                  child: Text(
-                                    "LOAD SAVE",
-                                    style: TextStyle(
-                                        fontFamily: "Aleo",
-                                        color: Colors.black,
-                                        fontSize: 18),
-                                  )),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      primary: Colors.redAccent,
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 20, horizontal: 30)),
-                                  onPressed: () async {
-                                    SharedPreferences prefs =
-                                        await SharedPreferences.getInstance();
+                              Builder(
+                                builder: (context) {
+                                  if (saveSlot2 == null || saveSlot2!.isEmpty) {
+                                    return Column(children: [
+                                      TextButton(
+                                          style: TextButton.styleFrom(
+                                              primary: Colors.white,
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 20,
+                                                  horizontal: 30)),
+                                          onPressed: () => null,
+                                          child: Container()),
+                                      TextButton(
+                                          style: TextButton.styleFrom(
+                                              primary: Colors.white,
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 20,
+                                                  horizontal: 30)),
+                                          onPressed: () => null,
+                                          child: Container()),
+                                    ]);
+                                  } else {
+                                    return Column(
+                                      children: [
+                                        ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                primary: Colors.white,
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 20,
+                                                    horizontal: 30)),
+                                            onPressed: () {
+                                              if (saveSlot2 == null ||
+                                                  saveSlot2!.isEmpty) {
+                                                print("EMPTY");
+                                              } else {
+                                                Navigator.of(context)
+                                                    .pushNamed('$saveSlot2');
+                                              }
+                                            },
+                                            child: Text(
+                                              "LOAD SAVE",
+                                              style: TextStyle(
+                                                  fontFamily: "Aleo",
+                                                  color: Colors.black,
+                                                  fontSize: 18),
+                                            )),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                primary: Colors.redAccent,
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 20,
+                                                    horizontal: 30)),
+                                            onPressed: () async {
+                                              SharedPreferences prefs =
+                                                  await SharedPreferences
+                                                      .getInstance();
 
-                                    setState(() {
-                                      prefs.remove("saveSlot2");
-                                      saveSlot2 = null;
-                                      print(saveSlot2);
-                                    });
-                                  },
-                                  child: Text(
-                                    "DELETE SAVE",
-                                    style: TextStyle(
-                                        fontFamily: "Aleo",
-                                        color: Colors.white,
-                                        fontSize: 18),
-                                  ))
+                                              setState(() {
+                                                prefs.remove("saveSlot2");
+                                                saveSlot2 = null;
+                                                print(saveSlot2);
+                                              });
+                                            },
+                                            child: Text(
+                                              "DELETE SAVE",
+                                              style: TextStyle(
+                                                  fontFamily: "Aleo",
+                                                  color: Colors.white,
+                                                  fontSize: 18),
+                                            ))
+                                      ],
+                                    );
+                                  }
+                                },
+                              ),
                             ],
                           ),
                           Spacer(),
@@ -444,52 +509,84 @@ class _LoadGameState extends State<SaveGame> {
                                   );
                                 }
                               }),
-                              ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      primary: Colors.white,
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 20, horizontal: 30)),
-                                  onPressed: () {
-                                    if (saveSlot3 == null ||
-                                        saveSlot3!.isEmpty) {
-                                      print("EMPTY");
-                                    } else {
-                                      Navigator.of(context)
-                                          .pushNamed('$saveSlot3');
-                                    }
-                                  },
-                                  child: Text(
-                                    "LOAD SAVE",
-                                    style: TextStyle(
-                                        fontFamily: "Aleo",
-                                        color: Colors.black,
-                                        fontSize: 18),
-                                  )),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      primary: Colors.redAccent,
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 20, horizontal: 30)),
-                                  onPressed: () async {
-                                    SharedPreferences prefs =
-                                        await SharedPreferences.getInstance();
+                              Builder(
+                                builder: (context) {
+                                  if (saveSlot3 == null || saveSlot3!.isEmpty) {
+                                    return Column(children: [
+                                      TextButton(
+                                          style: TextButton.styleFrom(
+                                              primary: Colors.white,
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 20,
+                                                  horizontal: 30)),
+                                          onPressed: () => null,
+                                          child: Container()),
+                                      TextButton(
+                                          style: TextButton.styleFrom(
+                                              primary: Colors.white,
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 20,
+                                                  horizontal: 30)),
+                                          onPressed: () => null,
+                                          child: Container()),
+                                    ]);
+                                  } else {
+                                    return Column(
+                                      children: [
+                                        ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                primary: Colors.white,
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 20,
+                                                    horizontal: 30)),
+                                            onPressed: () {
+                                              if (saveSlot3 == null ||
+                                                  saveSlot3!.isEmpty) {
+                                                print("EMPTY");
+                                              } else {
+                                                Navigator.of(context)
+                                                    .pushNamed('$saveSlot3');
+                                              }
+                                            },
+                                            child: Text(
+                                              "LOAD SAVE",
+                                              style: TextStyle(
+                                                  fontFamily: "Aleo",
+                                                  color: Colors.black,
+                                                  fontSize: 18),
+                                            )),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                primary: Colors.redAccent,
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 20,
+                                                    horizontal: 30)),
+                                            onPressed: () async {
+                                              SharedPreferences prefs =
+                                                  await SharedPreferences
+                                                      .getInstance();
 
-                                    setState(() {
-                                      prefs.remove("saveSlot3");
-                                      saveSlot3 = null;
-                                      print(saveSlot3);
-                                    });
-                                  },
-                                  child: Text(
-                                    "DELETE SAVE",
-                                    style: TextStyle(
-                                        fontFamily: "Aleo",
-                                        color: Colors.white,
-                                        fontSize: 18),
-                                  )),
+                                              setState(() {
+                                                prefs.remove("saveSlot3");
+                                                saveSlot3 = null;
+                                                print(saveSlot3);
+                                              });
+                                            },
+                                            child: Text(
+                                              "DELETE SAVE",
+                                              style: TextStyle(
+                                                  fontFamily: "Aleo",
+                                                  color: Colors.white,
+                                                  fontSize: 18),
+                                            )),
+                                      ],
+                                    );
+                                  }
+                                },
+                              ),
                             ],
                           ),
                           Spacer(),
