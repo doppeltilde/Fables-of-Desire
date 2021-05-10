@@ -15,23 +15,56 @@ class _SplashScreenState extends State<SplashScreen> {
   bool? isNoti = true;
   bool? isSwitchedFT = true;
   double? vol = 0.5;
+  bool? splash = false;
+  double? opacity = 0.0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         body: Center(
-            child: Text("· · ·",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 60,
-                    fontWeight: FontWeight.bold))));
+            child: new Container(
+                child: SafeArea(
+                    child: new SingleChildScrollView(
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+              Center(
+                child: new Container(
+                  child: Column(
+                    children: <Widget>[
+                      AnimatedOpacity(
+                        opacity: opacity!,
+                        duration: Duration(milliseconds: 250),
+                        child: Center(
+                            child: Image.asset(
+                          "assets/images/logo.png",
+                          fit: BoxFit.cover,
+                          width: MediaQuery.of(context).size.width / 3,
+                        )),
+                      ),
+                      // AnimatedOpacity(
+                      //     opacity: opacity!,
+                      //     duration: Duration(milliseconds: 300),
+                      //     child: Text(
+                      //       "Fables of Desire",
+                      //       style: TextStyle(fontFamily: "Julee", fontSize: 55),
+                      //     )),
+                    ],
+                  ),
+                ),
+              )
+            ]))))));
   }
 
   // PRECACHE IMAGES
 
   List<Map<String, dynamic>> images = [
     // MC
+    {
+      "image": "assets/images/sprites/Cast/MC_Sad.png",
+    },
     {
       "image": "assets/images/sprites/Cast/MC_Sad.png",
     },
@@ -101,8 +134,17 @@ class _SplashScreenState extends State<SplashScreen> {
         persistVol(vol!); // set an initial value
       }
     });
-    print(vol);
-    initSplash();
+
+    Future.delayed(const Duration(seconds: 3), () {
+      if (this.mounted) {
+        initSplash();
+      }
+    });
+    Future.delayed(Duration(seconds: 1), () {
+      setState(() {
+        opacity = 1.0;
+      });
+    });
   }
 
   void persist(bool value) {

@@ -42,100 +42,187 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
+    return new Container(
+        decoration: BoxDecoration(
           image: DecorationImage(
-        colorFilter: new ColorFilter.mode(
-            Colors.black.withOpacity(0.4), BlendMode.dstATop),
-        image: AssetImage("assets/images/bgs/mininature_001_19201440.jpg"),
-        fit: BoxFit.cover,
-      )),
-      child: SafeArea(
+            image: AssetImage("assets/images/bgs/mininature_001_19201440.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Scaffold(
-          appBar: AppBar(
-              automaticallyImplyLeading: true,
+            appBar: AppBar(
+              toolbarOpacity: 1,
               elevation: 0,
-              backgroundColor: Colors.transparent),
-          backgroundColor: Colors.transparent,
-          resizeToAvoidBottomInset: false,
-          body: SingleChildScrollView(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  LayoutBuilder(
-                    builder: (context, constraints) {
-                      if (constraints.maxWidth > 1200) {
-                        return Card(
-                          child: Container(
-                            width: MediaQuery.of(context).size.width / 2,
-                            height: 55,
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 20,
-                            ),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                color: Colors.transparent),
-                            child: Row(
-                              children: <Widget>[
-                                vol == 0
-                                    ? Icon(
-                                        Icons.music_off,
-                                        size: 35,
-                                      )
-                                    : Icon(
-                                        Icons.music_note,
-                                        size: 35,
-                                      ),
-                                SizedBox(width: 15),
-                                Text(
-                                  "CHANGE AUDIO",
-                                  style: TextStyle(
-                                      fontFamily: "Julee", fontSize: 28),
-                                ),
-                                Spacer(),
-                                Flexible(
-                                  child: SliderTheme(
-                                    data: SliderTheme.of(context).copyWith(
-                                      activeTrackColor: Colors.lightGreen,
-                                      inactiveTrackColor: Colors.grey,
-                                      thumbColor: Colors.green,
-                                      thumbShape: RoundSliderThumbShape(
-                                          enabledThumbRadius: 10.0),
-                                      overlayShape: RoundSliderOverlayShape(
-                                          overlayRadius: 10.0),
+              backgroundColor: Colors.transparent,
+              automaticallyImplyLeading: true,
+            ),
+            resizeToAvoidBottomInset: false,
+            backgroundColor: Colors.transparent,
+            body: Stack(children: <Widget>[
+              Center(
+                child: new Container(
+                  child: SafeArea(
+                    child: new SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          LayoutBuilder(
+                            builder: (context, constraints) {
+                              if (constraints.maxWidth > 1200) {
+                                return Card(
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
+                                    height: 55,
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 20,
                                     ),
-                                    child: Slider.adaptive(
-                                      min: 0.0,
-                                      max: 1.0,
-                                      value: vol!,
-                                      onChanged: (volume) {
-                                        setState(() {
-                                          if (Platform.isWindows ||
-                                              Platform.isLinux) {
-                                            widget.player?.setVolume(volume);
-                                          } else {
-                                            widget.audioPlayer
-                                                ?.setVolume(volume);
-                                          }
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(30),
+                                        color: Colors.transparent),
+                                    child: Row(
+                                      children: <Widget>[
+                                        vol == 0
+                                            ? Icon(
+                                                Icons.music_off,
+                                                size: 35,
+                                              )
+                                            : Icon(
+                                                Icons.music_note,
+                                                size: 35,
+                                              ),
+                                        SizedBox(width: 15),
+                                        Text(
+                                          "MUSIC VOLUME",
+                                          style: TextStyle(
+                                              fontFamily: "Julee",
+                                              fontSize: 28),
+                                        ),
+                                        Spacer(),
+                                        Flexible(
+                                          child: SliderTheme(
+                                            data: SliderTheme.of(context)
+                                                .copyWith(
+                                              activeTrackColor:
+                                                  Colors.lightGreen,
+                                              inactiveTrackColor:
+                                                  Colors.grey[300],
+                                              thumbColor: Colors.green,
+                                              thumbShape: RoundSliderThumbShape(
+                                                  enabledThumbRadius: 12.0),
+                                              overlayShape:
+                                                  RoundSliderOverlayShape(
+                                                      overlayRadius: 0.0),
+                                            ),
+                                            child: Slider(
+                                              min: 0.0,
+                                              max: 1.0,
+                                              value: vol!,
+                                              onChanged: (volume) {
+                                                setState(() {
+                                                  if (Platform.isWindows ||
+                                                      Platform.isLinux) {
+                                                    widget.player
+                                                        ?.setVolume(volume);
+                                                  } else {
+                                                    widget.audioPlayer
+                                                        ?.setVolume(volume);
+                                                  }
 
-                                          vol = volume;
-                                          saveVolumeState(volume);
-                                        });
-                                      },
+                                                  vol = volume;
+                                                  saveVolumeState(volume);
+                                                });
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
+                                );
+                              } else {
+                                return Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 50),
+                                  child: Card(
+                                    child: Container(
+                                      height: 55,
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 20,
+                                      ),
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                          color: Colors.transparent),
+                                      child: Row(
+                                        children: <Widget>[
+                                          vol == 0
+                                              ? Icon(
+                                                  Icons.music_off,
+                                                  size: 35,
+                                                )
+                                              : Icon(
+                                                  Icons.music_note,
+                                                  size: 35,
+                                                ),
+                                          SizedBox(width: 15),
+                                          Text(
+                                            "MUSIC VOLUME",
+                                            style: TextStyle(
+                                                fontFamily: "Julee",
+                                                fontSize: 25),
+                                          ),
+                                          Spacer(),
+                                          Flexible(
+                                            child: SliderTheme(
+                                              data: SliderTheme.of(context)
+                                                  .copyWith(
+                                                activeTrackColor:
+                                                    Colors.lightGreen,
+                                                inactiveTrackColor:
+                                                    Colors.grey[300],
+                                                thumbColor: Colors.green,
+                                                thumbShape:
+                                                    RoundSliderThumbShape(
+                                                        enabledThumbRadius:
+                                                            12.0),
+                                                overlayShape:
+                                                    RoundSliderOverlayShape(
+                                                        overlayRadius: 0.0),
+                                              ),
+                                              child: Slider(
+                                                min: 0.0,
+                                                max: 1.0,
+                                                value: vol!,
+                                                onChanged: (volume) {
+                                                  setState(() {
+                                                    if (Platform.isWindows ||
+                                                        Platform.isLinux) {
+                                                      widget.player
+                                                          ?.setVolume(volume);
+                                                    } else {
+                                                      widget.audioPlayer
+                                                          ?.setVolume(volume);
+                                                    }
+
+                                                    vol = volume;
+                                                    saveVolumeState(volume);
+                                                  });
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }
+                            },
                           ),
-                        );
-                      } else {
-                        return Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 50),
-                          child: Card(
+                          Card(
                             child: Container(
+                              width: MediaQuery.of(context).size.width / 2,
                               height: 55,
                               padding: EdgeInsets.symmetric(
                                 horizontal: 20,
@@ -156,7 +243,7 @@ class _SettingsState extends State<Settings> {
                                         ),
                                   SizedBox(width: 15),
                                   Text(
-                                    "CHANGE AUDIO",
+                                    "CHANGE VOICE",
                                     style: TextStyle(
                                         fontFamily: "Julee", fontSize: 28),
                                   ),
@@ -173,19 +260,14 @@ class _SettingsState extends State<Settings> {
                                             overlayRadius: 10.0),
                                       ),
                                       child: Slider.adaptive(
+                                        divisions: 4,
+                                        label: "$vol",
                                         min: 0.0,
                                         max: 1.0,
                                         value: vol!,
                                         onChanged: (volume) {
                                           setState(() {
-                                            if (Platform.isWindows ||
-                                                Platform.isLinux) {
-                                              widget.player?.setVolume(volume);
-                                            } else {
-                                              widget.audioPlayer
-                                                  ?.setVolume(volume);
-                                            }
-
+                                            widget.player?.setVolume(volume);
                                             vol = volume;
                                             saveVolumeState(volume);
                                           });
@@ -197,174 +279,75 @@ class _SettingsState extends State<Settings> {
                               ),
                             ),
                           ),
-                        );
-                      }
-                    },
-                  ),
-                  Card(
-                    child: Container(
-                      width: MediaQuery.of(context).size.width / 2,
-                      height: 55,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 20,
-                      ),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Colors.transparent),
-                      child: Row(
-                        children: <Widget>[
-                          vol == 0
-                              ? Icon(
-                                  Icons.music_off,
-                                  size: 35,
-                                )
-                              : Icon(
-                                  Icons.music_note,
-                                  size: 35,
-                                ),
-                          SizedBox(width: 15),
-                          Text(
-                            "CHANGE VOICE",
-                            style: TextStyle(fontFamily: "Julee", fontSize: 28),
-                          ),
-                          Spacer(),
-                          Flexible(
-                            child: SliderTheme(
-                              data: SliderTheme.of(context).copyWith(
-                                activeTrackColor: Colors.lightGreen,
-                                inactiveTrackColor: Colors.grey,
-                                thumbColor: Colors.green,
-                                thumbShape: RoundSliderThumbShape(
-                                    enabledThumbRadius: 10.0),
-                                overlayShape: RoundSliderOverlayShape(
-                                    overlayRadius: 10.0),
+                          Card(
+                            child: Container(
+                              width: MediaQuery.of(context).size.width / 2,
+                              height: 55,
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 20,
                               ),
-                              child: Slider.adaptive(
-                                divisions: 4,
-                                label: "$vol",
-                                min: 0.0,
-                                max: 1.0,
-                                value: vol!,
-                                onChanged: (volume) {
-                                  setState(() {
-                                    widget.player?.setVolume(volume);
-                                    vol = volume;
-                                    saveVolumeState(volume);
-                                  });
-                                },
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: Colors.transparent),
+                              child: Row(
+                                children: <Widget>[
+                                  vol == 0
+                                      ? Icon(
+                                          Icons.music_off,
+                                          size: 35,
+                                        )
+                                      : Icon(
+                                          Icons.music_note,
+                                          size: 35,
+                                        ),
+                                  SizedBox(width: 15),
+                                  Text(
+                                    "TEXT SPEED",
+                                    style: TextStyle(
+                                        fontFamily: "Julee", fontSize: 28),
+                                  ),
+                                  Spacer(),
+                                  Flexible(
+                                    child: SliderTheme(
+                                      data: SliderTheme.of(context).copyWith(
+                                        activeTrackColor: Colors.lightGreen,
+                                        inactiveTrackColor: Colors.grey,
+                                        thumbColor: Colors.green,
+                                        thumbShape: RoundSliderThumbShape(
+                                            enabledThumbRadius: 10.0),
+                                        overlayShape: RoundSliderOverlayShape(
+                                            overlayRadius: 10.0),
+                                      ),
+                                      child: Slider.adaptive(
+                                        divisions: 4,
+                                        label: "$vol",
+                                        min: 0.0,
+                                        max: 1.0,
+                                        value: vol!,
+                                        onChanged: (volume) {
+                                          setState(() {
+                                            widget.player?.setVolume(volume);
+                                            vol = volume;
+                                            saveVolumeState(volume);
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
+                          ),
+                          SizedBox(
+                            height: 55,
                           ),
                         ],
                       ),
                     ),
                   ),
-                  Card(
-                    child: Container(
-                      width: MediaQuery.of(context).size.width / 2,
-                      height: 55,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 20,
-                      ),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Colors.transparent),
-                      child: Row(
-                        children: <Widget>[
-                          vol == 0
-                              ? Icon(
-                                  Icons.music_off,
-                                  size: 35,
-                                )
-                              : Icon(
-                                  Icons.music_note,
-                                  size: 35,
-                                ),
-                          SizedBox(width: 15),
-                          Text(
-                            "TEXT SPEED",
-                            style: TextStyle(fontFamily: "Julee", fontSize: 28),
-                          ),
-                          Spacer(),
-                          Flexible(
-                            child: SliderTheme(
-                              data: SliderTheme.of(context).copyWith(
-                                activeTrackColor: Colors.lightGreen,
-                                inactiveTrackColor: Colors.grey,
-                                thumbColor: Colors.green,
-                                thumbShape: RoundSliderThumbShape(
-                                    enabledThumbRadius: 10.0),
-                                overlayShape: RoundSliderOverlayShape(
-                                    overlayRadius: 10.0),
-                              ),
-                              child: Slider.adaptive(
-                                divisions: 4,
-                                label: "$vol",
-                                min: 0.0,
-                                max: 1.0,
-                                value: vol!,
-                                onChanged: (volume) {
-                                  setState(() {
-                                    widget.player?.setVolume(volume);
-                                    vol = volume;
-                                    saveVolumeState(volume);
-                                  });
-                                },
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 55,
-                  ),
-                  ProfileListItem(
-                    icon: Icons.face_outlined,
-                    text: 'Credits',
-                  ),
-                  SizedBox(
-                    height: 55,
-                  ),
-                  GestureDetector(
-                    onTap: () async {
-                      const url = 'https://smalldreams.space/privacy-policy/';
-                      if (await canLaunch(url)) {
-                        await launch(url);
-                      } else {
-                        throw 'Could not launch $url';
-                      }
-                    },
-                    child: ProfileListItem(
-                      icon: Icons.privacy_tip_outlined,
-                      text: 'Privacy',
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () async {
-                      const url = 'https://smalldreams.space/terms-of-service/';
-                      if (await canLaunch(url)) {
-                        await launch(url);
-                      } else {
-                        throw 'Could not launch $url';
-                      }
-                    },
-                    child: ProfileListItem(
-                      icon: Icons.policy_outlined,
-                      text: 'Terms of Service',
-                    ),
-                  ),
-                  SizedBox(
-                    height: 55,
-                  ),
-                ],
+                ),
               ),
-            ),
-          ),
-        ),
-      ),
-    );
+            ])));
   }
 }
 
@@ -407,20 +390,20 @@ class _SettingsIngameState extends State<SettingsIngame> {
   Widget build(BuildContext context) {
     // final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      appBar: AppBar(
-        leading: GestureDetector(
-          onTap: () => Navigator.pop(context),
-          child: Icon(
-            Icons.arrow_back,
-            color: Colors.black,
+        appBar: AppBar(
+          leading: GestureDetector(
+            onTap: () => Navigator.pop(context),
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            ),
           ),
+          backgroundColor: Colors.white,
+          elevation: 0,
         ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
-      resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        child: Stack(
+        resizeToAvoidBottomInset: false,
+        body: SingleChildScrollView(
+            child: Stack(
           children: <Widget>[
             Padding(
               padding: EdgeInsets.symmetric(
@@ -443,355 +426,423 @@ class _SettingsIngameState extends State<SettingsIngame> {
                   SizedBox(
                     height: 20,
                   ),
-                  LayoutBuilder(
-                    builder: (context, constraints) {
-                      if (constraints.maxWidth > 1200) {
-                        return Card(
-                          child: Container(
-                            width: MediaQuery.of(context).size.width / 2,
-                            height: 55,
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 20,
-                            ),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                color: Colors.transparent),
-                            child: Row(
+                  Center(
+                      child: new Container(
+                          child: SafeArea(
+                              child: new SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Center(
+                          child: new Container(
+                            child: Column(
                               children: <Widget>[
-                                vol == 0
-                                    ? Icon(
-                                        Icons.music_off,
-                                        size: 35,
-                                      )
-                                    : Icon(
-                                        Icons.music_note,
-                                        size: 35,
-                                      ),
-                                SizedBox(width: 15),
-                                Text(
-                                  "CHANGE AUDIO",
-                                  style: TextStyle(
-                                      fontFamily: "Julee", fontSize: 28),
-                                ),
-                                Spacer(),
-                                Flexible(
-                                  child: SliderTheme(
-                                    data: SliderTheme.of(context).copyWith(
-                                      activeTrackColor: Colors.lightGreen,
-                                      inactiveTrackColor: Colors.grey,
-                                      thumbColor: Colors.green,
-                                      thumbShape: RoundSliderThumbShape(
-                                          enabledThumbRadius: 10.0),
-                                      overlayShape: RoundSliderOverlayShape(
-                                          overlayRadius: 10.0),
-                                    ),
-                                    child: Slider.adaptive(
-                                      min: 0.0,
-                                      max: 1.0,
-                                      value: vol!,
-                                      onChanged: (volume) {
-                                        setState(() {
-                                          if (Platform.isWindows ||
-                                              Platform.isLinux) {
-                                            widget.player?.setVolume(volume);
-                                          } else {
-                                            widget.audioPlayer
-                                                ?.setVolume(volume);
-                                          }
+                                LayoutBuilder(
+                                  builder: (context, constraints) {
+                                    if (constraints.maxWidth > 1200) {
+                                      return Card(
+                                        child: Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              2,
+                                          height: 55,
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 20,
+                                          ),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              color: Colors.transparent),
+                                          child: Row(
+                                            children: <Widget>[
+                                              vol == 0
+                                                  ? Icon(
+                                                      Icons.music_off,
+                                                      size: 35,
+                                                    )
+                                                  : Icon(
+                                                      Icons.music_note,
+                                                      size: 35,
+                                                    ),
+                                              SizedBox(width: 15),
+                                              Text(
+                                                "CHANGE AUDIO",
+                                                style: TextStyle(
+                                                    fontFamily: "Julee",
+                                                    fontSize: 28),
+                                              ),
+                                              Spacer(),
+                                              Flexible(
+                                                child: SliderTheme(
+                                                  data: SliderTheme.of(context)
+                                                      .copyWith(
+                                                    activeTrackColor:
+                                                        Colors.lightGreen,
+                                                    inactiveTrackColor:
+                                                        Colors.grey,
+                                                    thumbColor: Colors.green,
+                                                    thumbShape:
+                                                        RoundSliderThumbShape(
+                                                            enabledThumbRadius:
+                                                                10.0),
+                                                    overlayShape:
+                                                        RoundSliderOverlayShape(
+                                                            overlayRadius:
+                                                                10.0),
+                                                  ),
+                                                  child: Slider.adaptive(
+                                                    min: 0.0,
+                                                    max: 1.0,
+                                                    value: vol!,
+                                                    onChanged: (volume) {
+                                                      setState(() {
+                                                        if (Platform
+                                                                .isWindows ||
+                                                            Platform.isLinux) {
+                                                          widget.player
+                                                              ?.setVolume(
+                                                                  volume);
+                                                        } else {
+                                                          widget.audioPlayer
+                                                              ?.setVolume(
+                                                                  volume);
+                                                        }
 
-                                          vol = volume;
-                                          saveVolumeState(volume);
-                                        });
-                                      },
+                                                        vol = volume;
+                                                        saveVolumeState(volume);
+                                                      });
+                                                    },
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    } else {
+                                      return Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 50),
+                                        child: Card(
+                                          child: Container(
+                                            height: 55,
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 20,
+                                            ),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                                color: Colors.transparent),
+                                            child: Row(
+                                              children: <Widget>[
+                                                vol == 0
+                                                    ? Icon(
+                                                        Icons.music_off,
+                                                        size: 35,
+                                                      )
+                                                    : Icon(
+                                                        Icons.music_note,
+                                                        size: 35,
+                                                      ),
+                                                SizedBox(width: 15),
+                                                Text(
+                                                  "CHANGE AUDIO",
+                                                  style: TextStyle(
+                                                      fontFamily: "Julee",
+                                                      fontSize: 28),
+                                                ),
+                                                Spacer(),
+                                                Flexible(
+                                                  child: SliderTheme(
+                                                    data:
+                                                        SliderTheme.of(context)
+                                                            .copyWith(
+                                                      activeTrackColor:
+                                                          Colors.lightGreen,
+                                                      inactiveTrackColor:
+                                                          Colors.grey,
+                                                      thumbColor: Colors.green,
+                                                      thumbShape:
+                                                          RoundSliderThumbShape(
+                                                              enabledThumbRadius:
+                                                                  10.0),
+                                                      overlayShape:
+                                                          RoundSliderOverlayShape(
+                                                              overlayRadius:
+                                                                  10.0),
+                                                    ),
+                                                    child: Slider.adaptive(
+                                                      min: 0.0,
+                                                      max: 1.0,
+                                                      value: vol!,
+                                                      onChanged: (volume) {
+                                                        setState(() {
+                                                          if (Platform
+                                                                  .isWindows ||
+                                                              Platform
+                                                                  .isLinux) {
+                                                            widget.player
+                                                                ?.setVolume(
+                                                                    volume);
+                                                          } else {
+                                                            widget.audioPlayer
+                                                                ?.setVolume(
+                                                                    volume);
+                                                          }
+
+                                                          vol = volume;
+                                                          saveVolumeState(
+                                                              volume);
+                                                        });
+                                                      },
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                ),
+                                Card(
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
+                                    height: 55,
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 20,
+                                    ),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(30),
+                                        color: Colors.transparent),
+                                    child: Row(
+                                      children: <Widget>[
+                                        vol == 0
+                                            ? Icon(
+                                                Icons.music_off,
+                                                size: 35,
+                                              )
+                                            : Icon(
+                                                Icons.music_note,
+                                                size: 35,
+                                              ),
+                                        SizedBox(width: 15),
+                                        Text(
+                                          "CHANGE VOICE",
+                                          style: TextStyle(
+                                              fontFamily: "Julee",
+                                              fontSize: 28),
+                                        ),
+                                        Spacer(),
+                                        Flexible(
+                                          child: SliderTheme(
+                                            data: SliderTheme.of(context)
+                                                .copyWith(
+                                              activeTrackColor:
+                                                  Colors.lightGreen,
+                                              inactiveTrackColor: Colors.grey,
+                                              thumbColor: Colors.green,
+                                              thumbShape: RoundSliderThumbShape(
+                                                  enabledThumbRadius: 10.0),
+                                              overlayShape:
+                                                  RoundSliderOverlayShape(
+                                                      overlayRadius: 10.0),
+                                            ),
+                                            child: Slider.adaptive(
+                                              divisions: 4,
+                                              label: "$vol",
+                                              min: 0.0,
+                                              max: 1.0,
+                                              value: vol!,
+                                              onChanged: (volume) {
+                                                setState(() {
+                                                  widget.player
+                                                      ?.setVolume(volume);
+                                                  vol = volume;
+                                                  saveVolumeState(volume);
+                                                });
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Card(
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
+                                    height: 55,
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 20,
+                                    ),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(30),
+                                        color: Colors.transparent),
+                                    child: Row(
+                                      children: <Widget>[
+                                        vol == 0
+                                            ? Icon(
+                                                Icons.music_off,
+                                                size: 35,
+                                              )
+                                            : Icon(
+                                                Icons.music_note,
+                                                size: 35,
+                                              ),
+                                        SizedBox(width: 15),
+                                        Text(
+                                          "TEXT SPEED",
+                                          style: TextStyle(
+                                              fontFamily: "Julee",
+                                              fontSize: 28),
+                                        ),
+                                        Spacer(),
+                                        Flexible(
+                                          child: SliderTheme(
+                                            data: SliderTheme.of(context)
+                                                .copyWith(
+                                              activeTrackColor:
+                                                  Colors.lightGreen,
+                                              inactiveTrackColor: Colors.grey,
+                                              thumbColor: Colors.green,
+                                              thumbShape: RoundSliderThumbShape(
+                                                  enabledThumbRadius: 10.0),
+                                              overlayShape:
+                                                  RoundSliderOverlayShape(
+                                                      overlayRadius: 10.0),
+                                            ),
+                                            child: Slider.adaptive(
+                                              divisions: 4,
+                                              label: "$vol",
+                                              min: 0.0,
+                                              max: 1.0,
+                                              value: vol!,
+                                              onChanged: (volume) {
+                                                setState(() {
+                                                  widget.player
+                                                      ?.setVolume(volume);
+                                                  vol = volume;
+                                                  saveVolumeState(volume);
+                                                });
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 55,
+                                ),
+                                InkWell(
+                                  onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SaveGame(
+                                              route: widget.route,
+                                            )),
+                                  ),
+                                  child: Card(
+                                    child: Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 2,
+                                      height: 55,
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 20,
+                                      ),
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                          color: Colors.transparent),
+                                      child: Row(
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.save,
+                                            size: 35,
+                                          ),
+                                          SizedBox(width: 15),
+                                          Text(
+                                            "SAVE GAME",
+                                            style: TextStyle(
+                                                fontFamily: "Julee",
+                                                fontSize: 28),
+                                          ),
+                                          Spacer(),
+                                          Icon(
+                                            Icons.chevron_right_rounded,
+                                            color: Colors.black,
+                                            size: 25,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 55,
+                                ),
+                                GestureDetector(
+                                  onTap: () => showAlertDialog(context),
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
+                                    height: 55,
+                                    margin: EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                    ).copyWith(
+                                      bottom: 20,
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 20,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30),
+                                      color: Colors.redAccent,
+                                    ),
+                                    child: Row(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.logout,
+                                          color: Colors.white,
+                                          size: 25,
+                                        ),
+                                        SizedBox(width: 15),
+                                        Text(
+                                          "Go to Main Menu",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 18,
+                                              fontFamily: "Arvo"),
+                                        ),
+                                        Spacer(),
+                                        Icon(
+                                          Icons.chevron_right_rounded,
+                                          color: Colors.white,
+                                          size: 25,
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                        );
-                      } else {
-                        return Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 50),
-                          child: Card(
-                            child: Container(
-                              height: 55,
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 20,
-                              ),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
-                                  color: Colors.transparent),
-                              child: Row(
-                                children: <Widget>[
-                                  vol == 0
-                                      ? Icon(
-                                          Icons.music_off,
-                                          size: 35,
-                                        )
-                                      : Icon(
-                                          Icons.music_note,
-                                          size: 35,
-                                        ),
-                                  SizedBox(width: 15),
-                                  Text(
-                                    "CHANGE AUDIO",
-                                    style: TextStyle(
-                                        fontFamily: "Julee", fontSize: 28),
-                                  ),
-                                  Spacer(),
-                                  Flexible(
-                                    child: SliderTheme(
-                                      data: SliderTheme.of(context).copyWith(
-                                        activeTrackColor: Colors.lightGreen,
-                                        inactiveTrackColor: Colors.grey,
-                                        thumbColor: Colors.green,
-                                        thumbShape: RoundSliderThumbShape(
-                                            enabledThumbRadius: 10.0),
-                                        overlayShape: RoundSliderOverlayShape(
-                                            overlayRadius: 10.0),
-                                      ),
-                                      child: Slider.adaptive(
-                                        min: 0.0,
-                                        max: 1.0,
-                                        value: vol!,
-                                        onChanged: (volume) {
-                                          setState(() {
-                                            if (Platform.isWindows ||
-                                                Platform.isLinux) {
-                                              widget.player?.setVolume(volume);
-                                            } else {
-                                              widget.audioPlayer
-                                                  ?.setVolume(volume);
-                                            }
-
-                                            vol = volume;
-                                            saveVolumeState(volume);
-                                          });
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                      }
-                    },
-                  ),
-                  Card(
-                    child: Container(
-                      width: MediaQuery.of(context).size.width / 2,
-                      height: 55,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 20,
-                      ),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Colors.transparent),
-                      child: Row(
-                        children: <Widget>[
-                          vol == 0
-                              ? Icon(
-                                  Icons.music_off,
-                                  size: 35,
-                                )
-                              : Icon(
-                                  Icons.music_note,
-                                  size: 35,
-                                ),
-                          SizedBox(width: 15),
-                          Text(
-                            "CHANGE VOICE",
-                            style: TextStyle(fontFamily: "Julee", fontSize: 28),
-                          ),
-                          Spacer(),
-                          Flexible(
-                            child: SliderTheme(
-                              data: SliderTheme.of(context).copyWith(
-                                activeTrackColor: Colors.lightGreen,
-                                inactiveTrackColor: Colors.grey,
-                                thumbColor: Colors.green,
-                                thumbShape: RoundSliderThumbShape(
-                                    enabledThumbRadius: 10.0),
-                                overlayShape: RoundSliderOverlayShape(
-                                    overlayRadius: 10.0),
-                              ),
-                              child: Slider.adaptive(
-                                divisions: 4,
-                                label: "$vol",
-                                min: 0.0,
-                                max: 1.0,
-                                value: vol!,
-                                onChanged: (volume) {
-                                  setState(() {
-                                    widget.player?.setVolume(volume);
-                                    vol = volume;
-                                    saveVolumeState(volume);
-                                  });
-                                },
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                        )
+                      ],
                     ),
-                  ),
-                  Card(
-                    child: Container(
-                      width: MediaQuery.of(context).size.width / 2,
-                      height: 55,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 20,
-                      ),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Colors.transparent),
-                      child: Row(
-                        children: <Widget>[
-                          vol == 0
-                              ? Icon(
-                                  Icons.music_off,
-                                  size: 35,
-                                )
-                              : Icon(
-                                  Icons.music_note,
-                                  size: 35,
-                                ),
-                          SizedBox(width: 15),
-                          Text(
-                            "TEXT SPEED",
-                            style: TextStyle(fontFamily: "Julee", fontSize: 28),
-                          ),
-                          Spacer(),
-                          Flexible(
-                            child: SliderTheme(
-                              data: SliderTheme.of(context).copyWith(
-                                activeTrackColor: Colors.lightGreen,
-                                inactiveTrackColor: Colors.grey,
-                                thumbColor: Colors.green,
-                                thumbShape: RoundSliderThumbShape(
-                                    enabledThumbRadius: 10.0),
-                                overlayShape: RoundSliderOverlayShape(
-                                    overlayRadius: 10.0),
-                              ),
-                              child: Slider.adaptive(
-                                divisions: 4,
-                                label: "$vol",
-                                min: 0.0,
-                                max: 1.0,
-                                value: vol!,
-                                onChanged: (volume) {
-                                  setState(() {
-                                    widget.player?.setVolume(volume);
-                                    vol = volume;
-                                    saveVolumeState(volume);
-                                  });
-                                },
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 55,
-                  ),
-                  InkWell(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => SaveGame(
-                                route: widget.route,
-                              )),
-                    ),
-                    child: Card(
-                      child: Container(
-                        width: MediaQuery.of(context).size.width / 2,
-                        height: 55,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 20,
-                        ),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            color: Colors.transparent),
-                        child: Row(
-                          children: <Widget>[
-                            Icon(
-                              Icons.save,
-                              size: 35,
-                            ),
-                            SizedBox(width: 15),
-                            Text(
-                              "SAVE GAME",
-                              style:
-                                  TextStyle(fontFamily: "Julee", fontSize: 28),
-                            ),
-                            Spacer(),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.black,
-                              size: 25,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 55,
-                  ),
-                  GestureDetector(
-                    onTap: () => showAlertDialog(context),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width / 2,
-                      height: 55,
-                      margin: EdgeInsets.symmetric(
-                        horizontal: 10,
-                      ).copyWith(
-                        bottom: 20,
-                      ),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 20,
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.redAccent,
-                      ),
-                      child: Row(
-                        children: <Widget>[
-                          Icon(
-                            Icons.logout,
-                            color: Colors.white,
-                            size: 25,
-                          ),
-                          SizedBox(width: 15),
-                          Text(
-                            "Go to Main Menu",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontFamily: "Arvo"),
-                          ),
-                          Spacer(),
-                          Icon(
-                            Icons.chevron_right_rounded,
-                            color: Colors.white,
-                            size: 25,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  ))))
                 ],
               ),
-            ),
+            )
           ],
-        ),
-      ),
-    );
+        )));
   }
 
   showAlertDialog(BuildContext context) {
@@ -812,7 +863,7 @@ class _SettingsIngameState extends State<SettingsIngame> {
                 letterSpacing: .4),
           ),
           onPressed: () {
-            Navigator.of(context).pushReplacementNamed("/home");
+            Navigator.of(context).pushNamed("/home");
           },
         ),
         SizedBox(

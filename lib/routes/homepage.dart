@@ -1,5 +1,7 @@
 // Primary
 import 'package:dart_vlc/dart_vlc.dart';
+import 'package:fablesofdesire/global/credits.dart';
+import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:fablesofdesire/routes/load_game.dart';
 import 'package:universal_io/io.dart';
 import 'package:fablesofdesire/global/globals.dart';
@@ -66,7 +68,7 @@ class AppBody extends StatelessWidget {
   const AppBody({
     Key? key,
     required PageController controller,
-  })  : _controller = controller,
+  })   : _controller = controller,
         super(key: key);
 
   final PageController _controller;
@@ -98,6 +100,7 @@ class _BaseScreenState extends State<HomePage2> {
   AudioPlayer audioPlayer = AudioPlayer();
   late AudioCache _audioCache;
   double? vol = 1.0;
+  double? opacity = 0.0;
 
   @override
   void initState() {
@@ -106,6 +109,11 @@ class _BaseScreenState extends State<HomePage2> {
     if (!Platform.isWindows || !Platform.isLinux) {
       getSharedPrefs();
     }
+    Future.delayed(Duration(seconds: 1), () {
+      setState(() {
+        opacity = 1.0;
+      });
+    });
   }
 
   Future<void> getSharedPrefs() async {
@@ -152,128 +160,172 @@ class _BaseScreenState extends State<HomePage2> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.transparent,
-      body: Stack(
-        children: <Widget>[
-          new Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image:
-                    AssetImage("assets/images/bgs/mininature_001_19201440.jpg"),
-                fit: BoxFit.cover,
+    return WillPopScope(
+      onWillPop: () => getOnWillPop(context),
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Colors.transparent,
+        body: Stack(
+          children: <Widget>[
+            new Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                      "assets/images/bgs/mininature_001_19201440.jpg"),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-          Center(
-            child: new Container(
-              child: SafeArea(
-                child: new SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 30, vertical: 5),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width / 3,
-                          child: ElevatedButton(
-                            child: Text(
-                              "START",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 35,
-                                  fontFamily: "Julee"),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.white,
-                              padding: EdgeInsets.symmetric(vertical: 20),
-                            ),
-                            onPressed: () async {
-                              if (Platform.isWindows || Platform.isLinux) {
-                                setState(() {
-                                  this.player?.stop();
-                                });
-                              } else {
-                                stopAudio();
-                              }
+            AnimatedOpacity(
+              opacity: opacity!,
+              duration: Duration(milliseconds: 300),
+              child: Center(
+                child: new Container(
+                  child: SafeArea(
+                    child: new SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 5),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width / 3,
+                              child: ElevatedButton(
+                                child: Text(
+                                  "START",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 35,
+                                      fontFamily: "Julee"),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.white,
+                                    padding: EdgeInsets.symmetric(vertical: 20),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                        side: BorderSide(color: Colors.white))),
+                                onPressed: () async {
+                                  if (Platform.isWindows || Platform.isLinux) {
+                                    setState(() {
+                                      this.player?.stop();
+                                    });
+                                  } else {
+                                    stopAudio();
+                                  }
 
-                              Navigator.of(context).pushNamed('/1');
-                            },
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 30, vertical: 5),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width / 3,
-                          child: ElevatedButton(
-                            child: Text(
-                              "LOAD",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 35,
-                                  fontFamily: "Julee"),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.white,
-                              padding: EdgeInsets.symmetric(vertical: 20),
-                            ),
-                            onPressed: () async {
-                              if (Platform.isWindows || Platform.isLinux) {
-                                setState(() {
-                                  this.player?.stop();
-                                });
-                              } else {
-                                stopAudio();
-                              }
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => LoadGame()),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 30, vertical: 5),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width / 3,
-                          child: ElevatedButton(
-                            child: Text(
-                              "OPTIONS",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 35,
-                                  fontFamily: "Julee"),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.white,
-                              padding: EdgeInsets.symmetric(vertical: 20),
-                            ),
-                            onPressed: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Settings(
-                                        player: player,
-                                        audioPlayer: audioPlayer,
-                                      )),
+                                  Navigator.of(context).pushNamed('/1');
+                                },
+                              ),
                             ),
                           ),
-                        ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 5),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width / 3,
+                              child: ElevatedButton(
+                                child: Text(
+                                  "LOAD",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 35,
+                                      fontFamily: "Julee"),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.white,
+                                    padding: EdgeInsets.symmetric(vertical: 20),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                        side: BorderSide(color: Colors.white))),
+                                onPressed: () async {
+                                  if (Platform.isWindows || Platform.isLinux) {
+                                    setState(() {
+                                      this.player?.stop();
+                                    });
+                                  } else {
+                                    stopAudio();
+                                  }
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => LoadGame()),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 5),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width / 3,
+                              child: ElevatedButton(
+                                child: Text(
+                                  "OPTIONS",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 35,
+                                      fontFamily: "Julee"),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.white,
+                                    padding: EdgeInsets.symmetric(vertical: 20),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                        side: BorderSide(color: Colors.white))),
+                                onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Settings(
+                                            player: player,
+                                            audioPlayer: audioPlayer,
+                                          )),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 5),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width / 3,
+                              child: ElevatedButton(
+                                child: Text(
+                                  "CREDITS",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 35,
+                                      fontFamily: "Julee"),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.white,
+                                    padding: EdgeInsets.symmetric(vertical: 20),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                        side: BorderSide(color: Colors.white))),
+                                onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Credits()),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

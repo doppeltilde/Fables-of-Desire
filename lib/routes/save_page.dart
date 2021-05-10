@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:universal_io/io.dart';
@@ -78,7 +77,7 @@ class _LoadGameState extends State<SaveGame> {
         decoration: BoxDecoration(
             image: DecorationImage(
           colorFilter: new ColorFilter.mode(
-              Colors.black.withOpacity(0.6), BlendMode.dstATop),
+              Colors.black.withOpacity(1), BlendMode.dstATop),
           image: AssetImage("assets/images/bgs/mininature_003_19201440.jpg"),
           fit: BoxFit.cover,
         )),
