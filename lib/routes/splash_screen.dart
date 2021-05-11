@@ -128,10 +128,17 @@ class _SplashScreenState extends State<SplashScreen> {
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       sharedPreferences = sp;
       vol = sharedPreferences!.getDouble("volValue");
-      // will be null if never previously saved
       if (vol == null) {
         vol = 1.0;
-        persistVol(vol!); // set an initial value
+        persistVol(vol!);
+      }
+    });
+    SharedPreferences.getInstance().then((SharedPreferences sp) {
+      sharedPreferences = sp;
+      speed = sharedPreferences!.getInt("speedValue");
+      if (speed == null) {
+        speed = 100;
+        persistSpeed(speed!);
       }
     });
 
@@ -166,6 +173,14 @@ class _SplashScreenState extends State<SplashScreen> {
       vol = value;
     });
     sharedPreferences?.setDouble("volValue", value);
+  }
+
+  int? speed;
+  void persistSpeed(int value) {
+    setState(() {
+      speed = value;
+    });
+    sharedPreferences?.setInt("speedValue", value);
   }
 
   //

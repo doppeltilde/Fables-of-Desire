@@ -61,7 +61,7 @@ dynamic settingsClip(context, _scaffoldKey, route) {
         onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => SettingsIngame(
+                  builder: (context) => Settings(
                         route: route,
                       )),
             ),

@@ -18,9 +18,11 @@ class InterludeTextSound extends StatefulWidget {
 
 class _InterludeState extends State<InterludeTextSound> {
   bool? isNoti;
+  int? speed;
   @override
   void initState() {
     super.initState();
+    getSpeed();
   }
 
   Future<Null> getSharedPrefs() async {
@@ -29,6 +31,23 @@ class _InterludeState extends State<InterludeTextSound> {
     if (isNoti == true) {
       //_playAudio();
     } else {}
+  }
+
+  getSpeed() async {
+    speed = await getSpeedState();
+    setState(() {});
+  }
+
+  saveSpeedState(value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt("speedValue", value);
+  }
+
+  getSpeedState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int? speed = prefs.getInt('speedValue');
+
+    return speed;
   }
 
   @override
@@ -103,7 +122,7 @@ class _InterludeState extends State<InterludeTextSound> {
                                     color: Colors.black,
                                     fontFamily: "Aleo",
                                     fontSize: 18),
-                                speed: const Duration(milliseconds: 40),
+                                speed: Duration(milliseconds: speed!),
                               ),
                             ],
                             displayFullTextOnTap: true,

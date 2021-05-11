@@ -284,6 +284,7 @@ class _BaseScreenState extends State<HomePage2> {
                                       builder: (context) => Settings(
                                             player: player,
                                             audioPlayer: audioPlayer,
+                                            route: "/home",
                                           )),
                                 ),
                               ),
