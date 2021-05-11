@@ -216,7 +216,7 @@ class _BaseScreenState extends State<HomePage2> {
                                     stopAudio();
                                   }
 
-                                  Navigator.of(context).pushNamed('/1');
+                                  Navigator.of(context).pushNamed('/intro');
                                 },
                               ),
                             ),

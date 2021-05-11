@@ -18,10 +18,16 @@ class InterludeTextSound extends StatefulWidget {
 
 class _InterludeState extends State<InterludeTextSound> {
   bool? isNoti;
-  int? speed;
+  int? speed = 50;
+  String? _name;
   @override
   void initState() {
     super.initState();
+    SharedPreferences.getInstance().then((prefValue) => {
+          setState(() {
+            _name = prefValue.getString('name') ?? 'MC';
+          })
+        });
     getSpeed();
   }
 
@@ -46,39 +52,65 @@ class _InterludeState extends State<InterludeTextSound> {
   getSpeedState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int? speed = prefs.getInt('speedValue');
-
     return speed;
   }
 
   @override
   Widget build(BuildContext context) {
     // DEBUG
-    getSharedPrefs();
-    print(widget.a);
-    print(widget.q);
-    print(widget.n);
+
+    // print(widget.a);
+    // print(widget.q);
+    // print(widget.n);
     //
     return Column(
       children: <Widget>[
-        Opacity(
-          opacity: 0.8,
-          child: Card(
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 2, horizontal: 15),
-              child: Text(
-                widget.a!,
-                style: TextStyle(
-                  fontFamily: "Julee",
-                  fontSize: 21,
-                  color: Colors.black,
+        Builder(
+          builder: (context) {
+            if (widget.a! == "MC") {
+              return Opacity(
+                opacity: 0.8,
+                child: Card(
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 2, horizontal: 15),
+                    child: Text(
+                      "$_name",
+                      style: TextStyle(
+                        fontFamily: "Julee",
+                        fontSize: 21,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ),
+              );
+            } else {
+              return Opacity(
+                opacity: 0.8,
+                child: Card(
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 2, horizontal: 15),
+                    child: Text(
+                      widget.a!,
+                      style: TextStyle(
+                        fontFamily: "Julee",
+                        fontSize: 21,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            }
+          },
         ),
         Stack(
           children: <Widget>[

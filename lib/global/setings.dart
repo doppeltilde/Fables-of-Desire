@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:fablesofdesire/global/setttings/text_speed.dart';
 import 'package:fablesofdesire/routes/save_page.dart';
 import 'package:flutter/material.dart';
