@@ -72,7 +72,7 @@ class _LoadGameState extends State<SaveGame> {
 
   @override
   Widget build(BuildContext context) {
-    print(saveSlotOne);
+    //print(saveSlotOne);
     return Container(
         decoration: BoxDecoration(
             image: DecorationImage(
@@ -129,7 +129,7 @@ class _LoadGameState extends State<SaveGame> {
                                     setState(() {
                                       saveSlotOne = widget.route;
                                       saveSlotOneState(widget.route);
-                                      print(saveSlotOne);
+                                      //print(saveSlotOne);
                                     });
                                   } else {
                                     showAlertDialog(context);
@@ -219,7 +219,7 @@ class _LoadGameState extends State<SaveGame> {
                                           onPressed: () {
                                             if (saveSlotOne == null ||
                                                 saveSlotOne!.isEmpty) {
-                                              print("EMPTY");
+                                              //print("EMPTY");
                                             } else {
                                               Navigator.of(context)
                                                   .pushNamed('$saveSlotOne');
@@ -236,9 +236,10 @@ class _LoadGameState extends State<SaveGame> {
                                         SizedBox(
                                           height: 10,
                                         ),
-                                        ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                primary: Colors.redAccent,
+                                        TextButton(
+                                            style: TextButton.styleFrom(
+                                                backgroundColor:
+                                                    Colors.redAccent,
                                                 padding: EdgeInsets.symmetric(
                                                     vertical: 20,
                                                     horizontal: 30)),
@@ -257,7 +258,7 @@ class _LoadGameState extends State<SaveGame> {
                                               style: TextStyle(
                                                   fontFamily: "Aleo",
                                                   color: Colors.white,
-                                                  fontSize: 18),
+                                                  fontSize: 15),
                                             ))
                                       ],
                                     );
@@ -275,7 +276,7 @@ class _LoadGameState extends State<SaveGame> {
                                     setState(() {
                                       saveSlot2 = widget.route;
                                       saveSlot2State(widget.route);
-                                      print(saveSlot2);
+                                      //print(saveSlot2);
                                     });
                                   } else {
                                     showAlertDialog2(context);
@@ -362,7 +363,7 @@ class _LoadGameState extends State<SaveGame> {
                                             onPressed: () {
                                               if (saveSlot2 == null ||
                                                   saveSlot2!.isEmpty) {
-                                                print("EMPTY");
+                                                //print("EMPTY");
                                               } else {
                                                 Navigator.of(context)
                                                     .pushNamed('$saveSlot2');
@@ -378,9 +379,10 @@ class _LoadGameState extends State<SaveGame> {
                                         SizedBox(
                                           height: 10,
                                         ),
-                                        ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                primary: Colors.redAccent,
+                                        TextButton(
+                                            style: TextButton.styleFrom(
+                                                backgroundColor:
+                                                    Colors.redAccent,
                                                 padding: EdgeInsets.symmetric(
                                                     vertical: 20,
                                                     horizontal: 30)),
@@ -392,7 +394,7 @@ class _LoadGameState extends State<SaveGame> {
                                               setState(() {
                                                 prefs.remove("saveSlot2");
                                                 saveSlot2 = null;
-                                                print(saveSlot2);
+                                                //print(saveSlot2);
                                               });
                                             },
                                             child: Text(
@@ -400,8 +402,8 @@ class _LoadGameState extends State<SaveGame> {
                                               style: TextStyle(
                                                   fontFamily: "Aleo",
                                                   color: Colors.white,
-                                                  fontSize: 18),
-                                            ))
+                                                  fontSize: 15),
+                                            )),
                                       ],
                                     );
                                   }
@@ -418,7 +420,7 @@ class _LoadGameState extends State<SaveGame> {
                                     setState(() {
                                       saveSlot3 = widget.route;
                                       saveSlot3State(widget.route);
-                                      print(saveSlot3);
+                                      // print(saveSlot3);
                                     });
                                   } else {
                                     showAlertDialog3(context);
@@ -505,7 +507,7 @@ class _LoadGameState extends State<SaveGame> {
                                             onPressed: () {
                                               if (saveSlot3 == null ||
                                                   saveSlot3!.isEmpty) {
-                                                print("EMPTY");
+                                                //print("EMPTY");
                                               } else {
                                                 Navigator.of(context)
                                                     .pushNamed('$saveSlot3');
@@ -521,9 +523,10 @@ class _LoadGameState extends State<SaveGame> {
                                         SizedBox(
                                           height: 10,
                                         ),
-                                        ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                primary: Colors.redAccent,
+                                        TextButton(
+                                            style: TextButton.styleFrom(
+                                                backgroundColor:
+                                                    Colors.redAccent,
                                                 padding: EdgeInsets.symmetric(
                                                     vertical: 20,
                                                     horizontal: 30)),
@@ -535,7 +538,7 @@ class _LoadGameState extends State<SaveGame> {
                                               setState(() {
                                                 prefs.remove("saveSlot3");
                                                 saveSlot3 = null;
-                                                print(saveSlot3);
+                                                //print(saveSlot3);
                                               });
                                             },
                                             child: Text(
@@ -543,7 +546,7 @@ class _LoadGameState extends State<SaveGame> {
                                               style: TextStyle(
                                                   fontFamily: "Aleo",
                                                   color: Colors.white,
-                                                  fontSize: 18),
+                                                  fontSize: 15),
                                             )),
                                       ],
                                     );
@@ -586,7 +589,7 @@ class _LoadGameState extends State<SaveGame> {
             setState(() {
               saveSlotOne = widget.route;
               saveSlotOneState(widget.route);
-              print(saveSlotOne);
+              //print(saveSlotOne);
             });
           },
         ),
@@ -660,7 +663,7 @@ class _LoadGameState extends State<SaveGame> {
             setState(() {
               saveSlot2 = widget.route;
               saveSlot2State(widget.route);
-              print(saveSlot2);
+              //print(saveSlot2);
             });
           },
         ),
@@ -734,7 +737,7 @@ class _LoadGameState extends State<SaveGame> {
             setState(() {
               saveSlot3 = widget.route;
               saveSlot3State(widget.route);
-              print(saveSlot3);
+              //print(saveSlot3);
             });
           },
         ),

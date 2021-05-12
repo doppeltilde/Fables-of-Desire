@@ -136,15 +136,13 @@ class _InterludeState extends State<InterludeTextSound> {
                     ],
                   ),
                   FittedBox(
-                    fit: BoxFit.fitWidth,
+                    fit: BoxFit.scaleDown,
                     child: Stack(
                       children: <Widget>[
                         Container(
                           color: Colors.transparent,
                           padding: EdgeInsets.symmetric(
-                              vertical: 15,
-                              horizontal:
-                                  MediaQuery.of(context).size.width / 12),
+                              vertical: 15, horizontal: 70),
                           child: AnimatedTextKit(
                             animatedTexts: [
                               TyperAnimatedText(

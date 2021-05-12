@@ -1,3 +1,4 @@
+import 'package:fablesofdesire/global/setttings/bgm_volume.dart';
 import 'package:fablesofdesire/global/setttings/text_speed.dart';
 import 'package:fablesofdesire/routes/save_page.dart';
 import 'package:flutter/material.dart';
@@ -59,337 +60,489 @@ class _SettingsState extends State<Settings> {
             backgroundColor: Colors.transparent,
             body: Stack(children: <Widget>[
               Center(
-                child: new Container(
-                  child: SafeArea(
-                    child: new SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          LayoutBuilder(
-                            builder: (context, constraints) {
-                              if (constraints.maxWidth > 1200) {
-                                return Card(
-                                  child: Container(
-                                    width:
-                                        MediaQuery.of(context).size.width / 2,
-                                    height: 55,
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 20,
-                                    ),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                        color: Colors.transparent),
-                                    child: Row(
-                                      children: <Widget>[
-                                        vol == 0
-                                            ? Icon(
-                                                Icons.music_off,
-                                                size: 35,
-                                              )
-                                            : Icon(
-                                                Icons.music_note,
-                                                size: 35,
-                                              ),
-                                        SizedBox(width: 15),
-                                        Text(
-                                          "MUSIC VOLUME",
-                                          style: TextStyle(
-                                              fontFamily: "Julee",
-                                              fontSize: 28),
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: <Widget>[
+                        Flexible(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.max,
+                            children: <Widget>[
+                              BGMVolume(
+                                player: widget.player,
+                                audioPlayer: widget.audioPlayer,
+                              ),
+                              LayoutBuilder(
+                                builder: (context, constraints) {
+                                  if (constraints.maxWidth > 1200) {
+                                    return Card(
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                2,
+                                        height: 55,
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 20,
                                         ),
-                                        Spacer(),
-                                        Flexible(
-                                          child: SliderTheme(
-                                            data: SliderTheme.of(context)
-                                                .copyWith(
-                                              activeTrackColor:
-                                                  Colors.lightGreen,
-                                              inactiveTrackColor:
-                                                  Colors.grey[300],
-                                              thumbColor: Colors.green,
-                                              thumbShape: RoundSliderThumbShape(
-                                                  enabledThumbRadius: 12.0),
-                                              overlayShape:
-                                                  RoundSliderOverlayShape(
-                                                      overlayRadius: 0.0),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                            color: Colors.transparent),
+                                        child: Row(
+                                          children: <Widget>[
+                                            vol == 0
+                                                ? Icon(
+                                                    Icons.voice_over_off,
+                                                    size: 35,
+                                                  )
+                                                : Icon(
+                                                    Icons.record_voice_over,
+                                                    size: 35,
+                                                  ),
+                                            SizedBox(width: 15),
+                                            Text(
+                                              "VOICE VOLUME",
+                                              style: TextStyle(
+                                                  fontFamily: "Julee",
+                                                  fontSize: 28),
                                             ),
-                                            child: Slider(
-                                              min: 0.0,
-                                              max: 1.0,
-                                              value: vol!,
-                                              onChanged: (volume) {
-                                                setState(() {
-                                                  if (Platform.isWindows ||
-                                                      Platform.isLinux) {
-                                                    widget.player
-                                                        ?.setVolume(volume);
-                                                  } else {
-                                                    widget.audioPlayer
-                                                        ?.setVolume(volume);
-                                                  }
-
-                                                  vol = volume;
-                                                  saveVolumeState(volume);
-                                                });
-                                              },
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              } else {
-                                return Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 50),
-                                  child: Card(
-                                    child: Container(
-                                      height: 55,
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 20,
-                                      ),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(30),
-                                          color: Colors.transparent),
-                                      child: Row(
-                                        children: <Widget>[
-                                          vol == 0
-                                              ? Icon(
-                                                  Icons.music_off,
-                                                  size: 35,
-                                                )
-                                              : Icon(
-                                                  Icons.music_note,
-                                                  size: 35,
+                                            Spacer(),
+                                            Flexible(
+                                              child: SliderTheme(
+                                                data: SliderTheme.of(context)
+                                                    .copyWith(
+                                                  activeTrackColor:
+                                                      Colors.lightGreen,
+                                                  inactiveTrackColor:
+                                                      Colors.grey[300],
+                                                  thumbColor: Colors.green,
+                                                  thumbShape:
+                                                      RoundSliderThumbShape(
+                                                          enabledThumbRadius:
+                                                              12.0),
+                                                  overlayShape:
+                                                      RoundSliderOverlayShape(
+                                                          overlayRadius: 0.0),
                                                 ),
-                                          SizedBox(width: 15),
-                                          Text(
-                                            "MUSIC VOLUME",
+                                                child: Slider(
+                                                  min: 0.0,
+                                                  max: 1.0,
+                                                  value: vol!,
+                                                  onChanged: (volume) {
+                                                    setState(() {
+                                                      if (Platform.isWindows ||
+                                                          Platform.isLinux) {
+                                                        widget.player
+                                                            ?.setVolume(volume);
+                                                      } else {
+                                                        widget.audioPlayer
+                                                            ?.setVolume(volume);
+                                                      }
+
+                                                      vol = volume;
+                                                      saveVolumeState(volume);
+                                                    });
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  } else {
+                                    return Column(children: [
+                                      Divider(),
+                                      Card(
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 20,
+                                            vertical: 10,
+                                          ),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              color: Colors.transparent),
+                                          child: Text(
+                                            "VOICE VOLUME",
                                             style: TextStyle(
                                                 fontFamily: "Julee",
                                                 fontSize: 25),
                                           ),
-                                          Spacer(),
-                                          Flexible(
-                                            child: SliderTheme(
-                                              data: SliderTheme.of(context)
-                                                  .copyWith(
-                                                activeTrackColor:
-                                                    Colors.lightGreen,
-                                                inactiveTrackColor:
-                                                    Colors.grey[300],
-                                                thumbColor: Colors.green,
-                                                thumbShape:
-                                                    RoundSliderThumbShape(
-                                                        enabledThumbRadius:
-                                                            12.0),
-                                                overlayShape:
-                                                    RoundSliderOverlayShape(
-                                                        overlayRadius: 0.0),
-                                              ),
-                                              child: Slider(
-                                                min: 0.0,
-                                                max: 1.0,
-                                                value: vol!,
-                                                onChanged: (volume) {
-                                                  setState(() {
-                                                    if (Platform.isWindows ||
-                                                        Platform.isLinux) {
-                                                      widget.player
-                                                          ?.setVolume(volume);
-                                                    } else {
-                                                      widget.audioPlayer
-                                                          ?.setVolume(volume);
-                                                    }
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 50),
+                                        child: Card(
+                                          child: Container(
+                                            height: 55,
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 20,
+                                            ),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                                color: Colors.transparent),
+                                            child: Row(
+                                              children: <Widget>[
+                                                vol == 0
+                                                    ? Icon(
+                                                        Icons.voice_over_off,
+                                                        size: 35,
+                                                      )
+                                                    : Icon(
+                                                        Icons.record_voice_over,
+                                                        size: 35,
+                                                      ),
+                                                SizedBox(width: 15),
+                                                Flexible(
+                                                  child: SliderTheme(
+                                                    data:
+                                                        SliderTheme.of(context)
+                                                            .copyWith(
+                                                      activeTrackColor:
+                                                          Colors.lightGreen,
+                                                      inactiveTrackColor:
+                                                          Colors.grey[300],
+                                                      thumbColor: Colors.green,
+                                                      thumbShape:
+                                                          RoundSliderThumbShape(
+                                                              enabledThumbRadius:
+                                                                  12.0),
+                                                      overlayShape:
+                                                          RoundSliderOverlayShape(
+                                                              overlayRadius:
+                                                                  0.0),
+                                                    ),
+                                                    child: Slider(
+                                                      min: 0.0,
+                                                      max: 1.0,
+                                                      value: vol!,
+                                                      onChanged: (volume) {
+                                                        setState(() {
+                                                          if (Platform
+                                                                  .isWindows ||
+                                                              Platform
+                                                                  .isLinux) {
+                                                            widget.player
+                                                                ?.setVolume(
+                                                                    volume);
+                                                          } else {
+                                                            widget.audioPlayer
+                                                                ?.setVolume(
+                                                                    volume);
+                                                          }
 
-                                                    vol = volume;
-                                                    saveVolumeState(volume);
-                                                  });
-                                                },
-                                              ),
+                                                          vol = volume;
+                                                          saveVolumeState(
+                                                              volume);
+                                                        });
+                                                      },
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              }
-                            },
-                          ),
-                          Card(
-                            child: Container(
-                              width: MediaQuery.of(context).size.width / 2,
-                              height: 55,
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 20,
-                              ),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
-                                  color: Colors.transparent),
-                              child: Row(
-                                children: <Widget>[
-                                  vol == 0
-                                      ? Icon(
-                                          Icons.voice_over_off,
-                                          size: 35,
-                                        )
-                                      : Icon(
-                                          Icons.record_voice_over,
-                                          size: 35,
                                         ),
-                                  SizedBox(width: 15),
-                                  Text(
-                                    "VOICE VOLUME",
-                                    style: TextStyle(
-                                        fontFamily: "Julee", fontSize: 28),
-                                  ),
-                                  Spacer(),
-                                  Flexible(
-                                    child: SliderTheme(
-                                      data: SliderTheme.of(context).copyWith(
-                                        activeTrackColor: Colors.lightGreen,
-                                        inactiveTrackColor: Colors.grey,
-                                        thumbColor: Colors.green,
-                                        thumbShape: RoundSliderThumbShape(
-                                            enabledThumbRadius: 10.0),
-                                        overlayShape: RoundSliderOverlayShape(
-                                            overlayRadius: 10.0),
                                       ),
-                                      child: Slider.adaptive(
-                                        divisions: 4,
-                                        label: "$vol",
-                                        min: 0.0,
-                                        max: 1.0,
-                                        value: vol!,
-                                        onChanged: (volume) {
-                                          setState(() {
-                                            widget.player?.setVolume(volume);
-                                            vol = volume;
-                                            saveVolumeState(volume);
-                                          });
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                    ]);
+                                  }
+                                },
                               ),
+                              LayoutBuilder(
+                                builder: (context, constraints) {
+                                  if (constraints.maxWidth > 1200) {
+                                    return Card(
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                2,
+                                        height: 55,
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 20,
+                                        ),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                            color: Colors.transparent),
+                                        child: Row(
+                                          children: <Widget>[
+                                            vol == 0
+                                                ? Icon(
+                                                    Icons.volume_off,
+                                                    size: 35,
+                                                  )
+                                                : Icon(
+                                                    Icons.volume_up,
+                                                    size: 35,
+                                                  ),
+                                            SizedBox(width: 15),
+                                            Text(
+                                              "SFX VOLUME",
+                                              style: TextStyle(
+                                                  fontFamily: "Julee",
+                                                  fontSize: 28),
+                                            ),
+                                            Spacer(),
+                                            Flexible(
+                                              child: SliderTheme(
+                                                data: SliderTheme.of(context)
+                                                    .copyWith(
+                                                  activeTrackColor:
+                                                      Colors.lightGreen,
+                                                  inactiveTrackColor:
+                                                      Colors.grey[300],
+                                                  thumbColor: Colors.green,
+                                                  thumbShape:
+                                                      RoundSliderThumbShape(
+                                                          enabledThumbRadius:
+                                                              12.0),
+                                                  overlayShape:
+                                                      RoundSliderOverlayShape(
+                                                          overlayRadius: 0.0),
+                                                ),
+                                                child: Slider(
+                                                  min: 0.0,
+                                                  max: 1.0,
+                                                  value: vol!,
+                                                  onChanged: (volume) {
+                                                    setState(() {
+                                                      if (Platform.isWindows ||
+                                                          Platform.isLinux) {
+                                                        widget.player
+                                                            ?.setVolume(volume);
+                                                      } else {
+                                                        widget.audioPlayer
+                                                            ?.setVolume(volume);
+                                                      }
+
+                                                      vol = volume;
+                                                      saveVolumeState(volume);
+                                                    });
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  } else {
+                                    return Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 50),
+                                      child: Card(
+                                        child: Container(
+                                          height: 55,
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 20,
+                                          ),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              color: Colors.transparent),
+                                          child: Row(
+                                            children: <Widget>[
+                                              vol == 0
+                                                  ? Icon(
+                                                      Icons.volume_off,
+                                                      size: 35,
+                                                    )
+                                                  : Icon(
+                                                      Icons.volume_up,
+                                                      size: 35,
+                                                    ),
+                                              SizedBox(width: 15),
+                                              Text(
+                                                "SFX VOLUME",
+                                                style: TextStyle(
+                                                    fontFamily: "Julee",
+                                                    fontSize: 25),
+                                              ),
+                                              Spacer(),
+                                              Flexible(
+                                                child: SliderTheme(
+                                                  data: SliderTheme.of(context)
+                                                      .copyWith(
+                                                    activeTrackColor:
+                                                        Colors.lightGreen,
+                                                    inactiveTrackColor:
+                                                        Colors.grey[300],
+                                                    thumbColor: Colors.green,
+                                                    thumbShape:
+                                                        RoundSliderThumbShape(
+                                                            enabledThumbRadius:
+                                                                12.0),
+                                                    overlayShape:
+                                                        RoundSliderOverlayShape(
+                                                            overlayRadius: 0.0),
+                                                  ),
+                                                  child: Slider(
+                                                    min: 0.0,
+                                                    max: 1.0,
+                                                    value: vol!,
+                                                    onChanged: (volume) {
+                                                      setState(() {
+                                                        if (Platform
+                                                                .isWindows ||
+                                                            Platform.isLinux) {
+                                                          widget.player
+                                                              ?.setVolume(
+                                                                  volume);
+                                                        } else {
+                                                          widget.audioPlayer
+                                                              ?.setVolume(
+                                                                  volume);
+                                                        }
+
+                                                        vol = volume;
+                                                        saveVolumeState(volume);
+                                                      });
+                                                    },
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                },
+                              ),
+                              TextSpeed(),
+                            ],
+                          ),
+                        ),
+                        Flexible(
+                          child: Container(
+                            padding: EdgeInsets.only(left: 8),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.max,
+                              children: <Widget>[
+                                Builder(
+                                  builder: (context) {
+                                    if (widget.route != "/home") {
+                                      return InkWell(
+                                        onTap: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => SaveGame(
+                                                    route: widget.route,
+                                                  )),
+                                        ),
+                                        child: Card(
+                                          child: Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2,
+                                            height: 55,
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 20,
+                                            ),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                                color: Colors.transparent),
+                                            child: Row(
+                                              children: <Widget>[
+                                                Icon(
+                                                  Icons.save,
+                                                  size: 35,
+                                                ),
+                                                SizedBox(width: 15),
+                                                Text(
+                                                  "SAVE GAME",
+                                                  style: TextStyle(
+                                                      fontFamily: "Julee",
+                                                      fontSize: 28),
+                                                ),
+                                                Spacer(),
+                                                Icon(
+                                                  Icons.chevron_right_rounded,
+                                                  color: Colors.black,
+                                                  size: 25,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    } else {
+                                      return SizedBox.shrink();
+                                    }
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 55,
+                                ),
+                                Builder(
+                                  builder: (context) {
+                                    if (widget.route != "/home") {
+                                      return GestureDetector(
+                                        onTap: () => showAlertDialog(context),
+                                        child: Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              2,
+                                          height: 55,
+                                          margin: EdgeInsets.symmetric(
+                                            horizontal: 10,
+                                          ).copyWith(
+                                            bottom: 20,
+                                          ),
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 20,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                            color: Colors.redAccent,
+                                          ),
+                                          child: Row(
+                                            children: <Widget>[
+                                              Icon(
+                                                Icons.logout,
+                                                color: Colors.white,
+                                                size: 25,
+                                              ),
+                                              SizedBox(width: 15),
+                                              Text(
+                                                "Go to Main Menu",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 18,
+                                                    fontFamily: "Arvo"),
+                                              ),
+                                              Spacer(),
+                                              Icon(
+                                                Icons.chevron_right_rounded,
+                                                color: Colors.white,
+                                                size: 25,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    } else {
+                                      return SizedBox.shrink();
+                                    }
+                                  },
+                                ),
+                              ],
                             ),
                           ),
-                          TextSpeed(),
-                          SizedBox(
-                            height: 55,
-                          ),
-                          Builder(
-                            builder: (context) {
-                              if (widget.route != "/home") {
-                                return InkWell(
-                                  onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SaveGame(
-                                              route: widget.route,
-                                            )),
-                                  ),
-                                  child: Card(
-                                    child: Container(
-                                      width:
-                                          MediaQuery.of(context).size.width / 2,
-                                      height: 55,
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 20,
-                                      ),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(30),
-                                          color: Colors.transparent),
-                                      child: Row(
-                                        children: <Widget>[
-                                          Icon(
-                                            Icons.save,
-                                            size: 35,
-                                          ),
-                                          SizedBox(width: 15),
-                                          Text(
-                                            "SAVE GAME",
-                                            style: TextStyle(
-                                                fontFamily: "Julee",
-                                                fontSize: 28),
-                                          ),
-                                          Spacer(),
-                                          Icon(
-                                            Icons.chevron_right_rounded,
-                                            color: Colors.black,
-                                            size: 25,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              } else {
-                                return SizedBox.shrink();
-                              }
-                            },
-                          ),
-                          SizedBox(
-                            height: 55,
-                          ),
-                          Builder(
-                            builder: (context) {
-                              if (widget.route != "/home") {
-                                return GestureDetector(
-                                  onTap: () => showAlertDialog(context),
-                                  child: Container(
-                                    width:
-                                        MediaQuery.of(context).size.width / 2,
-                                    height: 55,
-                                    margin: EdgeInsets.symmetric(
-                                      horizontal: 10,
-                                    ).copyWith(
-                                      bottom: 20,
-                                    ),
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 20,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30),
-                                      color: Colors.redAccent,
-                                    ),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Icon(
-                                          Icons.logout,
-                                          color: Colors.white,
-                                          size: 25,
-                                        ),
-                                        SizedBox(width: 15),
-                                        Text(
-                                          "Go to Main Menu",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 18,
-                                              fontFamily: "Arvo"),
-                                        ),
-                                        Spacer(),
-                                        Icon(
-                                          Icons.chevron_right_rounded,
-                                          color: Colors.white,
-                                          size: 25,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              } else {
-                                return SizedBox.shrink();
-                              }
-                            },
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

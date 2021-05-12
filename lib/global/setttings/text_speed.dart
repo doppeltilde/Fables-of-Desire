@@ -92,7 +92,7 @@ class _TextSpeedState extends State<TextSpeed> {
                       max: 100,
                       value: speed!.toDouble(),
                       onChanged: (fast) {
-                        setState(() async {
+                        setState(() {
                           speed = fast.toInt();
                           saveSpeedState(fast.toInt());
                           //saveVolumeState(volume);

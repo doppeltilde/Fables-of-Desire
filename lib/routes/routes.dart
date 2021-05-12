@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:fablesofdesire/routes/route_observer.dart';
 import 'package:fablesofdesire/routes/splash_screen.dart';
 import 'package:fablesofdesire/screens/chapter1/chapter1.dart';
+import 'package:fablesofdesire/screens/chapter1/chapter2.dart';
 import 'package:fablesofdesire/screens/chapter1/intro.dart';
 import 'package:flutter/material.dart';
 import 'homepage.dart';
@@ -36,6 +37,9 @@ class Home extends StatelessWidget {
         },
         '/1': (context) {
           return VN1();
+        },
+        '/2': (context) {
+          return VN2();
         },
       },
     );

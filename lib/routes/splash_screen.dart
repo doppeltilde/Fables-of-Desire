@@ -95,11 +95,11 @@ class _SplashScreenState extends State<SplashScreen> {
     },
   ];
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    for (var i in images) precacheImage(AssetImage(i["image"]), context);
-  }
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //   for (var i in images) precacheImage(AssetImage(i["image"]), context);
+  // }
   // PRECACHE IMAGES
 
   @override
@@ -107,49 +107,54 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     //GamesServices.signIn();
     //initPlatformState();
-    SharedPreferences.getInstance().then((SharedPreferences sp) {
-      sharedPreferences = sp;
-      isNoti = sharedPreferences!.getBool(notiKey);
-      // will be null if never previously saved
-      if (isNoti == null) {
-        isNoti = true;
-        persistNoti(isNoti!); // set an initial value
-      }
-    });
-    SharedPreferences.getInstance().then((SharedPreferences sp) {
-      sharedPreferences = sp;
-      isSwitchedFT = sharedPreferences!.getBool(spKey);
-      // will be null if never previously saved
-      if (isSwitchedFT == null) {
-        isSwitchedFT = true;
-        persist(isSwitchedFT!); // set an initial value
-      }
-    });
-    SharedPreferences.getInstance().then((SharedPreferences sp) {
-      sharedPreferences = sp;
-      vol = sharedPreferences!.getDouble("volValue");
-      if (vol == null) {
-        vol = 1.0;
-        persistVol(vol!);
-      }
-    });
-    SharedPreferences.getInstance().then((SharedPreferences sp) {
-      sharedPreferences = sp;
-      speed = sharedPreferences!.getInt("speedValue");
-      if (speed == null) {
-        speed = 100;
-        persistSpeed(speed!);
-      }
-    });
+    Future.delayed(Duration.zero).then((_) {
+      // PRECACHE IMAGES
+      for (var i in images) precacheImage(AssetImage(i["image"]), context);
 
-    Future.delayed(const Duration(seconds: 3), () {
-      if (this.mounted) {
-        initSplash();
-      }
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      setState(() {
-        opacity = 1.0;
+      SharedPreferences.getInstance().then((SharedPreferences sp) {
+        sharedPreferences = sp;
+        isNoti = sharedPreferences!.getBool(notiKey);
+        // will be null if never previously saved
+        if (isNoti == null) {
+          isNoti = true;
+          persistNoti(isNoti!); // set an initial value
+        }
+      });
+      SharedPreferences.getInstance().then((SharedPreferences sp) {
+        sharedPreferences = sp;
+        isSwitchedFT = sharedPreferences!.getBool(spKey);
+        // will be null if never previously saved
+        if (isSwitchedFT == null) {
+          isSwitchedFT = true;
+          persist(isSwitchedFT!); // set an initial value
+        }
+      });
+      SharedPreferences.getInstance().then((SharedPreferences sp) {
+        sharedPreferences = sp;
+        vol = sharedPreferences!.getDouble("volValue");
+        if (vol == null) {
+          vol = 1.0;
+          persistVol(vol!);
+        }
+      });
+      SharedPreferences.getInstance().then((SharedPreferences sp) {
+        sharedPreferences = sp;
+        speed = sharedPreferences!.getInt("speedValue");
+        if (speed == null) {
+          speed = 100;
+          persistSpeed(speed!);
+        }
+      });
+
+      Future.delayed(const Duration(seconds: 3), () {
+        if (this.mounted) {
+          initSplash();
+        }
+      });
+      Future.delayed(Duration(seconds: 1), () {
+        setState(() {
+          opacity = 1.0;
+        });
       });
     });
   }

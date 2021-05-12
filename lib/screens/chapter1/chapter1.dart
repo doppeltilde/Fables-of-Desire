@@ -7,12 +7,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class VN1 extends StatefulWidget {
   @override
-  _QuizPageState createState() => _QuizPageState();
+  _VNState createState() => _VNState();
 }
 
-class _QuizPageState extends State<VN1> {
+class _VNState extends State<VN1> {
   final String route = "/1";
-  final String nextRoute = "/1";
+  final String nextRoute = "/2";
   TextConstructor1 textSound = TextConstructor1();
   bool? isNoti;
 
