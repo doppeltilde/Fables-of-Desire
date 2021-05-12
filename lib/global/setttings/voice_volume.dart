@@ -1,38 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:universal_io/io.dart';
 
-class TextSpeed extends StatefulWidget {
+class VoiceVolume extends StatefulWidget {
   final player;
-  TextSpeed({Key? key, this.player});
+  final audioPlayer;
+  VoiceVolume({Key? key, this.player, this.audioPlayer});
   @override
   _TextSpeedState createState() => new _TextSpeedState();
 }
 
-class _TextSpeedState extends State<TextSpeed> {
+class _TextSpeedState extends State<VoiceVolume> {
   @override
   void initState() {
     super.initState();
-    getSpeed();
+    getVolume();
   }
 
-  getSpeed() async {
-    speed = await getSpeedState();
+  double? vol = 1.0;
+  getVolume() async {
+    vol = await getVolumeState();
     setState(() {});
   }
 
-  saveSpeedState(value) async {
+  saveVolumeState(value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt("speedValue", value);
+    prefs.setDouble("volValue", value);
   }
 
-  getSpeedState() async {
+  getVolumeState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    int? speed = prefs.getInt('speedValue');
+    double? vol = prefs.getDouble('volValue');
 
-    return speed;
+    return vol;
   }
 
-  int? speed = 100;
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -42,7 +44,7 @@ class _TextSpeedState extends State<TextSpeed> {
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             child: Text(
-              "TEXT VOLUME",
+              "VOICE VOLUME",
               style: TextStyle(fontFamily: "Julee", fontSize: 25),
             ),
           ),
@@ -59,36 +61,16 @@ class _TextSpeedState extends State<TextSpeed> {
               color: Colors.transparent),
           child: Row(
             children: <Widget>[
-              Builder(
-                builder: (context) {
-                  if (speed == 0) {
-                    return Icon(
-                      Icons.pause,
+              vol == 0
+                  ? Icon(
+                      Icons.voice_over_off,
                       size: 35,
-                    );
-                  } else if (speed! <= 50) {
-                    return Icon(
-                      Icons.fast_forward,
+                    )
+                  : Icon(
+                      Icons.record_voice_over,
                       size: 35,
-                    );
-                  } else {
-                    return Icon(
-                      Icons.play_arrow,
-                      size: 35,
-                    );
-                  }
-                },
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Text(
-                "Faster",
-                style: TextStyle(fontFamily: "Aleo", fontSize: 16),
-              ),
-              SizedBox(
-                width: 10,
-              ),
+                    ),
+              SizedBox(width: 15),
               Flexible(
                 child: SliderTheme(
                   data: SliderTheme.of(context).copyWith(
@@ -99,32 +81,28 @@ class _TextSpeedState extends State<TextSpeed> {
                     overlayShape: RoundSliderOverlayShape(overlayRadius: 0.0),
                   ),
                   child: Slider(
-                    divisions: 6,
-                    label: "$speed",
-                    min: 0,
-                    max: 100,
-                    value: speed!.toDouble(),
-                    onChanged: (fast) {
+                    min: 0.0,
+                    max: 1.0,
+                    value: vol!,
+                    onChanged: (volume) {
                       setState(() {
-                        speed = fast.toInt();
-                        saveSpeedState(fast.toInt());
-                        //saveVolumeState(volume);
+                        if (Platform.isWindows || Platform.isLinux) {
+                          widget.player?.setVolume(volume);
+                        } else {
+                          widget.audioPlayer?.setVolume(volume);
+                        }
+
+                        vol = volume;
+                        saveVolumeState(volume);
                       });
                     },
                   ),
                 ),
               ),
-              SizedBox(
-                width: 10,
-              ),
-              Text(
-                "Slower",
-                style: TextStyle(fontFamily: "Aleo", fontSize: 16),
-              ),
             ],
           ),
         ),
-      )
+      ),
     ]);
   }
 }
