@@ -63,150 +63,152 @@ class _SettingsState extends State<Settings> {
                   return Center(
                     child: Container(
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: <Widget>[
-                            Flexible(
-                              child: Container(
-                                padding: EdgeInsets.only(left: 8),
+                        padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                        child: SafeArea(
+                          child: Row(
+                            children: <Widget>[
+                              Flexible(
                                 child: SingleChildScrollView(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: <Widget>[
-                                      Builder(
-                                        builder: (context) {
-                                          if (widget.route != "/home") {
-                                            return InkWell(
-                                              onTap: () => Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        SaveGame(
-                                                          route: widget.route,
-                                                        )),
-                                              ),
-                                              child: Card(
+                                  child: SettingsChangers(
+                                    player: widget.player,
+                                    audioPlayer: widget.audioPlayer,
+                                  ),
+                                ),
+                              ),
+                              Flexible(
+                                child: Container(
+                                  padding: EdgeInsets.only(left: 10),
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      children: <Widget>[
+                                        Builder(
+                                          builder: (context) {
+                                            if (widget.route != "/home") {
+                                              return InkWell(
+                                                onTap: () => Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          SaveGame(
+                                                            route: widget.route,
+                                                          )),
+                                                ),
+                                                child: Card(
+                                                  child: Container(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            2,
+                                                    height: 55,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                      horizontal: 20,
+                                                    ),
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(30),
+                                                        color:
+                                                            Colors.transparent),
+                                                    child: Row(
+                                                      children: <Widget>[
+                                                        Icon(
+                                                          Icons.save,
+                                                          size: 35,
+                                                        ),
+                                                        SizedBox(width: 15),
+                                                        Text(
+                                                          "SAVE GAME",
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  "Julee",
+                                                              fontSize: 28),
+                                                        ),
+                                                        Spacer(),
+                                                        Icon(
+                                                          Icons
+                                                              .chevron_right_rounded,
+                                                          color: Colors.black,
+                                                          size: 25,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            } else {
+                                              return SizedBox.shrink();
+                                            }
+                                          },
+                                        ),
+                                        SizedBox(
+                                          height: 55,
+                                        ),
+                                        Builder(
+                                          builder: (context) {
+                                            if (widget.route != "/home") {
+                                              return GestureDetector(
+                                                onTap: () =>
+                                                    showAlertDialog(context),
                                                 child: Container(
                                                   width: MediaQuery.of(context)
                                                           .size
                                                           .width /
                                                       2,
                                                   height: 55,
+                                                  margin: EdgeInsets.symmetric(
+                                                    horizontal: 10,
+                                                  ).copyWith(
+                                                    bottom: 20,
+                                                  ),
                                                   padding: EdgeInsets.symmetric(
                                                     horizontal: 20,
                                                   ),
                                                   decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              30),
-                                                      color:
-                                                          Colors.transparent),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            30),
+                                                    color: Colors.redAccent,
+                                                  ),
                                                   child: Row(
                                                     children: <Widget>[
                                                       Icon(
-                                                        Icons.save,
-                                                        size: 35,
+                                                        Icons.logout,
+                                                        color: Colors.white,
+                                                        size: 25,
                                                       ),
                                                       SizedBox(width: 15),
                                                       Text(
-                                                        "SAVE GAME",
+                                                        "Go to Main Menu",
                                                         style: TextStyle(
-                                                            fontFamily: "Julee",
-                                                            fontSize: 28),
+                                                            color: Colors.white,
+                                                            fontSize: 18,
+                                                            fontFamily: "Arvo"),
                                                       ),
                                                       Spacer(),
                                                       Icon(
                                                         Icons
                                                             .chevron_right_rounded,
-                                                        color: Colors.black,
+                                                        color: Colors.white,
                                                         size: 25,
                                                       ),
                                                     ],
                                                   ),
                                                 ),
-                                              ),
-                                            );
-                                          } else {
-                                            return SizedBox.shrink();
-                                          }
-                                        },
-                                      ),
-                                      SizedBox(
-                                        height: 55,
-                                      ),
-                                      Builder(
-                                        builder: (context) {
-                                          if (widget.route != "/home") {
-                                            return GestureDetector(
-                                              onTap: () =>
-                                                  showAlertDialog(context),
-                                              child: Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    2,
-                                                height: 55,
-                                                margin: EdgeInsets.symmetric(
-                                                  horizontal: 10,
-                                                ).copyWith(
-                                                  bottom: 20,
-                                                ),
-                                                padding: EdgeInsets.symmetric(
-                                                  horizontal: 20,
-                                                ),
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(30),
-                                                  color: Colors.redAccent,
-                                                ),
-                                                child: Row(
-                                                  children: <Widget>[
-                                                    Icon(
-                                                      Icons.logout,
-                                                      color: Colors.white,
-                                                      size: 25,
-                                                    ),
-                                                    SizedBox(width: 15),
-                                                    Text(
-                                                      "Go to Main Menu",
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 18,
-                                                          fontFamily: "Arvo"),
-                                                    ),
-                                                    Spacer(),
-                                                    Icon(
-                                                      Icons
-                                                          .chevron_right_rounded,
-                                                      color: Colors.white,
-                                                      size: 25,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            );
-                                          } else {
-                                            return SizedBox.shrink();
-                                          }
-                                        },
-                                      ),
-                                    ],
+                                              );
+                                            } else {
+                                              return SizedBox.shrink();
+                                            }
+                                          },
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Flexible(
-                              child: SingleChildScrollView(
-                                child: SettingsChangers(
-                                  player: widget.player,
-                                  audioPlayer: widget.audioPlayer,
-                                ),
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
