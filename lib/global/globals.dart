@@ -19,36 +19,28 @@ dynamic buttons(context, route, scaffoldKey) {
   return Builder(builder: (BuildContext context) {
     if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
       return SafeArea(
-        child: Padding(
-          padding: EdgeInsets.only(left: 50, bottom: 50),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              skipClip(context, route),
-              SizedBox(
-                width: 7,
-              ),
-              settingsClip(context, scaffoldKey, route),
-            ],
-          ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            skipClip(context, route),
+            SizedBox(
+              width: 7,
+            ),
+            settingsClip(context, scaffoldKey, route),
+          ],
         ),
       );
     } else {
       return SafeArea(
-        child: Padding(
-          padding: EdgeInsets.only(left: 15, bottom: 15),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              skipClip(context, route),
-              SizedBox(
-                width: 7,
-              ),
-              settingsClip(context, scaffoldKey, route),
-            ],
-          ),
+        child: Row(
+          children: [
+            skipClip(context, route),
+            SizedBox(
+              width: 7,
+            ),
+            settingsClip(context, scaffoldKey, route),
+          ],
         ),
       );
     }

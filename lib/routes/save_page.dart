@@ -140,7 +140,7 @@ class _LoadGameState extends State<SaveGame> {
                                       saveSlotOne!.isEmpty) {
                                     return Container(
                                       width:
-                                          MediaQuery.of(context).size.width / 5,
+                                          MediaQuery.of(context).size.width / 4,
                                       height:
                                           MediaQuery.of(context).size.height /
                                               4,
@@ -160,7 +160,7 @@ class _LoadGameState extends State<SaveGame> {
                                   } else {
                                     return Container(
                                       width:
-                                          MediaQuery.of(context).size.width / 5,
+                                          MediaQuery.of(context).size.width / 4,
                                       height:
                                           MediaQuery.of(context).size.height /
                                               4,
@@ -286,7 +286,7 @@ class _LoadGameState extends State<SaveGame> {
                                   if (saveSlot2 == null || saveSlot2!.isEmpty) {
                                     return Container(
                                       width:
-                                          MediaQuery.of(context).size.width / 5,
+                                          MediaQuery.of(context).size.width / 4,
                                       height:
                                           MediaQuery.of(context).size.height /
                                               4,
@@ -306,7 +306,7 @@ class _LoadGameState extends State<SaveGame> {
                                   } else {
                                     return Container(
                                       width:
-                                          MediaQuery.of(context).size.width / 5,
+                                          MediaQuery.of(context).size.width / 4,
                                       height:
                                           MediaQuery.of(context).size.height /
                                               4,
@@ -430,7 +430,7 @@ class _LoadGameState extends State<SaveGame> {
                                   if (saveSlot3 == null || saveSlot3!.isEmpty) {
                                     return Container(
                                       width:
-                                          MediaQuery.of(context).size.width / 5,
+                                          MediaQuery.of(context).size.width / 4,
                                       height:
                                           MediaQuery.of(context).size.height /
                                               4,
@@ -450,7 +450,7 @@ class _LoadGameState extends State<SaveGame> {
                                   } else {
                                     return Container(
                                       width:
-                                          MediaQuery.of(context).size.width / 5,
+                                          MediaQuery.of(context).size.width / 4,
                                       height:
                                           MediaQuery.of(context).size.height /
                                               4,

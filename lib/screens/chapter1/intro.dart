@@ -13,7 +13,7 @@ class Intro extends StatefulWidget {
 }
 
 class _Intro extends State<Intro> {
-  TextEditingController? _controller;
+  TextEditingController? _controller = TextEditingController();
   String? _name;
 
   @override
@@ -25,6 +25,11 @@ class _Intro extends State<Intro> {
             _controller = new TextEditingController(text: _name);
           })
         });
+    Future.delayed(Duration(seconds: 1), () {
+      setState(() {
+        opacity = 1.0;
+      });
+    });
     // Future.delayed(const Duration(seconds: 0), () {
     //   Navigator.of(context).pushNamed('/prefTrue');
     // });
@@ -37,7 +42,7 @@ class _Intro extends State<Intro> {
 
   bool _validate = false;
   RegExp regExp = new RegExp("[a-zA-Z]");
-  bool visible = false;
+  double? opacity = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -52,113 +57,122 @@ class _Intro extends State<Intro> {
               child: new Container(
                 child: SafeArea(
                   child: new SingleChildScrollView(
-                    child: new Column(
-                      // center the children
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          width: MediaQuery.of(context).size.width / 1.7,
-                          margin: EdgeInsets.symmetric(horizontal: 100),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                "Character Name",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: "NanumBrush",
-                                    fontSize: 55),
-                              ),
-                              SizedBox(
-                                height: 50,
-                              ),
-                              Center(
-                                  child: TextFormField(
-                                      maxLength: 10,
-                                      inputFormatters: [
-                                        LengthLimitingTextInputFormatter(10),
-                                        FilteringTextInputFormatter.allow(
-                                            RegExp('[a-zA-Z]')),
-                                      ],
-                                      onChanged: (String str) {
-                                        setState(() {
-                                          if (_controller!.text.isEmpty ||
-                                              _controller!.text.length >= 11) {
-                                            _validate = true;
-                                          } else {
-                                            _validate = false;
-                                          }
-
-                                          _name = str;
-                                          storeName(str);
-                                        });
-                                      },
-                                      autovalidateMode: AutovalidateMode.always,
-                                      controller: _controller,
-                                      obscureText: false,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(50),
-                                            borderSide: BorderSide(
-                                              width: 0,
-                                              style: BorderStyle.none,
-                                            ),
-                                          ),
-                                          errorText:
-                                              _validate ? 'Error!' : null,
-                                          hintText: "Main Character",
-                                          fillColor: Color(0xfff3f3f4),
-                                          filled: true)))
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Builder(
-                          builder: (context) {
-                            if (_controller!.text.isEmpty ||
-                                _controller!.text.length >= 11) {
-                              return SizedBox.shrink();
-                            } else {
-                              return Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 30, vertical: 5),
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width / 3,
-                                  child: ElevatedButton(
-                                      child: Text(
-                                        "CONTINUE",
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 35,
-                                            fontFamily: "Julee"),
-                                      ),
-                                      style: ElevatedButton.styleFrom(
-                                          primary: Colors.white,
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 20),
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20.0),
-                                              side: BorderSide(
-                                                  color: Colors.white))),
-                                      onPressed: () {
-                                        Navigator.of(context).pushNamed('/1');
-                                        // Navigator.push(
-                                        //   context,
-                                        //   MaterialPageRoute(
-                                        //       builder: (context) => PrefName()),
-                                        // );
-                                      }),
+                    child: new AnimatedOpacity(
+                      opacity: opacity!,
+                      duration: Duration(milliseconds: 300),
+                      child: Column(
+                        // center the children
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                            width: MediaQuery.of(context).size.width / 1.7,
+                            margin: EdgeInsets.symmetric(horizontal: 100),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Text(
+                                  "Character Name",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "NanumBrush",
+                                      fontSize: 55),
                                 ),
-                              );
-                            }
-                          },
-                        ),
-                      ],
+                                SizedBox(
+                                  height: 50,
+                                ),
+                                Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 3,
+                                    child: TextFormField(
+                                        maxLength: 10,
+                                        inputFormatters: [
+                                          LengthLimitingTextInputFormatter(10),
+                                          FilteringTextInputFormatter.allow(
+                                              RegExp('[a-zA-Z]')),
+                                        ],
+                                        onChanged: (String str) {
+                                          setState(() {
+                                            if (_controller!.text.isEmpty ||
+                                                _controller!.text.length >=
+                                                    11) {
+                                              _validate = true;
+                                            } else {
+                                              _validate = false;
+                                            }
+
+                                            _name = str;
+                                            storeName(str);
+                                          });
+                                        },
+                                        autovalidateMode:
+                                            AutovalidateMode.always,
+                                        controller: _controller,
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(50),
+                                              borderSide: BorderSide(
+                                                width: 0,
+                                                style: BorderStyle.none,
+                                              ),
+                                            ),
+                                            errorText:
+                                                _validate ? 'Error!' : null,
+                                            hintText: "Main Character",
+                                            fillColor: Color(0xfff3f3f4),
+                                            filled: true)))
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Builder(
+                            builder: (context) {
+                              if (_controller!.text.isEmpty ||
+                                  _controller!.text.length >= 11) {
+                                return SizedBox.shrink();
+                              } else {
+                                return Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 30, vertical: 5),
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 3,
+                                    child: ElevatedButton(
+                                        child: Text(
+                                          "CONTINUE",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 35,
+                                              fontFamily: "Julee"),
+                                        ),
+                                        style: ElevatedButton.styleFrom(
+                                            primary: Colors.white,
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 20),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(20.0),
+                                                side: BorderSide(
+                                                    color: Colors.white))),
+                                        onPressed: () {
+                                          Navigator.of(context).pushNamed('/1');
+                                          // Navigator.push(
+                                          //   context,
+                                          //   MaterialPageRoute(
+                                          //       builder: (context) => PrefName()),
+                                          // );
+                                        }),
+                                  ),
+                                );
+                              }
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

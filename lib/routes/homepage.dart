@@ -68,7 +68,7 @@ class AppBody extends StatelessWidget {
   const AppBody({
     Key? key,
     required PageController controller,
-  })   : _controller = controller,
+  })  : _controller = controller,
         super(key: key);
 
   final PageController _controller;
@@ -99,7 +99,6 @@ class _BaseScreenState extends State<HomePage2> {
   Player? player;
   AudioPlayer audioPlayer = AudioPlayer();
   late AudioCache _audioCache;
-  double? vol = 1.0;
   double? opacity = 0.0;
 
   @override
@@ -107,7 +106,7 @@ class _BaseScreenState extends State<HomePage2> {
     super.initState();
     _audioCache = AudioCache(prefix: "assets/audio/");
     if (!Platform.isWindows || !Platform.isLinux) {
-      getSharedPrefs();
+      playAudio();
     }
     Future.delayed(Duration(seconds: 1), () {
       setState(() {
@@ -116,15 +115,12 @@ class _BaseScreenState extends State<HomePage2> {
     });
   }
 
-  Future<void> getSharedPrefs() async {
-    playAudio();
-  }
-
   void playAudio() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    vol = (prefs.getDouble("volValue"));
+    double? _vol;
+    _vol = (prefs.getDouble('volValue'));
     audioPlayer = await _audioCache.loop('warmth-of-the-sun-adi-goldstein.mp3',
-        volume: vol!);
+        volume: _vol!);
   }
 
   void stopAudio() {
@@ -138,12 +134,17 @@ class _BaseScreenState extends State<HomePage2> {
       this.player = Player(
         id: 0,
       );
+
       getSound();
     }
   }
 
   Future<dynamic> getSound() async {
     if (Platform.isWindows || Platform.isLinux) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      double? _vol;
+      _vol = (prefs.getDouble('volValue'));
+      print(_vol);
       this.player?.open(
             new Playlist(
               playlistMode: PlaylistMode.loop,
@@ -153,7 +154,8 @@ class _BaseScreenState extends State<HomePage2> {
               ],
             ),
           );
-    } else {}
+      this.player?.setVolume(_vol!);
+    }
   }
 
   bool? chapters;
@@ -197,7 +199,7 @@ class _BaseScreenState extends State<HomePage2> {
                                   "START",
                                   style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 35,
+                                      fontSize: 40,
                                       fontFamily: "Julee"),
                                 ),
                                 style: ElevatedButton.styleFrom(
@@ -205,7 +207,7 @@ class _BaseScreenState extends State<HomePage2> {
                                     padding: EdgeInsets.symmetric(vertical: 20),
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(20.0),
+                                            BorderRadius.circular(40.0),
                                         side: BorderSide(color: Colors.white))),
                                 onPressed: () async {
                                   if (Platform.isWindows || Platform.isLinux) {
@@ -239,7 +241,7 @@ class _BaseScreenState extends State<HomePage2> {
                                     padding: EdgeInsets.symmetric(vertical: 20),
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(20.0),
+                                            BorderRadius.circular(40.0),
                                         side: BorderSide(color: Colors.white))),
                                 onPressed: () async {
                                   if (Platform.isWindows || Platform.isLinux) {
@@ -276,7 +278,7 @@ class _BaseScreenState extends State<HomePage2> {
                                     padding: EdgeInsets.symmetric(vertical: 20),
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(20.0),
+                                            BorderRadius.circular(40.0),
                                         side: BorderSide(color: Colors.white))),
                                 onPressed: () => Navigator.push(
                                   context,
@@ -308,7 +310,7 @@ class _BaseScreenState extends State<HomePage2> {
                                     padding: EdgeInsets.symmetric(vertical: 20),
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(20.0),
+                                            BorderRadius.circular(40.0),
                                         side: BorderSide(color: Colors.white))),
                                 onPressed: () => Navigator.push(
                                   context,

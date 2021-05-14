@@ -77,7 +77,7 @@ class _VNState extends State<VN1> {
 
               // Sprites here
               //spriteBuilder(context, quizBrain.getNumber()),
-              buttons(context, route, scaffoldKey),
+
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.end,
