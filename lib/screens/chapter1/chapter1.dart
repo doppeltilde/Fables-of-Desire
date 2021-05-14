@@ -78,20 +78,12 @@ class _VNState extends State<VN1> {
               // Sprites here
               //spriteBuilder(context, quizBrain.getNumber()),
 
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Container(
-                    child: InterludeTextSound(
-                      textSound.getCorrectAnswer(),
-                      textSound.getQuestionText(),
-                      textSound.getNumber(),
-                      route,
-                      scaffoldKey,
-                    ),
-                  ),
-                ],
+              InterludeTextSound(
+                textSound.getCorrectAnswer(),
+                textSound.getQuestionText(),
+                textSound.getNumber(),
+                route,
+                scaffoldKey,
               ),
             ],
           ),

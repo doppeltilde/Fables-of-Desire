@@ -1,7 +1,7 @@
 name: fablesofdesire
 description: A new game.
 publish_to: 'none' 
-version: 1.0.0+17
+version: 1.0.0+18
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
@@ -20,7 +20,7 @@ dependencies:
   easy_localization: ^3.0.0
   easy_localization_loader: ^1.0.0
   flame_audio: ^0.1.0-rc5
-  msix: ^2.1.0
+  msix: ^2.1.1
   universal_io: ^2.0.4
   dart_vlc: ^0.0.7
   desktop_window: ^0.4.0
@@ -82,7 +82,7 @@ msix_config:
   tile_icon_path: windows\runner\resources\app_icon.png
   certificate_path: C:\Users\jonaf\OneDrive\Documents\keys\openssl\fablesofdesire\CERT.pfx
   certificate_password: fablesofdesire
-  msix_version: 1.1.8.0
+  msix_version: 1.1.9.0
   icons_background_color: "#ffffff"
   architecture: x64
   # See https://docs.microsoft.com/en-us/windows/uwp/packaging/app-capability-declarations

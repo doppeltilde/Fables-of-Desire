@@ -34,6 +34,8 @@ dynamic buttons(context, route, scaffoldKey) {
     } else {
       return SafeArea(
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             skipClip(context, route),
             SizedBox(
