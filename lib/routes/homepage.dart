@@ -131,7 +131,7 @@ class _BaseScreenState extends State<HomePage2> {
   void didChangeDependencies() async {
     if (Platform.isWindows || Platform.isLinux) {
       super.didChangeDependencies();
-      this.player = Player(
+      player = Player(
         id: 0,
       );
 
@@ -144,17 +144,16 @@ class _BaseScreenState extends State<HomePage2> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       double? _vol;
       _vol = (prefs.getDouble('volValue'));
-      print(_vol);
-      this.player?.open(
-            new Playlist(
-              playlistMode: PlaylistMode.loop,
-              medias: [
-                await Media.asset(
-                    'assets/audio/warmth-of-the-sun-adi-goldstein.mp3'),
-              ],
-            ),
-          );
-      this.player?.setVolume(_vol!);
+      await player?.open(
+        new Playlist(
+          playlistMode: PlaylistMode.loop,
+          medias: [
+            await Media.asset(
+                'assets/audio/warmth-of-the-sun-adi-goldstein.mp3'),
+          ],
+        ),
+      );
+      await player?.setVolume(_vol!);
     }
   }
 
@@ -212,7 +211,7 @@ class _BaseScreenState extends State<HomePage2> {
                                 onPressed: () async {
                                   if (Platform.isWindows || Platform.isLinux) {
                                     setState(() {
-                                      this.player?.stop();
+                                      player?.stop();
                                     });
                                   } else {
                                     stopAudio();
@@ -246,7 +245,7 @@ class _BaseScreenState extends State<HomePage2> {
                                 onPressed: () async {
                                   if (Platform.isWindows || Platform.isLinux) {
                                     setState(() {
-                                      this.player?.stop();
+                                      player?.stop();
                                     });
                                   } else {
                                     stopAudio();
