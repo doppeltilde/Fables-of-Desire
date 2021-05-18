@@ -1,7 +1,7 @@
 import 'package:fablesofdesire/global/settings_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
+//import 'package:url_launcher/url_launcher.dart';
 
 class Credits extends StatefulWidget {
   final player;
@@ -71,35 +71,13 @@ class _SettingsState extends State<Credits> {
                           SizedBox(
                             height: 55,
                           ),
-                          GestureDetector(
-                            onTap: () async {
-                              const url =
-                                  'https://smalldreams.space/privacy-policy/';
-                              if (await canLaunch(url)) {
-                                await launch(url);
-                              } else {
-                                throw 'Could not launch $url';
-                              }
-                            },
-                            child: ProfileListItem(
-                              icon: Icons.privacy_tip_outlined,
-                              text: 'Privacy',
-                            ),
+                          ProfileListItem(
+                            icon: Icons.privacy_tip_outlined,
+                            text: 'Privacy',
                           ),
-                          GestureDetector(
-                            onTap: () async {
-                              const url =
-                                  'https://smalldreams.space/terms-of-service/';
-                              if (await canLaunch(url)) {
-                                await launch(url);
-                              } else {
-                                throw 'Could not launch $url';
-                              }
-                            },
-                            child: ProfileListItem(
-                              icon: Icons.policy_outlined,
-                              text: 'Terms of Service',
-                            ),
+                          ProfileListItem(
+                            icon: Icons.policy_outlined,
+                            text: 'Terms of Service',
                           ),
                           SizedBox(
                             height: 55,
