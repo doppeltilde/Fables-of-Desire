@@ -13,9 +13,10 @@ class MyRouteObserver extends RouteObserver {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     if (lastRoute.settings.name != null && lastRoute.settings.name != "/") {
       prefs.setString('last_route', lastRoute.settings.name!);
-    } else if (previousRoute != null && previousRoute.settings.name != "/") {
-      prefs.setString('previous_route', previousRoute.settings.name!);
     }
+    // else if (previousRoute != null && previousRoute.settings.name != "/") {
+    //  prefs.setString('previous_route', previousRoute.settings.name!);
+    // }
   }
 
   @override
