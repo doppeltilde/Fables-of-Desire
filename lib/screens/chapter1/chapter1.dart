@@ -4,6 +4,8 @@ import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:fablesofdesire/text/vn_text.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:audioplayers/audio_cache.dart';
 
 class VN1 extends StatefulWidget {
   @override
@@ -11,6 +13,8 @@ class VN1 extends StatefulWidget {
 }
 
 class _VNState extends State<VN1> {
+  AudioPlayer audioPlayer = AudioPlayer();
+  late AudioCache _audioCache;
   final String route = "/1";
   final String nextRoute = "/2";
   TextConstructor1 textSound = TextConstructor1();
@@ -19,7 +23,7 @@ class _VNState extends State<VN1> {
   void checkAnswer(bool userPickedAnswer) {
     setState(() {
       if (textSound.isFinished() == true) {
-        Navigator.of(context).pushNamed(nextRoute);
+        Navigator.of(context).pushNamed(nextRoute, arguments: audioPlayer);
       } else {
         textSound.nextQuestion();
       }
@@ -28,17 +32,17 @@ class _VNState extends State<VN1> {
 
   @override
   void initState() {
-    getSound();
+    playAudio();
+    _audioCache = AudioCache(prefix: "assets/audio/");
+
     super.initState();
   }
 
-  Future<Null> getSound() async {
+  void playAudio() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    isNoti = (prefs.getBool("notiState"));
-    if (isNoti == true) {
-    } else {
-      //_audioCache.play('pop.mp3', volume: 0);
-    }
+    double? _vol;
+    _vol = (prefs.getDouble('volValue'));
+    audioPlayer = await _audioCache.loop('calling.mp3', volume: _vol!);
   }
 
   var scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -83,6 +87,7 @@ class _VNState extends State<VN1> {
                 textSound.getQuestionText(),
                 textSound.getNumber(),
                 route,
+                audioPlayer,
                 scaffoldKey,
               ),
             ],

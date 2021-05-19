@@ -26,19 +26,19 @@ class Home extends StatelessWidget {
       ],
 
       routes: {
-        '/': (context) {
+        '/': (_) {
           return SplashScreen();
         },
-        '/home': (context) {
+        HomePage.currentRoute: (_) {
           return HomePage();
         },
-        '/intro': (context) {
+        '/intro': (_) {
           return Intro();
         },
-        '/1': (context) {
+        '/1': (_) {
           return VN1();
         },
-        '/2': (context) {
+        '/2': (_) {
           return VN2();
         },
       },

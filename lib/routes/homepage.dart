@@ -12,6 +12,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:audioplayers/audio_cache.dart';
 
 class HomePage extends StatefulWidget {
+  static const currentRoute = "/home";
   @override
   _WildfyreState createState() => _WildfyreState();
 }

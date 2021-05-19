@@ -13,10 +13,24 @@
 
 # MC
 "mc":
-  "speech1": "Hi, this is the MC's first speech."
-  "speech2": "Second"
+
+  "1": "Hi, this is MC's first speech."
+  "2": "Hi, this is MC's second speech."
+  "3": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,\n
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
   # Here a breakline
-  "speech3": "Third with\na breakline."
+  "speech4": "Fourth with\na breakline."
+
+  "route1":
+    "1": "This is the first route"
+    # Some comment
+    "2": "Hi, this is Tomiichi's first speech."
+
+  "route2":
+    "1": "This is the second route"
+    "thiscanbewhatever": "Noice."
+
+
 
 # TOMIICHI
 "tom":

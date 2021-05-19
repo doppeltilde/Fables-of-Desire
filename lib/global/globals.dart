@@ -15,71 +15,68 @@ class AllowMultipleGestureRecognizer extends TapGestureRecognizer {
   }
 }
 
-dynamic buttons(context, route, scaffoldKey) {
-  return Builder(builder: (BuildContext context) {
-    if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
-      return SafeArea(
+class Buttons extends StatelessWidget {
+  final route;
+  final audioPlayer;
+  final scaffoldKey;
+  Buttons({Key? key, this.route, this.audioPlayer, this.scaffoldKey});
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            skipClip(context, route),
-            SizedBox(
-              width: 7,
-            ),
-            settingsClip(context, scaffoldKey, route),
-          ],
+      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        skipClip(context, route),
+        SizedBox(
+          width: 7,
         ),
-      );
-    } else {
-      return SafeArea(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            skipClip(context, route),
-            SizedBox(
-              width: 7,
-            ),
-            settingsClip(context, scaffoldKey, route),
-          ],
-        ),
-      );
-    }
-  });
+        SettingsClip(
+            audioPlayer: audioPlayer, scaffoldKey: scaffoldKey, route: route),
+      ],
+    ));
+  }
 }
 
-dynamic settingsClip(context, _scaffoldKey, route) {
-  return LayoutBuilder(builder: (context, constraints) {
-    return InkWell(
-        onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => Settings(
-                        route: route,
-                      )),
-            ),
-        child: Stack(
-          alignment: Alignment.center,
-          children: <Widget>[
-            Stack(
-              children: <Widget>[
-                Container(
-                  color: Colors.transparent,
-                  padding: EdgeInsets.all(1),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: Image.asset(
-                      "assets/images/gui/more.png",
-                      fit: BoxFit.cover,
+class SettingsClip extends StatelessWidget {
+  final route;
+  final audioPlayer;
+  final scaffoldKey;
+  SettingsClip({Key? key, this.route, this.audioPlayer, this.scaffoldKey});
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(builder: (context, constraints) {
+      return InkWell(
+          onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Settings(
+                          route: route,
+                          audioPlayer: audioPlayer,
+                        )),
+              ),
+          child: Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              Stack(
+                children: <Widget>[
+                  Container(
+                    color: Colors.transparent,
+                    padding: EdgeInsets.all(1),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: Image.asset(
+                        "assets/images/gui/more.png",
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
-        ));
-  });
+                ],
+              ),
+            ],
+          ));
+    });
+  }
 }
 
 dynamic skipClip(context, route) {

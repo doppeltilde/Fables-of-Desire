@@ -18,9 +18,10 @@ class TextConstructor1 {
   int textNumber = 0;
 
   List<TextSound> textBank = [
-    TextSound(tr("mc.speech1"), "MC", "silence", "Cast/MC_Neutral"),
-    TextSound(tr("mc.speech2"), "MC", "silence", "Cast/MC_Blush"),
-    TextSound(tr("mc.speech3"), "MC", "silence", "Cast/MC_Happy"),
+    // Speech, Name, Voice, Image
+    TextSound(tr("mc.1"), "MC", "silence", "Cast/MC_Neutral"),
+    TextSound(tr("mc.2"), "MC", "silence", "Cast/MC_Blush"),
+    TextSound(tr("mc.3"), "MC", "silence", "Cast/MC_Happy"),
     TextSound(tr("tom.speech1"), tr("tom_name"), "silence", "tom_neutral"),
     TextSound(tr("tom.speech2"), tr("tom_name"), "silence", "tom_neutral"),
     TextSound(tr("tom.speech3"), tr("tom_name"), "silence", "tom_neutral"),
@@ -60,7 +61,6 @@ like a ListView.""", tr("hidetake_name"), "silence", "hidetake_neutral"),
 
   bool isFinished() {
     if (textNumber >= textBank.length - 1) {
-      print('Now returning true');
       return true;
     } else {
       return false;

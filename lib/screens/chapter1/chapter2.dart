@@ -12,8 +12,8 @@ class VN2 extends StatefulWidget {
 }
 
 class _VNState extends State<VN2> {
-  final String route = "/2";
-  final String nextRoute = "/1";
+  static const currentRoute = "/2";
+  static const nextRoute = "/1";
   TextConstructor1 textSound = TextConstructor1();
   bool? isNoti;
 
@@ -53,6 +53,7 @@ class _VNState extends State<VN2> {
   bool _visible = true;
   @override
   Widget build(BuildContext context) {
+    final audioPlayer = ModalRoute.of(context)!.settings.arguments;
     return WillPopScope(
         onWillPop: () => getOnWillPop(context),
         child: Builder(builder: (context) {
@@ -74,7 +75,7 @@ class _VNState extends State<VN2> {
                         isRepeatingAnimation: false,
                         animatedTexts: [
                           TyperAnimatedText(
-                            "Five days later...",
+                            "Some time later...",
                             speed: Duration(milliseconds: 85),
                             textStyle: TextStyle(
                                 fontSize: 20,
@@ -128,7 +129,8 @@ class _VNState extends State<VN2> {
                       textSound.getCorrectAnswer(),
                       textSound.getQuestionText(),
                       textSound.getNumber(),
-                      route,
+                      currentRoute,
+                      audioPlayer,
                       scaffoldKey,
                     ),
                   ],

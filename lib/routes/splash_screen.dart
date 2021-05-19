@@ -1,3 +1,4 @@
+import 'package:fablesofdesire/routes/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -204,7 +205,7 @@ class _SplashScreenState extends State<SplashScreen> {
     } else if (previousRoute != null && previousRoute != '/') {
       Navigator.pushReplacementNamed(context, previousRoute);
     } else {
-      Navigator.of(context).pushReplacementNamed('/home');
+      Navigator.of(context).pushNamed(HomePage.currentRoute);
     }
   }
 
