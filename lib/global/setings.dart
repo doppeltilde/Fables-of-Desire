@@ -7,7 +7,7 @@ class Settings extends StatefulWidget {
   final player;
   final audioPlayer;
   final route;
-  Settings({Key? key, this.player, required this.audioPlayer, this.route});
+  Settings({Key? key, this.player, this.audioPlayer, this.route});
 
   @override
   _SettingsState createState() => _SettingsState();

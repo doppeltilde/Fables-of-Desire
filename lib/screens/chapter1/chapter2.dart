@@ -1,5 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:fablesofdesire/constructor/vn_constructor.dart';
+import 'package:fablesofdesire/global/audio/global_audio.dart';
 import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:fablesofdesire/text/vn_text.dart';
@@ -15,16 +16,6 @@ class _VNState extends State<VN2> {
   static const nextRoute = "/1";
   TextConstructor1 textSound = TextConstructor1();
   bool? isNoti;
-
-  void checkAnswer(bool userPickedAnswer) {
-    setState(() {
-      if (textSound.isFinished() == true) {
-        Navigator.of(context).pushNamed(nextRoute);
-      } else {
-        textSound.nextQuestion();
-      }
-    });
-  }
 
   @override
   void initState() {
@@ -42,7 +33,8 @@ class _VNState extends State<VN2> {
   bool _visible = true;
   @override
   Widget build(BuildContext context) {
-    final dynamic audioPlayer = ModalRoute.of(context)!.settings.arguments;
+    GlobalAudio globalAudio =
+        ModalRoute.of(context)!.settings.arguments as dynamic;
     return WillPopScope(
         onWillPop: () => getOnWillPop(context),
         child: Builder(builder: (context) {
@@ -94,8 +86,11 @@ class _VNState extends State<VN2> {
                   setState(() {
                     if (textSound.isFinished() == true) {
                       Navigator.of(context).pushNamed(nextRoute);
-                      if (audioPlayer != null) {
-                        audioPlayer.stop();
+                      if (globalAudio.audioPlayer != null) {
+                        globalAudio.audioPlayer.stop();
+                      }
+                      if (globalAudio.player != null) {
+                        globalAudio.player?.stop();
                       }
                     } else {
                       textSound.nextQuestion();
@@ -129,7 +124,8 @@ class _VNState extends State<VN2> {
                       textSound.getQuestionText(),
                       textSound.getNumber(),
                       currentRoute,
-                      audioPlayer,
+                      globalAudio.player,
+                      globalAudio.audioPlayer,
                       scaffoldKey,
                     ),
                   ],

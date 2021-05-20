@@ -5,7 +5,7 @@ import 'package:universal_io/io.dart';
 class BGMVolume extends StatefulWidget {
   final player;
   final audioPlayer;
-  BGMVolume({Key? key, this.player, required this.audioPlayer});
+  BGMVolume({Key? key, this.player, this.audioPlayer});
   @override
   _TextSpeedState createState() => new _TextSpeedState();
 }

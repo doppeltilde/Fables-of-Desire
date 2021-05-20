@@ -83,6 +83,7 @@ class _BaseScreenState extends State<HomePage2> {
     if (!Platform.isWindows || !Platform.isLinux) {
       playAudio();
     }
+
     Future.delayed(Duration(seconds: 1), () {
       setState(() {
         opacity = 1.0;
@@ -92,8 +93,7 @@ class _BaseScreenState extends State<HomePage2> {
 
   void playAudio() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    double? _vol;
-    _vol = (prefs.getDouble('volValue'));
+    double? _vol = prefs.getDouble('volValue');
     audioPlayer = await _audioCache.loop('warmth-of-the-sun-adi-goldstein.mp3',
         volume: _vol!);
   }
@@ -117,8 +117,7 @@ class _BaseScreenState extends State<HomePage2> {
   Future<dynamic> getSound() async {
     if (Platform.isWindows || Platform.isLinux) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      double? _vol;
-      _vol = (prefs.getDouble('volValue'));
+      double? _vol = prefs.getDouble('volValue');
       await player?.open(
         new Playlist(
           playlistMode: PlaylistMode.loop,
