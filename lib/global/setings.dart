@@ -244,6 +244,9 @@ class _SettingsState extends State<Settings> {
             if (widget.audioPlayer != null) {
               widget.audioPlayer.stop();
             }
+            if (widget.player != null) {
+              widget.player?.stop();
+            }
 
             Navigator.of(context).pushNamed("/home");
           },
