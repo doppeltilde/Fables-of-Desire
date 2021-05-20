@@ -33,7 +33,7 @@ class _VNState extends State<VN2> {
   bool _visible = true;
   @override
   Widget build(BuildContext context) {
-    GlobalAudio globalAudio =
+    GlobalAudio? globalAudio =
         ModalRoute.of(context)!.settings.arguments as dynamic;
     return WillPopScope(
         onWillPop: () => getOnWillPop(context),
@@ -86,7 +86,7 @@ class _VNState extends State<VN2> {
                   setState(() {
                     if (textSound.isFinished() == true) {
                       Navigator.of(context).pushNamed(nextRoute);
-                      if (globalAudio.audioPlayer != null) {
+                      if (globalAudio!.audioPlayer != null) {
                         globalAudio.audioPlayer.stop();
                       }
                       if (globalAudio.player != null) {
@@ -124,7 +124,7 @@ class _VNState extends State<VN2> {
                       textSound.getQuestionText(),
                       textSound.getNumber(),
                       currentRoute,
-                      globalAudio.player,
+                      globalAudio!.player,
                       globalAudio.audioPlayer,
                       scaffoldKey,
                     ),

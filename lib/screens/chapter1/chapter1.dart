@@ -38,9 +38,9 @@ class _VNState extends State<VN1> {
 
   @override
   void initState() {
-    _audioCache = AudioCache(prefix: "assets/audio/");
     super.initState();
     if (!Platform.isWindows || !Platform.isLinux) {
+      _audioCache = AudioCache(prefix: "assets/audio/");
       getVolume();
     }
   }

@@ -79,8 +79,8 @@ class _BaseScreenState extends State<HomePage2> {
   @override
   void initState() {
     super.initState();
-    _audioCache = AudioCache(prefix: "assets/audio/");
     if (!Platform.isWindows || !Platform.isLinux) {
+      _audioCache = AudioCache(prefix: "assets/audio/");
       playAudio();
     }
 
