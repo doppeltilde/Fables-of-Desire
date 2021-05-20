@@ -2,13 +2,12 @@ import 'package:fablesofdesire/global/setttings/settings_changers.dart';
 import 'package:fablesofdesire/routes/save_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:audioplayers/audioplayers.dart';
 
 class Settings extends StatefulWidget {
   final player;
   final audioPlayer;
   final route;
-  Settings({Key? key, this.player, this.audioPlayer, this.route});
+  Settings({Key? key, this.player, required this.audioPlayer, this.route});
 
   @override
   _SettingsState createState() => _SettingsState();
@@ -242,7 +241,10 @@ class _SettingsState extends State<Settings> {
                 letterSpacing: .4),
           ),
           onPressed: () async {
-            widget.audioPlayer.stop();
+            if (widget.audioPlayer != null) {
+              widget.audioPlayer.stop();
+            }
+
             Navigator.of(context).pushNamed("/home");
           },
         ),

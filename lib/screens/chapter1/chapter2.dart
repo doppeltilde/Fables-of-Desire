@@ -4,7 +4,6 @@ import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:fablesofdesire/text/vn_text.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class VN2 extends StatefulWidget {
   @override
@@ -29,7 +28,6 @@ class _VNState extends State<VN2> {
 
   @override
   void initState() {
-    getSound();
     super.initState();
     Future.delayed(const Duration(seconds: 5), () {
       if (this.mounted) {
@@ -40,20 +38,11 @@ class _VNState extends State<VN2> {
     });
   }
 
-  Future<Null> getSound() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    isNoti = (prefs.getBool("notiState"));
-    if (isNoti == true) {
-    } else {
-      //_audioCache.play('pop.mp3', volume: 0);
-    }
-  }
-
   var scaffoldKey = new GlobalKey<ScaffoldState>();
   bool _visible = true;
   @override
   Widget build(BuildContext context) {
-    final audioPlayer = ModalRoute.of(context)!.settings.arguments;
+    final dynamic audioPlayer = ModalRoute.of(context)!.settings.arguments;
     return WillPopScope(
         onWillPop: () => getOnWillPop(context),
         child: Builder(builder: (context) {
@@ -102,7 +91,17 @@ class _VNState extends State<VN2> {
               backgroundColor: Colors.black,
               body: InkWell(
                 onTap: () {
-                  checkAnswer(true);
+                  setState(() {
+                    if (textSound.isFinished() == true) {
+                      Navigator.of(context).pushNamed(nextRoute);
+                      if (audioPlayer != null) {
+                        audioPlayer.stop();
+                      }
+                    } else {
+                      textSound.nextQuestion();
+                    }
+                  });
+                  // checkAnswer(true);
                 },
                 child: Stack(
                   fit: StackFit.expand,

@@ -1,5 +1,6 @@
 // Gestures
-import 'package:universal_io/io.dart';
+
+import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fablesofdesire/global/setings.dart';
@@ -22,19 +23,43 @@ class Buttons extends StatelessWidget {
   Buttons({Key? key, this.route, this.audioPlayer, this.scaffoldKey});
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Row(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        skipClip(context, route),
-        SizedBox(
-          width: 7,
-        ),
-        SettingsClip(
-            audioPlayer: audioPlayer, scaffoldKey: scaffoldKey, route: route),
-      ],
-    ));
+    return Builder(builder: (BuildContext context) {
+      if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
+        return SafeArea(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              skipClip(context, route),
+              SizedBox(
+                width: 7,
+              ),
+              SettingsClip(
+                  audioPlayer: audioPlayer,
+                  scaffoldKey: scaffoldKey,
+                  route: route),
+            ],
+          ),
+        );
+      } else {
+        return SafeArea(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              skipClip(context, route),
+              SizedBox(
+                width: 7,
+              ),
+              SettingsClip(
+                  audioPlayer: audioPlayer,
+                  scaffoldKey: scaffoldKey,
+                  route: route),
+            ],
+          ),
+        );
+      }
+    });
   }
 }
 

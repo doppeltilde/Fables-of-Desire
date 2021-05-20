@@ -17,10 +17,12 @@ class TextSound {
 class TextConstructor1 {
   int textNumber = 0;
 
+  final m = "MC";
   List<TextSound> textBank = [
     // Speech, Name, Voice, Image
     TextSound(tr("mc.1"), "MC", "silence", "Cast/MC_Neutral"),
     TextSound(tr("mc.2"), "MC", "silence", "Cast/MC_Blush"),
+
     TextSound(tr("mc.3"), "MC", "silence", "Cast/MC_Happy"),
     TextSound(tr("tom.speech1"), tr("tom_name"), "silence", "tom_neutral"),
     TextSound(tr("tom.speech2"), tr("tom_name"), "silence", "tom_neutral"),

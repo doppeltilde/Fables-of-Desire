@@ -32,16 +32,21 @@ class _VNState extends State<VN1> {
 
   @override
   void initState() {
-    playAudio();
     _audioCache = AudioCache(prefix: "assets/audio/");
 
     super.initState();
+    getVolume();
   }
 
-  void playAudio() async {
+  double? vol = 1.0;
+  getVolume() async {
+    vol = await playAudio();
+    setState(() {});
+  }
+
+  playAudio() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    double? _vol;
-    _vol = (prefs.getDouble('volValue'));
+    double? _vol = prefs.getDouble('volValue');
     audioPlayer = await _audioCache.loop('calling.mp3', volume: _vol!);
   }
 

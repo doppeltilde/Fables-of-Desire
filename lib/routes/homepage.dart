@@ -4,7 +4,6 @@ import 'package:fablesofdesire/global/credits.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:fablesofdesire/routes/load_game.dart';
 import 'package:universal_io/io.dart';
-import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/global/setings.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -58,32 +57,7 @@ class _WildfyreState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      drawerEnableOpenDragGesture: false,
-      drawer: AppDrawerMain(),
-      body: AppBody(controller: controller),
-    );
-  }
-}
-
-class AppBody extends StatelessWidget {
-  const AppBody({
-    Key? key,
-    required PageController controller,
-  })  : _controller = controller,
-        super(key: key);
-
-  final PageController _controller;
-
-  @override
-  Widget build(BuildContext context) {
-    return PageView(
-      physics: NeverScrollableScrollPhysics(),
-      controller: _controller,
-      children: [
-        HomePage2(),
-        // About(),
-        Settings(),
-      ],
+      body: HomePage2(),
     );
   }
 }
