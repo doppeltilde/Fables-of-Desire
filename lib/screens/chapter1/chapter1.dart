@@ -42,9 +42,13 @@ class _VNState extends State<VN1> {
 
   playAudio() {
     if (!Platform.isWindows || Platform.isLinux) {
-      GameAudio.bgm.play("calling.mp3");
+      if (GameAudio.bgm.isPlaying == false) {
+        GameAudio.bgm.play("calling.mp3");
+      }
     } else {
-      GameAudioDesktop.playAudio.play("calling.mp3");
+      if (GameAudioDesktop.playAudio.isPlaying == false) {
+        GameAudioDesktop.playAudio.play("calling.mp3");
+      }
     }
   }
 

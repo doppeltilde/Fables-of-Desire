@@ -1,7 +1,9 @@
+import 'package:fablesofdesire/global/audio/game_audio.dart';
 import 'package:fablesofdesire/global/setttings/settings_changers.dart';
 import 'package:fablesofdesire/routes/save_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:universal_io/io.dart';
 
 class Settings extends StatefulWidget {
   final route;
@@ -233,6 +235,11 @@ class _SettingsState extends State<Settings> {
                 letterSpacing: .4),
           ),
           onPressed: () {
+            if (!Platform.isWindows || Platform.isLinux) {
+              GameAudio.bgm.stop();
+            } else {
+              GameAudioDesktop.playAudio.stop();
+            }
             Navigator.of(context).pushNamed("/home");
           },
         ),

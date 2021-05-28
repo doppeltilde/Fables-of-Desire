@@ -95,9 +95,13 @@ class _BaseScreenState extends State<HomePage2> {
 
   playAudio() {
     if (!Platform.isWindows || Platform.isLinux) {
-      GameAudio.bgm.play("warmth-of-the-sun-adi-goldstein.mp3");
+      if (GameAudio.bgm.isPlaying == false) {
+        GameAudio.bgm.play("warmth-of-the-sun-adi-goldstein.mp3");
+      }
     } else {
-      GameAudioDesktop.playAudio.play("warmth-of-the-sun-adi-goldstein.mp3");
+      if (GameAudioDesktop.playAudio.isPlaying == false) {
+        GameAudioDesktop.playAudio.play("warmth-of-the-sun-adi-goldstein.mp3");
+      }
     }
   }
 
