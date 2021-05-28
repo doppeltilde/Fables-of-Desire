@@ -4,6 +4,7 @@ import 'package:fablesofdesire/global/audio/game_audio.dart';
 import 'package:fablesofdesire/global/credits.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:fablesofdesire/routes/load_game.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:universal_io/io.dart';
 import 'package:fablesofdesire/global/setings.dart';
 import 'package:flutter/material.dart';
@@ -34,11 +35,11 @@ class _WildfyreState extends State<HomePage> {
   }
 
   // PRECACHE IMAGES
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    for (var i in images) precacheImage(AssetImage(i["image"]), context);
-  }
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //   for (var i in images) precacheImage(AssetImage(i["image"]), context);
+  // }
 
   bool isLightTheme = true;
   var scaffoldKey = GlobalKey<ScaffoldState>();
@@ -63,6 +64,8 @@ class _BaseScreenState extends State<HomePage2> {
 
   double? opacity = 0.0;
 
+  SharedPreferences? sharedPreferences;
+  String? notHome;
   @override
   void initState() {
     super.initState();
@@ -74,6 +77,20 @@ class _BaseScreenState extends State<HomePage2> {
         opacity = 1.0;
       });
     });
+    SharedPreferences.getInstance().then((SharedPreferences sp) {
+      sharedPreferences = sp;
+      notHome = sharedPreferences!.getString("notHome");
+      notHome = "warmth-of-the-sun-adi-goldstein.mp3";
+      persistNotHome(notHome!);
+      print(notHome);
+    });
+  }
+
+  void persistNotHome(String value) {
+    setState(() {
+      notHome = value;
+    });
+    sharedPreferences?.setString("notHome", value);
   }
 
   playAudio() {

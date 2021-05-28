@@ -1,6 +1,8 @@
+import 'package:fablesofdesire/global/audio/game_audio.dart';
 import 'package:fablesofdesire/routes/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:universal_io/io.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -103,7 +105,7 @@ class _SplashScreenState extends State<SplashScreen> {
     //initPlatformState();
     Future.delayed(Duration.zero).then((_) {
       // PRECACHE IMAGES
-      //for (var i in images) precacheImage(AssetImage(i["image"]), context);
+      for (var i in images) precacheImage(AssetImage(i["image"]), context);
 
       SharedPreferences.getInstance().then((SharedPreferences sp) {
         sharedPreferences = sp;
@@ -191,14 +193,29 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> initSplash() async {
     final prefs = await SharedPreferences.getInstance();
+    String? notHome = prefs.getString("notHome");
     String? lastRoute = prefs.getString('last_route');
     String? previousRoute = prefs.getString('previous_route');
+
     if (lastRoute != null && lastRoute != '/') {
       Navigator.pushReplacementNamed(context, lastRoute);
     } else if (previousRoute != null && previousRoute != '/') {
       Navigator.pushReplacementNamed(context, previousRoute);
     } else {
       Navigator.of(context).pushNamed(HomePage.currentRoute);
+    }
+
+    if (lastRoute != null ||
+        lastRoute != '/' ||
+        lastRoute != "/home" ||
+        previousRoute != "/home" ||
+        previousRoute != null ||
+        previousRoute != '/') {
+      if (!Platform.isWindows || Platform.isLinux) {
+        GameAudio.bgm.play(notHome!);
+      } else {
+        GameAudioDesktop.playAudio.play(notHome!);
+      }
     }
   }
 

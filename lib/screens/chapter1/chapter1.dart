@@ -7,6 +7,7 @@ import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:fablesofdesire/text/vn_text.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class VN1 extends StatefulWidget {
   @override
@@ -17,11 +18,26 @@ class _VNState extends State<VN1> {
   final String route = "/1";
   final String nextRoute = "/2";
   final textSound = TextConstructor1();
-
+  SharedPreferences? sharedPreferences;
+  String? notHome;
   @override
   void initState() {
     super.initState();
     playAudio();
+    SharedPreferences.getInstance().then((SharedPreferences sp) {
+      sharedPreferences = sp;
+      notHome = sharedPreferences!.getString("notHome");
+      notHome = "calling.mp3";
+      persistNotHome(notHome!);
+      print(notHome);
+    });
+  }
+
+  void persistNotHome(String value) {
+    setState(() {
+      notHome = value;
+    });
+    sharedPreferences?.setString("notHome", value);
   }
 
   playAudio() {
