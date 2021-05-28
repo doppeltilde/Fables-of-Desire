@@ -1,3 +1,4 @@
+import 'package:dart_vlc/dart_vlc.dart';
 import 'package:fablesofdesire/global/audio/game_audio.dart';
 import 'package:fablesofdesire/routes/homepage.dart';
 import 'package:flutter/material.dart';
@@ -94,6 +95,13 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    if (Platform.isWindows ||
+        Platform.isLinux && GameAudioDesktop.playAudio.isPlaying == false) {
+      super.didChangeDependencies();
+      GameAudioDesktop.playAudio.player = Player(
+        id: 0,
+      );
+    }
     for (var i in images) precacheImage(AssetImage(i["image"]), context);
   }
   // PRECACHE IMAGES
