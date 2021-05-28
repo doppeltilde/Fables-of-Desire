@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:dart_vlc/dart_vlc.dart';
 import 'package:fablesofdesire/constructor/vn_constructor.dart';
 import 'package:fablesofdesire/global/audio/game_audio.dart';
-import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:fablesofdesire/text/vn_text.dart';
 import 'package:flutter/material.dart';
