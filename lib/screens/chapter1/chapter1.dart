@@ -47,8 +47,6 @@ class _VNState extends State<VN1> {
     return WillPopScope(
       onWillPop: () => getOnWillPop(context),
       child: Scaffold(
-        endDrawerEnableOpenDragGesture: false,
-        endDrawer: AppDrawer(),
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.black,
         body: InkWell(
