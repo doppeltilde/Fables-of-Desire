@@ -70,15 +70,14 @@ class HomePage2 extends StatefulWidget {
 /// The main widget state.
 class _BaseScreenState extends State<HomePage2> {
   bool isLightTheme = true;
-  Player? player;
+
   double? opacity = 0.0;
 
   @override
   void initState() {
     super.initState();
-    if (!Platform.isWindows || !Platform.isLinux) {
-      playAudio();
-    }
+
+    playAudio();
 
     Future.delayed(Duration(seconds: 1), () {
       setState(() {
@@ -87,39 +86,17 @@ class _BaseScreenState extends State<HomePage2> {
     });
   }
 
+  CurrentState current = new CurrentState();
   playAudio() {
-    GameAudio.bgm.play("warmth-of-the-sun-adi-goldstein.mp3");
-  }
-
-  @override
-  void didChangeDependencies() async {
-    if (Platform.isWindows || Platform.isLinux) {
-      super.didChangeDependencies();
-      player = Player(
-        id: 0,
-      );
-      getSound();
+    if (!Platform.isWindows || Platform.isLinux) {
+      GameAudio.bgm.play("warmth-of-the-sun-adi-goldstein.mp3");
+    } else {
+      GameAudioDesktop.playAudio.player?.currentStream.listen((current) {
+        this.setState(() => this.current = current);
+      });
+      GameAudioDesktop.playAudio.play("warmth-of-the-sun-adi-goldstein.mp3");
     }
   }
-
-  Future<dynamic> getSound() async {
-    if (Platform.isWindows || Platform.isLinux) {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      double? _vol = prefs.getDouble('volValue');
-      await player?.open(
-        new Playlist(
-          playlistMode: PlaylistMode.loop,
-          medias: [
-            await Media.asset(
-                'assets/audio/warmth-of-the-sun-adi-goldstein.mp3'),
-          ],
-        ),
-      );
-      await player?.setVolume(_vol!);
-    }
-  }
-
-  bool? chapters;
 
   @override
   Widget build(BuildContext context) {
@@ -173,7 +150,7 @@ class _BaseScreenState extends State<HomePage2> {
                                 onPressed: () async {
                                   if (Platform.isWindows || Platform.isLinux) {
                                     setState(() {
-                                      player?.stop();
+                                      GameAudioDesktop.playAudio.stop();
                                     });
                                   }
 
@@ -205,7 +182,7 @@ class _BaseScreenState extends State<HomePage2> {
                                 onPressed: () async {
                                   if (Platform.isWindows || Platform.isLinux) {
                                     setState(() {
-                                      player?.stop();
+                                      GameAudioDesktop.playAudio.stop();
                                     });
                                   }
                                   Navigator.push(
@@ -241,7 +218,6 @@ class _BaseScreenState extends State<HomePage2> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => Settings(
-                                            player: player,
                                             route: "/home",
                                           )),
                                 ),
