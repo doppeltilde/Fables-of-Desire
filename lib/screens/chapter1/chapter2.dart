@@ -1,7 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:fablesofdesire/constructor/vn_constructor.dart';
 import 'package:fablesofdesire/global/audio/game_audio.dart';
-import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:fablesofdesire/text/vn_text.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +14,6 @@ class _VNState extends State<VN2> {
   static const currentRoute = "/2";
   static const nextRoute = "/1";
   TextConstructor1 textSound = TextConstructor1();
-  bool? isNoti;
 
   @override
   void initState() {
@@ -29,7 +27,6 @@ class _VNState extends State<VN2> {
     });
   }
 
-  var scaffoldKey = new GlobalKey<ScaffoldState>();
   bool _visible = true;
   @override
   Widget build(BuildContext context) {
@@ -74,9 +71,6 @@ class _VNState extends State<VN2> {
             ));
           } else {
             return Scaffold(
-              key: scaffoldKey,
-              endDrawerEnableOpenDragGesture: false,
-              endDrawer: AppDrawer(),
               resizeToAvoidBottomInset: false,
               backgroundColor: Colors.black,
               body: InkWell(
@@ -122,7 +116,6 @@ class _VNState extends State<VN2> {
                       textSound.getQuestionText(),
                       textSound.getNumber(),
                       currentRoute,
-                      scaffoldKey,
                     ),
                   ],
                 ),

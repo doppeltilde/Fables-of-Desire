@@ -17,11 +17,8 @@ class AllowMultipleGestureRecognizer extends TapGestureRecognizer {
 
 class Buttons extends StatelessWidget {
   final route;
-  final player;
-  final audioPlayer;
-  final scaffoldKey;
-  Buttons(
-      {Key? key, this.route, this.player, this.audioPlayer, this.scaffoldKey});
+
+  Buttons({Key? key, this.route});
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (BuildContext context) {
@@ -35,7 +32,7 @@ class Buttons extends StatelessWidget {
               SizedBox(
                 width: 7,
               ),
-              SettingsClip(scaffoldKey: scaffoldKey, route: route),
+              SettingsClip(route: route),
             ],
           ),
         );
@@ -49,7 +46,7 @@ class Buttons extends StatelessWidget {
               SizedBox(
                 width: 7,
               ),
-              SettingsClip(scaffoldKey: scaffoldKey, route: route),
+              SettingsClip(route: route),
             ],
           ),
         );
@@ -61,8 +58,7 @@ class Buttons extends StatelessWidget {
 class SettingsClip extends StatelessWidget {
   final route;
 
-  final scaffoldKey;
-  SettingsClip({Key? key, this.route, this.scaffoldKey});
+  SettingsClip({Key? key, this.route});
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {

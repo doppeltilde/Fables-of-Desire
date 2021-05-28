@@ -84,7 +84,7 @@ class _TextSpeedState extends State<BGMVolume> {
                 ),
                 child: Slider(
                   min: 0.0,
-                  max: 1.0,
+                  max: 2.0,
                   value: vol ?? 1.0,
                   onChanged: (volume) {
                     setState(() {
@@ -98,7 +98,6 @@ class _TextSpeedState extends State<BGMVolume> {
                           GameAudio.bgm.resume();
                         }
                       }
-
                       vol = volume;
                       saveVolumeState(volume);
                     });

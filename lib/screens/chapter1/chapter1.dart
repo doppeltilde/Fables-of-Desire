@@ -17,7 +17,6 @@ class _VNState extends State<VN1> {
   final String route = "/1";
   final String nextRoute = "/2";
   TextConstructor1 textSound = TextConstructor1();
-  bool? isNoti;
 
   @override
   void initState() {
@@ -43,14 +42,11 @@ class _VNState extends State<VN1> {
     }
   }
 
-  var scaffoldKey = new GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () => getOnWillPop(context),
       child: Scaffold(
-        key: scaffoldKey,
         endDrawerEnableOpenDragGesture: false,
         endDrawer: AppDrawer(),
         resizeToAvoidBottomInset: false,
@@ -91,7 +87,6 @@ class _VNState extends State<VN1> {
                 textSound.getQuestionText(),
                 textSound.getNumber(),
                 route,
-                scaffoldKey,
               ),
             ],
           ),

@@ -11,9 +11,8 @@ class InterludeTextSound extends StatefulWidget {
   final String? q;
   final int n;
   final route;
-  final scaffoldKey;
 
-  InterludeTextSound(this.a, this.q, this.n, this.route, this.scaffoldKey);
+  InterludeTextSound(this.a, this.q, this.n, this.route);
 
   @override
   _InterludeState createState() => _InterludeState();
@@ -169,7 +168,7 @@ class _InterludeState extends State<InterludeTextSound> {
                     ),
                   ]),
                 ),
-                Buttons(route: widget.route, scaffoldKey: widget.scaffoldKey),
+                Buttons(route: widget.route),
               ],
             ),
           );
@@ -179,8 +178,7 @@ class _InterludeState extends State<InterludeTextSound> {
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.only(left: 10, bottom: 15),
-                child: Buttons(
-                    route: widget.route, scaffoldKey: widget.scaffoldKey),
+                child: Buttons(route: widget.route),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
