@@ -19,16 +19,6 @@ class _VNState extends State<VN1> {
   TextConstructor1 textSound = TextConstructor1();
   bool? isNoti;
 
-  void checkAnswer(bool userPickedAnswer) {
-    setState(() {
-      if (textSound.isFinished() == true) {
-        Navigator.of(context).pushNamed(nextRoute);
-      } else {
-        textSound.nextQuestion();
-      }
-    });
-  }
-
   @override
   void initState() {
     super.initState();
@@ -67,7 +57,13 @@ class _VNState extends State<VN1> {
         backgroundColor: Colors.black,
         body: InkWell(
           onTap: () {
-            checkAnswer(true);
+            setState(() {
+              if (textSound.isFinished() == true) {
+                Navigator.of(context).pushNamed(nextRoute);
+              } else {
+                textSound.nextQuestion();
+              }
+            });
           },
           child: Stack(
             fit: StackFit.expand,

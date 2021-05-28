@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:dart_vlc/dart_vlc.dart';
 import 'package:fablesofdesire/global/audio/bgm.dart';

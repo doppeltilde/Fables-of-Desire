@@ -7,7 +7,6 @@ import 'package:fablesofdesire/routes/load_game.dart';
 import 'package:universal_io/io.dart';
 import 'package:fablesofdesire/global/setings.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   static const currentRoute = "/home";
