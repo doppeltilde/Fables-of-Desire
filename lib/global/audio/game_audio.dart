@@ -3,7 +3,6 @@ import 'package:dart_vlc/dart_vlc.dart';
 import 'package:fablesofdesire/global/audio/bgm.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:universal_io/io.dart';
 
 class GameAudio {
   /// Access a shared instance of the [AudioCache] class.
