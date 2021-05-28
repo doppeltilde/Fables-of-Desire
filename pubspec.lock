@@ -44,12 +44,12 @@ packages:
     source: hosted
     version: "0.4.0"
   audioplayers:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: audioplayers
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.18.3"
+    version: "0.19.0"
   characters:
     dependency: transitive
     description:
@@ -148,20 +148,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.1"
-  flame:
-    dependency: transitive
-    description:
-      name: flame
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0-rc9"
-  flame_audio:
-    dependency: "direct main"
-    description:
-      name: flame_audio
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.0-rc5"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -246,7 +232,7 @@ packages:
       name: msix
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.1"
+    version: "2.1.2"
   nested:
     dependency: transitive
     description:
@@ -254,13 +240,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
-  ordered_set:
-    dependency: transitive
-    description:
-      name: ordered_set
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.0"
   package_config:
     dependency: transitive
     description:
@@ -274,7 +253,7 @@ packages:
       name: package_info
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.2"
   path:
     dependency: transitive
     description:
@@ -365,14 +344,14 @@ packages:
       name: share
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.1"
+    version: "2.0.4"
   shared_preferences:
     dependency: "direct main"
     description:
       name: shared_preferences
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.5"
+    version: "2.0.6"
   shared_preferences_linux:
     dependency: transitive
     description:
@@ -427,13 +406,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
-  synchronized:
-    dependency: transitive
-    description:
-      name: synchronized
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.0"
   term_glyph:
     dependency: transitive
     description:

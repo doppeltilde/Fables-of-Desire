@@ -2,14 +2,12 @@ import 'dart:io';
 
 import 'package:dart_vlc/dart_vlc.dart';
 import 'package:fablesofdesire/constructor/vn_constructor.dart';
-import 'package:fablesofdesire/global/audio/global_audio.dart';
+import 'package:fablesofdesire/global/audio/game_audio.dart';
 import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:fablesofdesire/text/vn_text.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:audioplayers/audioplayers.dart';
-import 'package:audioplayers/audio_cache.dart';
 
 class VN1 extends StatefulWidget {
   @override
@@ -17,8 +15,6 @@ class VN1 extends StatefulWidget {
 }
 
 class _VNState extends State<VN1> {
-  AudioPlayer audioPlayer = AudioPlayer();
-  late AudioCache _audioCache;
   final String route = "/1";
   final String nextRoute = "/2";
   TextConstructor1 textSound = TextConstructor1();
@@ -28,8 +24,7 @@ class _VNState extends State<VN1> {
   void checkAnswer(bool userPickedAnswer) {
     setState(() {
       if (textSound.isFinished() == true) {
-        Navigator.of(context).pushNamed(nextRoute,
-            arguments: GlobalAudio(player: player, audioPlayer: audioPlayer));
+        Navigator.of(context).pushNamed(nextRoute);
       } else {
         textSound.nextQuestion();
       }
@@ -40,21 +35,14 @@ class _VNState extends State<VN1> {
   void initState() {
     super.initState();
     if (!Platform.isWindows || !Platform.isLinux) {
-      _audioCache = AudioCache(prefix: "assets/audio/");
-      getVolume();
+      playAudio();
     }
   }
 
   double? vol = 1.0;
-  getVolume() async {
-    vol = await playAudio();
-    setState(() {});
-  }
 
-  playAudio() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    double? _vol = prefs.getDouble('volValue');
-    audioPlayer = await _audioCache.loop('calling.mp3', volume: _vol!);
+  playAudio() {
+    GameAudio.bgm.play("calling.mp3");
   }
 
   @override
@@ -127,8 +115,6 @@ class _VNState extends State<VN1> {
                 textSound.getQuestionText(),
                 textSound.getNumber(),
                 route,
-                player,
-                audioPlayer,
                 scaffoldKey,
               ),
             ],

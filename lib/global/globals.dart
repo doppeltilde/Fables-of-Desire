@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fablesofdesire/global/setings.dart';
-import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -84,7 +83,6 @@ class SettingsClip extends StatelessWidget {
                     builder: (context) => Settings(
                           route: route,
                           player: player,
-                          audioPlayer: audioPlayer,
                         )),
               ),
           child: Stack(
@@ -161,7 +159,6 @@ showAlertDialog(BuildContext context, route) {
               letterSpacing: .4),
         ),
         onPressed: () {
-          FlameAudio.bgm.stop();
           Navigator.of(context).pushNamed(route);
         },
       ),

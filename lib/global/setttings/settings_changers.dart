@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 
 class SettingsChangers extends StatefulWidget {
   final player;
-  final audioPlayer;
-  SettingsChangers({Key? key, this.player, this.audioPlayer});
+
+  SettingsChangers({Key? key, this.player});
   @override
   _TextSpeedState createState() => new _TextSpeedState();
 }
@@ -22,17 +22,14 @@ class _TextSpeedState extends State<SettingsChangers> {
       children: <Widget>[
         BGMVolume(
           player: widget.player,
-          audioPlayer: widget.audioPlayer,
         ),
         Divider(),
         VoiceVolume(
           player: widget.player,
-          audioPlayer: widget.audioPlayer,
         ),
         Divider(),
         SFXVolume(
           player: widget.player,
-          audioPlayer: widget.audioPlayer,
         ),
         Divider(),
         TextSpeed(),

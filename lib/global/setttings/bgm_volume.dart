@@ -1,11 +1,12 @@
+import 'package:fablesofdesire/global/audio/game_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:universal_io/io.dart';
 
 class BGMVolume extends StatefulWidget {
   final player;
-  final audioPlayer;
-  BGMVolume({Key? key, this.player, this.audioPlayer});
+
+  BGMVolume({Key? key, this.player});
   @override
   _TextSpeedState createState() => new _TextSpeedState();
 }
@@ -87,13 +88,18 @@ class _TextSpeedState extends State<BGMVolume> {
                 child: Slider(
                   min: 0.0,
                   max: 1.0,
-                  value: vol!,
+                  value: vol ?? 1.0,
                   onChanged: (volume) {
                     setState(() {
                       if (Platform.isWindows || Platform.isLinux) {
                         widget.player?.setVolume(volume);
                       } else {
-                        widget.audioPlayer.setVolume(volume);
+                        GameAudio.bgm.audioPlayer!.setVolume(volume);
+                        if (vol == 0) {
+                          GameAudio.bgm.pause();
+                        } else {
+                          GameAudio.bgm.resume();
+                        }
                       }
 
                       vol = volume;

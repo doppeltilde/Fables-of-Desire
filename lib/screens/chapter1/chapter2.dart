@@ -1,5 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:fablesofdesire/constructor/vn_constructor.dart';
+import 'package:fablesofdesire/global/audio/game_audio.dart';
 import 'package:fablesofdesire/global/audio/global_audio.dart';
 import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
@@ -86,12 +87,12 @@ class _VNState extends State<VN2> {
                   setState(() {
                     if (textSound.isFinished() == true) {
                       Navigator.of(context).pushNamed(nextRoute);
-                      if (globalAudio!.audioPlayer != null) {
-                        globalAudio.audioPlayer.stop();
+                      if (GameAudio.bgm.audioPlayer != null) {
+                        GameAudio.bgm.stop();
                       }
-                      if (globalAudio.player != null) {
-                        globalAudio.player?.stop();
-                      }
+                      // if (globalAudio.player != null) {
+                      //   globalAudio.player?.stop();
+                      // }
                     } else {
                       textSound.nextQuestion();
                     }
@@ -124,8 +125,6 @@ class _VNState extends State<VN2> {
                       textSound.getQuestionText(),
                       textSound.getNumber(),
                       currentRoute,
-                      globalAudio!.player,
-                      globalAudio.audioPlayer,
                       scaffoldKey,
                     ),
                   ],

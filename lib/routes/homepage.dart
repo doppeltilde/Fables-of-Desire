@@ -1,5 +1,6 @@
 // Primary
 import 'package:dart_vlc/dart_vlc.dart';
+import 'package:fablesofdesire/global/audio/game_audio.dart';
 import 'package:fablesofdesire/global/credits.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:fablesofdesire/routes/load_game.dart';
@@ -7,8 +8,6 @@ import 'package:universal_io/io.dart';
 import 'package:fablesofdesire/global/setings.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:audioplayers/audioplayers.dart';
-import 'package:audioplayers/audio_cache.dart';
 
 class HomePage extends StatefulWidget {
   static const currentRoute = "/home";
@@ -72,15 +71,12 @@ class HomePage2 extends StatefulWidget {
 class _BaseScreenState extends State<HomePage2> {
   bool isLightTheme = true;
   Player? player;
-  AudioPlayer audioPlayer = AudioPlayer();
-  late AudioCache _audioCache;
   double? opacity = 0.0;
 
   @override
   void initState() {
     super.initState();
     if (!Platform.isWindows || !Platform.isLinux) {
-      _audioCache = AudioCache(prefix: "assets/audio/");
       playAudio();
     }
 
@@ -91,15 +87,8 @@ class _BaseScreenState extends State<HomePage2> {
     });
   }
 
-  void playAudio() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    double? _vol = prefs.getDouble('volValue');
-    audioPlayer = await _audioCache.loop('warmth-of-the-sun-adi-goldstein.mp3',
-        volume: _vol!);
-  }
-
-  void stopAudio() {
-    audioPlayer.stop();
+  playAudio() {
+    GameAudio.bgm.play("warmth-of-the-sun-adi-goldstein.mp3");
   }
 
   @override
@@ -109,7 +98,6 @@ class _BaseScreenState extends State<HomePage2> {
       player = Player(
         id: 0,
       );
-
       getSound();
     }
   }
@@ -187,8 +175,6 @@ class _BaseScreenState extends State<HomePage2> {
                                     setState(() {
                                       player?.stop();
                                     });
-                                  } else {
-                                    stopAudio();
                                   }
 
                                   Navigator.of(context).pushNamed('/intro');
@@ -221,8 +207,6 @@ class _BaseScreenState extends State<HomePage2> {
                                     setState(() {
                                       player?.stop();
                                     });
-                                  } else {
-                                    stopAudio();
                                   }
                                   Navigator.push(
                                     context,
@@ -258,7 +242,6 @@ class _BaseScreenState extends State<HomePage2> {
                                   MaterialPageRoute(
                                       builder: (context) => Settings(
                                             player: player,
-                                            audioPlayer: audioPlayer,
                                             route: "/home",
                                           )),
                                 ),

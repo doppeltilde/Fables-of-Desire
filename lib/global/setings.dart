@@ -5,9 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Settings extends StatefulWidget {
   final player;
-  final audioPlayer;
   final route;
-  Settings({Key? key, this.player, this.audioPlayer, this.route});
+  Settings({Key? key, this.player, this.route});
 
   @override
   _SettingsState createState() => _SettingsState();
@@ -71,7 +70,6 @@ class _SettingsState extends State<Settings> {
                                 child: SingleChildScrollView(
                                   child: SettingsChangers(
                                     player: widget.player,
-                                    audioPlayer: widget.audioPlayer,
                                   ),
                                 ),
                               ),
@@ -215,7 +213,6 @@ class _SettingsState extends State<Settings> {
                               child: SingleChildScrollView(
                                 child: SettingsChangers(
                                   player: widget.player,
-                                  audioPlayer: widget.audioPlayer,
                                 ),
                               ))));
                 }
@@ -241,9 +238,6 @@ class _SettingsState extends State<Settings> {
                 letterSpacing: .4),
           ),
           onPressed: () async {
-            if (widget.audioPlayer != null) {
-              widget.audioPlayer.stop();
-            }
             if (widget.player != null) {
               widget.player?.stop();
             }
