@@ -7,7 +7,6 @@ import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:fablesofdesire/text/vn_text.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class VN1 extends StatefulWidget {
   @override
@@ -19,7 +18,6 @@ class _VNState extends State<VN1> {
   final String nextRoute = "/2";
   TextConstructor1 textSound = TextConstructor1();
   bool? isNoti;
-  Player? player;
 
   void checkAnswer(bool userPickedAnswer) {
     setState(() {
@@ -34,42 +32,24 @@ class _VNState extends State<VN1> {
   @override
   void initState() {
     super.initState();
-    if (!Platform.isWindows || !Platform.isLinux) {
-      playAudio();
-    }
+    playAudio();
   }
 
-  double? vol = 1.0;
-
   playAudio() {
-    GameAudio.bgm.play("calling.mp3");
+    if (!Platform.isWindows || Platform.isLinux) {
+      GameAudio.bgm.play("calling.mp3");
+    } else {
+      GameAudioDesktop.playAudio.play("calling.mp3");
+    }
   }
 
   @override
   void didChangeDependencies() async {
     if (Platform.isWindows || Platform.isLinux) {
       super.didChangeDependencies();
-      player = Player(
+      GameAudioDesktop.playAudio.player = Player(
         id: 0,
       );
-
-      getSound();
-    }
-  }
-
-  Future<dynamic> getSound() async {
-    if (Platform.isWindows || Platform.isLinux) {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      double? _vol = prefs.getDouble('volValue');
-      await player?.open(
-        new Playlist(
-          playlistMode: PlaylistMode.loop,
-          medias: [
-            await Media.asset('assets/audio/calling.mp3'),
-          ],
-        ),
-      );
-      await player?.setVolume(_vol!);
     }
   }
 

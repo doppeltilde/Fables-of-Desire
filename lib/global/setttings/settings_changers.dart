@@ -5,9 +5,6 @@ import 'package:fablesofdesire/global/setttings/voice_volume.dart';
 import 'package:flutter/material.dart';
 
 class SettingsChangers extends StatefulWidget {
-  final player;
-
-  SettingsChangers({Key? key, this.player});
   @override
   _TextSpeedState createState() => new _TextSpeedState();
 }
@@ -20,17 +17,11 @@ class _TextSpeedState extends State<SettingsChangers> {
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
-        BGMVolume(
-          player: widget.player,
-        ),
+        BGMVolume(),
         Divider(),
-        VoiceVolume(
-          player: widget.player,
-        ),
+        VoiceVolume(),
         Divider(),
-        SFXVolume(
-          player: widget.player,
-        ),
+        SFXVolume(),
         Divider(),
         TextSpeed(),
       ],

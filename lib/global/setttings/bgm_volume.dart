@@ -4,9 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:universal_io/io.dart';
 
 class BGMVolume extends StatefulWidget {
-  final player;
-
-  BGMVolume({Key? key, this.player});
   @override
   _TextSpeedState createState() => new _TextSpeedState();
 }
@@ -92,7 +89,7 @@ class _TextSpeedState extends State<BGMVolume> {
                   onChanged: (volume) {
                     setState(() {
                       if (Platform.isWindows || Platform.isLinux) {
-                        widget.player?.setVolume(volume);
+                        GameAudioDesktop.playAudio.player?.setVolume(volume);
                       } else {
                         GameAudio.bgm.audioPlayer!.setVolume(volume);
                         if (vol == 0) {

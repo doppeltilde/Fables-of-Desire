@@ -78,20 +78,6 @@ class _BaseScreenState extends State<HomePage2> {
     super.initState();
 
     playAudio();
-    if (this.mounted) {
-      GameAudioDesktop.playAudio.player?.currentStream.listen((current) {
-        this.setState(
-            () => GameAudioDesktop.playAudio.player?.current = current);
-      });
-      GameAudioDesktop.playAudio.player?.positionStream.listen((position) {
-        this.setState(
-            () => GameAudioDesktop.playAudio.player?.position = position);
-      });
-      GameAudioDesktop.playAudio.player?.playbackStream.listen((playback) {
-        this.setState(
-            () => GameAudioDesktop.playAudio.player?.playback = playback);
-      });
-    }
 
     Future.delayed(Duration(seconds: 1), () {
       setState(() {
@@ -100,12 +86,21 @@ class _BaseScreenState extends State<HomePage2> {
     });
   }
 
-  CurrentState current = new CurrentState();
   playAudio() {
     if (!Platform.isWindows || Platform.isLinux) {
       GameAudio.bgm.play("warmth-of-the-sun-adi-goldstein.mp3");
     } else {
       GameAudioDesktop.playAudio.play("warmth-of-the-sun-adi-goldstein.mp3");
+    }
+  }
+
+  @override
+  void didChangeDependencies() async {
+    if (Platform.isWindows || Platform.isLinux) {
+      super.didChangeDependencies();
+      GameAudioDesktop.playAudio.player = Player(
+        id: 0,
+      );
     }
   }
 

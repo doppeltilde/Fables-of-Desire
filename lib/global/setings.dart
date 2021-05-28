@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Settings extends StatefulWidget {
-  final player;
   final route;
-  Settings({Key? key, this.player, this.route});
+  Settings({Key? key, this.route});
 
   @override
   _SettingsState createState() => _SettingsState();
@@ -68,9 +67,7 @@ class _SettingsState extends State<Settings> {
                             children: <Widget>[
                               Flexible(
                                 child: SingleChildScrollView(
-                                  child: SettingsChangers(
-                                    player: widget.player,
-                                  ),
+                                  child: SettingsChangers(),
                                 ),
                               ),
                               Flexible(
@@ -211,9 +208,7 @@ class _SettingsState extends State<Settings> {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 5),
                               child: SingleChildScrollView(
-                                child: SettingsChangers(
-                                  player: widget.player,
-                                ),
+                                child: SettingsChangers(),
                               ))));
                 }
               })
@@ -237,11 +232,7 @@ class _SettingsState extends State<Settings> {
                 fontSize: 18,
                 letterSpacing: .4),
           ),
-          onPressed: () async {
-            if (widget.player != null) {
-              widget.player?.stop();
-            }
-
+          onPressed: () {
             Navigator.of(context).pushNamed("/home");
           },
         ),

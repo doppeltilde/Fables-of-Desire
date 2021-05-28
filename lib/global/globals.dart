@@ -35,11 +35,7 @@ class Buttons extends StatelessWidget {
               SizedBox(
                 width: 7,
               ),
-              SettingsClip(
-                  player: player,
-                  audioPlayer: audioPlayer,
-                  scaffoldKey: scaffoldKey,
-                  route: route),
+              SettingsClip(scaffoldKey: scaffoldKey, route: route),
             ],
           ),
         );
@@ -53,11 +49,7 @@ class Buttons extends StatelessWidget {
               SizedBox(
                 width: 7,
               ),
-              SettingsClip(
-                  player: player,
-                  audioPlayer: audioPlayer,
-                  scaffoldKey: scaffoldKey,
-                  route: route),
+              SettingsClip(scaffoldKey: scaffoldKey, route: route),
             ],
           ),
         );
@@ -68,11 +60,9 @@ class Buttons extends StatelessWidget {
 
 class SettingsClip extends StatelessWidget {
   final route;
-  final audioPlayer;
-  final player;
+
   final scaffoldKey;
-  SettingsClip(
-      {Key? key, this.route, this.player, this.audioPlayer, this.scaffoldKey});
+  SettingsClip({Key? key, this.route, this.scaffoldKey});
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
@@ -82,7 +72,6 @@ class SettingsClip extends StatelessWidget {
                 MaterialPageRoute(
                     builder: (context) => Settings(
                           route: route,
-                          player: player,
                         )),
               ),
           child: Stack(
