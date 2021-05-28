@@ -44,7 +44,7 @@ class _Intro extends State<Intro> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => getOnWillPop(context),
+      onWillPop: () => getOnWillPop(),
       child: new Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.black,

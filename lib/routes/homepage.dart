@@ -114,7 +114,7 @@ class _BaseScreenState extends State<HomePage2> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => getOnWillPop(context),
+      onWillPop: () => getOnWillPop(),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.transparent,
@@ -165,6 +165,8 @@ class _BaseScreenState extends State<HomePage2> {
                                     setState(() {
                                       GameAudioDesktop.playAudio.stop();
                                     });
+                                  } else {
+                                    GameAudio.bgm.stop();
                                   }
 
                                   Navigator.of(context).pushNamed('/intro');
@@ -196,6 +198,10 @@ class _BaseScreenState extends State<HomePage2> {
                                   if (Platform.isWindows || Platform.isLinux) {
                                     setState(() {
                                       GameAudioDesktop.playAudio.stop();
+                                    });
+                                  } else {
+                                    setState(() {
+                                      GameAudio.bgm.stop();
                                     });
                                   }
                                   Navigator.push(

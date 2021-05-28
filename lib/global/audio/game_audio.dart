@@ -58,7 +58,6 @@ class PlayAudio extends WidgetsBindingObserver {
   Future<void> play(String filename, {double volume = 1.0}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     double? vol = prefs.getDouble('volValue');
-    print(vol);
     await player?.open(
       new Playlist(
         playlistMode: PlaylistMode.loop,

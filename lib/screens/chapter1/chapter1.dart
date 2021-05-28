@@ -61,7 +61,7 @@ class _VNState extends State<VN1> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => getOnWillPop(context),
+      onWillPop: () => getOnWillPop(),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.black,

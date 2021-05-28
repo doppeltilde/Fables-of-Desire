@@ -193,7 +193,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> initSplash() async {
     final prefs = await SharedPreferences.getInstance();
-    String? notHome = prefs.getString("notHome");
+    //String? notHome = prefs.getString("notHome");
     String? lastRoute = prefs.getString('last_route');
     String? previousRoute = prefs.getString('previous_route');
 
@@ -205,18 +205,18 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.of(context).pushNamed(HomePage.currentRoute);
     }
 
-    if (lastRoute != null ||
-        lastRoute != '/' ||
-        lastRoute != "/home" ||
-        previousRoute != "/home" ||
-        previousRoute != null ||
-        previousRoute != '/') {
-      if (!Platform.isWindows || Platform.isLinux) {
-        GameAudio.bgm.play(notHome!);
-      } else {
-        GameAudioDesktop.playAudio.play(notHome!);
-      }
-    }
+    // if (lastRoute != null ||
+    //     lastRoute != '/' ||
+    //     lastRoute != "/home" ||
+    //     previousRoute != "/home" ||
+    //     previousRoute != null ||
+    //     previousRoute != '/') {
+    //   if (!Platform.isWindows || Platform.isLinux) {
+    //     GameAudio.bgm.play(notHome!);
+    //   } else {
+    //     GameAudioDesktop.playAudio.play(notHome!);
+    //   }
+    // }
   }
 
   ///
