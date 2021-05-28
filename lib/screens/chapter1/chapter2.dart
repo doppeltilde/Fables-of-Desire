@@ -37,11 +37,8 @@ class _VNState extends State<VN2> {
             return Scaffold(
                 body: Center(
               child: AnimatedOpacity(
-                // If the widget is visible, animate to 0.0 (invisible).
-                // If the widget is hidden, animate to 1.0 (fully visible).
                 opacity: _visible ? 1.0 : 0.0,
                 duration: Duration(milliseconds: 500),
-                // The green box must be a child of the AnimatedOpacity widget.
                 child: Container(
                   child: Center(
                     child: Padding(
@@ -107,9 +104,6 @@ class _VNState extends State<VN2> {
                         }
                       },
                     ),
-
-                    // Sprites here
-                    //spriteBuilder(context, quizBrain.getNumber()),
 
                     InterludeTextSound(
                       textSound.getCorrectAnswer(),

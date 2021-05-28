@@ -32,7 +32,7 @@ class _TextSpeedState extends State<TextSpeed> {
     return speed;
   }
 
-  int? speed = 100;
+  int speed = 50;
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -70,7 +70,7 @@ class _TextSpeedState extends State<TextSpeed> {
                     Icons.pause,
                     size: 35,
                   );
-                } else if (speed! <= 50) {
+                } else if (speed <= 50) {
                   return Icon(
                     Icons.fast_forward,
                     size: 35,
@@ -103,11 +103,11 @@ class _TextSpeedState extends State<TextSpeed> {
                   overlayShape: RoundSliderOverlayShape(overlayRadius: 0.0),
                 ),
                 child: Slider(
-                  divisions: 6,
-                  label: "$speed",
+                  divisions: 10,
+                  label: "$speed ms",
                   min: 0,
                   max: 100,
-                  value: speed!.toDouble(),
+                  value: speed.toDouble(),
                   onChanged: (fast) {
                     setState(() {
                       speed = fast.toInt();

@@ -16,7 +16,7 @@ class VN1 extends StatefulWidget {
 class _VNState extends State<VN1> {
   final String route = "/1";
   final String nextRoute = "/2";
-  TextConstructor1 textSound = TextConstructor1();
+  final textSound = TextConstructor1();
 
   @override
   void initState() {
@@ -78,9 +78,6 @@ class _VNState extends State<VN1> {
                   }
                 },
               ),
-
-              // Sprites here
-              //spriteBuilder(context, quizBrain.getNumber()),
 
               InterludeTextSound(
                 textSound.getCorrectAnswer(),

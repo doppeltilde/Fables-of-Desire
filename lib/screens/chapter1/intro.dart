@@ -30,9 +30,6 @@ class _Intro extends State<Intro> {
         opacity = 1.0;
       });
     });
-    // Future.delayed(const Duration(seconds: 0), () {
-    //   Navigator.of(context).pushNamed('/prefTrue');
-    // });
   }
 
   Future<Null> storeName(String name) async {
@@ -50,7 +47,8 @@ class _Intro extends State<Intro> {
       onWillPop: () => getOnWillPop(context),
       child: new Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.red[300],
+        backgroundColor: Colors.black,
+        //backgroundColor: Colors.red[300],
         body: Stack(
           children: <Widget>[
             new Center(
@@ -76,53 +74,51 @@ class _Intro extends State<Intro> {
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: "NanumBrush",
-                                      fontSize: 55),
+                                      fontSize: 65),
                                 ),
                                 SizedBox(
                                   height: 50,
                                 ),
                                 Container(
-                                    width:
-                                        MediaQuery.of(context).size.width / 3,
-                                    child: TextFormField(
-                                        maxLength: 10,
-                                        inputFormatters: [
-                                          LengthLimitingTextInputFormatter(10),
-                                          FilteringTextInputFormatter.allow(
-                                              RegExp('[a-zA-Z]')),
-                                        ],
-                                        onChanged: (String str) {
-                                          setState(() {
-                                            if (_controller!.text.isEmpty ||
-                                                _controller!.text.length >=
-                                                    11) {
-                                              _validate = true;
-                                            } else {
-                                              _validate = false;
-                                            }
+                                  width: MediaQuery.of(context).size.width / 3,
+                                  child: TextFormField(
+                                    maxLength: 10,
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(10),
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp('[a-zA-Z]')),
+                                    ],
+                                    onChanged: (String str) {
+                                      setState(() {
+                                        if (_controller!.text.isEmpty ||
+                                            _controller!.text.length >= 11) {
+                                          _validate = true;
+                                        } else {
+                                          _validate = false;
+                                        }
 
-                                            _name = str;
-                                            storeName(str);
-                                          });
-                                        },
-                                        autovalidateMode:
-                                            AutovalidateMode.always,
-                                        controller: _controller,
-                                        obscureText: false,
-                                        decoration: InputDecoration(
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(50),
-                                              borderSide: BorderSide(
-                                                width: 0,
-                                                style: BorderStyle.none,
-                                              ),
-                                            ),
-                                            errorText:
-                                                _validate ? 'Error!' : null,
-                                            hintText: "Main Character",
-                                            fillColor: Color(0xfff3f3f4),
-                                            filled: true)))
+                                        _name = str;
+                                        storeName(str);
+                                      });
+                                    },
+                                    autovalidateMode: AutovalidateMode.always,
+                                    controller: _controller,
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                          borderSide: BorderSide(
+                                            width: 0,
+                                            style: BorderStyle.none,
+                                          ),
+                                        ),
+                                        errorText: _validate ? 'Error!' : null,
+                                        hintText: "Main Character",
+                                        fillColor: Color(0xfff3f3f4),
+                                        filled: true),
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -140,13 +136,13 @@ class _Intro extends State<Intro> {
                                       horizontal: 30, vertical: 5),
                                   child: Container(
                                     width:
-                                        MediaQuery.of(context).size.width / 3,
+                                        MediaQuery.of(context).size.width / 4,
                                     child: ElevatedButton(
                                         child: Text(
                                           "CONTINUE",
                                           style: TextStyle(
                                               color: Colors.black,
-                                              fontSize: 35,
+                                              fontSize: 30,
                                               fontFamily: "Julee"),
                                         ),
                                         style: ElevatedButton.styleFrom(
@@ -155,7 +151,7 @@ class _Intro extends State<Intro> {
                                                 vertical: 20),
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(20.0),
+                                                    BorderRadius.circular(30.0),
                                                 side: BorderSide(
                                                     color: Colors.white))),
                                         onPressed: () {

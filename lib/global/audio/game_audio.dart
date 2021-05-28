@@ -24,13 +24,6 @@ class GameAudio {
     return audioCache.play(file, volume: volume);
   }
 
-  static Future<AudioPlayer> playBubble(String file) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    double? bubbleValue = prefs.getDouble('bubbleValue');
-    return audioCache.play(file,
-        volume: bubbleValue ?? 1.0, mode: PlayerMode.LOW_LATENCY);
-  }
-
   /// Plays, and keep looping the given [file]
   /// This method supports long audio files
   ///

@@ -15,15 +15,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _WildfyreState extends State<HomePage> {
-  static const int _startingPageId = 0;
-  bool? isSwitchedFT;
-  int selectedPageId = _startingPageId;
-  TabController? tabscon;
-  bool init = true;
-  final controller = PageController(
-    initialPage: 0,
-  );
-
   List<Map<String, dynamic>> images = [
     {
       "image": "assets/images/sprites/Cast/MC_Sad.png",
@@ -50,7 +41,7 @@ class _WildfyreState extends State<HomePage> {
   }
 
   bool isLightTheme = true;
-  var scaffoldKey = new GlobalKey<ScaffoldState>();
+  var scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,7 +103,7 @@ class _BaseScreenState extends State<HomePage2> {
         backgroundColor: Colors.transparent,
         body: Stack(
           children: <Widget>[
-            new Container(
+            Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(
@@ -125,9 +116,9 @@ class _BaseScreenState extends State<HomePage2> {
               opacity: opacity!,
               duration: Duration(milliseconds: 300),
               child: Center(
-                child: new Container(
+                child: Container(
                   child: SafeArea(
-                    child: new SingleChildScrollView(
+                    child: SingleChildScrollView(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,

@@ -24,15 +24,15 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
         backgroundColor: Colors.white,
         body: Center(
-            child: new Container(
+            child: Container(
                 child: SafeArea(
-                    child: new SingleChildScrollView(
+                    child: SingleChildScrollView(
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
               Center(
-                child: new Container(
+                child: Container(
                   child: Column(
                     children: <Widget>[
                       AnimatedOpacity(
@@ -45,13 +45,6 @@ class _SplashScreenState extends State<SplashScreen> {
                           width: MediaQuery.of(context).size.width / 3,
                         )),
                       ),
-                      // AnimatedOpacity(
-                      //     opacity: opacity!,
-                      //     duration: Duration(milliseconds: 300),
-                      //     child: Text(
-                      //       "Fables of Desire",
-                      //       style: TextStyle(fontFamily: "Julee", fontSize: 55),
-                      //     )),
                     ],
                   ),
                 ),
@@ -96,11 +89,11 @@ class _SplashScreenState extends State<SplashScreen> {
     },
   ];
 
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //   for (var i in images) precacheImage(AssetImage(i["image"]), context);
-  // }
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    for (var i in images) precacheImage(AssetImage(i["image"]), context);
+  }
   // PRECACHE IMAGES
 
   @override
@@ -110,7 +103,7 @@ class _SplashScreenState extends State<SplashScreen> {
     //initPlatformState();
     Future.delayed(Duration.zero).then((_) {
       // PRECACHE IMAGES
-      for (var i in images) precacheImage(AssetImage(i["image"]), context);
+      //for (var i in images) precacheImage(AssetImage(i["image"]), context);
 
       SharedPreferences.getInstance().then((SharedPreferences sp) {
         sharedPreferences = sp;

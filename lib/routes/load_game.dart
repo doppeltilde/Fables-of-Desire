@@ -76,8 +76,8 @@ class _LoadGameState extends State<LoadGame> {
     return Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-          colorFilter: new ColorFilter.mode(
-              Colors.black.withOpacity(1), BlendMode.dstATop),
+          colorFilter:
+              ColorFilter.mode(Colors.black.withOpacity(1), BlendMode.dstATop),
           image: AssetImage("assets/images/bgs/mininature_003_19201440.jpg"),
           fit: BoxFit.cover,
         )),
@@ -92,7 +92,7 @@ class _LoadGameState extends State<LoadGame> {
           body: Stack(children: <Widget>[
             Builder(builder: (context) {
               if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
-                return new DrawerHeader(
+                return DrawerHeader(
                   child: Center(
                     child: Text(
                       "LOAD GAME",
@@ -108,15 +108,15 @@ class _LoadGameState extends State<LoadGame> {
               }
             }),
             Center(
-                child: new Container(
+                child: Container(
                     child: SafeArea(
-                        child: new SingleChildScrollView(
+                        child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Center(
-                    child: new Container(
+                    child: Container(
                       child: Row(
                         children: <Widget>[
                           Spacer(),
