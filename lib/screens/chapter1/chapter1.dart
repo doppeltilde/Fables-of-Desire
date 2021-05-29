@@ -26,7 +26,7 @@ class _VNState extends State<VN1> {
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       sharedPreferences = sp;
       notHome = sharedPreferences!.getString("notHome");
-      notHome = "calling.mp3";
+      notHome = "cherrycolored.mp3";
       persistNotHome(notHome!);
       print(notHome);
     });
@@ -42,11 +42,11 @@ class _VNState extends State<VN1> {
   playAudio() {
     if (!Platform.isWindows || Platform.isLinux) {
       if (GameAudio.bgm.isPlaying == false) {
-        GameAudio.bgm.play("calling.mp3");
+        GameAudio.bgm.play("cherrycolored.mp3");
       }
     } else {
       if (GameAudioDesktop.playAudio.isPlaying == false) {
-        GameAudioDesktop.playAudio.play("calling.mp3");
+        GameAudioDesktop.playAudio.play("cherrycolored.mp3");
       }
     }
   }

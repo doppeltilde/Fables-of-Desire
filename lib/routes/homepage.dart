@@ -80,7 +80,7 @@ class _BaseScreenState extends State<HomePage2> {
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       sharedPreferences = sp;
       notHome = sharedPreferences!.getString("notHome");
-      notHome = "warmth-of-the-sun-adi-goldstein.mp3";
+      notHome = "The_world_of_peace-.mp3";
       persistNotHome(notHome!);
       print(notHome);
     });
@@ -96,17 +96,17 @@ class _BaseScreenState extends State<HomePage2> {
   playAudio() {
     if (!Platform.isWindows || Platform.isLinux) {
       if (GameAudio.bgm.isPlaying == false) {
-        GameAudio.bgm.play("warmth-of-the-sun-adi-goldstein.mp3");
+        GameAudio.bgm.play("The_world_of_peace-.mp3");
       }
     } else {
       if (GameAudioDesktop.playAudio.isPlaying == false) {
-        GameAudioDesktop.playAudio.play("warmth-of-the-sun-adi-goldstein.mp3");
+        GameAudioDesktop.playAudio.play("The_world_of_peace-.mp3");
       }
     }
   }
 
   @override
-  void didChangeDependencies() async {
+  void didChangeDependencies() {
     if (Platform.isWindows || Platform.isLinux) {
       super.didChangeDependencies();
       GameAudioDesktop.playAudio.player = Player(
@@ -164,15 +164,16 @@ class _BaseScreenState extends State<HomePage2> {
                                         borderRadius:
                                             BorderRadius.circular(40.0),
                                         side: BorderSide(color: Colors.white))),
-                                onPressed: () async {
+                                onPressed: () {
                                   if (Platform.isWindows || Platform.isLinux) {
                                     setState(() {
                                       GameAudioDesktop.playAudio.stop();
                                     });
                                   } else {
-                                    GameAudio.bgm.stop();
+                                    setState(() {
+                                      GameAudio.bgm.stop();
+                                    });
                                   }
-
                                   Navigator.of(context).pushNamed('/intro');
                                 },
                               ),
@@ -198,16 +199,7 @@ class _BaseScreenState extends State<HomePage2> {
                                         borderRadius:
                                             BorderRadius.circular(40.0),
                                         side: BorderSide(color: Colors.white))),
-                                onPressed: () async {
-                                  if (Platform.isWindows || Platform.isLinux) {
-                                    setState(() {
-                                      GameAudioDesktop.playAudio.stop();
-                                    });
-                                  } else {
-                                    setState(() {
-                                      GameAudio.bgm.stop();
-                                    });
-                                  }
+                                onPressed: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(

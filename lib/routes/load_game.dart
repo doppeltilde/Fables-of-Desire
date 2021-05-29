@@ -1,3 +1,4 @@
+import 'package:fablesofdesire/global/audio/game_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:universal_io/io.dart';
@@ -72,7 +73,6 @@ class _LoadGameState extends State<LoadGame> {
 
   @override
   Widget build(BuildContext context) {
-    print(saveSlotOne);
     return Container(
         decoration: BoxDecoration(
             image: DecorationImage(
@@ -128,6 +128,16 @@ class _LoadGameState extends State<LoadGame> {
                                       saveSlotOne!.isEmpty) {
                                     print("EMPTY");
                                   } else {
+                                    if (Platform.isWindows ||
+                                        Platform.isLinux) {
+                                      setState(() {
+                                        GameAudioDesktop.playAudio.stop();
+                                      });
+                                    } else {
+                                      setState(() {
+                                        GameAudio.bgm.stop();
+                                      });
+                                    }
                                     Navigator.of(context)
                                         .pushNamed('$saveSlotOne');
                                   }
@@ -245,6 +255,16 @@ class _LoadGameState extends State<LoadGame> {
                                   if (saveSlot2 == null || saveSlot2!.isEmpty) {
                                     print("EMPTY");
                                   } else {
+                                    if (Platform.isWindows ||
+                                        Platform.isLinux) {
+                                      setState(() {
+                                        GameAudioDesktop.playAudio.stop();
+                                      });
+                                    } else {
+                                      setState(() {
+                                        GameAudio.bgm.stop();
+                                      });
+                                    }
                                     Navigator.of(context)
                                         .pushNamed('$saveSlot2');
                                   }
@@ -359,6 +379,16 @@ class _LoadGameState extends State<LoadGame> {
                                   if (saveSlot3 == null || saveSlot3!.isEmpty) {
                                     print("EMPTY");
                                   } else {
+                                    if (Platform.isWindows ||
+                                        Platform.isLinux) {
+                                      setState(() {
+                                        GameAudioDesktop.playAudio.stop();
+                                      });
+                                    } else {
+                                      setState(() {
+                                        GameAudio.bgm.stop();
+                                      });
+                                    }
                                     Navigator.of(context)
                                         .pushNamed('$saveSlot3');
                                   }

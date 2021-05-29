@@ -113,7 +113,6 @@ class _SplashScreenState extends State<SplashScreen> {
     //initPlatformState();
     Future.delayed(Duration.zero).then((_) {
       // PRECACHE IMAGES
-      for (var i in images) precacheImage(AssetImage(i["image"]), context);
 
       SharedPreferences.getInstance().then((SharedPreferences sp) {
         sharedPreferences = sp;
