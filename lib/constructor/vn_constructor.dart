@@ -139,7 +139,7 @@ class _InterludeState extends State<InterludeTextSound> {
                       ],
                     ),
                     FittedBox(
-                      fit: BoxFit.fill,
+                      fit: BoxFit.fitHeight,
                       child: Stack(
                         children: <Widget>[
                           Container(

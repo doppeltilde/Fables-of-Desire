@@ -25,6 +25,7 @@ dependencies:
   dart_vlc: ^0.0.7
   desktop_window: ^0.4.0
   provider: ^5.0.0
+  auto_size_text: ^3.0.0-nullsafety.0
   #riverpod: ^0.14.0+3
 
 # dependency_overrides:

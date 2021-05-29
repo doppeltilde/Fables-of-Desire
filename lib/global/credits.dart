@@ -12,11 +12,29 @@ class Credits extends StatefulWidget {
   _SettingsState createState() => _SettingsState();
 }
 
-class _SettingsState extends State<Credits> {
+class _SettingsState extends State<Credits>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+  late Animation<double> animation;
   @override
   void initState() {
     super.initState();
     getVolume();
+    controller = AnimationController(
+      duration: Duration(seconds: 1),
+      vsync: this,
+    );
+
+    animation = CurvedAnimation(
+      parent: controller,
+      curve: Curves.easeInOutCubic,
+    ).drive(Tween(begin: 0, end: 2));
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   double? vol = 1.0;
@@ -81,6 +99,49 @@ class _SettingsState extends State<Credits> {
                           ),
                           SizedBox(
                             height: 55,
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width / 2,
+                            height: 70,
+                            margin: EdgeInsets.symmetric(
+                              horizontal: 10,
+                            ).copyWith(
+                              bottom: 20,
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 20,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              color: Theme.of(context).cardColor,
+                            ),
+                            child: Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Developed with ♥ in",
+                                    style: TextStyle(
+                                        fontSize: 22, fontFamily: "Aleo"),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      controller
+                                        ..reset()
+                                        ..forward();
+                                    },
+                                    child: RotationTransition(
+                                      turns: animation,
+                                      child: FlutterLogo(
+                                        size: 110,
+                                        style: FlutterLogoStyle.horizontal,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         ],
                       ),
