@@ -218,7 +218,7 @@ class _SplashScreenState extends State<SplashScreen> {
         previousRoute != "/home" ||
         previousRoute != null ||
         previousRoute != '/') {
-      if (!Platform.isWindows || Platform.isLinux) {
+      if (!Platform.isWindows || !Platform.isLinux) {
         GameAudio.bgm.play(notHome!);
       } else {
         GameAudioDesktop.playAudio.play(notHome!);

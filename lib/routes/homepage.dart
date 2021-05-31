@@ -94,7 +94,7 @@ class _BaseScreenState extends State<HomePage2> {
   }
 
   playAudio() {
-    if (!Platform.isWindows || Platform.isLinux) {
+    if (!Platform.isWindows || !Platform.isLinux) {
       if (GameAudio.bgm.isPlaying == false) {
         GameAudio.bgm.play("The_world_of_peace-.mp3");
       }

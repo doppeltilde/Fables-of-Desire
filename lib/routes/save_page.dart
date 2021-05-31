@@ -4,7 +4,7 @@ import 'package:universal_io/io.dart';
 
 class SaveGame extends StatefulWidget {
   final route;
-  SaveGame({Key? key, this.route});
+  SaveGame({this.route});
 
   @override
   _LoadGameState createState() => _LoadGameState();
@@ -140,10 +140,10 @@ class _LoadGameState extends State<SaveGame> {
                                       saveSlotOne!.isEmpty) {
                                     return Container(
                                       width:
-                                          MediaQuery.of(context).size.width / 4,
+                                          MediaQuery.of(context).size.width / 5,
                                       height:
                                           MediaQuery.of(context).size.height /
-                                              4,
+                                              3,
                                       padding: EdgeInsets.symmetric(
                                         horizontal: 20,
                                       ),
@@ -153,17 +153,17 @@ class _LoadGameState extends State<SaveGame> {
                                         image: DecorationImage(
                                           image: AssetImage(
                                               "assets/images/sprites/Cast/MC_Neutral.png"),
-                                          fit: BoxFit.cover,
+                                          fit: BoxFit.fitHeight,
                                         ),
                                       ),
                                     );
                                   } else {
                                     return Container(
                                       width:
-                                          MediaQuery.of(context).size.width / 4,
+                                          MediaQuery.of(context).size.width / 5,
                                       height:
                                           MediaQuery.of(context).size.height /
-                                              4,
+                                              3,
                                       padding: EdgeInsets.symmetric(
                                         horizontal: 20,
                                       ),
@@ -173,7 +173,7 @@ class _LoadGameState extends State<SaveGame> {
                                         image: DecorationImage(
                                           image: AssetImage(
                                               "assets/images/sprites/Cast/MC_Happy.png"),
-                                          fit: BoxFit.cover,
+                                          fit: BoxFit.fitHeight,
                                         ),
                                       ),
                                     );
@@ -286,10 +286,10 @@ class _LoadGameState extends State<SaveGame> {
                                   if (saveSlot2 == null || saveSlot2!.isEmpty) {
                                     return Container(
                                       width:
-                                          MediaQuery.of(context).size.width / 4,
+                                          MediaQuery.of(context).size.width / 5,
                                       height:
                                           MediaQuery.of(context).size.height /
-                                              4,
+                                              3,
                                       padding: EdgeInsets.symmetric(
                                         horizontal: 20,
                                       ),
@@ -299,17 +299,17 @@ class _LoadGameState extends State<SaveGame> {
                                         image: DecorationImage(
                                           image: AssetImage(
                                               "assets/images/sprites/Cast/MC_Neutral.png"),
-                                          fit: BoxFit.cover,
+                                          fit: BoxFit.fitHeight,
                                         ),
                                       ),
                                     );
                                   } else {
                                     return Container(
                                       width:
-                                          MediaQuery.of(context).size.width / 4,
+                                          MediaQuery.of(context).size.width / 5,
                                       height:
                                           MediaQuery.of(context).size.height /
-                                              4,
+                                              3,
                                       padding: EdgeInsets.symmetric(
                                         horizontal: 20,
                                       ),
@@ -319,7 +319,7 @@ class _LoadGameState extends State<SaveGame> {
                                         image: DecorationImage(
                                           image: AssetImage(
                                               "assets/images/sprites/Cast/MC_Happy.png"),
-                                          fit: BoxFit.cover,
+                                          fit: BoxFit.fitHeight,
                                         ),
                                       ),
                                     );
@@ -414,62 +414,57 @@ class _LoadGameState extends State<SaveGame> {
                           Spacer(),
                           Column(
                             children: [
-                              InkWell(
-                                onTap: () {
-                                  if (saveSlot3 == null || saveSlot3!.isEmpty) {
-                                    setState(() {
-                                      saveSlot3 = widget.route;
-                                      saveSlot3State(widget.route);
-                                      // print(saveSlot3);
-                                    });
-                                  } else {
-                                    showAlertDialog3(context);
-                                  }
-                                },
-                                child: Builder(builder: (context) {
-                                  if (saveSlot3 == null || saveSlot3!.isEmpty) {
-                                    return Container(
-                                      width:
-                                          MediaQuery.of(context).size.width / 4,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              4,
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 20,
+                              InkWell(onTap: () {
+                                if (saveSlot3 == null || saveSlot3!.isEmpty) {
+                                  setState(() {
+                                    saveSlot3 = widget.route;
+                                    saveSlot3State(widget.route);
+                                    // print(saveSlot3);
+                                  });
+                                } else {
+                                  showAlertDialog3(context);
+                                }
+                              }, child: Builder(builder: (context) {
+                                if (saveSlot3 == null || saveSlot3!.isEmpty) {
+                                  return Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 5,
+                                    height:
+                                        MediaQuery.of(context).size.height / 3,
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 20,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30),
+                                      color: Theme.of(context).cardColor,
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                            "assets/images/sprites/Cast/MC_Neutral.png"),
+                                        fit: BoxFit.fitHeight,
                                       ),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                        color: Theme.of(context).cardColor,
-                                        image: DecorationImage(
-                                          image: AssetImage(
-                                              "assets/images/sprites/Cast/MC_Neutral.png"),
-                                          fit: BoxFit.cover,
-                                        ),
+                                    ),
+                                  );
+                                } else {
+                                  return Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 5,
+                                    height:
+                                        MediaQuery.of(context).size.height / 3,
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 20,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30),
+                                      color: Theme.of(context).cardColor,
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                            "assets/images/sprites/Cast/MC_Happy.png"),
+                                        fit: BoxFit.fitHeight,
                                       ),
-                                    );
-                                  } else {
-                                    return Container(
-                                      width:
-                                          MediaQuery.of(context).size.width / 4,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              4,
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 20,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                        color: Theme.of(context).cardColor,
-                                        image: DecorationImage(
-                                          image: AssetImage(
-                                              "assets/images/sprites/Cast/MC_Happy.png"),
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                }),
-                              ),
+                                    ),
+                                  );
+                                }
+                              })),
                               Builder(builder: (context) {
                                 if (saveSlot3 == null || saveSlot3!.isEmpty) {
                                   return Text(

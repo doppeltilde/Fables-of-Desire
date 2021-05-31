@@ -150,7 +150,7 @@ class _LoadGameState extends State<LoadGame> {
                                           MediaQuery.of(context).size.width / 5,
                                       height:
                                           MediaQuery.of(context).size.height /
-                                              4,
+                                              3,
                                       padding: EdgeInsets.symmetric(
                                         horizontal: 20,
                                       ),
@@ -160,7 +160,7 @@ class _LoadGameState extends State<LoadGame> {
                                         image: DecorationImage(
                                           image: AssetImage(
                                               "assets/images/sprites/Cast/MC_Neutral.png"),
-                                          fit: BoxFit.cover,
+                                          fit: BoxFit.fitHeight,
                                         ),
                                       ),
                                     );
@@ -170,7 +170,7 @@ class _LoadGameState extends State<LoadGame> {
                                           MediaQuery.of(context).size.width / 5,
                                       height:
                                           MediaQuery.of(context).size.height /
-                                              4,
+                                              3,
                                       padding: EdgeInsets.symmetric(
                                         horizontal: 20,
                                       ),
@@ -180,7 +180,7 @@ class _LoadGameState extends State<LoadGame> {
                                         image: DecorationImage(
                                           image: AssetImage(
                                               "assets/images/sprites/Cast/MC_Happy.png"),
-                                          fit: BoxFit.cover,
+                                          fit: BoxFit.fitHeight,
                                         ),
                                       ),
                                     );
@@ -276,7 +276,7 @@ class _LoadGameState extends State<LoadGame> {
                                           MediaQuery.of(context).size.width / 5,
                                       height:
                                           MediaQuery.of(context).size.height /
-                                              4,
+                                              3,
                                       padding: EdgeInsets.symmetric(
                                         horizontal: 20,
                                       ),
@@ -286,7 +286,7 @@ class _LoadGameState extends State<LoadGame> {
                                         image: DecorationImage(
                                           image: AssetImage(
                                               "assets/images/sprites/Cast/MC_Neutral.png"),
-                                          fit: BoxFit.cover,
+                                          fit: BoxFit.fitHeight,
                                         ),
                                       ),
                                     );
@@ -296,7 +296,7 @@ class _LoadGameState extends State<LoadGame> {
                                           MediaQuery.of(context).size.width / 5,
                                       height:
                                           MediaQuery.of(context).size.height /
-                                              4,
+                                              3,
                                       padding: EdgeInsets.symmetric(
                                         horizontal: 20,
                                       ),
@@ -306,7 +306,7 @@ class _LoadGameState extends State<LoadGame> {
                                         image: DecorationImage(
                                           image: AssetImage(
                                               "assets/images/sprites/Cast/MC_Happy.png"),
-                                          fit: BoxFit.cover,
+                                          fit: BoxFit.fitHeight,
                                         ),
                                       ),
                                     );
@@ -400,7 +400,7 @@ class _LoadGameState extends State<LoadGame> {
                                           MediaQuery.of(context).size.width / 5,
                                       height:
                                           MediaQuery.of(context).size.height /
-                                              4,
+                                              3,
                                       padding: EdgeInsets.symmetric(
                                         horizontal: 20,
                                       ),
@@ -410,7 +410,7 @@ class _LoadGameState extends State<LoadGame> {
                                         image: DecorationImage(
                                           image: AssetImage(
                                               "assets/images/sprites/Cast/MC_Neutral.png"),
-                                          fit: BoxFit.cover,
+                                          fit: BoxFit.fitHeight,
                                         ),
                                       ),
                                     );
@@ -420,7 +420,7 @@ class _LoadGameState extends State<LoadGame> {
                                           MediaQuery.of(context).size.width / 5,
                                       height:
                                           MediaQuery.of(context).size.height /
-                                              4,
+                                              3,
                                       padding: EdgeInsets.symmetric(
                                         horizontal: 20,
                                       ),
@@ -430,7 +430,7 @@ class _LoadGameState extends State<LoadGame> {
                                         image: DecorationImage(
                                           image: AssetImage(
                                               "assets/images/sprites/Cast/MC_Happy.png"),
-                                          fit: BoxFit.cover,
+                                          fit: BoxFit.fitHeight,
                                         ),
                                       ),
                                     );
