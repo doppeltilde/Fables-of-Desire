@@ -16,8 +16,11 @@ class _LoadGameState extends State<LoadGame> {
   void initState() {
     super.initState();
     getSlot1();
+    getSlot1Date();
     getSlot2();
+    getSlot2Date();
     getSlot3();
+    getSlot3Date();
   }
 
   String? saveSlotOne;
@@ -26,15 +29,22 @@ class _LoadGameState extends State<LoadGame> {
     setState(() {});
   }
 
-  saveSlotOneState(value) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("saveSlotOne", value);
-  }
-
   getSlotOneState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? saveSlotOne = prefs.getString('saveSlotOne');
     return saveSlotOne;
+  }
+
+  String? saveSlotOneDate;
+  getSlot1Date() async {
+    saveSlotOneDate = await getSlotOneDateState();
+    setState(() {});
+  }
+
+  getSlotOneDateState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? saveSlotOneDate = prefs.getString('saveSlotOneDate');
+    return saveSlotOneDate;
   }
 
   String? saveSlot2;
@@ -54,6 +64,18 @@ class _LoadGameState extends State<LoadGame> {
     return saveSlot2;
   }
 
+  String? saveSlot2Date;
+  getSlot2Date() async {
+    saveSlot2Date = await getSlot2DateState();
+    setState(() {});
+  }
+
+  getSlot2DateState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? saveSlot2Date = prefs.getString('saveSlot2Date');
+    return saveSlot2Date;
+  }
+
   String? saveSlot3;
   getSlot3() async {
     saveSlot3 = await getSlot3State();
@@ -69,6 +91,18 @@ class _LoadGameState extends State<LoadGame> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? saveSlot3 = prefs.getString('saveSlot3');
     return saveSlot3;
+  }
+
+  String? saveSlot3Date;
+  getSlot3Date() async {
+    saveSlot3Date = await getSlot3DateState();
+    setState(() {});
+  }
+
+  getSlot3DateState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? saveSlot3Date = prefs.getString('saveSlot3Date');
+    return saveSlot3Date;
   }
 
   @override
@@ -194,16 +228,17 @@ class _LoadGameState extends State<LoadGame> {
                                     "EMPTY",
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontFamily: "NanumBrush",
-                                        fontSize: 35),
+                                        fontFamily: "Aleo",
+                                        fontSize: 20),
                                   );
                                 } else {
                                   return Text(
-                                    "SAVED",
+                                    "\nSAVED\n$saveSlotOneDate\n",
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontFamily: "NanumBrush",
-                                        fontSize: 35),
+                                        fontFamily: "Aleo",
+                                        fontSize: 20),
                                   );
                                 }
                               }),
@@ -319,16 +354,17 @@ class _LoadGameState extends State<LoadGame> {
                                     "EMPTY",
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontFamily: "NanumBrush",
-                                        fontSize: 35),
+                                        fontFamily: "Aleo",
+                                        fontSize: 20),
                                   );
                                 } else {
                                   return Text(
-                                    "SAVED",
+                                    "\nSAVED\n$saveSlot2Date\n",
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontFamily: "NanumBrush",
-                                        fontSize: 35),
+                                        fontFamily: "Aleo",
+                                        fontSize: 20),
                                   );
                                 }
                               }),
@@ -443,16 +479,17 @@ class _LoadGameState extends State<LoadGame> {
                                     "EMPTY",
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontFamily: "NanumBrush",
-                                        fontSize: 35),
+                                        fontFamily: "Aleo",
+                                        fontSize: 20),
                                   );
                                 } else {
                                   return Text(
-                                    "SAVED",
+                                    "\nSAVED\n$saveSlot3Date\n",
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontFamily: "NanumBrush",
-                                        fontSize: 35),
+                                        fontFamily: "Aleo",
+                                        fontSize: 20),
                                   );
                                 }
                               }),

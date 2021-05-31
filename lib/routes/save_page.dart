@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:universal_io/io.dart';
+import 'package:intl/intl.dart';
 
 class SaveGame extends StatefulWidget {
   final route;
@@ -15,8 +16,11 @@ class _LoadGameState extends State<SaveGame> {
   void initState() {
     super.initState();
     getSlot1();
+    getSlot1Date();
     getSlot2();
+    getSlot2Date();
     getSlot3();
+    getSlot3Date();
   }
 
   String? saveSlotOne;
@@ -36,6 +40,23 @@ class _LoadGameState extends State<SaveGame> {
     return saveSlotOne;
   }
 
+  String? saveSlotOneDate;
+  getSlot1Date() async {
+    saveSlotOneDate = await getSlotOneDateState();
+    setState(() {});
+  }
+
+  saveSlotOneDateState(value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("saveSlotOneDate", value);
+  }
+
+  getSlotOneDateState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? saveSlotOneDate = prefs.getString('saveSlotOneDate');
+    return saveSlotOneDate;
+  }
+
   String? saveSlot2;
   getSlot2() async {
     saveSlot2 = await getSlot2State();
@@ -53,6 +74,23 @@ class _LoadGameState extends State<SaveGame> {
     return saveSlot2;
   }
 
+  String? saveSlot2Date;
+  getSlot2Date() async {
+    saveSlot2Date = await getSlot2DateState();
+    setState(() {});
+  }
+
+  saveSlot2DateState(value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("saveSlot2Date", value);
+  }
+
+  getSlot2DateState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? saveSlot2Date = prefs.getString('saveSlot2Date');
+    return saveSlot2Date;
+  }
+
   String? saveSlot3;
   getSlot3() async {
     saveSlot3 = await getSlot3State();
@@ -68,6 +106,23 @@ class _LoadGameState extends State<SaveGame> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? saveSlot3 = prefs.getString('saveSlot3');
     return saveSlot3;
+  }
+
+  String? saveSlot3Date;
+  getSlot3Date() async {
+    saveSlot3Date = await getSlot3DateState();
+    setState(() {});
+  }
+
+  saveSlot3DateState(value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("saveSlot3Date", value);
+  }
+
+  getSlot3DateState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? saveSlot3Date = prefs.getString('saveSlot3Date');
+    return saveSlot3Date;
   }
 
   @override
@@ -129,6 +184,14 @@ class _LoadGameState extends State<SaveGame> {
                                     setState(() {
                                       saveSlotOne = widget.route;
                                       saveSlotOneState(widget.route);
+                                      DateTime now = DateTime.now();
+                                      String dateFormat =
+                                          DateFormat("dd-MM-yyyy HH:mm:ss")
+                                              .format(now);
+                                      saveSlotOneDateState(
+                                          "$dateFormat".toString());
+                                      saveSlotOneDate =
+                                          "$dateFormat".toString();
                                       //print(saveSlotOne);
                                     });
                                   } else {
@@ -187,16 +250,17 @@ class _LoadGameState extends State<SaveGame> {
                                     "EMPTY",
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontFamily: "NanumBrush",
-                                        fontSize: 35),
+                                        fontFamily: "Aleo",
+                                        fontSize: 20),
                                   );
                                 } else {
                                   return Text(
-                                    "SAVED",
+                                    "\nSAVED\n$saveSlotOneDate\n",
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontFamily: "NanumBrush",
-                                        fontSize: 35),
+                                        fontFamily: "Aleo",
+                                        fontSize: 20),
                                   );
                                 }
                               }),
@@ -276,6 +340,13 @@ class _LoadGameState extends State<SaveGame> {
                                     setState(() {
                                       saveSlot2 = widget.route;
                                       saveSlot2State(widget.route);
+                                      DateTime now = DateTime.now();
+                                      String dateFormat =
+                                          DateFormat("dd-MM-yyyy HH:mm:ss")
+                                              .format(now);
+                                      saveSlot2DateState(
+                                          "$dateFormat".toString());
+                                      saveSlot2Date = "$dateFormat".toString();
                                       //print(saveSlot2);
                                     });
                                   } else {
@@ -332,16 +403,17 @@ class _LoadGameState extends State<SaveGame> {
                                     "EMPTY",
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontFamily: "NanumBrush",
-                                        fontSize: 35),
+                                        fontFamily: "Aleo",
+                                        fontSize: 20),
                                   );
                                 } else {
                                   return Text(
-                                    "SAVED",
+                                    "\nSAVED\n$saveSlot2Date\n",
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontFamily: "NanumBrush",
-                                        fontSize: 35),
+                                        fontFamily: "Aleo",
+                                        fontSize: 20),
                                   );
                                 }
                               }),
@@ -419,6 +491,13 @@ class _LoadGameState extends State<SaveGame> {
                                   setState(() {
                                     saveSlot3 = widget.route;
                                     saveSlot3State(widget.route);
+                                    DateTime now = DateTime.now();
+                                    String dateFormat =
+                                        DateFormat("dd-MM-yyyy HH:mm:ss")
+                                            .format(now);
+                                    saveSlot3DateState(
+                                        "$dateFormat".toString());
+                                    saveSlot3Date = "$dateFormat".toString();
                                     // print(saveSlot3);
                                   });
                                 } else {
@@ -471,16 +550,17 @@ class _LoadGameState extends State<SaveGame> {
                                     "EMPTY",
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontFamily: "NanumBrush",
-                                        fontSize: 35),
+                                        fontFamily: "Aleo",
+                                        fontSize: 20),
                                   );
                                 } else {
                                   return Text(
-                                    "SAVED",
+                                    "\nSAVED\n$saveSlot3Date\n",
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontFamily: "NanumBrush",
-                                        fontSize: 35),
+                                        fontFamily: "Aleo",
+                                        fontSize: 20),
                                   );
                                 }
                               }),
@@ -584,6 +664,10 @@ class _LoadGameState extends State<SaveGame> {
             setState(() {
               saveSlotOne = widget.route;
               saveSlotOneState(widget.route);
+              DateTime now = DateTime.now();
+              String dateFormat = DateFormat("dd-MM-yyyy HH:mm:ss").format(now);
+              saveSlotOneDateState("$dateFormat".toString());
+              saveSlotOneDate = "$dateFormat".toString();
               //print(saveSlotOne);
             });
           },
@@ -658,6 +742,10 @@ class _LoadGameState extends State<SaveGame> {
             setState(() {
               saveSlot2 = widget.route;
               saveSlot2State(widget.route);
+              DateTime now = DateTime.now();
+              String dateFormat = DateFormat("dd-MM-yyyy HH:mm:ss").format(now);
+              saveSlot2DateState("$dateFormat".toString());
+              saveSlot2Date = "$dateFormat".toString();
               //print(saveSlot2);
             });
           },
@@ -732,7 +820,11 @@ class _LoadGameState extends State<SaveGame> {
             setState(() {
               saveSlot3 = widget.route;
               saveSlot3State(widget.route);
-              //print(saveSlot3);
+              DateTime now = DateTime.now();
+              String dateFormat = DateFormat("dd-MM-yyyy HH:mm:ss").format(now);
+              saveSlot3DateState("$dateFormat".toString());
+              saveSlot3Date = "$dateFormat".toString();
+              // print(saveSlot3);
             });
           },
         ),
