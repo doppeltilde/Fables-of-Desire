@@ -247,7 +247,7 @@ class _LoadGameState extends State<SaveGame> {
                                 if (saveSlotOne == null ||
                                     saveSlotOne!.isEmpty) {
                                   return Text(
-                                    "EMPTY",
+                                    "\nEMPTY",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: "Aleo",
@@ -400,7 +400,7 @@ class _LoadGameState extends State<SaveGame> {
                               Builder(builder: (context) {
                                 if (saveSlot2 == null || saveSlot2!.isEmpty) {
                                   return Text(
-                                    "EMPTY",
+                                    "\nEMPTY",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: "Aleo",
@@ -547,7 +547,7 @@ class _LoadGameState extends State<SaveGame> {
                               Builder(builder: (context) {
                                 if (saveSlot3 == null || saveSlot3!.isEmpty) {
                                   return Text(
-                                    "EMPTY",
+                                    "\nEMPTY",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: "Aleo",
