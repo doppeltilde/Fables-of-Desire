@@ -38,7 +38,7 @@ class ProfileListItem extends StatelessWidget {
           SizedBox(width: 15),
           Text(
             this.text!,
-            style: TextStyle(fontFamily: "Julee", fontSize: 28),
+            style: TextStyle(fontFamily: "Aleo", fontSize: 22),
           ),
           Spacer(),
           if (this.hasNavigation)

@@ -100,6 +100,19 @@ class _SettingsState extends State<Credits>
                           SizedBox(
                             height: 55,
                           ),
+                          InkWell(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LicensesSimplePage()),
+                            ),
+                            highlightColor: Colors.transparent,
+                            splashColor: Colors.transparent,
+                            child: ProfileListItem(
+                              icon: Icons.article_outlined,
+                              text: 'Licenses',
+                            ),
+                          ),
                           Container(
                             width: MediaQuery.of(context).size.width / 2,
                             height: 70,
@@ -151,4 +164,20 @@ class _SettingsState extends State<Credits>
               ),
             ])));
   }
+}
+
+class LicensesSimplePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => Theme(
+        data: ThemeData.dark(),
+        child: LicensePage(
+          applicationName: 'Fables of Desire',
+          applicationIcon: Padding(
+            padding: EdgeInsets.all(8),
+            child: Image.asset('assets/images/logo.png', width: 48, height: 48),
+          ),
+          applicationVersion: '1.0.0',
+          applicationLegalese: 'Copyright ${DateTime.now().year} SmallDreams',
+        ),
+      );
 }

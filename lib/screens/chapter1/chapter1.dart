@@ -40,7 +40,7 @@ class _VNState extends State<VN1> {
   }
 
   playAudio() {
-    if (!Platform.isWindows || Platform.isLinux) {
+    if (!Platform.isWindows || !Platform.isLinux) {
       if (GameAudio.bgm.isPlaying == false) {
         GameAudio.bgm.play("cherrycolored.mp3");
       }
