@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:universal_io/io.dart';
+import 'dart:io' show Platform;
 
 class SFXVolume extends StatefulWidget {
   final player;

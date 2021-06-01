@@ -5,7 +5,7 @@ import 'package:fablesofdesire/global/credits.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:fablesofdesire/routes/load_game.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:universal_io/io.dart';
+import 'dart:io' show Platform;
 import 'package:fablesofdesire/global/setings.dart';
 import 'package:flutter/material.dart';
 
@@ -94,13 +94,13 @@ class _BaseScreenState extends State<HomePage2> {
   }
 
   playAudio() {
-    if (!Platform.isWindows || !Platform.isLinux) {
-      if (GameAudio.bgm.isPlaying == false) {
-        GameAudio.bgm.play("The_world_of_peace-.mp3");
-      }
-    } else {
+    if (Platform.isWindows || Platform.isLinux) {
       if (GameAudioDesktop.playAudio.isPlaying == false) {
         GameAudioDesktop.playAudio.play("The_world_of_peace-.mp3");
+      }
+    } else {
+      if (GameAudio.bgm.isPlaying == false) {
+        GameAudio.bgm.play("The_world_of_peace-.mp3");
       }
     }
   }

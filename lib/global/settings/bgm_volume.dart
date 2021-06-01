@@ -1,7 +1,7 @@
 import 'package:fablesofdesire/global/audio/game_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:universal_io/io.dart';
+import 'dart:io' show Platform;
 
 class BGMVolume extends StatefulWidget {
   @override

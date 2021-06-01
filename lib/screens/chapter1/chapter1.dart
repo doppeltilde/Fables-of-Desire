@@ -40,13 +40,13 @@ class _VNState extends State<VN1> {
   }
 
   playAudio() {
-    if (!Platform.isWindows || !Platform.isLinux) {
-      if (GameAudio.bgm.isPlaying == false) {
-        GameAudio.bgm.play("cherrycolored.mp3");
-      }
-    } else {
+    if (Platform.isWindows || Platform.isLinux) {
       if (GameAudioDesktop.playAudio.isPlaying == false) {
         GameAudioDesktop.playAudio.play("cherrycolored.mp3");
+      }
+    } else {
+      if (GameAudio.bgm.isPlaying == false) {
+        GameAudio.bgm.play("cherrycolored.mp3");
       }
     }
   }

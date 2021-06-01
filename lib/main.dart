@@ -10,13 +10,13 @@ import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:fablesofdesire/routes/routes.dart';
 import 'package:flutter/services.dart';
-import 'package:universal_io/io.dart';
+import 'dart:io' show Platform;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-    await DesktopWindow.setMinWindowSize(Size(800, 500));
+    await DesktopWindow.setMinWindowSize(Size(900, 600));
   } else {}
 
   SystemChrome.setPreferredOrientations(

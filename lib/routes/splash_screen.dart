@@ -3,7 +3,7 @@ import 'package:fablesofdesire/global/audio/game_audio.dart';
 import 'package:fablesofdesire/routes/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:universal_io/io.dart';
+import 'dart:io' show Platform;
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -218,11 +218,13 @@ class _SplashScreenState extends State<SplashScreen> {
         previousRoute != "/home" ||
         previousRoute != null ||
         previousRoute != '/') {
-      if (!Platform.isWindows ||
-          !Platform.isLinux && GameAudio.bgm.isPlaying == false) {
-        GameAudio.bgm.play(notHome!);
-      } else {
+      if (Platform.isWindows ||
+          Platform.isLinux && GameAudioDesktop.playAudio.isPlaying == false) {
         GameAudioDesktop.playAudio.play(notHome!);
+      } else {
+        if (GameAudio.bgm.isPlaying == false) {
+          GameAudio.bgm.play(notHome!);
+        }
       }
     }
   }
