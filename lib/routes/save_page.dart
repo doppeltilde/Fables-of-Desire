@@ -128,7 +128,6 @@ class _LoadGameState extends State<SaveGame> {
 
   @override
   Widget build(BuildContext context) {
-    //print(saveSlotOne);
     return Container(
         decoration: BoxDecoration(
             image: DecorationImage(
@@ -139,7 +138,7 @@ class _LoadGameState extends State<SaveGame> {
         )),
         child: SafeArea(
             child: Scaffold(
-          appBar: appbar(context) as PreferredSizeWidget?,
+          //appBar: appbar(context) as PreferredSizeWidget?,
           backgroundColor: Colors.transparent,
           resizeToAvoidBottomInset: false,
           body: Stack(children: <Widget>[
@@ -635,7 +634,8 @@ class _LoadGameState extends State<SaveGame> {
                   ),
                 ],
               ),
-            ))))
+            )))),
+            backbutton(context)
           ]),
         )));
   }

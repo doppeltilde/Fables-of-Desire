@@ -31,6 +31,39 @@ Widget appbar(context) {
   );
 }
 
+Widget backbutton(context) {
+  return Align(
+    alignment: FractionalOffset.bottomLeft,
+    child: Row(children: [
+      Padding(
+        padding: EdgeInsets.only(bottom: 20, left: 10),
+        child: InkWell(
+          onTap: () => Navigator.pop(context),
+          child: Container(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: Theme.of(context).cardColor,
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.arrow_back_outlined,
+                    size: 35,
+                    color: Colors.black,
+                  ),
+                  Text(
+                    "RETURN",
+                    style: TextStyle(fontFamily: "Aleo", fontSize: 24),
+                  ),
+                ],
+              )),
+        ),
+      ),
+    ]),
+  );
+}
+
 class AllowMultipleGestureRecognizer extends TapGestureRecognizer {
   @override
   void rejectGesture(int pointer) {

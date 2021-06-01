@@ -118,7 +118,7 @@ class _LoadGameState extends State<LoadGame> {
         )),
         child: SafeArea(
             child: Scaffold(
-          appBar: appbar(context) as PreferredSizeWidget?,
+          // appBar: appbar(context) as PreferredSizeWidget?,
           backgroundColor: Colors.transparent,
           resizeToAvoidBottomInset: false,
           body: Stack(children: <Widget>[
@@ -537,7 +537,8 @@ class _LoadGameState extends State<LoadGame> {
                   ),
                 ],
               ),
-            ))))
+            )))),
+            backbutton(context)
           ]),
         )));
   }
