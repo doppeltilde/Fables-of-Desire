@@ -1,5 +1,5 @@
-import 'package:fablesofdesire/global/setttings/bgm_volume.dart';
-import 'package:fablesofdesire/global/setttings/text_speed.dart';
+import 'package:fablesofdesire/global/settings/bgm_volume.dart';
+import 'package:fablesofdesire/global/settings/text_speed.dart';
 import 'package:flutter/material.dart';
 
 class SettingsChangers extends StatefulWidget {

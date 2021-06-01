@@ -1,5 +1,5 @@
 import 'package:fablesofdesire/global/audio/game_audio.dart';
-import 'package:fablesofdesire/global/setttings/settings_changers.dart';
+import 'package:fablesofdesire/global/settings/settings_changers.dart';
 import 'package:fablesofdesire/routes/save_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
