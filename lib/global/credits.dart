@@ -1,3 +1,4 @@
+import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/global/settings_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -65,12 +66,7 @@ class _SettingsState extends State<Credits>
           ),
         ),
         child: Scaffold(
-            appBar: AppBar(
-              toolbarOpacity: 1,
-              elevation: 0,
-              backgroundColor: Colors.transparent,
-              automaticallyImplyLeading: true,
-            ),
+            appBar: appbar(context) as PreferredSizeWidget?,
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
             body: Stack(children: <Widget>[

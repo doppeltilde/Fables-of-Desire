@@ -1,4 +1,5 @@
 import 'package:fablesofdesire/global/audio/game_audio.dart';
+import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/global/settings/settings_changers.dart';
 import 'package:fablesofdesire/routes/save_page.dart';
 import 'package:flutter/material.dart';
@@ -49,12 +50,7 @@ class _SettingsState extends State<Settings> {
           fit: BoxFit.cover,
         )),
         child: Scaffold(
-            appBar: AppBar(
-              toolbarOpacity: 1,
-              elevation: 0,
-              backgroundColor: Colors.transparent,
-              automaticallyImplyLeading: true,
-            ),
+            appBar: appbar(context) as PreferredSizeWidget?,
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
             body: Stack(children: <Widget>[

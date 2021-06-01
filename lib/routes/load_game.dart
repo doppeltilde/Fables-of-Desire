@@ -1,4 +1,5 @@
 import 'package:fablesofdesire/global/audio/game_audio.dart';
+import 'package:fablesofdesire/global/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:universal_io/io.dart';
@@ -117,10 +118,7 @@ class _LoadGameState extends State<LoadGame> {
         )),
         child: SafeArea(
             child: Scaffold(
-          appBar: AppBar(
-              automaticallyImplyLeading: true,
-              elevation: 0,
-              backgroundColor: Colors.transparent),
+          appBar: appbar(context) as PreferredSizeWidget?,
           backgroundColor: Colors.transparent,
           resizeToAvoidBottomInset: false,
           body: Stack(children: <Widget>[
