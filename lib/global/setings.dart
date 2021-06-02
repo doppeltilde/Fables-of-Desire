@@ -50,7 +50,7 @@ class _SettingsState extends State<Settings> {
           fit: BoxFit.cover,
         )),
         child: Scaffold(
-            // appBar: appbar(context) as PreferredSizeWidget?,
+            appBar: appbar(context, "SETTINGS") as PreferredSizeWidget?,
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
             body: Stack(children: <Widget>[

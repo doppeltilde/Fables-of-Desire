@@ -8,26 +8,24 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-Widget appbar(context) {
+Widget appbar(context, name) {
   return AppBar(
     toolbarOpacity: 1,
     elevation: 0,
-    leading: Container(
+    centerTitle: true,
+    title: Container(
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
         color: Theme.of(context).cardColor,
       ),
-      child: IconButton(
-        icon: Icon(
-          Icons.arrow_back_outlined,
-          size: 40,
-          color: Colors.black,
-        ),
-        onPressed: () => Navigator.pop(context),
+      child: Text(
+        name,
+        style: TextStyle(fontFamily: "Aleo", color: Colors.black),
       ),
     ),
     backgroundColor: Colors.transparent,
-    automaticallyImplyLeading: true,
+    automaticallyImplyLeading: false,
   );
 }
 

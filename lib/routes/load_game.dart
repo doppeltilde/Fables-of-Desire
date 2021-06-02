@@ -118,27 +118,10 @@ class _LoadGameState extends State<LoadGame> {
         )),
         child: SafeArea(
             child: Scaffold(
-          // appBar: appbar(context) as PreferredSizeWidget?,
+          appBar: appbar(context, "LOAD GAME") as PreferredSizeWidget?,
           backgroundColor: Colors.transparent,
           resizeToAvoidBottomInset: false,
           body: Stack(children: <Widget>[
-            Builder(builder: (context) {
-              if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
-                return DrawerHeader(
-                  child: Center(
-                    child: Text(
-                      "LOAD GAME",
-                      style: TextStyle(
-                          fontSize: 40,
-                          fontFamily: "Aleo",
-                          color: Colors.white),
-                    ),
-                  ),
-                );
-              } else {
-                return SizedBox.shrink();
-              }
-            }),
             Center(
                 child: Container(
                     child: SafeArea(
