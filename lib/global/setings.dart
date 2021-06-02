@@ -232,10 +232,14 @@ class _SettingsState extends State<Settings> {
                 letterSpacing: .4),
           ),
           onPressed: () {
-            if (!Platform.isWindows || Platform.isLinux) {
-              GameAudio.bgm.stop();
+            if (Platform.isWindows || Platform.isLinux) {
+              setState(() {
+                GameAudioDesktop.playAudio.stop();
+              });
             } else {
-              GameAudioDesktop.playAudio.stop();
+              setState(() {
+                GameAudio.bgm.stop();
+              });
             }
             Navigator.of(context).pushNamed("/home");
           },
