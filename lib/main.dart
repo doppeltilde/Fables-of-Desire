@@ -12,7 +12,7 @@ import 'package:fablesofdesire/routes/routes.dart';
 import 'package:flutter/services.dart';
 import 'dart:io' show Platform;
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {

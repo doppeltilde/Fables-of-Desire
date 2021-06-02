@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dart_vlc/dart_vlc.dart';
 import 'package:fablesofdesire/constructor/vn_constructor.dart';
 import 'package:fablesofdesire/global/audio/game_audio.dart';
+import 'package:fablesofdesire/global/audio/global_audio.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:fablesofdesire/text/vn_text.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class _VNState extends State<VN1> {
   @override
   void initState() {
     super.initState();
-    playAudio();
+    GlobalAudio.playAudio.getAudio("herrycolored.mp3");
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       sharedPreferences = sp;
       notHome = sharedPreferences!.getString("notHome");
@@ -37,18 +38,6 @@ class _VNState extends State<VN1> {
       notHome = value;
     });
     sharedPreferences?.setString("notHome", value);
-  }
-
-  playAudio() {
-    if (Platform.isWindows || Platform.isLinux) {
-      if (GameAudioDesktop.playAudio.isPlaying == false) {
-        GameAudioDesktop.playAudio.play("cherrycolored.mp3");
-      }
-    } else {
-      if (GameAudio.bgm.isPlaying == false) {
-        GameAudio.bgm.play("cherrycolored.mp3");
-      }
-    }
   }
 
   @override
