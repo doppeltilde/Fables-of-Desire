@@ -50,7 +50,7 @@ class _SettingsState extends State<Settings> {
           fit: BoxFit.cover,
         )),
         child: Scaffold(
-            // appBar: appbar(context) as PreferredSizeWidget?,
+            appBar: appbar(context, "SETTINGS") as PreferredSizeWidget?,
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
             body: Stack(children: <Widget>[
@@ -232,10 +232,14 @@ class _SettingsState extends State<Settings> {
                 letterSpacing: .4),
           ),
           onPressed: () {
-            if (!Platform.isWindows || Platform.isLinux) {
-              GameAudio.bgm.stop();
+            if (Platform.isWindows || Platform.isLinux) {
+              setState(() {
+                GameAudioDesktop.playAudio.stop();
+              });
             } else {
-              GameAudioDesktop.playAudio.stop();
+              setState(() {
+                GameAudio.bgm.stop();
+              });
             }
             Navigator.of(context).pushNamed("/home");
           },

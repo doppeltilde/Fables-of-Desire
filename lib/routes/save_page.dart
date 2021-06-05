@@ -1,7 +1,6 @@
 import 'package:fablesofdesire/global/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:io' show Platform;
 import 'package:intl/intl.dart';
 
 class SaveGame extends StatefulWidget {
@@ -138,27 +137,10 @@ class _LoadGameState extends State<SaveGame> {
         )),
         child: SafeArea(
             child: Scaffold(
-          //appBar: appbar(context) as PreferredSizeWidget?,
+          appBar: appbar(context, "SAVE GAME") as PreferredSizeWidget?,
           backgroundColor: Colors.transparent,
           resizeToAvoidBottomInset: false,
           body: Stack(children: <Widget>[
-            Builder(builder: (context) {
-              if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
-                return new DrawerHeader(
-                  child: Center(
-                    child: Text(
-                      "SAVE GAME",
-                      style: TextStyle(
-                          fontSize: 40,
-                          fontFamily: "Aleo",
-                          color: Colors.white),
-                    ),
-                  ),
-                );
-              } else {
-                return SizedBox.shrink();
-              }
-            }),
             Center(
                 child: new Container(
                     child: SafeArea(

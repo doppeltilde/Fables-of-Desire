@@ -1,6 +1,7 @@
 // Primary
 import 'package:dart_vlc/dart_vlc.dart';
 import 'package:fablesofdesire/global/audio/game_audio.dart';
+import 'package:fablesofdesire/global/audio/global_audio.dart';
 import 'package:fablesofdesire/global/credits.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:fablesofdesire/routes/load_game.dart';
@@ -70,7 +71,7 @@ class _BaseScreenState extends State<HomePage2> {
   void initState() {
     super.initState();
 
-    playAudio();
+    GlobalAudio.playAudio.getAudio("The_world_of_peace-.mp3");
 
     Future.delayed(Duration(seconds: 1), () {
       setState(() {
@@ -91,18 +92,6 @@ class _BaseScreenState extends State<HomePage2> {
       notHome = value;
     });
     sharedPreferences?.setString("notHome", value);
-  }
-
-  playAudio() {
-    if (Platform.isWindows || Platform.isLinux) {
-      if (GameAudioDesktop.playAudio.isPlaying == false) {
-        GameAudioDesktop.playAudio.play("The_world_of_peace-.mp3");
-      }
-    } else {
-      if (GameAudio.bgm.isPlaying == false) {
-        GameAudio.bgm.play("The_world_of_peace-.mp3");
-      }
-    }
   }
 
   @override
