@@ -250,29 +250,7 @@ class _LoadGameState extends State<LoadGame> {
                                   } else {
                                     return Column(
                                       children: [
-                                        ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                primary: Colors.redAccent,
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: 20,
-                                                    horizontal: 30)),
-                                            onPressed: () async {
-                                              SharedPreferences prefs =
-                                                  await SharedPreferences
-                                                      .getInstance();
-
-                                              setState(() {
-                                                prefs.remove("saveSlotOne");
-                                                saveSlotOne = null;
-                                              });
-                                            },
-                                            child: Text(
-                                              "DELETE SAVE",
-                                              style: TextStyle(
-                                                  fontFamily: "Aleo",
-                                                  color: Colors.white,
-                                                  fontSize: 18),
-                                            ))
+                                        deletebutton(context, saveSlotOne),
                                       ],
                                     );
                                   }

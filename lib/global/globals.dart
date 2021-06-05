@@ -64,6 +64,25 @@ Widget backbutton(context) {
   );
 }
 
+Widget deletebutton(context, saveSlotOne) {
+  return TextButton(
+      style: TextButton.styleFrom(
+          backgroundColor: Colors.redAccent,
+          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
+          )),
+      onPressed: () async {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.remove(saveSlotOne);
+        saveSlotOne = null;
+      },
+      child: Text(
+        "DELETE SAVE",
+        style: TextStyle(fontFamily: "Aleo", color: Colors.white, fontSize: 18),
+      ));
+}
+
 class AllowMultipleGestureRecognizer extends TapGestureRecognizer {
   @override
   void rejectGesture(int pointer) {
