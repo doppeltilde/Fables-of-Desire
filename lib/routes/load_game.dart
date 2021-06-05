@@ -233,13 +233,8 @@ class _LoadGameState extends State<LoadGame> {
                                   } else {
                                     return Column(
                                       children: [
-                                        ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                primary: Colors.redAccent,
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: 20,
-                                                    horizontal: 30)),
-                                            onPressed: () async {
+                                        InkWell(
+                                            onTap: () async {
                                               SharedPreferences prefs =
                                                   await SharedPreferences
                                                       .getInstance();
@@ -249,13 +244,22 @@ class _LoadGameState extends State<LoadGame> {
                                                 saveSlotOne = null;
                                               });
                                             },
-                                            child: Text(
-                                              "DELETE SAVE",
-                                              style: TextStyle(
-                                                  fontFamily: "Aleo",
-                                                  color: Colors.white,
-                                                  fontSize: 18),
-                                            ))
+                                            child: Container(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 10, horizontal: 25),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                                color: Colors.redAccent,
+                                              ),
+                                              child: Text(
+                                                "DELETE SAVE",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontFamily: "Aleo",
+                                                    fontSize: 20),
+                                              ),
+                                            )),
                                       ],
                                     );
                                   }

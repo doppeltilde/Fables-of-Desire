@@ -1,7 +1,6 @@
 import 'package:fablesofdesire/global/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:io' show Platform;
 import 'package:intl/intl.dart';
 
 class SaveGame extends StatefulWidget {
