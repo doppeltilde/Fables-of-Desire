@@ -17,37 +17,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _WildfyreState extends State<HomePage> {
-  List<Map<String, dynamic>> images = [
-    {
-      "image": "assets/images/sprites/Cast/MC_Sad.png",
-    },
-    {
-      "image": "assets/images/sprites/Cast/MC_Angry.png",
-    },
-    {
-      "image": "assets/images/sprites/Cast/MC_Blush.png",
-    },
-    {
-      "image": "assets/images/sprites/Cast/MC_Happy.png",
-    },
-  ];
-  void initState() {
-    super.initState();
-  }
-
-  // PRECACHE IMAGES
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //   for (var i in images) precacheImage(AssetImage(i["image"]), context);
-  // }
-
   bool isLightTheme = true;
-  var scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
       body: HomePage2(),
     );
   }

@@ -346,36 +346,15 @@ class _LoadGameState extends State<LoadGame> {
                               }),
                               Builder(
                                 builder: (context) {
-                                  if (saveSlot2 == null || saveSlot2!.isEmpty) {
+                                  if (saveSlotOne == null ||
+                                      saveSlotOne!.isEmpty) {
                                     return Column(children: [
                                       SizedBox.shrink(),
                                     ]);
                                   } else {
                                     return Column(
                                       children: [
-                                        ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                primary: Colors.redAccent,
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: 20,
-                                                    horizontal: 30)),
-                                            onPressed: () async {
-                                              SharedPreferences prefs =
-                                                  await SharedPreferences
-                                                      .getInstance();
-
-                                              setState(() {
-                                                prefs.remove("saveSlot2");
-                                                saveSlot2 = null;
-                                              });
-                                            },
-                                            child: Text(
-                                              "DELETE SAVE",
-                                              style: TextStyle(
-                                                  fontFamily: "Aleo",
-                                                  color: Colors.white,
-                                                  fontSize: 18),
-                                            ))
+                                        deletebutton(context, saveSlot2),
                                       ],
                                     );
                                   }
@@ -471,36 +450,15 @@ class _LoadGameState extends State<LoadGame> {
                               }),
                               Builder(
                                 builder: (context) {
-                                  if (saveSlot3 == null || saveSlot3!.isEmpty) {
+                                  if (saveSlotOne == null ||
+                                      saveSlotOne!.isEmpty) {
                                     return Column(children: [
                                       SizedBox.shrink(),
                                     ]);
                                   } else {
                                     return Column(
                                       children: [
-                                        ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                primary: Colors.redAccent,
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: 20,
-                                                    horizontal: 30)),
-                                            onPressed: () async {
-                                              SharedPreferences prefs =
-                                                  await SharedPreferences
-                                                      .getInstance();
-
-                                              setState(() {
-                                                prefs.remove("saveSlot3");
-                                                saveSlot3 = null;
-                                              });
-                                            },
-                                            child: Text(
-                                              "DELETE SAVE",
-                                              style: TextStyle(
-                                                  fontFamily: "Aleo",
-                                                  color: Colors.white,
-                                                  fontSize: 18),
-                                            ))
+                                        deletebutton(context, saveSlot3),
                                       ],
                                     );
                                   }
