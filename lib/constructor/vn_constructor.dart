@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:clay_containers/clay_containers.dart';
+import 'package:clay_containers/widgets/clay_container.dart';
 import 'package:fablesofdesire/global/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -59,6 +61,8 @@ class _InterludeState extends State<InterludeTextSound> {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Builder(
       builder: (context) {
         if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
@@ -107,7 +111,7 @@ class _InterludeState extends State<InterludeTextSound> {
                               widget.a!,
                               style: TextStyle(
                                 fontFamily: "Julee",
-                                fontSize: 21,
+                                fontSize: 30,
                                 color: Colors.black,
                               ),
                             ),
@@ -117,56 +121,140 @@ class _InterludeState extends State<InterludeTextSound> {
                     }
                   },
                 ),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width / 3.4),
-                  child:
-                      Stack(alignment: Alignment.centerLeft, children: <Widget>[
-                    Stack(
-                      children: <Widget>[
-                        Container(
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 12),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
                           color: Colors.transparent,
-                          padding: EdgeInsets.all(5),
-                          width: MediaQuery.of(context).size.width * 2,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10.0),
-                            child: Image.asset(
-                              "assets/images/gui/textbox_scroll_03.png",
-                              fit: BoxFit.cover,
-                            ),
+                          border: Border.all(
+                            color: Colors.white,
+                            width: 10,
                           ),
+                          borderRadius: BorderRadius.circular(100),
                         ),
-                      ],
-                    ),
-                    FittedBox(
-                      fit: BoxFit.fitHeight,
-                      child: Stack(
-                        children: <Widget>[
-                          Container(
-                            color: Colors.transparent,
-                            padding: EdgeInsets.symmetric(
-                                vertical: 15, horizontal: 70),
-                            child: AnimatedTextKit(
-                              animatedTexts: [
-                                TyperAnimatedText(
-                                  widget.q!,
-                                  textAlign: TextAlign.left,
-                                  textStyle: TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: "Aleo",
-                                      fontSize: 18),
-                                  speed: Duration(milliseconds: speed!),
-                                ),
-                              ],
-                              displayFullTextOnTap: true,
-                              isRepeatingAnimation: false,
-                              key: ValueKey(widget.n),
-                            ),
-                          ),
-                        ],
                       ),
-                    ),
-                  ]),
+                      Container(
+                        // padding: EdgeInsets.symmetric(
+                        //     horizontal: MediaQuery.of(context).size.width / 3.5,
+                        //     vertical: 20),
+                        child: Stack(
+                          alignment: Alignment.centerLeft,
+                          children: <Widget>[
+                            // Stack(
+                            //   children: <Widget>[
+                            //     Container(
+                            //       color: Colors.transparent,
+                            //       padding: EdgeInsets.all(5),
+                            //       width: MediaQuery.of(context).size.width * 2,
+                            //       child: ClipRRect(
+                            //         borderRadius: BorderRadius.circular(10.0),
+                            //         child: Image.asset(
+                            //           "assets/images/gui/textbox_scroll_03.png",
+                            //           fit: BoxFit.cover,
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
+                            Opacity(
+                              opacity: 0.8,
+                              child: ClayContainer(
+                                spread: 3,
+                                surfaceColor: Colors.white,
+                                curveType: CurveType.none,
+                                width: 700,
+                                //color: Colors.brown[400],
+                                color: Colors.grey,
+                                customBorderRadius: BorderRadius.all(
+                                  Radius.circular(20),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: width * 0.03,
+                                      vertical: height * 0.04),
+                                  child: AnimatedTextKit(
+                                    animatedTexts: [
+                                      TyperAnimatedText(
+                                        widget.q!,
+                                        textAlign: TextAlign.left,
+                                        textStyle: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: "Aleo",
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20),
+                                        speed: Duration(milliseconds: speed!),
+                                      ),
+                                    ],
+                                    displayFullTextOnTap: true,
+                                    isRepeatingAnimation: false,
+                                    key: ValueKey(widget.n),
+                                  ),
+                                ),
+                              ),
+
+                              // FittedBox(
+                              //   fit: BoxFit.fitHeight,
+                              //   child: Stack(
+                              //     children: <Widget>[
+                              //       Container(
+                              //         color: Colors.transparent,
+                              //         padding: EdgeInsets.symmetric(
+                              //             vertical: 15, horizontal: 70),
+                              //         child: AnimatedTextKit(
+                              //           animatedTexts: [
+                              //             TyperAnimatedText(
+                              //               widget.q!,
+                              //               textAlign: TextAlign.left,
+                              //               textStyle: TextStyle(
+                              //                   color: Colors.black,
+                              //                   fontFamily: "Aleo",
+                              //                   fontSize: 18),
+                              //               speed: Duration(milliseconds: speed!),
+                              //             ),
+                              //           ],
+                              //           displayFullTextOnTap: true,
+                              //           isRepeatingAnimation: false,
+                              //           key: ValueKey(widget.n),
+                              //         ),
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          border: Border.all(
+                            color: Colors.white,
+                            width: 10,
+                          ),
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                      ),
+                      // Container(
+                      //   transform: Matrix4.translationValues(-140.0, 0.0, 0.0),
+                      //   width: 100,
+                      //   height: 100,
+                      //   decoration: BoxDecoration(
+                      //     border: Border(
+                      //       right: BorderSide(width: 16.0, color: Colors.white),
+                      //     ),
+                      //     color: Colors.transparent,
+                      //   ),
+                      // ),
+                    ],
+                  ),
                 ),
                 Buttons(route: widget.route),
               ],

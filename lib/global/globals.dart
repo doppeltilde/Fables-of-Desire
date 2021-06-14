@@ -62,7 +62,7 @@ Widget backbutton(context) {
   );
 }
 
-Widget deletebutton(context, saveSlotOne) {
+Widget deletebutton(context, saveSlot) {
   return TextButton(
       style: TextButton.styleFrom(
           backgroundColor: Colors.redAccent,
@@ -72,8 +72,8 @@ Widget deletebutton(context, saveSlotOne) {
           )),
       onPressed: () async {
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        prefs.remove(saveSlotOne);
-        saveSlotOne = null;
+        prefs.remove(saveSlot);
+        saveSlot = null;
       },
       child: Text(
         "DELETE SAVE",

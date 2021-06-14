@@ -47,7 +47,7 @@ class _Intro extends State<Intro> {
       onWillPop: () => getOnWillPop(),
       child: new Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.redAccent,
         //backgroundColor: Colors.red[300],
         body: Stack(
           children: <Widget>[
@@ -73,7 +73,7 @@ class _Intro extends State<Intro> {
                                   "Character Name",
                                   style: TextStyle(
                                       color: Colors.white,
-                                      fontFamily: "NanumBrush",
+                                      fontFamily: "Julee",
                                       fontSize: 65),
                                 ),
                                 SizedBox(

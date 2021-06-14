@@ -130,7 +130,7 @@ class _SettingsState extends State<Credits>
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "Developed with ♥ in",
+                                    "Developed with ❤️ in",
                                     style: TextStyle(
                                         fontSize: 22, fontFamily: "Aleo"),
                                   ),
