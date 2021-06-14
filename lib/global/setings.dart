@@ -228,7 +228,7 @@ class _SettingsState extends State<Settings> {
             style: TextStyle(
                 color: Colors.black,
                 fontFamily: "Aleo",
-                fontSize: 18,
+                fontSize: 22,
                 letterSpacing: .4),
           ),
           onPressed: () {
@@ -249,13 +249,15 @@ class _SettingsState extends State<Settings> {
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-              primary: Colors.white, onPrimary: Theme.of(context).primaryColor),
+            primary: Colors.white,
+            onPrimary: Theme.of(context).primaryColor,
+          ),
           child: Text(
             "NO",
             style: TextStyle(
                 color: Colors.black,
                 fontFamily: "Aleo",
-                fontSize: 18,
+                fontSize: 22,
                 letterSpacing: .4),
           ),
           onPressed: () {
@@ -266,22 +268,49 @@ class _SettingsState extends State<Settings> {
     );
 
     // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      backgroundColor: Colors.amber,
-      title: Text(
-        "Go to Main Menu",
-        textAlign: TextAlign.center,
-        style: TextStyle(fontFamily: "Aleo", fontSize: 30, letterSpacing: .2),
-      ),
-      content: Text(
-        "Are you sure about that?",
-        textAlign: TextAlign.center,
-        style: TextStyle(fontFamily: "Aleo", fontSize: 20, letterSpacing: .4),
-      ),
-      actions: [
-        continueButton,
-      ],
-    );
+    Dialog alert = Dialog(
+        backgroundColor: Colors.transparent,
+        insetPadding: EdgeInsets.all(10),
+        child: Container(
+            width: MediaQuery.of(context).size.width / 2,
+            height: 200,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.amberAccent),
+            padding: EdgeInsets.fromLTRB(20, 50, 20, 20),
+            child: Column(
+              children: <Widget>[
+                Text("Go to Main Menu",
+                    style: TextStyle(fontSize: 28, fontFamily: "Aleo"),
+                    textAlign: TextAlign.center),
+
+                Text("Are you sure about that?",
+                    style: TextStyle(fontSize: 24, fontFamily: "Aleo"),
+                    textAlign: TextAlign.center),
+                Spacer(),
+                continueButton,
+                // Positioned(
+                //     top: -100,
+                //     child: Image.asset("https://i.imgur.com/2yaf2wb.png",
+                //         width: 150, height: 150))
+              ],
+            )));
+    // AlertDialog 2 = AlertDialog(
+    //   backgroundColor: Colors.amber,
+    //   title: Text(
+    //     "Go to Main Menu",
+    //     textAlign: TextAlign.center,
+    //     style: TextStyle(fontFamily: "Aleo", fontSize: 30, letterSpacing: .2),
+    //   ),
+    //   content: Text(
+    //     "Are you sure about that?",
+    //     textAlign: TextAlign.center,
+    //     style: TextStyle(fontFamily: "Aleo", fontSize: 20, letterSpacing: .4),
+    //   ),
+    //   actions: [
+    //     continueButton,
+    //   ],
+    // );
 
     // show the dialog
     showDialog(

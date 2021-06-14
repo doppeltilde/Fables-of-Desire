@@ -121,141 +121,143 @@ class _InterludeState extends State<InterludeTextSound> {
                     }
                   },
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 12),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          border: Border.all(
-                            color: Colors.white,
-                            width: 10,
-                          ),
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                      ),
-                      Container(
-                        // padding: EdgeInsets.symmetric(
-                        //     horizontal: MediaQuery.of(context).size.width / 3.5,
-                        //     vertical: 20),
-                        child: Stack(
-                          alignment: Alignment.centerLeft,
-                          children: <Widget>[
-                            // Stack(
-                            //   children: <Widget>[
-                            //     Container(
-                            //       color: Colors.transparent,
-                            //       padding: EdgeInsets.all(5),
-                            //       width: MediaQuery.of(context).size.width * 2,
-                            //       child: ClipRRect(
-                            //         borderRadius: BorderRadius.circular(10.0),
-                            //         child: Image.asset(
-                            //           "assets/images/gui/textbox_scroll_03.png",
-                            //           fit: BoxFit.cover,
-                            //         ),
-                            //       ),
-                            //     ),
-                            //   ],
-                            // ),
-                            Opacity(
-                              opacity: 0.8,
-                              child: ClayContainer(
-                                spread: 3,
-                                surfaceColor: Colors.white,
-                                curveType: CurveType.none,
-                                width: 700,
-                                //color: Colors.brown[400],
-                                color: Colors.grey,
-                                customBorderRadius: BorderRadius.all(
-                                  Radius.circular(20),
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: width * 0.03,
-                                      vertical: height * 0.04),
-                                  child: AnimatedTextKit(
-                                    animatedTexts: [
-                                      TyperAnimatedText(
-                                        widget.q!,
-                                        textAlign: TextAlign.left,
-                                        textStyle: TextStyle(
-                                            color: Colors.black,
-                                            fontFamily: "Aleo",
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20),
-                                        speed: Duration(milliseconds: speed!),
-                                      ),
-                                    ],
-                                    displayFullTextOnTap: true,
-                                    isRepeatingAnimation: false,
-                                    key: ValueKey(widget.n),
-                                  ),
-                                ),
-                              ),
-
-                              // FittedBox(
-                              //   fit: BoxFit.fitHeight,
-                              //   child: Stack(
-                              //     children: <Widget>[
-                              //       Container(
-                              //         color: Colors.transparent,
-                              //         padding: EdgeInsets.symmetric(
-                              //             vertical: 15, horizontal: 70),
-                              //         child: AnimatedTextKit(
-                              //           animatedTexts: [
-                              //             TyperAnimatedText(
-                              //               widget.q!,
-                              //               textAlign: TextAlign.left,
-                              //               textStyle: TextStyle(
-                              //                   color: Colors.black,
-                              //                   fontFamily: "Aleo",
-                              //                   fontSize: 18),
-                              //               speed: Duration(milliseconds: speed!),
-                              //             ),
-                              //           ],
-                              //           displayFullTextOnTap: true,
-                              //           isRepeatingAnimation: false,
-                              //           key: ValueKey(widget.n),
-                              //         ),
-                              //       ),
-                              //     ],
-                              //   ),
-                              // ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          border: Border.all(
-                            color: Colors.white,
-                            width: 10,
-                          ),
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                      ),
-                      // Container(
-                      //   transform: Matrix4.translationValues(-140.0, 0.0, 0.0),
-                      //   width: 100,
-                      //   height: 100,
-                      //   decoration: BoxDecoration(
-                      //     border: Border(
-                      //       right: BorderSide(width: 16.0, color: Colors.white),
+                // Padding(
+                //   padding: EdgeInsets.symmetric(vertical: 12),
+                //   child: Row(
+                //     crossAxisAlignment: CrossAxisAlignment.center,
+                //     mainAxisAlignment: MainAxisAlignment.center,
+                //     children: [
+                //       Container(
+                //         width: 100,
+                //         height: 100,
+                //         decoration: BoxDecoration(
+                //           color: Colors.transparent,
+                //           border: Border.all(
+                //             color: Colors.white,
+                //             width: 10,
+                //           ),
+                //           borderRadius: BorderRadius.circular(100),
+                //         ),
+                //       ),
+                Container(
+                  //width: MediaQuery.of(context).size.width / 2,
+                  // padding: EdgeInsets.symmetric(
+                  //     horizontal: MediaQuery.of(context).size.width / 3.5,
+                  //     vertical: 20),
+                  child: Stack(
+                    alignment: Alignment.centerLeft,
+                    children: <Widget>[
+                      // Stack(
+                      //   children: <Widget>[
+                      //     Container(
+                      //       color: Colors.transparent,
+                      //       padding: EdgeInsets.all(5),
+                      //       width: MediaQuery.of(context).size.width * 2,
+                      //       child: ClipRRect(
+                      //         borderRadius: BorderRadius.circular(10.0),
+                      //         child: Image.asset(
+                      //           "assets/images/gui/textbox_scroll_03.png",
+                      //           fit: BoxFit.cover,
+                      //         ),
+                      //       ),
                       //     ),
-                      //     color: Colors.transparent,
-                      //   ),
+                      //   ],
                       // ),
+                      Container(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        width: MediaQuery.of(context).size.width / 2,
+                        child: Opacity(
+                          opacity: 0.8,
+                          child: ClayContainer(
+                            spread: 3,
+                            surfaceColor: Colors.white,
+                            curveType: CurveType.none,
+                            width: 700,
+                            //color: Colors.brown[400],
+                            color: Colors.grey,
+                            customBorderRadius: BorderRadius.all(
+                              Radius.circular(20),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: width * 0.03,
+                                  vertical: height * 0.04),
+                              child: AnimatedTextKit(
+                                animatedTexts: [
+                                  TyperAnimatedText(
+                                    widget.q!,
+                                    textAlign: TextAlign.left,
+                                    textStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: "Aleo",
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20),
+                                    speed: Duration(milliseconds: speed!),
+                                  ),
+                                ],
+                                displayFullTextOnTap: true,
+                                isRepeatingAnimation: false,
+                                key: ValueKey(widget.n),
+                              ),
+                            ),
+                          ),
+                        ),
+                        // FittedBox(
+                        //   fit: BoxFit.fitHeight,
+                        //   child: Stack(
+                        //     children: <Widget>[
+                        //       Container(
+                        //         color: Colors.transparent,
+                        //         padding: EdgeInsets.symmetric(
+                        //             vertical: 15, horizontal: 70),
+                        //         child: AnimatedTextKit(
+                        //           animatedTexts: [
+                        //             TyperAnimatedText(
+                        //               widget.q!,
+                        //               textAlign: TextAlign.left,
+                        //               textStyle: TextStyle(
+                        //                   color: Colors.black,
+                        //                   fontFamily: "Aleo",
+                        //                   fontSize: 18),
+                        //               speed: Duration(milliseconds: speed!),
+                        //             ),
+                        //           ],
+                        //           displayFullTextOnTap: true,
+                        //           isRepeatingAnimation: false,
+                        //           key: ValueKey(widget.n),
+                        //         ),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
+                      ),
                     ],
                   ),
                 ),
+                // Container(
+                //   width: 100,
+                //   height: 100,
+                //   decoration: BoxDecoration(
+                //     color: Colors.transparent,
+                //     border: Border.all(
+                //       color: Colors.white,
+                //       width: 10,
+                //     ),
+                //     borderRadius: BorderRadius.circular(100),
+                //   ),
+                // ),
+                // Container(
+                //   transform: Matrix4.translationValues(-140.0, 0.0, 0.0),
+                //   width: 100,
+                //   height: 100,
+                //   decoration: BoxDecoration(
+                //     border: Border(
+                //       right: BorderSide(width: 16.0, color: Colors.white),
+                //     ),
+                //     color: Colors.transparent,
+                //   ),
+                // ),
+
                 Buttons(route: widget.route),
               ],
             ),
@@ -463,22 +465,37 @@ class ImageBuilderMC extends StatefulWidget {
 class _ImageBuilderMCState extends State<ImageBuilderMC> {
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      right: 0,
-      // Just crop the image!
-      top: (MediaQuery.of(context).size.height / 2) + 25,
-      child: Align(
-        alignment: Alignment.bottomRight,
-        child: AnimatedSwitcher(
-          duration: Duration(milliseconds: 0),
-          child: Image.asset(
-            "assets/images/sprites/" + widget.image! + ".png",
-            fit: BoxFit.cover,
-            height: MediaQuery.of(context).size.height / 2,
-            key: UniqueKey(),
-          ),
-        ),
-      ),
+    double height = MediaQuery.of(context).size.height;
+    return Builder(
+      builder: (context) {
+        if (height < 700) {
+          return Align(
+            alignment: Alignment.bottomRight,
+            child: AnimatedSwitcher(
+              duration: Duration(milliseconds: 0),
+              child: Image.asset(
+                "assets/images/sprites/" + widget.image! + ".png",
+                fit: BoxFit.cover,
+                height: MediaQuery.of(context).size.height / 1.4,
+                key: UniqueKey(),
+              ),
+            ),
+          );
+        } else {
+          return Align(
+            alignment: Alignment.bottomRight,
+            child: AnimatedSwitcher(
+              duration: Duration(milliseconds: 0),
+              child: Image.asset(
+                "assets/images/sprites/" + widget.image! + ".png",
+                fit: BoxFit.cover,
+                height: MediaQuery.of(context).size.height / 2,
+                key: UniqueKey(),
+              ),
+            ),
+          );
+        }
+      },
     );
   }
 }
