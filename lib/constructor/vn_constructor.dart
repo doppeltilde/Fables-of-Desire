@@ -9,12 +9,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io' show Platform;
 
 class InterludeTextSound extends StatefulWidget {
+  final bgImage;
   final String? a;
   final String? q;
   final int n;
+  final charImage;
   final route;
+  final nextRoute;
 
-  InterludeTextSound(this.a, this.q, this.n, this.route);
+  InterludeTextSound(this.bgImage, this.a, this.q, this.n, this.charImage,
+      this.route, this.nextRoute);
 
   @override
   _InterludeState createState() => _InterludeState();
@@ -63,326 +67,354 @@ class _InterludeState extends State<InterludeTextSound> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return Builder(
-      builder: (context) {
-        if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
-          return Padding(
-            padding: EdgeInsets.only(bottom: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Builder(
-                  builder: (context) {
-                    if (widget.a! == "MC") {
-                      return Opacity(
-                        opacity: 0.8,
-                        child: Card(
-                          color: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 2, horizontal: 15),
-                            child: Text(
-                              "$_name",
-                              style: TextStyle(
-                                fontFamily: "Julee",
-                                fontSize: 21,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    } else {
-                      return Opacity(
-                        opacity: 0.8,
-                        child: Card(
-                          color: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 2, horizontal: 15),
-                            child: Text(
-                              widget.a!,
-                              style: TextStyle(
-                                fontFamily: "Julee",
-                                fontSize: 30,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    }
-                  },
-                ),
-                // Padding(
-                //   padding: EdgeInsets.symmetric(vertical: 12),
-                //   child: Row(
-                //     crossAxisAlignment: CrossAxisAlignment.center,
-                //     mainAxisAlignment: MainAxisAlignment.center,
-                //     children: [
-                //       Container(
-                //         width: 100,
-                //         height: 100,
-                //         decoration: BoxDecoration(
-                //           color: Colors.transparent,
-                //           border: Border.all(
-                //             color: Colors.white,
-                //             width: 10,
-                //           ),
-                //           borderRadius: BorderRadius.circular(100),
-                //         ),
-                //       ),
-                Container(
-                  //width: MediaQuery.of(context).size.width / 2,
-                  // padding: EdgeInsets.symmetric(
-                  //     horizontal: MediaQuery.of(context).size.width / 3.5,
-                  //     vertical: 20),
-                  child: Stack(
-                    alignment: Alignment.centerLeft,
-                    children: <Widget>[
-                      // Stack(
-                      //   children: <Widget>[
-                      //     Container(
-                      //       color: Colors.transparent,
-                      //       padding: EdgeInsets.all(5),
-                      //       width: MediaQuery.of(context).size.width * 2,
-                      //       child: ClipRRect(
-                      //         borderRadius: BorderRadius.circular(10.0),
-                      //         child: Image.asset(
-                      //           "assets/images/gui/textbox_scroll_03.png",
-                      //           fit: BoxFit.cover,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
-                      Container(
-                        padding: EdgeInsets.symmetric(vertical: 10),
-                        width: MediaQuery.of(context).size.width / 2,
-                        child: Opacity(
-                          opacity: 0.8,
-                          child: ClayContainer(
-                            spread: 3,
-                            surfaceColor: Colors.white,
-                            curveType: CurveType.none,
-                            width: 700,
-                            //color: Colors.brown[400],
-                            color: Colors.grey,
-                            customBorderRadius: BorderRadius.all(
-                              Radius.circular(20),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: width * 0.03,
-                                  vertical: height * 0.04),
-                              child: AnimatedTextKit(
-                                animatedTexts: [
-                                  TyperAnimatedText(
-                                    widget.q!,
-                                    textAlign: TextAlign.left,
-                                    textStyle: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: "Aleo",
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20),
-                                    speed: Duration(milliseconds: speed!),
-                                  ),
-                                ],
-                                displayFullTextOnTap: true,
-                                isRepeatingAnimation: false,
-                                key: ValueKey(widget.n),
-                              ),
-                            ),
-                          ),
-                        ),
-                        // FittedBox(
-                        //   fit: BoxFit.fitHeight,
-                        //   child: Stack(
-                        //     children: <Widget>[
-                        //       Container(
-                        //         color: Colors.transparent,
-                        //         padding: EdgeInsets.symmetric(
-                        //             vertical: 15, horizontal: 70),
-                        //         child: AnimatedTextKit(
-                        //           animatedTexts: [
-                        //             TyperAnimatedText(
-                        //               widget.q!,
-                        //               textAlign: TextAlign.left,
-                        //               textStyle: TextStyle(
-                        //                   color: Colors.black,
-                        //                   fontFamily: "Aleo",
-                        //                   fontSize: 18),
-                        //               speed: Duration(milliseconds: speed!),
-                        //             ),
-                        //           ],
-                        //           displayFullTextOnTap: true,
-                        //           isRepeatingAnimation: false,
-                        //           key: ValueKey(widget.n),
-                        //         ),
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
-                      ),
-                    ],
-                  ),
-                ),
-                // Container(
-                //   width: 100,
-                //   height: 100,
-                //   decoration: BoxDecoration(
-                //     color: Colors.transparent,
-                //     border: Border.all(
-                //       color: Colors.white,
-                //       width: 10,
-                //     ),
-                //     borderRadius: BorderRadius.circular(100),
-                //   ),
-                // ),
-                // Container(
-                //   transform: Matrix4.translationValues(-140.0, 0.0, 0.0),
-                //   width: 100,
-                //   height: 100,
-                //   decoration: BoxDecoration(
-                //     border: Border(
-                //       right: BorderSide(width: 16.0, color: Colors.white),
-                //     ),
-                //     color: Colors.transparent,
-                //   ),
-                // ),
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        BackgroundBuilder(image: widget.bgImage),
+        // Character here
+        Builder(
+          builder: (BuildContext context) {
+            if (widget.a == "MC") {
+              return ImageBuilderMC(image: widget.charImage);
+            } else {
+              return ImageBuilder(image: widget.charImage);
+            }
+          },
+        ),
 
-                Buttons(route: widget.route),
-              ],
-            ),
-          );
-        } else {
-          return Stack(
-            fit: StackFit.expand,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(left: 10, bottom: 15),
-                child: Buttons(route: widget.route),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Builder(
-                    builder: (context) {
-                      if (widget.a! == "MC") {
-                        return Opacity(
-                          opacity: 0.8,
-                          child: Card(
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 2, horizontal: 15),
-                              child: Text(
-                                "$_name",
-                                style: TextStyle(
-                                  fontFamily: "Julee",
-                                  fontSize: 21,
-                                  color: Colors.black,
+        Builder(
+          builder: (context) {
+            if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
+              return Padding(
+                padding: EdgeInsets.only(bottom: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Builder(
+                      builder: (context) {
+                        if (widget.a! == "MC") {
+                          return Opacity(
+                            opacity: 0.8,
+                            child: Card(
+                              color: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 2, horizontal: 15),
+                                child: Text(
+                                  "$_name",
+                                  style: TextStyle(
+                                    fontFamily: "Julee",
+                                    fontSize: 30,
+                                    color: Colors.black,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        );
-                      } else {
-                        return Opacity(
-                          opacity: 0.8,
-                          child: Card(
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 2, horizontal: 15),
-                              child: Text(
-                                widget.a!,
-                                style: TextStyle(
-                                  fontFamily: "Julee",
-                                  fontSize: 21,
-                                  color: Colors.black,
+                          );
+                        } else {
+                          return Opacity(
+                            opacity: 0.8,
+                            child: Card(
+                              color: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 2, horizontal: 15),
+                                child: Text(
+                                  widget.a!,
+                                  style: TextStyle(
+                                    fontFamily: "Julee",
+                                    fontSize: 30,
+                                    color: Colors.black,
+                                  ),
                                 ),
                               ),
                             ),
+                          );
+                        }
+                      },
+                    ),
+                    // Padding(
+                    //   padding: EdgeInsets.symmetric(vertical: 12),
+                    //   child: Row(
+                    //     crossAxisAlignment: CrossAxisAlignment.center,
+                    //     mainAxisAlignment: MainAxisAlignment.center,
+                    //     children: [
+                    //       Container(
+                    //         width: 100,
+                    //         height: 100,
+                    //         decoration: BoxDecoration(
+                    //           color: Colors.transparent,
+                    //           border: Border.all(
+                    //             color: Colors.white,
+                    //             width: 10,
+                    //           ),
+                    //           borderRadius: BorderRadius.circular(100),
+                    //         ),
+                    //       ),
+                    Container(
+                      //width: MediaQuery.of(context).size.width / 2,
+                      // padding: EdgeInsets.symmetric(
+                      //     horizontal: MediaQuery.of(context).size.width / 3.5,
+                      //     vertical: 20),
+                      child: Stack(
+                        alignment: Alignment.centerLeft,
+                        children: <Widget>[
+                          // Stack(
+                          //   children: <Widget>[
+                          //     Container(
+                          //       color: Colors.transparent,
+                          //       padding: EdgeInsets.all(5),
+                          //       width: MediaQuery.of(context).size.width * 2,
+                          //       child: ClipRRect(
+                          //         borderRadius: BorderRadius.circular(10.0),
+                          //         child: Image.asset(
+                          //           "assets/images/gui/textbox_scroll_03.png",
+                          //           fit: BoxFit.cover,
+                          //         ),
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical: 10),
+                            width: MediaQuery.of(context).size.width / 2.4,
+                            child: Opacity(
+                              opacity: 0.8,
+                              child: ClayContainer(
+                                spread: 2,
+                                surfaceColor: Colors.white,
+                                curveType: CurveType.none,
+                                width: 700,
+                                //color: Colors.brown[400],
+                                color: Colors.grey,
+                                customBorderRadius: BorderRadius.only(
+                                  //Radius.circular(30),
+                                  topLeft: Radius.circular(20),
+                                  bottomRight: Radius.circular(20),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: width * 0.025,
+                                      vertical: height * 0.025),
+                                  child: AnimatedTextKit(
+                                    animatedTexts: [
+                                      TyperAnimatedText(
+                                        widget.q!,
+                                        textAlign: TextAlign.left,
+                                        textStyle: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: "Mali",
+                                            fontSize: 22),
+                                        speed: Duration(milliseconds: speed!),
+                                      ),
+                                    ],
+                                    displayFullTextOnTap: true,
+                                    isRepeatingAnimation: false,
+                                    key: ValueKey(widget.n),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            // FittedBox(
+                            //   fit: BoxFit.fitHeight,
+                            //   child: Stack(
+                            //     children: <Widget>[
+                            //       Container(
+                            //         color: Colors.transparent,
+                            //         padding: EdgeInsets.symmetric(
+                            //             vertical: 15, horizontal: 70),
+                            //         child: AnimatedTextKit(
+                            //           animatedTexts: [
+                            //             TyperAnimatedText(
+                            //               widget.q!,
+                            //               textAlign: TextAlign.left,
+                            //               textStyle: TextStyle(
+                            //                   color: Colors.black,
+                            //                   fontFamily: "Aleo",
+                            //                   fontSize: 18),
+                            //               speed: Duration(milliseconds: speed!),
+                            //             ),
+                            //           ],
+                            //           displayFullTextOnTap: true,
+                            //           isRepeatingAnimation: false,
+                            //           key: ValueKey(widget.n),
+                            //         ),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
                           ),
-                        );
-                      }
-                    },
+                        ],
+                      ),
+                    ),
+                    // Container(
+                    //   width: 100,
+                    //   height: 100,
+                    //   decoration: BoxDecoration(
+                    //     color: Colors.transparent,
+                    //     border: Border.all(
+                    //       color: Colors.white,
+                    //       width: 10,
+                    //     ),
+                    //     borderRadius: BorderRadius.circular(100),
+                    //   ),
+                    // ),
+                    // Container(
+                    //   transform: Matrix4.translationValues(-140.0, 0.0, 0.0),
+                    //   width: 100,
+                    //   height: 100,
+                    //   decoration: BoxDecoration(
+                    //     border: Border(
+                    //       right: BorderSide(width: 16.0, color: Colors.white),
+                    //     ),
+                    //     color: Colors.transparent,
+                    //   ),
+                    // ),
+
+                    Buttons(
+                      route: widget.route,
+                      nextRoute: widget.nextRoute,
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              return Stack(
+                fit: StackFit.expand,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(left: 10, bottom: 15),
+                    child: Buttons(route: widget.route),
                   ),
-                  Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: MediaQuery.of(context).size.width / 4.4),
-                      child: Column(
-                        children: [
-                          Stack(alignment: Alignment.centerLeft, children: <
-                              Widget>[
-                            Stack(
-                              children: <Widget>[
-                                Container(
-                                  color: Colors.transparent,
-                                  padding: EdgeInsets.all(5),
-                                  width: MediaQuery.of(context).size.width * 2,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    child: Image.asset(
-                                      "assets/images/gui/textbox_scroll_03.png",
-                                      fit: BoxFit.cover,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Builder(
+                        builder: (context) {
+                          if (widget.a! == "MC") {
+                            return Opacity(
+                              opacity: 0.8,
+                              child: Card(
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 2, horizontal: 15),
+                                  child: Text(
+                                    "$_name",
+                                    style: TextStyle(
+                                      fontFamily: "Julee",
+                                      fontSize: 21,
+                                      color: Colors.black,
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
-                            FittedBox(
-                              fit: BoxFit.scaleDown,
-                              child: Stack(
-                                children: <Widget>[
-                                  Container(
-                                    color: Colors.transparent,
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 15, horizontal: 70),
-                                    child: AnimatedTextKit(
-                                      animatedTexts: [
-                                        TyperAnimatedText(
-                                          widget.q!,
-                                          textAlign: TextAlign.left,
-                                          textStyle: TextStyle(
-                                              color: Colors.black,
-                                              fontFamily: "Aleo",
-                                              fontSize: 18),
-                                          speed: Duration(milliseconds: speed!),
+                              ),
+                            );
+                          } else {
+                            return Opacity(
+                              opacity: 0.8,
+                              child: Card(
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 2, horizontal: 15),
+                                  child: Text(
+                                    widget.a!,
+                                    style: TextStyle(
+                                      fontFamily: "Julee",
+                                      fontSize: 21,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+                        },
+                      ),
+                      Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal:
+                                  MediaQuery.of(context).size.width / 4.4),
+                          child: Column(
+                            children: [
+                              Stack(
+                                  alignment: Alignment.centerLeft,
+                                  children: <Widget>[
+                                    Stack(
+                                      children: <Widget>[
+                                        Container(
+                                          color: Colors.transparent,
+                                          padding: EdgeInsets.all(5),
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              2,
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            child: Image.asset(
+                                              "assets/images/gui/textbox_scroll_03.png",
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
                                         ),
                                       ],
-                                      displayFullTextOnTap: true,
-                                      isRepeatingAnimation: false,
-                                      key: ValueKey(widget.n),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ]),
-                        ],
-                      )),
+                                    FittedBox(
+                                      fit: BoxFit.scaleDown,
+                                      child: Stack(
+                                        children: <Widget>[
+                                          Container(
+                                            color: Colors.transparent,
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 15, horizontal: 70),
+                                            child: AnimatedTextKit(
+                                              animatedTexts: [
+                                                TyperAnimatedText(
+                                                  widget.q!,
+                                                  textAlign: TextAlign.left,
+                                                  textStyle: TextStyle(
+                                                      color: Colors.black,
+                                                      fontFamily: "Aleo",
+                                                      fontSize: 18),
+                                                  speed: Duration(
+                                                      milliseconds: speed!),
+                                                ),
+                                              ],
+                                              displayFullTextOnTap: true,
+                                              isRepeatingAnimation: false,
+                                              key: ValueKey(widget.n),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ]),
+                            ],
+                          )),
+                    ],
+                  )
                 ],
-              )
-            ],
-          );
-        }
-      },
+              );
+            }
+          },
+        ),
+      ],
     );
   }
 }

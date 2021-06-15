@@ -47,7 +47,7 @@ class _Intro extends State<Intro> {
       onWillPop: () => getOnWillPop(),
       child: new Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Colors.brown,
         //backgroundColor: Colors.red[300],
         body: Stack(
           children: <Widget>[
@@ -136,7 +136,7 @@ class _Intro extends State<Intro> {
                                       horizontal: 30, vertical: 5),
                                   child: Container(
                                     width:
-                                        MediaQuery.of(context).size.width / 4,
+                                        MediaQuery.of(context).size.width / 5,
                                     child: ElevatedButton(
                                         child: Text(
                                           "CONTINUE",

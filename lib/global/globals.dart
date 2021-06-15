@@ -90,8 +90,9 @@ class AllowMultipleGestureRecognizer extends TapGestureRecognizer {
 
 class Buttons extends StatelessWidget {
   final route;
+  final nextRoute;
 
-  Buttons({Key? key, this.route});
+  Buttons({Key? key, this.route, this.nextRoute});
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (BuildContext context) {
@@ -101,7 +102,7 @@ class Buttons extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              skipClip(context, route),
+              skipClip(context, nextRoute),
               SizedBox(
                 width: 7,
               ),
@@ -115,7 +116,7 @@ class Buttons extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              skipClip(context, route),
+              skipClip(context, nextRoute),
               SizedBox(
                 width: 7,
               ),
@@ -167,12 +168,12 @@ class SettingsClip extends StatelessWidget {
   }
 }
 
-dynamic skipClip(context, route) {
+dynamic skipClip(context, nextRoute) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
       InkWell(
-        onTap: () => showAlertDialog(context, route),
+        onTap: () => showAlertDialog(context, nextRoute),
         child: Stack(
           alignment: Alignment.center,
           children: <Widget>[
@@ -198,7 +199,7 @@ dynamic skipClip(context, route) {
   );
 }
 
-showAlertDialog(BuildContext context, route) {
+showAlertDialog(BuildContext context, nextRoute) {
   // set up the buttons
 
   Widget continueButton = Row(
@@ -213,11 +214,11 @@ showAlertDialog(BuildContext context, route) {
           style: TextStyle(
               color: Colors.black,
               fontFamily: "Aleo",
-              fontSize: 18,
+              fontSize: 22,
               letterSpacing: .4),
         ),
         onPressed: () {
-          Navigator.of(context).pushNamed(route);
+          Navigator.of(context).pushNamed(nextRoute);
         },
       ),
       SizedBox(
@@ -231,7 +232,7 @@ showAlertDialog(BuildContext context, route) {
           style: TextStyle(
               color: Colors.black,
               fontFamily: "Aleo",
-              fontSize: 18,
+              fontSize: 22,
               letterSpacing: .4),
         ),
         onPressed: () {
@@ -242,30 +243,57 @@ showAlertDialog(BuildContext context, route) {
   );
 
   // set up the AlertDialog
-  AlertDialog alert = AlertDialog(
-    backgroundColor: Colors.amber,
-    title: Text(
-      "CHAPTER SKIP!",
-      textAlign: TextAlign.center,
-      style: TextStyle(
-          fontFamily: "Aleo",
-          fontSize: 30,
-          letterSpacing: .2,
-          color: Colors.black),
-    ),
-    content: Text(
-      "Are you sure about that?",
-      textAlign: TextAlign.center,
-      style: TextStyle(
-          fontFamily: "Aleo",
-          fontSize: 20,
-          letterSpacing: .4,
-          color: Colors.black),
-    ),
-    actions: [
-      continueButton,
-    ],
-  );
+  Dialog alert = Dialog(
+      backgroundColor: Colors.transparent,
+      insetPadding: EdgeInsets.all(10),
+      child: Container(
+          width: MediaQuery.of(context).size.width / 2,
+          height: 200,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: Colors.amberAccent),
+          padding: EdgeInsets.fromLTRB(20, 50, 20, 20),
+          child: Column(
+            children: <Widget>[
+              Text("Chapter Skip",
+                  style: TextStyle(fontSize: 28, fontFamily: "Aleo"),
+                  textAlign: TextAlign.center),
+
+              Text("Are you sure about that?",
+                  style: TextStyle(fontSize: 24, fontFamily: "Aleo"),
+                  textAlign: TextAlign.center),
+              Spacer(),
+              continueButton,
+              // Positioned(
+              //     top: -100,
+              //     child: Image.asset("https://i.imgur.com/2yaf2wb.png",
+              //         width: 150, height: 150))
+            ],
+          )));
+  // AlertDialog alert = AlertDialog(
+  //   backgroundColor: Colors.amber,
+  //   title: Text(
+  //     "CHAPTER SKIP!",
+  //     textAlign: TextAlign.center,
+  //     style: TextStyle(
+  //         fontFamily: "Aleo",
+  //         fontSize: 30,
+  //         letterSpacing: .2,
+  //         color: Colors.black),
+  //   ),
+  //   content: Text(
+  //     "Are you sure about that?",
+  //     textAlign: TextAlign.center,
+  //     style: TextStyle(
+  //         fontFamily: "Aleo",
+  //         fontSize: 20,
+  //         letterSpacing: .4,
+  //         color: Colors.black),
+  //   ),
+  //   actions: [
+  //     continueButton,
+  //   ],
+  // );
 
   // show the dialog
   showDialog(

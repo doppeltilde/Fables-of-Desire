@@ -11,7 +11,7 @@ class VN2 extends StatefulWidget {
 }
 
 class _VNState extends State<VN2> {
-  static const currentRoute = "/2";
+  static const route = "/2";
   static const nextRoute = "/1";
   TextConstructor1 textSound = TextConstructor1();
 
@@ -41,23 +41,37 @@ class _VNState extends State<VN2> {
                 duration: Duration(milliseconds: 500),
                 child: Container(
                   child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          top: 60.0, bottom: 10, left: 50, right: 50),
-                      child: AnimatedTextKit(
-                        isRepeatingAnimation: false,
-                        animatedTexts: [
-                          TyperAnimatedText(
-                            "Some time later...",
-                            speed: Duration(milliseconds: 85),
-                            textStyle: TextStyle(
-                                fontSize: 20,
-                                color: Colors.white,
-                                fontFamily: "Julee"),
-                            textAlign: TextAlign.center,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "--",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              top: 60.0, bottom: 60, left: 50, right: 50),
+                          child: AnimatedTextKit(
+                            isRepeatingAnimation: false,
+                            animatedTexts: [
+                              TyperAnimatedText(
+                                "Some time later...",
+                                speed: Duration(milliseconds: 85),
+                                textStyle: TextStyle(
+                                    fontSize: 30,
+                                    color: Colors.white,
+                                    fontFamily: "Mali"),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                        Text(
+                          "--",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
                     ),
                   ),
                   width: MediaQuery.of(context).size.width,
@@ -87,32 +101,14 @@ class _VNState extends State<VN2> {
                   });
                   // checkAnswer(true);
                 },
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: <Widget>[
-                    BackgroundBuilder(
-                        image: "assets/images/bgs/mininature_001_19201440.jpg"),
-                    // Character here
-                    Builder(
-                      builder: (BuildContext context) {
-                        if (textSound.getCorrectAnswer() == "MC") {
-                          return ImageBuilderMC(
-                            image: textSound.getImage(),
-                          );
-                        } else {
-                          return ImageBuilder(image: textSound.getImage());
-                        }
-                      },
-                    ),
-
-                    InterludeTextSound(
-                      textSound.getCorrectAnswer(),
-                      textSound.getQuestionText(),
-                      textSound.getNumber(),
-                      currentRoute,
-                    ),
-                  ],
-                ),
+                child: InterludeTextSound(
+                    "assets/images/bgs/mininature_003_19201440.jpg",
+                    textSound.getCorrectAnswer(),
+                    textSound.getQuestionText(),
+                    textSound.getNumber(),
+                    textSound.getImage(),
+                    route,
+                    nextRoute),
               ),
             );
           }

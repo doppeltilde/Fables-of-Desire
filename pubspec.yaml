@@ -61,6 +61,15 @@ flutter:
     - family: Julee
       fonts:
         - asset: assets/fonts/Julee-Regular.ttf
+    - family: Mali
+      fonts:
+        - asset: assets/fonts/Mali-Regular.ttf
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/Nunito-Regular.ttf
+    - family: IndieFlower
+      fonts:
+        - asset: assets/fonts/IndieFlower-Regular.ttf
 
 # flutter pub run msix:create
 msix_config:

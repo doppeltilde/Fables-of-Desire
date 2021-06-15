@@ -67,31 +67,14 @@ class _VNState extends State<VN1> {
               }
             });
           },
-          child: Stack(
-            fit: StackFit.expand,
-            children: <Widget>[
-              BackgroundBuilder(
-                  image: "assets/images/bgs/mininature_001_19201440.jpg"),
-              // Character here
-              Builder(
-                builder: (BuildContext context) {
-                  if (textSound.getCorrectAnswer() == "MC") {
-                    return ImageBuilderMC(
-                      image: textSound.getImage(),
-                    );
-                  } else {
-                    return ImageBuilder(image: textSound.getImage());
-                  }
-                },
-              ),
-
-              InterludeTextSound(
-                textSound.getCorrectAnswer(),
-                textSound.getQuestionText(),
-                textSound.getNumber(),
-                route,
-              ),
-            ],
+          child: InterludeTextSound(
+            "assets/images/bgs/mininature_001_19201440.jpg",
+            textSound.getCorrectAnswer(),
+            textSound.getQuestionText(),
+            textSound.getNumber(),
+            textSound.getImage(),
+            route,
+            nextRoute,
           ),
         ),
       ),
