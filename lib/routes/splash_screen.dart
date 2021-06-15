@@ -95,8 +95,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (Platform.isWindows ||
-        Platform.isLinux && GameAudioDesktop.playAudio.isPlaying == false) {
+    if (Platform.isWindows || Platform.isLinux) {
       super.didChangeDependencies();
       GameAudioDesktop.playAudio.player = Player(
         id: 0,
@@ -218,13 +217,10 @@ class _SplashScreenState extends State<SplashScreen> {
         previousRoute != "/home" ||
         previousRoute != null ||
         previousRoute != '/') {
-      if (Platform.isWindows ||
-          Platform.isLinux && GameAudioDesktop.playAudio.isPlaying == false) {
+      if (Platform.isWindows || Platform.isLinux) {
         GameAudioDesktop.playAudio.play(notHome!);
       } else {
-        if (GameAudio.bgm.isPlaying == false) {
-          GameAudio.bgm.play(notHome!);
-        }
+        GameAudio.bgm.play(notHome!);
       }
     }
   }

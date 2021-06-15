@@ -22,9 +22,15 @@ class PlayAudio with WidgetsBindingObserver {
     if (Platform.isWindows || Platform.isLinux) {
       if (GameAudioDesktop.playAudio.isPlaying == false) {
         GameAudioDesktop.playAudio.play(musicName);
+      } else {
+        GameAudio.bgm.stop();
+        GameAudio.bgm.play(musicName);
       }
     } else {
       if (GameAudio.bgm.isPlaying == false) {
+        GameAudio.bgm.play(musicName);
+      } else {
+        GameAudio.bgm.stop();
         GameAudio.bgm.play(musicName);
       }
     }

@@ -1,6 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:fablesofdesire/constructor/vn_constructor.dart';
-import 'package:fablesofdesire/global/audio/game_audio.dart';
+import 'package:fablesofdesire/constructor/vn_scaffold.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:fablesofdesire/text/vn_text.dart';
 import 'package:flutter/material.dart';
@@ -81,35 +80,10 @@ class _VNState extends State<VN2> {
               ),
             ));
           } else {
-            return Scaffold(
-              resizeToAvoidBottomInset: false,
-              backgroundColor: Colors.black,
-              body: InkWell(
-                onTap: () {
-                  setState(() {
-                    if (textSound.isFinished() == true) {
-                      Navigator.of(context).pushNamed(nextRoute);
-                      if (GameAudio.bgm.audioPlayer != null) {
-                        GameAudio.bgm.stop();
-                      }
-                      if (GameAudioDesktop.playAudio.player != null) {
-                        GameAudioDesktop.playAudio.player?.stop();
-                      }
-                    } else {
-                      textSound.nextQuestion();
-                    }
-                  });
-                  // checkAnswer(true);
-                },
-                child: InterludeTextSound(
-                    "assets/images/bgs/mininature_003_19201440.jpg",
-                    textSound.getCorrectAnswer(),
-                    textSound.getQuestionText(),
-                    textSound.getNumber(),
-                    textSound.getImage(),
-                    route,
-                    nextRoute),
-              ),
+            return VNScaffold(
+              textSound: textSound,
+              route: route,
+              nextRoute: nextRoute,
             );
           }
         }));
