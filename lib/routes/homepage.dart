@@ -127,15 +127,15 @@ class _BaseScreenState extends State<HomePage2> {
                                             BorderRadius.circular(40.0),
                                         side: BorderSide(color: Colors.white))),
                                 onPressed: () {
-                                  if (Platform.isWindows || Platform.isLinux) {
-                                    setState(() {
-                                      GameAudioDesktop.playAudio.stop();
-                                    });
-                                  } else {
-                                    setState(() {
-                                      GameAudio.bgm.stop();
-                                    });
-                                  }
+                                  // if (Platform.isWindows || Platform.isLinux) {
+                                  //   setState(() {
+                                  //     GameAudioDesktop.playAudio.stop();
+                                  //   });
+                                  // } else {
+                                  //   setState(() {
+                                  //     GameAudio.bgm.stop();
+                                  //   });
+                                  // }
                                   Navigator.of(context).pushNamed('/intro');
                                 },
                               ),

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dart_vlc/dart_vlc.dart';
-import 'package:fablesofdesire/constructor/vn_constructor.dart';
+import 'package:fablesofdesire/constructor/vn_scaffold.dart';
 import 'package:fablesofdesire/global/audio/game_audio.dart';
 import 'package:fablesofdesire/global/audio/global_audio.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
@@ -54,29 +54,11 @@ class _VNState extends State<VN1> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () => getOnWillPop(),
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.black,
-        body: InkWell(
-          onTap: () {
-            setState(() {
-              if (textSound.isFinished() == true) {
-                Navigator.of(context).pushNamed(nextRoute);
-              } else {
-                textSound.nextQuestion();
-              }
-            });
-          },
-          child: InterludeTextSound(
-            "assets/images/bgs/mininature_001_19201440.jpg",
-            textSound.getCorrectAnswer(),
-            textSound.getQuestionText(),
-            textSound.getNumber(),
-            textSound.getImage(),
-            route,
-            nextRoute,
-          ),
-        ),
+      child: VNScaffold(
+        bgImage: "mininature_001_19201440",
+        textSound: textSound,
+        route: route,
+        nextRoute: nextRoute,
       ),
     );
   }

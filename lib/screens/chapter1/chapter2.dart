@@ -81,6 +81,7 @@ class _VNState extends State<VN2> {
             ));
           } else {
             return VNScaffold(
+              bgImage: "mininature_003_19201440",
               textSound: textSound,
               route: route,
               nextRoute: nextRoute,
