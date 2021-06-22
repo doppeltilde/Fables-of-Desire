@@ -66,7 +66,9 @@ class PlayAudio extends WidgetsBindingObserver {
           playlistMode: PlaylistMode.loop,
           medias: [
             await Media.network(
-                'https://edenhost.de/gameAudio/fablesofdesire/' + filename),
+                'https://edenhost.de/gameAudio/fablesofdesire/' +
+                    filename +
+                    ".mp3"),
           ],
         ),
       );
@@ -75,7 +77,7 @@ class PlayAudio extends WidgetsBindingObserver {
         new Playlist(
           playlistMode: PlaylistMode.loop,
           medias: [
-            await Media.asset('assets/audio/' + filename),
+            await Media.asset('assets/audio/' + filename + ".mp3"),
           ],
         ),
       );

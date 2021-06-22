@@ -18,7 +18,7 @@ class PlayAudio with WidgetsBindingObserver {
     sharedPreferences?.setString("notHome", value);
   }
 
-  Future<void> getAudio(String musicName) async {
+  Future<void> getBGM(String musicName) async {
     if (Platform.isWindows || Platform.isLinux) {
       if (GameAudioDesktop.playAudio.isPlaying == false) {
         GameAudioDesktop.playAudio.play(musicName);

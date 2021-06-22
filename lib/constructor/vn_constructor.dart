@@ -540,11 +540,11 @@ class ImageBuilderMC extends StatefulWidget {
 
 class _ImageBuilderMCState extends State<ImageBuilderMC> {
   List images = [
-    "MC_Blush",
-    "MC_Frown",
-    "MC_Happy",
-    "MC_Neutral",
-    "MC_Sad",
+    "mc_blush",
+    "mc_frown",
+    "mc_happy",
+    "mc_neutral",
+    "mc_sad",
   ];
   @override
   void didChangeDependencies() {
@@ -556,13 +556,14 @@ class _ImageBuilderMCState extends State<ImageBuilderMC> {
 
   @override
   Widget build(BuildContext context) {
-    for (var i in images)
-      precacheImage(AssetImage("assets/images/sprites/" + i + ".png"), context);
+    // for (var i in images)
+    //   precacheImage(AssetImage("assets/images/sprites/" + i + ".png"), context);
     double height = MediaQuery.of(context).size.height;
     return Builder(
       builder: (context) {
         if (height < 700) {
           return Align(
+            key: UniqueKey(),
             alignment: Alignment.bottomRight,
             child: AnimatedSwitcher(
               duration: Duration(milliseconds: 0),
@@ -570,12 +571,14 @@ class _ImageBuilderMCState extends State<ImageBuilderMC> {
                 "assets/images/sprites/" + widget.image! + ".png",
                 fit: BoxFit.cover,
                 height: MediaQuery.of(context).size.height / 1.4,
-                key: UniqueKey(),
+                // key: UniqueKey(),
+                gaplessPlayback: true,
               ),
             ),
           );
         } else {
           return Align(
+            key: UniqueKey(),
             alignment: Alignment.bottomRight,
             child: AnimatedSwitcher(
               duration: Duration(milliseconds: 0),
@@ -583,7 +586,8 @@ class _ImageBuilderMCState extends State<ImageBuilderMC> {
                 "assets/images/sprites/" + widget.image! + ".png",
                 fit: BoxFit.cover,
                 height: MediaQuery.of(context).size.height / 2,
-                key: UniqueKey(),
+                //key: UniqueKey(),
+                gaplessPlayback: true,
               ),
             ),
           );

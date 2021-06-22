@@ -8,12 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Intro extends StatefulWidget {
+class TestIntro extends StatefulWidget {
   @override
   _Intro createState() => _Intro();
 }
 
-class _Intro extends State<Intro> {
+class _Intro extends State<TestIntro> {
   TextEditingController? _controller = TextEditingController();
   String? _name;
 
@@ -48,8 +48,8 @@ class _Intro extends State<Intro> {
       onWillPop: () => getOnWillPop(),
       child: new Scaffold(
         resizeToAvoidBottomInset: false,
-        //backgroundColor: Colors.redAccent,
-        backgroundColor: Colors.red[300],
+        backgroundColor: Colors.redAccent,
+        //backgroundColor: Colors.red[300],
         body: Stack(
           children: <Widget>[
             new Center(
@@ -157,8 +157,7 @@ class _Intro extends State<Intro> {
                                                     color: Colors.white))),
                                         onPressed: () {
                                           GlobalAudio.playAudio.stopAudio();
-                                          Navigator.of(context)
-                                              .pushNamed('/naoki1');
+                                          Navigator.of(context).pushNamed('/1');
                                           // Navigator.push(
                                           //   context,
                                           //   MaterialPageRoute(

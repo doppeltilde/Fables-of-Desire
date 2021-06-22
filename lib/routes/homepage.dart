@@ -44,7 +44,7 @@ class _BaseScreenState extends State<HomePage2> {
   void initState() {
     super.initState();
 
-    GlobalAudio.playAudio.getAudio("The_world_of_peace-.mp3");
+    GlobalAudio.playAudio.getBGM("The_world_of_peace-");
 
     Future.delayed(Duration(seconds: 1), () {
       setState(() {
@@ -54,7 +54,7 @@ class _BaseScreenState extends State<HomePage2> {
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       sharedPreferences = sp;
       notHome = sharedPreferences!.getString("notHome");
-      notHome = "The_world_of_peace-.mp3";
+      notHome = "The_world_of_peace";
       persistNotHome(notHome!);
       print(notHome);
     });
@@ -117,6 +117,7 @@ class _BaseScreenState extends State<HomePage2> {
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 40,
+                                      fontWeight: FontWeight.bold,
                                       fontFamily: "Julee"),
                                 ),
                                 style: ElevatedButton.styleFrom(
@@ -127,15 +128,32 @@ class _BaseScreenState extends State<HomePage2> {
                                             BorderRadius.circular(40.0),
                                         side: BorderSide(color: Colors.white))),
                                 onPressed: () {
-                                  // if (Platform.isWindows || Platform.isLinux) {
-                                  //   setState(() {
-                                  //     GameAudioDesktop.playAudio.stop();
-                                  //   });
-                                  // } else {
-                                  //   setState(() {
-                                  //     GameAudio.bgm.stop();
-                                  //   });
-                                  // }
+                                  Navigator.of(context).pushNamed('/testintro');
+                                },
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 5),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width / 3,
+                              child: ElevatedButton(
+                                child: Text(
+                                  "NAOKI ROUTE",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 35,
+                                      fontFamily: "Julee"),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.white,
+                                    padding: EdgeInsets.symmetric(vertical: 20),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(40.0),
+                                        side: BorderSide(color: Colors.white))),
+                                onPressed: () {
                                   Navigator.of(context).pushNamed('/intro');
                                 },
                               ),
