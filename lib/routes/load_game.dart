@@ -1,5 +1,6 @@
 import 'package:fablesofdesire/global/audio/game_audio.dart';
 import 'package:fablesofdesire/global/globals.dart';
+import 'package:fablesofdesire/routes/consts/consts.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io' show Platform;
@@ -160,44 +161,12 @@ class _LoadGameState extends State<LoadGame> {
                                 child: Builder(builder: (context) {
                                   if (saveSlotOne == null ||
                                       saveSlotOne!.isEmpty) {
-                                    return Container(
-                                      width:
-                                          MediaQuery.of(context).size.width / 5,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              3,
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 20,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                        color: Theme.of(context).cardColor,
-                                        image: DecorationImage(
-                                          image: AssetImage(
-                                              "assets/images/sprites/Cast/MC_Neutral.png"),
-                                          fit: BoxFit.fitHeight,
-                                        ),
-                                      ),
+                                    return ChibiNeutral(
+                                      chibiImg: "MC_Happy",
                                     );
                                   } else {
-                                    return Container(
-                                      width:
-                                          MediaQuery.of(context).size.width / 5,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              3,
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 20,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                        color: Theme.of(context).cardColor,
-                                        image: DecorationImage(
-                                          image: AssetImage(
-                                              "assets/images/sprites/Cast/MC_Happy.png"),
-                                          fit: BoxFit.fitHeight,
-                                        ),
-                                      ),
+                                    return ChibiHappy(
+                                      chibiImg: "MC_Happy",
                                     );
                                   }
                                 }),
@@ -291,44 +260,12 @@ class _LoadGameState extends State<LoadGame> {
                                 },
                                 child: Builder(builder: (context) {
                                   if (saveSlot2 == null || saveSlot2!.isEmpty) {
-                                    return Container(
-                                      width:
-                                          MediaQuery.of(context).size.width / 5,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              3,
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 20,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                        color: Theme.of(context).cardColor,
-                                        image: DecorationImage(
-                                          image: AssetImage(
-                                              "assets/images/sprites/Cast/MC_Neutral.png"),
-                                          fit: BoxFit.fitHeight,
-                                        ),
-                                      ),
+                                    return ChibiNeutral(
+                                      chibiImg: "MC_Happy",
                                     );
                                   } else {
-                                    return Container(
-                                      width:
-                                          MediaQuery.of(context).size.width / 5,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              3,
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 20,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                        color: Theme.of(context).cardColor,
-                                        image: DecorationImage(
-                                          image: AssetImage(
-                                              "assets/images/sprites/Cast/MC_Happy.png"),
-                                          fit: BoxFit.fitHeight,
-                                        ),
-                                      ),
+                                    return ChibiHappy(
+                                      chibiImg: "MC_Happy",
                                     );
                                   }
                                 }),
@@ -416,44 +353,12 @@ class _LoadGameState extends State<LoadGame> {
                                 },
                                 child: Builder(builder: (context) {
                                   if (saveSlot3 == null || saveSlot3!.isEmpty) {
-                                    return Container(
-                                      width:
-                                          MediaQuery.of(context).size.width / 5,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              3,
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 20,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                        color: Theme.of(context).cardColor,
-                                        image: DecorationImage(
-                                          image: AssetImage(
-                                              "assets/images/sprites/Cast/MC_Neutral.png"),
-                                          fit: BoxFit.fitHeight,
-                                        ),
-                                      ),
+                                    return ChibiNeutral(
+                                      chibiImg: "MC_Happy",
                                     );
                                   } else {
-                                    return Container(
-                                      width:
-                                          MediaQuery.of(context).size.width / 5,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              3,
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 20,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                        color: Theme.of(context).cardColor,
-                                        image: DecorationImage(
-                                          image: AssetImage(
-                                              "assets/images/sprites/Cast/MC_Happy.png"),
-                                          fit: BoxFit.fitHeight,
-                                        ),
-                                      ),
+                                    return ChibiHappy(
+                                      chibiImg: "MC_Happy",
                                     );
                                   }
                                 }),

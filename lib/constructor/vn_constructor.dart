@@ -556,6 +556,8 @@ class _ImageBuilderMCState extends State<ImageBuilderMC> {
 
   @override
   Widget build(BuildContext context) {
+    for (var i in images)
+      precacheImage(AssetImage("assets/images/sprites/" + i + ".png"), context);
     double height = MediaQuery.of(context).size.height;
     return Builder(
       builder: (context) {
