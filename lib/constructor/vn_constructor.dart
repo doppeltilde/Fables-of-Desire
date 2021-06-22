@@ -189,40 +189,117 @@ class _InterludeState extends State<InterludeTextSound> {
                             width: MediaQuery.of(context).size.width / 2.4,
                             child: Opacity(
                               opacity: 0.8,
-                              child: ClayContainer(
-                                spread: 2,
-                                surfaceColor: Colors.white,
-                                curveType: CurveType.none,
-                                width: 700,
-                                //color: Colors.brown[400],
-                                color: Colors.grey,
-                                customBorderRadius: BorderRadius.only(
-                                  //Radius.circular(30),
-                                  topLeft: Radius.circular(20),
-                                  bottomRight: Radius.circular(20),
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: width * 0.025,
-                                      vertical: height * 0.025),
-                                  child: AnimatedTextKit(
-                                    animatedTexts: [
-                                      TyperAnimatedText(
-                                        widget.q!,
-                                        textAlign: TextAlign.left,
-                                        textStyle: TextStyle(
-                                            color: Colors.black,
-                                            fontFamily: "Mali",
-                                            fontSize: 22),
-                                        speed: Duration(milliseconds: speed!),
+                              child: Builder(builder: (context) {
+                                if (widget.a! == "MC") {
+                                  return ClayContainer(
+                                    spread: 1,
+                                    surfaceColor: Colors.white,
+                                    curveType: CurveType.none,
+                                    width: 700,
+                                    //color: Colors.brown[400],
+                                    color: Colors.red[300],
+                                    customBorderRadius: BorderRadius.only(
+                                      //Radius.circular(30),
+                                      bottomLeft: Radius.circular(20),
+                                      topLeft: Radius.circular(20),
+                                      topRight: Radius.circular(20),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: width * 0.025,
+                                          vertical: height * 0.025),
+                                      child: AnimatedTextKit(
+                                        animatedTexts: [
+                                          TyperAnimatedText(
+                                            widget.q!,
+                                            textAlign: TextAlign.left,
+                                            textStyle: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: "Mali",
+                                                fontSize: 22),
+                                            speed:
+                                                Duration(milliseconds: speed!),
+                                          ),
+                                        ],
+                                        displayFullTextOnTap: true,
+                                        isRepeatingAnimation: false,
+                                        key: ValueKey(widget.n),
                                       ),
-                                    ],
-                                    displayFullTextOnTap: true,
-                                    isRepeatingAnimation: false,
-                                    key: ValueKey(widget.n),
-                                  ),
-                                ),
-                              ),
+                                    ),
+                                  );
+                                } else if (widget.a! == "Narrator") {
+                                  return ClayContainer(
+                                    spread: 1,
+                                    surfaceColor: Colors.white,
+                                    curveType: CurveType.none,
+                                    width: 700,
+                                    //color: Colors.brown[400],
+                                    color: Colors.grey,
+                                    customBorderRadius: BorderRadius.all(
+                                      Radius.circular(20),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: width * 0.025,
+                                          vertical: height * 0.025),
+                                      child: AnimatedTextKit(
+                                        animatedTexts: [
+                                          TyperAnimatedText(
+                                            widget.q!,
+                                            textAlign: TextAlign.left,
+                                            textStyle: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: "Mali",
+                                                fontSize: 22),
+                                            speed:
+                                                Duration(milliseconds: speed!),
+                                          ),
+                                        ],
+                                        displayFullTextOnTap: true,
+                                        isRepeatingAnimation: false,
+                                        key: ValueKey(widget.n),
+                                      ),
+                                    ),
+                                  );
+                                } else {
+                                  return ClayContainer(
+                                    spread: 1,
+                                    surfaceColor: Colors.white,
+                                    curveType: CurveType.none,
+                                    width: 700,
+                                    //color: Colors.brown[400],
+                                    color: Colors.black,
+                                    customBorderRadius: BorderRadius.only(
+                                      //Radius.circular(30),
+                                      bottomRight: Radius.circular(20),
+                                      topLeft: Radius.circular(20),
+                                      topRight: Radius.circular(20),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: width * 0.025,
+                                          vertical: height * 0.025),
+                                      child: AnimatedTextKit(
+                                        animatedTexts: [
+                                          TyperAnimatedText(
+                                            widget.q!,
+                                            textAlign: TextAlign.left,
+                                            textStyle: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: "Mali",
+                                                fontSize: 22),
+                                            speed:
+                                                Duration(milliseconds: speed!),
+                                          ),
+                                        ],
+                                        displayFullTextOnTap: true,
+                                        isRepeatingAnimation: false,
+                                        key: ValueKey(widget.n),
+                                      ),
+                                    ),
+                                  );
+                                }
+                              }),
                             ),
                             // FittedBox(
                             //   fit: BoxFit.fitHeight,
@@ -502,29 +579,26 @@ class _ImageBuilderState extends State<ImageBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedSwitcher(
-      duration: Duration(milliseconds: 0),
-      child: ListView(
-        key: UniqueKey(),
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        children: <Widget>[
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              SizedBox(
-                height: 50,
-              ),
-              Image.asset(
-                "assets/images/sprites/" + widget.image! + ".png",
-                fit: BoxFit.cover,
-                height: MediaQuery.of(context).size.height / 1,
-              )
-            ],
-          )
-        ],
-      ),
+    return ListView(
+      key: UniqueKey(),
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      children: <Widget>[
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            SizedBox(
+              height: 50,
+            ),
+            Image.asset(
+              "assets/images/sprites/" + widget.image! + ".png",
+              fit: BoxFit.cover,
+              height: MediaQuery.of(context).size.height / 1,
+            )
+          ],
+        )
+      ],
     );
   }
 }
