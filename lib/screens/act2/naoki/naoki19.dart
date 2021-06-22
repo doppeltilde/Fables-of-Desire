@@ -14,11 +14,22 @@ class _VNState extends State<Naoki19> {
 
   @override
   Widget build(BuildContext context) {
-    return VNScaffold(
-      bgImage: "1710heian15_y_19201080",
-      textSound: textSound,
-      route: route,
-      nextRoute: nextRoute,
-    );
+    return Builder(builder: (context) {
+      if (textSound.textNumber >= 21) {
+        return VNScaffold(
+          bgImage: "1710heian20_19201080",
+          textSound: textSound,
+          route: route,
+          nextRoute: nextRoute,
+        );
+      } else {
+        return VNScaffold(
+          bgImage: "mininature_001_19201440",
+          textSound: textSound,
+          route: route,
+          nextRoute: nextRoute,
+        );
+      }
+    });
   }
 }

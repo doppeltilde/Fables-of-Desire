@@ -2,9 +2,13 @@
 // NAME TEST
 //
 
+import 'dart:io';
+
+import 'package:fablesofdesire/global/audio/global_audio.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:salem/core/audio/gameAudio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Intro extends StatefulWidget {
@@ -21,7 +25,7 @@ class _Intro extends State<Intro> {
     super.initState();
     SharedPreferences.getInstance().then((prefValue) => {
           setState(() {
-            _name = prefValue.getString('name') ?? 'X';
+            _name = prefValue.getString('name') ?? 'MC';
             _controller = new TextEditingController(text: _name);
           })
         });
@@ -47,7 +51,7 @@ class _Intro extends State<Intro> {
       onWillPop: () => getOnWillPop(),
       child: new Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.brown,
+        backgroundColor: Colors.redAccent,
         //backgroundColor: Colors.red[300],
         body: Stack(
           children: <Widget>[
@@ -155,6 +159,7 @@ class _Intro extends State<Intro> {
                                                 side: BorderSide(
                                                     color: Colors.white))),
                                         onPressed: () {
+                                          GlobalAudio.playAudio.stopAudio();
                                           Navigator.of(context)
                                               .pushNamed('/naoki1');
                                           // Navigator.push(

@@ -263,7 +263,7 @@ class NaokiText3 {
         n, "B-bathing? Won’t you drown in something so large?", "naoki_blush"),
     Speech(
         m,
-        "Of course not. This is one of the benefits of being human I wanted to show you.",
+        "Of course not. This is one of the benefits of being human. I wanted to show you.",
         "mc_sad"),
     Speech(
         m,
@@ -1327,6 +1327,10 @@ class NaokiText14 {
     textNumber = 0;
   }
 
+  String? bgImage() {
+    return "1710heian20_19201080";
+  }
+
   List<Speech> textBank = [
     // todo bg outside shrine, day
     Speech(
@@ -1401,6 +1405,10 @@ class NaokiText15 {
 
   void reset() {
     textNumber = 0;
+  }
+
+  String? bgImage() {
+    return "1710heian15_n_19201080";
   }
 
   List<Speech> textBank = [
@@ -1506,6 +1514,10 @@ class NaokiText16 {
 
   void reset() {
     textNumber = 0;
+  }
+
+  String bgImage() {
+    return "snowmori_022_19201440";
   }
 
   List<Speech> textBank = [
@@ -2065,7 +2077,7 @@ class NaokiText20 {
   }
 
   List<Speech> textBank = [
-    // bg mountain view, sunset
+    // todo: bg mountain view, sunset
     Speech(
         nar,
         "As we walk back to the central shrine and far enough away from prying ears, I finally stop and put down some of the tributes.",

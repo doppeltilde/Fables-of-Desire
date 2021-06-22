@@ -23,7 +23,7 @@ import 'package:fablesofdesire/screens/act2/naoki/naoki8.dart';
 import 'package:fablesofdesire/screens/act2/naoki/naoki9.dart';
 import 'package:fablesofdesire/screens/chapter1/chapter1.dart';
 import 'package:fablesofdesire/screens/chapter1/chapter2.dart';
-import 'package:fablesofdesire/screens/chapter1/intro.dart';
+import 'package:fablesofdesire/screens/intro.dart';
 import 'package:flutter/material.dart';
 import 'homepage.dart';
 

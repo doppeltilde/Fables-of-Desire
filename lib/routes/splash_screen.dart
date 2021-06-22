@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return SplashLoadingScreen(
       bgColor: Colors.white,
-      opacity: 1,
+      opacity: 1.0,
       imgDuration: 250,
       splashImage: "assets/images/logo.png",
     );

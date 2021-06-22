@@ -15,7 +15,7 @@ class _VNState extends State<Naoki20> {
   @override
   Widget build(BuildContext context) {
     return VNScaffold(
-      bgImage: "1710heian15_y_19201080",
+      bgImage: "mininature_003_y_19201440",
       textSound: textSound,
       route: route,
       nextRoute: nextRoute,

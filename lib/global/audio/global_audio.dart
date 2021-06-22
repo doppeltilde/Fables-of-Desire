@@ -23,8 +23,8 @@ class PlayAudio with WidgetsBindingObserver {
       if (GameAudioDesktop.playAudio.isPlaying == false) {
         GameAudioDesktop.playAudio.play(musicName);
       } else {
-        GameAudio.bgm.stop();
-        GameAudio.bgm.play(musicName);
+        GameAudioDesktop.playAudio.stop();
+        GameAudioDesktop.playAudio.play(musicName);
       }
     } else {
       if (GameAudio.bgm.isPlaying == false) {
@@ -33,6 +33,14 @@ class PlayAudio with WidgetsBindingObserver {
         GameAudio.bgm.stop();
         GameAudio.bgm.play(musicName);
       }
+    }
+  }
+
+  Future<void> stopAudio() async {
+    if (Platform.isWindows || Platform.isLinux) {
+      GameAudioDesktop.playAudio.stop();
+    } else {
+      GameAudio.bgm.stop();
     }
   }
 
