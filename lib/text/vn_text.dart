@@ -18,13 +18,21 @@ class TextConstructor1 {
   final m = "MC";
   List<Speech> textBank = [
     // Speech, Name, Voice, Image
-    Speech("MC", "HELLO WORLD", "MC_Neutral"),
-    Speech("MC", tr("mc.2"), "MC_Blush"),
+    Speech("MC", "HELLO WORLD", "mc_neutral"),
+    Speech(
+        "MC",
+        """Good morning. Morning Brew has been proud to offer same-day email delivery since our founding in 2015. To make sure this newsletter is hitting your inbox every morning, you can take the following steps:""",
+        "mc_blush"),
 
-    Speech("MC", tr("mc.3"), "MC_Happy"),
-    Speech(tr("tom_name"), tr("tom.speech1"), "tom_neutral"),
-    Speech(tr("tom_name"), tr("tom.speech2"), "tom_neutral"),
-    Speech(tr("tom_name"), tr("tom.speech3"), "tom_neutral"),
+    Speech("MC", "Move us to your primary inbox if you use Gmail", "mc_happy"),
+    Speech(tr("tom_name"), "Add us to your VIP list if you use Apple Mail",
+        "tom_neutral"),
+    Speech(tr("tom_name"), "Add us to your favorites if you use Outlook",
+        "tom_neutral"),
+    Speech(
+        tr("tom_name"),
+        "Or some combination of the above if you use anything else. Thanks!",
+        "tom_neutral"),
     Speech(tr("naoki_name"), tr("naoki.speech1"), "naoki_neutral"),
     Speech(tr("naoki_name"), tr("naoki.speech2"), "naoki_neutral"),
     Speech(tr("naoki_name"), tr("naoki.speech3"), "naoki_neutral"),
