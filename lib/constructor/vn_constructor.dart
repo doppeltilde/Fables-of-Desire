@@ -460,9 +460,44 @@ class ImageBuilder extends StatefulWidget {
 }
 
 class _ImageBuilderState extends State<ImageBuilder> {
+  List images = [
+    "fox_hidetake_blush",
+    "fox_hidetake_frown",
+    "fox_hidetake_happy",
+    "fox_hidetake_neutral",
+    "fox_hidetake_sad",
+    "hidetake_blush",
+    "hidetake_frown",
+    "hidetake_happy",
+    "hidetake_neutral",
+    "hidetake_sad",
+    "raven_naoki_blush",
+    "raven_naoki_frown",
+    "raven_naoki_happy",
+    "raven_naoki_neutral",
+    "raven_naoki_sad",
+    "naoki_blush",
+    "naoki_frown",
+    "naoki_happy",
+    "naoki_neutral",
+    "naoki_sad",
+    "raccoon_tom_blush",
+    "raccoon_tom_frown",
+    "raccoon_tom_happy",
+    "raccoon_tom_neutral",
+    "raccoon_tom_sad",
+    "tom_blush",
+    "tom_frown",
+    "tom_happy",
+    "tom_neutral",
+    "tom_sad",
+  ];
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    for (var i in images)
+      precacheImage(AssetImage("assets/images/sprites/" + i + ".png"), context);
+
+    super.didChangeDependencies();
   }
 
   @override
@@ -485,7 +520,6 @@ class _ImageBuilderState extends State<ImageBuilder> {
                 "assets/images/sprites/" + widget.image! + ".png",
                 fit: BoxFit.cover,
                 height: MediaQuery.of(context).size.height / 1,
-                gaplessPlayback: true,
               )
             ],
           )
@@ -505,6 +539,21 @@ class ImageBuilderMC extends StatefulWidget {
 }
 
 class _ImageBuilderMCState extends State<ImageBuilderMC> {
+  List images = [
+    "MC_Blush",
+    "MC_Frown",
+    "MC_Happy",
+    "MC_Neutral",
+    "MC_Sad",
+  ];
+  @override
+  void didChangeDependencies() {
+    for (var i in images)
+      precacheImage(AssetImage("assets/images/sprites/" + i + ".png"), context);
+
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -520,7 +569,6 @@ class _ImageBuilderMCState extends State<ImageBuilderMC> {
                 fit: BoxFit.cover,
                 height: MediaQuery.of(context).size.height / 1.4,
                 key: UniqueKey(),
-                gaplessPlayback: true,
               ),
             ),
           );
@@ -534,7 +582,6 @@ class _ImageBuilderMCState extends State<ImageBuilderMC> {
                 fit: BoxFit.cover,
                 height: MediaQuery.of(context).size.height / 2,
                 key: UniqueKey(),
-                gaplessPlayback: true,
               ),
             ),
           );

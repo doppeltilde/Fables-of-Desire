@@ -23,8 +23,48 @@ class _SplashScreenState extends State<SplashScreen> {
   bool? splash = false;
   double? opacity = 0.0;
 
+  List images = [
+    "fox_hidetake_blush",
+    "fox_hidetake_frown",
+    "fox_hidetake_happy",
+    "fox_hidetake_neutral",
+    "fox_hidetake_sad",
+    "hidetake_blush",
+    "hidetake_frown",
+    "hidetake_happy",
+    "hidetake_neutral",
+    "hidetake_sad",
+    "MC_Blush",
+    "MC_Frown",
+    "MC_Happy",
+    "MC_Neutral",
+    "MC_Sad",
+    "raven_naoki_blush",
+    "raven_naoki_frown",
+    "raven_naoki_happy",
+    "raven_naoki_neutral",
+    "raven_naoki_sad",
+    "naoki_blush",
+    "naoki_frown",
+    "naoki_happy",
+    "naoki_neutral",
+    "naoki_sad",
+    "raccoon_tom_blush",
+    "raccoon_tom_frown",
+    "raccoon_tom_happy",
+    "raccoon_tom_neutral",
+    "raccoon_tom_sad",
+    "tom_blush",
+    "tom_frown",
+    "tom_happy",
+    "tom_neutral",
+    "tom_sad",
+  ];
   @override
   Widget build(BuildContext context) {
+    for (var i in images)
+      precacheImage(AssetImage("assets/images/sprites/" + i + ".png"), context);
+
     return SplashLoadingScreen(
       bgColor: Colors.white,
       opacity: 1.0,
@@ -51,19 +91,17 @@ class _SplashScreenState extends State<SplashScreen> {
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       sharedPreferences = sp;
       isNoti = sharedPreferences!.getBool(notiKey);
-      // will be null if never previously saved
       if (isNoti == null) {
         isNoti = true;
-        persistNoti(isNoti!); // set an initial value
+        persistNoti(isNoti!);
       }
     });
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       sharedPreferences = sp;
       isSwitchedFT = sharedPreferences!.getBool(spKey);
-      // will be null if never previously saved
       if (isSwitchedFT == null) {
         isSwitchedFT = true;
-        persist(isSwitchedFT!); // set an initial value
+        persist(isSwitchedFT!);
       }
     });
     SharedPreferences.getInstance().then((SharedPreferences sp) {
@@ -84,9 +122,7 @@ class _SplashScreenState extends State<SplashScreen> {
     });
 
     Future.delayed(const Duration(seconds: 3), () {
-      if (this.mounted) {
-        initSplash();
-      }
+      PersistNavigation.initSplash(context, HomePage.currentRoute);
     });
     Future.delayed(Duration(seconds: 1), () {
       setState(() {
@@ -122,26 +158,5 @@ class _SplashScreenState extends State<SplashScreen> {
       speed = value;
     });
     sharedPreferences?.setInt("speedValue", value);
-  }
-
-  //
-  // Saves pushNamed as last route
-  // Example:
-  // If pushNamed "/page1" -> saves page1 into cache
-  // If pushNamed -> materialroute, still saves last pushNamed
-  //
-
-  Future<void> initSplash() async {
-    final prefs = await SharedPreferences.getInstance();
-    String? lastRoute = prefs.getString('last_route');
-    String? previousRoute = prefs.getString('previous_route');
-
-    if (lastRoute != null && lastRoute != '/') {
-      Navigator.pushReplacementNamed(context, lastRoute);
-    } else if (previousRoute != null && previousRoute != '/') {
-      Navigator.pushReplacementNamed(context, previousRoute);
-    } else {
-      Navigator.of(context).pushNamed(HomePage.currentRoute);
-    }
   }
 }

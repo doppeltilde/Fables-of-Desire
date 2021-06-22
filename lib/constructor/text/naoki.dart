@@ -530,13 +530,13 @@ class NaokiText7 {
     Speech(
         m,
         "Naoki. Do you remember what I told you before about monitoring the fauna and flora?",
-        "transparent"),
+        "mc_neutral"),
     Speech(
         n,
         "Yes. I should always be aware of any changes in the terrain, no matter how small.",
-        "transparent"),
+        "naoki_neutral"),
     Speech(m, "That’s right. Tell me what you see.", "mc_happy"),
-    Speech(n, "Hm…", "transparent"),
+    Speech(n, "Hm…", "naoki_neutral"),
     Speech(
         n,
         "Well. The first thing I notice is definitely the strange-colored stones here.",
@@ -553,13 +553,13 @@ class NaokiText7 {
     Speech(
         n,
         "Sometimes in the morning, several birds in this mountain have mysteriously returned unharmed with the faint smell of human on them.",
-        "transparent"),
-    Speech(n, "I see now that it has always been you.", "transparent"),
+        "naoki_neutral"),
+    Speech(n, "I see now that it has always been you.", "naoki_neutral"),
     Speech(
         m,
         "Oh! Yes, I suppose it must. Every now and then a younger or elderly bird needs help, so I’ve carried them to nests.",
         "mc_neutral"),
-    Speech(m, "I did not realize it became a legend of sorts.", "transparent"),
+    Speech(m, "I did not realize it became a legend of sorts.", "mc_neutral"),
     Speech(
         nar,
         "Naoki chuckles to himself and it takes me by surprise. I don’t think I’ve ever heard him laugh before. It reminds me of a fledgling’s trill.",
@@ -675,7 +675,7 @@ class NaokiText9 {
     Speech(
         nar,
         "Naoki stops pruning the bushes long enough to look up to me with a pout on his face.",
-        "naoki_frown"),
+        "transparent"),
     Speech(n, "It is not perfectly even.", "naoki_sad"),
     Speech(m, "Do you really think so? It’s beautiful to me as it is.",
         "mc_neutral"),
@@ -762,7 +762,7 @@ class NaokiText10 {
     Speech(
         nar,
         "He gently sets them down on the outdoor blanket and waits for me to sit before sitting across from me.",
-        "naoki_neutral"),
+        "transparent"),
     Speech(m, "Thanks for the food.", "transparent"),
     Speech(n, "Thanks for the food…", "transparent"),
     Speech(
@@ -785,7 +785,7 @@ class NaokiText10 {
         "He concentrates intently on his bowls, not looking at me as he mumbles his answers.",
         "transparent"),
     Speech(n, "At first, I dusted that one ceiling you couldn’t reach earlier…",
-        "transparent"),
+        "naoki_happy"),
     Speech(nar, "Gah! He noticed!", "mc_blush"),
     // TODO screen shake
     Speech(n, "Ah. Almost… Then, I returned to the shrine.", "transparent"),
@@ -805,26 +805,26 @@ class NaokiText10 {
     Speech(
         n,
         "Books… for transferring information? Like talking without voices?",
-        "transparent"),
-    Speech(m, "Yes, that’s right.", "transparent"),
+        "naoki_neutral"),
+    Speech(m, "Yes, that’s right.", "mc_neutral"),
     Speech(n, "It sounds incredibly useful.", "naoki_happy"),
     Speech(
         m,
         "It sure is. What you saw was the shrine collection, or library of books.",
-        "transparent"),
-    Speech(n, "Could I learn to cook in a library?", "transparent"),
-    Speech(m, "Ha ha! You sure could, there’s a few books on that.",
-        "transparent"),
+        "mc_neutral"),
+    Speech(n, "Could I learn to cook in a library?", "naoki_blush"),
+    Speech(
+        m, "Ha ha! You sure could, there’s a few books on that.", "mc_happy"),
     Speech(m, "You’d have to learn how to read, though.", "mc_neutral"),
     Speech(
         m,
         "Perhaps later if you still have an interest I can start teaching you how to read.",
-        "transparent"),
+        "mc_neutral"),
     Speech(
         m,
         "We definitely need to get you comfortable on the morning clearings, though. It can be dangerous if you’re not prepared.",
         "naoki_neutral"),
-    Speech(n, "Mm, yes…", "transparent"),
+    Speech(n, "Mm, yes…", "naoki_neutral"),
     Speech(nar, "A little distracted, are we? At least he’s having fun, ha ha…",
         "mc_happy"),
   ];
@@ -907,7 +907,7 @@ class NaokiText11 {
     Speech(
         n,
         "Then why change me? Why not get a human if you needed this form?",
-        "naoki_sasd"),
+        "naoki_sad"),
     Speech(
         m,
         "That’s… a difficult question to answer, Naoki. As you can see from my appearance, I am also human-like.",
