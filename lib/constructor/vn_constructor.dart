@@ -9,16 +9,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io' show Platform;
 
 class InterludeTextSound extends StatefulWidget {
-  final bgImage;
-  final String? a;
-  final String? q;
-  final int n;
-  final charImage;
-  final route;
-  final nextRoute;
-
   InterludeTextSound(this.bgImage, this.a, this.q, this.n, this.charImage,
       this.route, this.nextRoute);
+
+  final String? a;
+  final bgImage;
+  final charImage;
+  final int n;
+  final nextRoute;
+  final String? q;
+  final route;
 
   @override
   _InterludeState createState() => _InterludeState();
@@ -27,7 +27,9 @@ class InterludeTextSound extends StatefulWidget {
 class _InterludeState extends State<InterludeTextSound> {
   bool? isNoti;
   int? speed = 50;
+
   String? _name;
+
   @override
   void initState() {
     super.initState();
@@ -74,7 +76,7 @@ class _InterludeState extends State<InterludeTextSound> {
         // Character here
         Builder(
           builder: (BuildContext context) {
-            if (widget.a == "MC") {
+            if (widget.a == "MC" || widget.a == "Narrator") {
               return ImageBuilderMC(image: widget.charImage);
             } else {
               return ImageBuilder(image: widget.charImage);
@@ -370,6 +372,7 @@ class _InterludeState extends State<InterludeTextSound> {
                                             child: Image.asset(
                                               "assets/images/gui/textbox_scroll_03.png",
                                               fit: BoxFit.cover,
+                                              gaplessPlayback: true,
                                             ),
                                           ),
                                         ),
@@ -420,8 +423,10 @@ class _InterludeState extends State<InterludeTextSound> {
 }
 
 class BackgroundBuilder extends StatefulWidget {
-  final String? image;
   BackgroundBuilder({Key? key, this.image}) : super(key: key);
+
+  final String? image;
+
   @override
   _BackgroundBuilderState createState() => _BackgroundBuilderState();
 }
@@ -446,8 +451,10 @@ class _BackgroundBuilderState extends State<BackgroundBuilder> {
 }
 
 class ImageBuilder extends StatefulWidget {
-  final String? image;
   ImageBuilder({Key? key, this.image}) : super(key: key);
+
+  final String? image;
+
   @override
   _ImageBuilderState createState() => _ImageBuilderState();
 }
@@ -478,6 +485,7 @@ class _ImageBuilderState extends State<ImageBuilder> {
                 "assets/images/sprites/" + widget.image! + ".png",
                 fit: BoxFit.cover,
                 height: MediaQuery.of(context).size.height / 1,
+                gaplessPlayback: true,
               )
             ],
           )
@@ -488,8 +496,10 @@ class _ImageBuilderState extends State<ImageBuilder> {
 }
 
 class ImageBuilderMC extends StatefulWidget {
-  final String? image;
   ImageBuilderMC({Key? key, this.image}) : super(key: key);
+
+  final String? image;
+
   @override
   _ImageBuilderMCState createState() => _ImageBuilderMCState();
 }
@@ -510,6 +520,7 @@ class _ImageBuilderMCState extends State<ImageBuilderMC> {
                 fit: BoxFit.cover,
                 height: MediaQuery.of(context).size.height / 1.4,
                 key: UniqueKey(),
+                gaplessPlayback: true,
               ),
             ),
           );
@@ -523,6 +534,7 @@ class _ImageBuilderMCState extends State<ImageBuilderMC> {
                 fit: BoxFit.cover,
                 height: MediaQuery.of(context).size.height / 2,
                 key: UniqueKey(),
+                gaplessPlayback: true,
               ),
             ),
           );

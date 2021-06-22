@@ -155,7 +155,8 @@ class _Intro extends State<Intro> {
                                                 side: BorderSide(
                                                     color: Colors.white))),
                                         onPressed: () {
-                                          Navigator.of(context).pushNamed('/1');
+                                          Navigator.of(context)
+                                              .pushNamed('/naoki1');
                                           // Navigator.push(
                                           //   context,
                                           //   MaterialPageRoute(

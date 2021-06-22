@@ -2,6 +2,7 @@ import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/global/settings_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 //import 'package:url_launcher/url_launcher.dart';
 
 class Credits extends StatefulWidget {
@@ -109,46 +110,57 @@ class _SettingsState extends State<Credits>
                               text: 'Licenses',
                             ),
                           ),
-                          Container(
-                            width: MediaQuery.of(context).size.width / 2,
-                            height: 70,
-                            margin: EdgeInsets.symmetric(
-                              horizontal: 10,
-                            ).copyWith(
-                              bottom: 20,
-                            ),
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 20,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color: Theme.of(context).cardColor,
-                            ),
-                            child: Center(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Developed with ❤️ in",
-                                    style: TextStyle(
-                                        fontSize: 22, fontFamily: "Aleo"),
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      controller
-                                        ..reset()
-                                        ..forward();
-                                    },
-                                    child: RotationTransition(
-                                      turns: animation,
-                                      child: FlutterLogo(
-                                        size: 110,
-                                        style: FlutterLogoStyle.horizontal,
-                                      ),
+                          InkWell(
+                            onTap: () async {
+                              const url =
+                                  'https://github.com/SmallDreams/Engine';
+                              if (await canLaunch(url)) {
+                                await launch(url);
+                              } else {
+                                throw 'Could not launch $url';
+                              }
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width / 2,
+                              height: 70,
+                              margin: EdgeInsets.symmetric(
+                                horizontal: 10,
+                              ).copyWith(
+                                bottom: 20,
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 20,
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: Theme.of(context).cardColor,
+                              ),
+                              child: Center(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Developed with ❤️ in the SALEM ENGINE",
+                                      style: TextStyle(
+                                          fontSize: 22, fontFamily: "Aleo"),
                                     ),
-                                  ),
-                                ],
+                                    // GestureDetector(
+                                    //   onTap: () {
+                                    //     controller
+                                    //       ..reset()
+                                    //       ..forward();
+                                    //   },
+                                    //   child: RotationTransition(
+                                    //     turns: animation,
+                                    //     child: FlutterLogo(
+                                    //       size: 110,
+                                    //       style: FlutterLogoStyle.horizontal,
+                                    //     ),
+                                    //   ),
+                                    // ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
