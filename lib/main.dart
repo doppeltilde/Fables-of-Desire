@@ -16,7 +16,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-    await DesktopWindow.setMinWindowSize(Size(900, 600));
+    await DesktopWindow.setMinWindowSize(Size(1000, 700));
   } else {}
 
   SystemChrome.setPreferredOrientations(
