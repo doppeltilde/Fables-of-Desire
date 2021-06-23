@@ -141,7 +141,7 @@ class _SettingsState extends State<Credits>
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Text(
-                                      "Developed with ❤️ in the SALEM ENGINE",
+                                      "Developed with ❤️ in the Salem Engine.",
                                       style: TextStyle(
                                           fontSize: 22, fontFamily: "Aleo"),
                                     ),

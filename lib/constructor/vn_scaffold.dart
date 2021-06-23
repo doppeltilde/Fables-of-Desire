@@ -16,24 +16,29 @@ class VNScaffold extends StatefulWidget {
 
 class _VNState extends State<VNScaffold> {
   bool isFinished = false;
-  var fadeIn = false;
+  var switchFade = false;
+  double? opacity = 0.0;
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () => getOnWillPop(),
       child: Builder(
         builder: (context) {
-          if (fadeIn != false) {
-            return AnimatedOpacity(
-              // If the widget is visible, animate to 0.0 (invisible).
-              // If the widget is hidden, animate to 1.0 (fully visible).
-              opacity: fadeIn ? 1.0 : 0.0,
-              duration: Duration(milliseconds: 500),
-              // The green box must be a child of the AnimatedOpacity widget.
-              child: Container(
-                width: double.infinity,
-                height: double.infinity,
-                color: Colors.black,
+          if (switchFade != false) {
+            return Scaffold(
+              body: AnimatedOpacity(
+                // If the widget is visible, animate to 0.0 (invisible).
+                // If the widget is hidden, animate to 1.0 (fully visible).
+                opacity: opacity!,
+                duration: Duration(milliseconds: 300),
+                // The green box must be a child of the AnimatedOpacity widget.
+                child: Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  color: Colors.red,
+                  child: Text("$opacity"),
+                ),
               ),
             );
           } else {
@@ -48,7 +53,12 @@ class _VNState extends State<VNScaffold> {
                         Navigator.of(context).pushNamed(widget.nextRoute);
                       });
 
-                      fadeIn = true;
+                      switchFade = true;
+                      Future.delayed(Duration(milliseconds: 300), () {
+                        setState(() {
+                          opacity = 1.0;
+                        });
+                      });
                     }
                     widget.textSound.nextQuestion();
                   });
