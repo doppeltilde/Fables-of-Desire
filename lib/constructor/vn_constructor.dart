@@ -564,34 +564,21 @@ class _ImageBuilderState extends State<ImageBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      key: UniqueKey(),
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      children: <Widget>[
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            SizedBox(
-              height: 50,
+    return Builder(
+      builder: (context) {
+        if (widget.image != null) {
+          return Align(
+            alignment: Alignment.bottomCenter,
+            child: Image.asset(
+              "assets/images/sprites/" + widget.image! + ".png",
+              fit: BoxFit.cover,
+              height: MediaQuery.of(context).size.height / 1.2,
             ),
-            Builder(
-              builder: (context) {
-                if (widget.image != null) {
-                  return Image.asset(
-                    "assets/images/sprites/" + widget.image! + ".png",
-                    fit: BoxFit.cover,
-                    height: MediaQuery.of(context).size.height / 1,
-                  );
-                } else {
-                  return SizedBox.shrink();
-                }
-              },
-            )
-          ],
-        )
-      ],
+          );
+        } else {
+          return SizedBox.shrink();
+        }
+      },
     );
   }
 }
@@ -638,7 +625,7 @@ class _ImageBuilderMCState extends State<ImageBuilderMC> {
                     return Image.asset(
                       "assets/images/sprites/" + widget.image! + ".png",
                       fit: BoxFit.cover,
-                      height: MediaQuery.of(context).size.height / 1.4,
+                      height: MediaQuery.of(context).size.height / 1.7,
                       gaplessPlayback: true,
                     );
                   } else {

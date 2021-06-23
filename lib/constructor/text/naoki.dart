@@ -2,7 +2,7 @@
 //Copyright (c) 2021 Destini Islands and The SmallDreams Authors.
 
 class Speech {
-  /// Needs better more clean code focused names!
+  /// Needs better, more clean code focused names!
   final String? characterName;
   final String? characterText;
   final String? voice;
@@ -110,13 +110,13 @@ class NaokiText1 {
     Speech(
       characterName: nar,
       characterText:
-          "Today I’ve decided to try to get closer to Naoki after the rough start.",
+          "/Today I’ve decided to try to get closer to Naoki after the rough start./",
       mcImage: "mc_happy",
     ),
     Speech(
       characterName: nar,
       characterText:
-          "But as I enter his room, I see that he doesn’t even turn his face to greet me. His gaze peers beyond the windows.",
+          "/But as I enter his room, I see that he doesn’t even turn his face to greet me. His gaze peers beyond the windows./",
       mcImage: "mc_neutral",
     ),
     Speech(
@@ -148,13 +148,11 @@ class NaokiText1 {
     Speech(
       characterName: nar,
       characterText:
-          "I certainly don't know what I would think if I were suddenly in a different body.",
-      mcImage: "transparent",
+          "/I certainly don't know what I would think if I were suddenly in a different body./",
     ),
     Speech(
       characterName: nar,
-      characterText: "He turns to face me, his head tilting in wonder.",
-      mcImage: "transparent",
+      characterText: "/He turns to face me, his head tilting in wonder./",
     ),
     Speech(
       characterName: n,

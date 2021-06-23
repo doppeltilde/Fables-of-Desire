@@ -24,12 +24,13 @@ class TextConstructor1 {
     // Speech, Name, Voice, Image
     Speech(
         characterName: "MC",
-        characterText: "HELLO WORLD",
+        characterText:
+            "Away down South in the land of traitors, Rattlesnakes and alligators...",
         mcImage: "mc_neutral"),
     Speech(
         characterName: "Tom",
         characterText:
-            """Good morning. Morning Brew has been proud to offer same-day email delivery since our founding in 2015. To make sure this newsletter is hitting your inbox every morning, you can take the following steps:""",
+            "Negus is a noun derived from the Ethiopian Semitic root ngś, meaning 'to reign'. The title has subsequently been used to translate the word 'king' or 'emperor' in Biblical and other literature.",
         charImage: "tom_neutral"),
 
 //     Speech("MC", "Move us to your primary inbox if you use Gmail", "mc_happy"),
@@ -62,7 +63,7 @@ class TextConstructor1 {
     return textBank[textNumber].mcImage;
   }
 
-  String? getCharImage() {
+  String? getSideCharImage() {
     return textBank[textNumber].charImage;
   }
 

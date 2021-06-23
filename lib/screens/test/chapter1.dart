@@ -23,7 +23,7 @@ class _VNState extends State<VN1> {
   @override
   void initState() {
     super.initState();
-    GlobalAudio.playAudio.getBGM("cherrycolored");
+    GlobalAudio.playAudio.getBGM("union");
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       sharedPreferences = sp;
       notHome = sharedPreferences!.getString("notHome");

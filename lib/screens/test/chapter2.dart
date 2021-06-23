@@ -1,5 +1,6 @@
 import 'package:fablesofdesire/constructor/text_animation.dart';
 import 'package:fablesofdesire/constructor/vn_scaffold.dart';
+import 'package:fablesofdesire/global/audio/global_audio.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:fablesofdesire/text/vn_text.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class _VNState extends State<VN2> {
   @override
   void initState() {
     super.initState();
+    GlobalAudio.playAudio.getBGM("dankengine");
     Future.delayed(const Duration(seconds: 5), () {
       if (this.mounted) {
         setState(() {
