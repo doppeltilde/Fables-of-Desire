@@ -15,15 +15,15 @@ class InterludeTextSound extends StatefulWidget {
     this.characterText,
     this.n,
     this.mcImage,
-    this.charImage,
+    this.sideCharImage,
     this.route,
     this.nextRoute,
   );
 
   final String? a;
   final bgImage;
-  final mcImage;
-  final charImage;
+  final String? mcImage;
+  final String? sideCharImage;
   final int n;
   final nextRoute;
   final characterText;
@@ -85,10 +85,15 @@ class _InterludeState extends State<InterludeTextSound> {
         // Character here
         Builder(
           builder: (BuildContext context) {
-            if (widget.a == "MC" || widget.a == "Narrator") {
-              return ImageBuilderMC(image: widget.mcImage);
+            if (widget.mcImage != null && widget.sideCharImage != null) {
+              return ImageBuilderMultiple(
+                  mcImage: widget.mcImage, sideCharImage: widget.sideCharImage);
             } else {
-              return ImageBuilder(image: widget.charImage);
+              if (widget.a == "MC" || widget.a == "Narrator") {
+                return ImageBuilderMC(image: widget.mcImage);
+              } else {
+                return ImageBuilder(image: widget.sideCharImage);
+              }
             }
           },
         ),
@@ -661,6 +666,132 @@ class _ImageBuilderMCState extends State<ImageBuilderMC> {
               ));
         }
       },
+    );
+  }
+}
+
+class ImageBuilderMultiple extends StatefulWidget {
+  ImageBuilderMultiple({Key? key, this.mcImage, this.sideCharImage})
+      : super(key: key);
+
+  final String? mcImage;
+  final String? sideCharImage;
+
+  @override
+  _ImageBuilderMultipleState createState() => _ImageBuilderMultipleState();
+}
+
+class _ImageBuilderMultipleState extends State<ImageBuilderMultiple> {
+  List images = [
+    "mc_blush",
+    "mc_frown",
+    "mc_happy",
+    "mc_neutral",
+    "mc_sad",
+    "fox_hidetake_blush",
+    "fox_hidetake_frown",
+    "fox_hidetake_happy",
+    "fox_hidetake_neutral",
+    "fox_hidetake_sad",
+    "hidetake_blush",
+    "hidetake_frown",
+    "hidetake_happy",
+    "hidetake_neutral",
+    "hidetake_sad",
+    "raven_naoki_blush",
+    "raven_naoki_frown",
+    "raven_naoki_happy",
+    "raven_naoki_neutral",
+    "raven_naoki_sad",
+    "naoki_blush",
+    "naoki_frown",
+    "naoki_happy",
+    "naoki_neutral",
+    "naoki_sad",
+    "raccoon_tom_blush",
+    "raccoon_tom_frown",
+    "raccoon_tom_happy",
+    "raccoon_tom_neutral",
+    "raccoon_tom_sad",
+    "tom_blush",
+    "tom_frown",
+    "tom_happy",
+    "tom_neutral",
+    "tom_sad",
+  ];
+  @override
+  void didChangeDependencies() {
+    for (var i in images)
+      precacheImage(AssetImage("assets/images/sprites/" + i + ".png"), context);
+
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // for (var i in images)
+    //   precacheImage(AssetImage("assets/images/sprites/" + i + ".png"), context);
+    double height = MediaQuery.of(context).size.height;
+    return Stack(
+      children: <Widget>[
+        Builder(
+          builder: (context) {
+            if (widget.sideCharImage != null) {
+              return Align(
+                alignment: Alignment.bottomCenter,
+                child: Image.asset(
+                  "assets/images/sprites/" + widget.sideCharImage! + ".png",
+                  fit: BoxFit.cover,
+                  height: MediaQuery.of(context).size.height / 1.2,
+                ),
+              );
+            } else {
+              return SizedBox.shrink();
+            }
+          },
+        ),
+        Builder(
+          builder: (context) {
+            if (height < 700) {
+              return Align(
+                  key: UniqueKey(),
+                  alignment: Alignment.bottomRight,
+                  child: Builder(
+                    builder: (context) {
+                      if (widget.mcImage != null) {
+                        return Image.asset(
+                          "assets/images/sprites/" + widget.mcImage! + ".png",
+                          fit: BoxFit.cover,
+                          height: MediaQuery.of(context).size.height / 2,
+                          gaplessPlayback: true,
+                        );
+                      } else {
+                        return SizedBox.shrink();
+                      }
+                    },
+                  ));
+            } else {
+              return Align(
+                  key: UniqueKey(),
+                  alignment: Alignment.bottomRight,
+                  child: Builder(
+                    builder: (context) {
+                      if (widget.mcImage != null) {
+                        return Image.asset(
+                          "assets/images/sprites/" + widget.mcImage! + ".png",
+                          fit: BoxFit.cover,
+                          height: MediaQuery.of(context).size.height / 2,
+                          gaplessPlayback: true,
+                        );
+                      } else {
+                        return SizedBox.shrink();
+                      }
+                    },
+                  ));
+            }
+          },
+        ),
+      ],
     );
   }
 }

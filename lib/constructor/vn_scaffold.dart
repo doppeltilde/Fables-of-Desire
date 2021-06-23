@@ -74,7 +74,7 @@ class _VNState extends State<VNScaffold> {
                   widget.textSound.getCharacterText(),
                   widget.textSound.getNumber(),
                   widget.textSound.getMCImage(),
-                  widget.textSound.getCharImage(),
+                  widget.textSound.getSideCharImage(),
                   widget.route,
                   widget.nextRoute,
                 ),
