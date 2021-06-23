@@ -80,4 +80,5 @@ msix_config:
   msix_version: 1.1.9.0
   icons_background_color: "#ffffff"
   architecture: x64
+  store: true
   # See https://docs.microsoft.com/en-us/windows/uwp/packaging/app-capability-declarations
