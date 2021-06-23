@@ -15,7 +15,6 @@ class VNScaffold extends StatefulWidget {
 }
 
 class _VNState extends State<VNScaffold> {
-  bool isFinished = false;
   var switchFade = false;
   double? opacity = 0.0;
 
