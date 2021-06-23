@@ -24,14 +24,23 @@ class TextConstructor1 {
     // Speech, Name, Voice, Image
     Speech(
         characterName: "MC",
-        characterText:
-            "Away down South in the land of traitors, Rattlesnakes and alligators...",
-        mcImage: "mc_neutral"),
+        characterText: "a world of wonders in a sea of broken glass",
+        mcImage: "mc_happy"),
     Speech(
         characterName: "Tom",
         characterText:
-            "Negus is a noun derived from the Ethiopian Semitic root ngś, meaning 'to reign'. The title has subsequently been used to translate the word 'king' or 'emperor' in Biblical and other literature.",
-        charImage: "tom_neutral"),
+            "mirror is a song about the costs of being hard on yourself.",
+        charImage: "tom_happy"),
+    Speech(
+        characterName: "Naoki",
+        characterText:
+            "get your wish is a song about finding a reason to keep going, even if it's not for your own sake",
+        charImage: "naoki_happy"),
+    Speech(
+        characterName: "Hidetake",
+        characterText:
+            "i see Look at the Sky as a mantra to remind myself that there's good reason for hope, and that people can meaningfully improve themselves and the world.",
+        charImage: "hidetake_happy"),
 
 //     Speech("MC", "Move us to your primary inbox if you use Gmail", "mc_happy"),
 //     Speech(tr("tom_name"), "Add us to your VIP list if you use Apple Mail",
