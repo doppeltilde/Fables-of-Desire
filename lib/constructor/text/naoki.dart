@@ -1,12 +1,15 @@
-// Fables of Desire - Naoki Route - Destini Islands
+// Fables of Desire - Naoki Route
+//Copyright (c) 2021 Destini Islands and The SmallDreams Authors.
 
 class Speech {
+  /// Needs better more clean code focused names!
   final String? characterName;
   final String? characterText;
   final String? voice;
   final String? mcImage;
   final String? charImage;
-  final String? sideImage;
+  final String? sideCharImage;
+  final String? cgImg;
 
   Speech({
     this.characterName,
@@ -14,10 +17,12 @@ class Speech {
     this.voice,
     this.mcImage,
     this.charImage,
-    this.sideImage,
+    this.sideCharImage,
+    this.cgImg,
   });
 }
 
+/// Name documentation
 final m = "MC";
 final n = "Naoki";
 final man = "Man";
@@ -28,6 +33,7 @@ final c = "Child";
 
 class NaokiText1 {
   int textNumber = 0;
+
   void nextQuestion() {
     if (textNumber < textBank.length - 1) {
       textNumber++;

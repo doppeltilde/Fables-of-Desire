@@ -1,3 +1,5 @@
+/// Copyright (c) 2021 Jona T. Feucht and The SmallDreams Authors.
+
 import 'package:dart_vlc/dart_vlc.dart';
 import 'package:fablesofdesire/global/audio/game_audio.dart';
 import 'package:fablesofdesire/routes/homepage.dart';

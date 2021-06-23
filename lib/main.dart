@@ -1,8 +1,4 @@
-/*
-
-Copyright 2021 Jona Feucht & SmallDreams
-
-*/
+/// Copyright (c) 2021 Jona T. Feucht and The SmallDreams Authors.
 
 import 'package:desktop_window/desktop_window.dart';
 import 'package:easy_localization/easy_localization.dart';

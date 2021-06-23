@@ -1,3 +1,5 @@
+/// Copyright (c) 2021 Jona T. Feucht and The SmallDreams Authors.
+
 import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/routes/consts/consts.dart';
 import 'package:flutter/material.dart';

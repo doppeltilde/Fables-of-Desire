@@ -1,4 +1,4 @@
-// Primary
+/// Copyright (c) 2021 Jona T. Feucht and The SmallDreams Authors.
 import 'package:dart_vlc/dart_vlc.dart';
 import 'package:fablesofdesire/global/audio/game_audio.dart';
 import 'package:fablesofdesire/global/audio/global_audio.dart';
@@ -10,6 +10,8 @@ import 'dart:io' show Platform;
 import 'package:fablesofdesire/global/setings.dart';
 import 'package:flutter/material.dart';
 
+/// Main Menu
+/// Point the splash screen here
 class HomePage extends StatefulWidget {
   static const currentRoute = "/home";
   @override
@@ -17,23 +19,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _WildfyreState extends State<HomePage> {
-  bool isLightTheme = true;
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: HomePage2(),
-    );
-  }
-}
-
-// HomePage
-class HomePage2 extends StatefulWidget {
-  @override
-  _BaseScreenState createState() => _BaseScreenState();
-}
-
-/// The main widget state.
-class _BaseScreenState extends State<HomePage2> {
   bool isLightTheme = true;
 
   double? opacity = 0.0;
