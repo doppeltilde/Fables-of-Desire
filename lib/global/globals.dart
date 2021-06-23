@@ -1,15 +1,85 @@
 // Gestures
+
 import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fablesofdesire/global/setings.dart';
-import 'package:fablesofdesire/global/theme.dart';
-import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:package_info/package_info.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+Widget appbar(context, name) {
+  return AppBar(
+    toolbarOpacity: 1,
+    elevation: 0,
+    centerTitle: true,
+    title: Container(
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30),
+        color: Theme.of(context).cardColor,
+      ),
+      child: Text(
+        name,
+        style: TextStyle(fontFamily: "Aleo", color: Colors.black),
+      ),
+    ),
+    backgroundColor: Colors.transparent,
+    automaticallyImplyLeading: false,
+  );
+}
+
+Widget backbutton(context) {
+  return Align(
+    alignment: FractionalOffset.bottomLeft,
+    child: Row(children: [
+      Padding(
+        padding: EdgeInsets.only(bottom: 20, left: 10),
+        child: InkWell(
+          onTap: () => Navigator.pop(context),
+          child: Container(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: Theme.of(context).cardColor,
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.arrow_back_outlined,
+                    size: 35,
+                    color: Colors.black,
+                  ),
+                  Text(
+                    "RETURN",
+                    style: TextStyle(fontFamily: "Aleo", fontSize: 24),
+                  ),
+                ],
+              )),
+        ),
+      ),
+    ]),
+  );
+}
+
+Widget deletebutton(context, saveSlot) {
+  return TextButton(
+      style: TextButton.styleFrom(
+          backgroundColor: Colors.redAccent,
+          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
+          )),
+      onPressed: () async {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.remove(saveSlot);
+        saveSlot = null;
+      },
+      child: Text(
+        "DELETE SAVE",
+        style: TextStyle(fontFamily: "Aleo", color: Colors.white, fontSize: 18),
+      ));
+}
 
 class AllowMultipleGestureRecognizer extends TapGestureRecognizer {
   @override
@@ -18,97 +88,92 @@ class AllowMultipleGestureRecognizer extends TapGestureRecognizer {
   }
 }
 
-dynamic settingsClip(context, _scaffoldKey) {
-  return LayoutBuilder(builder: (context, constraints) {
-    if (Platform.isMacOS || Platform.isLinux || Platform.isWindows) {
-      return InkWell(
-        onTap: () => _scaffoldKey.currentState.openEndDrawer(),
-        child: Stack(
-          alignment: Alignment.center,
-          children: <Widget>[
-            Stack(
-              children: <Widget>[
-                Container(
-                  color: Colors.transparent,
-                  padding: EdgeInsets.all(1),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: Image.asset(
-                      "assets/images/gui/more.png",
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => SettingsIngame()),
-        ),
-        child: Stack(
-          alignment: Alignment.center,
-          children: <Widget>[
-            Stack(
-              children: <Widget>[
-                Container(
-                  color: Colors.transparent,
-                  padding: EdgeInsets.all(1),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: Image.asset(
-                      "assets/images/gui/more.png",
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      );
-      // return Row(
-      //   mainAxisAlignment: MainAxisAlignment.center,
-      //   children: [
-      //     Container(
-      //       child: ElevatedButton(
-      //         style: ElevatedButton.styleFrom(
-      //             shape: RoundedRectangleBorder(
-      //               borderRadius: BorderRadius.circular(18.0),
-      //             ),
-      //             primary: Theme.of(context).primaryColor),
-      //         onPressed: () {
-      //           Navigator.push(
-      //             context,
-      //             MaterialPageRoute(builder: (context) => SettingsIngame()),
-      //           );
-      //         },
-      //         child: Text(
-      //           "Settings",
-      //           style: TextStyle(
-      //               color: Theme.of(context).accentColor,
-      //               fontFamily: "Aleo",
-      //               fontSize: 20,
-      //               letterSpacing: .2),
-      //         ),
-      //       ),
-      //     ),
-      //   ],
-      // );
-    }
-  });
+class Buttons extends StatelessWidget {
+  final route;
+  final nextRoute;
+
+  Buttons({Key? key, this.route, this.nextRoute});
+  @override
+  Widget build(BuildContext context) {
+    return Builder(builder: (BuildContext context) {
+      if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
+        return SafeArea(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              skipClip(context, nextRoute),
+              SizedBox(
+                width: 7,
+              ),
+              SettingsClip(route: route),
+            ],
+          ),
+        );
+      } else {
+        return SafeArea(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              skipClip(context, nextRoute),
+              SizedBox(
+                width: 7,
+              ),
+              SettingsClip(route: route),
+            ],
+          ),
+        );
+      }
+    });
+  }
 }
 
-dynamic skipClip(context, route) {
+class SettingsClip extends StatelessWidget {
+  final route;
+
+  SettingsClip({Key? key, this.route});
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(builder: (context, constraints) {
+      return InkWell(
+          onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Settings(
+                          route: route,
+                        )),
+              ),
+          child: Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              Stack(
+                children: <Widget>[
+                  Container(
+                    color: Colors.transparent,
+                    padding: EdgeInsets.all(1),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: Image.asset(
+                        "assets/images/gui/more.png",
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ));
+    });
+  }
+}
+
+dynamic skipClip(context, nextRoute) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
       InkWell(
-        onTap: () => showAlertDialog(context, route),
+        onTap: () => showAlertDialog(context, nextRoute),
         child: Stack(
           alignment: Alignment.center,
           children: <Widget>[
@@ -130,29 +195,11 @@ dynamic skipClip(context, route) {
           ],
         ),
       ),
-      // Container(
-      //   child: ElevatedButton(
-      //     style: ElevatedButton.styleFrom(
-      //         shape: RoundedRectangleBorder(
-      //           borderRadius: BorderRadius.circular(18.0),
-      //         ),
-      //         primary: Theme.of(context).primaryColor),
-      //     onPressed: () => showAlertDialog(context, route),
-      //     child: Text(
-      //       "Skip >>",
-      //       style: TextStyle(
-      //           color: Theme.of(context).accentColor,
-      //           fontFamily: "Aleo",
-      //           fontSize: 20,
-      //           letterSpacing: .2),
-      //     ),
-      //   ),
-      // ),
     ],
   );
 }
 
-showAlertDialog(BuildContext context, route) {
+showAlertDialog(BuildContext context, nextRoute) {
   // set up the buttons
 
   Widget continueButton = Row(
@@ -161,15 +208,17 @@ showAlertDialog(BuildContext context, route) {
     children: [
       ElevatedButton(
         style: ElevatedButton.styleFrom(
-            primary: Theme.of(context).accentColor,
-            onPrimary: Theme.of(context).primaryColor),
+            primary: Colors.white, onPrimary: Theme.of(context).primaryColor),
         child: Text(
           "YES",
-          style: TextStyle(fontFamily: "Aleo", fontSize: 18, letterSpacing: .4),
+          style: TextStyle(
+              color: Colors.black,
+              fontFamily: "Aleo",
+              fontSize: 22,
+              letterSpacing: .4),
         ),
         onPressed: () {
-          FlameAudio.bgm.stop();
-          Navigator.of(context).pushNamed(route);
+          Navigator.of(context).pushNamed(nextRoute);
         },
       ),
       SizedBox(
@@ -177,11 +226,14 @@ showAlertDialog(BuildContext context, route) {
       ),
       ElevatedButton(
         style: ElevatedButton.styleFrom(
-            primary: Theme.of(context).accentColor,
-            onPrimary: Theme.of(context).primaryColor),
+            primary: Colors.white, onPrimary: Theme.of(context).primaryColor),
         child: Text(
           "NO",
-          style: TextStyle(fontFamily: "Aleo", fontSize: 18, letterSpacing: .4),
+          style: TextStyle(
+              color: Colors.black,
+              fontFamily: "Aleo",
+              fontSize: 22,
+              letterSpacing: .4),
         ),
         onPressed: () {
           Navigator.pop(context);
@@ -191,30 +243,57 @@ showAlertDialog(BuildContext context, route) {
   );
 
   // set up the AlertDialog
-  AlertDialog alert = AlertDialog(
-    backgroundColor: Colors.amber,
-    title: Text(
-      "CHAPTER SKIP!",
-      textAlign: TextAlign.center,
-      style: TextStyle(
-          fontFamily: "Aleo",
-          fontSize: 30,
-          letterSpacing: .2,
-          color: Colors.black),
-    ),
-    content: Text(
-      "Are you sure about that?",
-      textAlign: TextAlign.center,
-      style: TextStyle(
-          fontFamily: "Aleo",
-          fontSize: 20,
-          letterSpacing: .4,
-          color: Colors.black),
-    ),
-    actions: [
-      continueButton,
-    ],
-  );
+  Dialog alert = Dialog(
+      backgroundColor: Colors.transparent,
+      insetPadding: EdgeInsets.all(10),
+      child: Container(
+          width: MediaQuery.of(context).size.width / 2,
+          height: 200,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: Colors.amberAccent),
+          padding: EdgeInsets.fromLTRB(20, 50, 20, 20),
+          child: Column(
+            children: <Widget>[
+              Text("Chapter Skip",
+                  style: TextStyle(fontSize: 28, fontFamily: "Aleo"),
+                  textAlign: TextAlign.center),
+
+              Text("Are you sure about that?",
+                  style: TextStyle(fontSize: 24, fontFamily: "Aleo"),
+                  textAlign: TextAlign.center),
+              Spacer(),
+              continueButton,
+              // Positioned(
+              //     top: -100,
+              //     child: Image.asset("https://i.imgur.com/2yaf2wb.png",
+              //         width: 150, height: 150))
+            ],
+          )));
+  // AlertDialog alert = AlertDialog(
+  //   backgroundColor: Colors.amber,
+  //   title: Text(
+  //     "CHAPTER SKIP!",
+  //     textAlign: TextAlign.center,
+  //     style: TextStyle(
+  //         fontFamily: "Aleo",
+  //         fontSize: 30,
+  //         letterSpacing: .2,
+  //         color: Colors.black),
+  //   ),
+  //   content: Text(
+  //     "Are you sure about that?",
+  //     textAlign: TextAlign.center,
+  //     style: TextStyle(
+  //         fontFamily: "Aleo",
+  //         fontSize: 20,
+  //         letterSpacing: .4,
+  //         color: Colors.black),
+  //   ),
+  //   actions: [
+  //     continueButton,
+  //   ],
+  // );
 
   // show the dialog
   showDialog(
@@ -226,6 +305,8 @@ showAlertDialog(BuildContext context, route) {
 }
 
 class AppDrawer extends StatefulWidget {
+  final player;
+  AppDrawer({Key? key, this.player});
   @override
   _AppDrawerState createState() => new _AppDrawerState();
 }
@@ -236,22 +317,8 @@ class _AppDrawerState extends State<AppDrawer> {
   @override
   void initState() {
     super.initState();
-    _initPackageInfo();
     getSwitchValues();
     getNotiValues();
-  }
-
-  PackageInfo _packageInfo = PackageInfo(
-    appName: 'Unknown',
-    packageName: 'Unknown',
-    version: 'Unknown',
-    buildNumber: 'Unknown',
-  );
-  Future<void> _initPackageInfo() async {
-    final PackageInfo info = await PackageInfo.fromPlatform();
-    setState(() {
-      _packageInfo = info;
-    });
   }
 
   getSwitchValues() async {
@@ -294,11 +361,12 @@ class _AppDrawerState extends State<AppDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
+    // final themeProvider = Provider.of<ThemeProvider>(context);
 
     return new Drawer(
         child: Container(
-      color: Theme.of(context).primaryColor,
+      width: MediaQuery.of(context).size.width / 4,
+      color: Colors.white,
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -311,11 +379,6 @@ class _AppDrawerState extends State<AppDrawer> {
             ),
             Container(
               height: 55,
-              margin: EdgeInsets.symmetric(
-                horizontal: 10,
-              ).copyWith(
-                bottom: 20,
-              ),
               padding: EdgeInsets.symmetric(
                 horizontal: 20,
               ),
@@ -325,204 +388,36 @@ class _AppDrawerState extends State<AppDrawer> {
               ),
               child: Row(
                 children: <Widget>[
-                  themeProvider.isLightTheme!
+                  widget.player?.general.volume == 0
                       ? Icon(
-                          Icons.wb_sunny_rounded,
-                          size: 25,
-                        )
-                      : Icon(
-                          Icons.nights_stay,
-                          size: 25,
-                        ),
-                  SizedBox(width: 15),
-                  Text(
-                    "Change Theme",
-                    style: TextStyle(
-                      fontFamily: "Arvo",
-                      fontSize: 18,
-                    ),
-                  ),
-                  Spacer(),
-                  Switch.adaptive(
-                      value: themeProvider.isLightTheme!,
-                      onChanged: (bool value) async {
-                        await themeProvider.toggleThemeData();
-                        themeProvider.isLightTheme = value;
-                      }),
-                ],
-              ),
-            ),
-            Container(
-              height: 55,
-              margin: EdgeInsets.symmetric(
-                horizontal: 10,
-              ).copyWith(
-                bottom: 20,
-              ),
-              padding: EdgeInsets.symmetric(
-                horizontal: 20,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Theme.of(context).cardColor,
-              ),
-              child: Row(
-                children: <Widget>[
-                  isSwitchedFT!
-                      ? Icon(
-                          Icons.music_note,
-                          size: 25,
-                        )
-                      : Icon(
                           Icons.music_off,
                           size: 25,
+                        )
+                      : Icon(
+                          Icons.music_note,
+                          size: 25,
                         ),
                   SizedBox(width: 15),
                   Text(
-                    "Music Volume",
-                    style: TextStyle(
-                      fontFamily: "Arvo",
-                      fontSize: 18,
-                    ),
+                    "Change Audio",
                   ),
                   Spacer(),
-                  Switch.adaptive(
-                    value: isSwitchedFT!,
-                    onChanged: (bool value) {
-                      setState(() {
-                        isSwitchedFT!
-                            ? FlameAudio.bgm.pause()
-                            : FlameAudio.bgm.resume();
-
-                        isSwitchedFT = value;
-                        saveSwitchState(value);
-                        //switch works
-                      });
-                    },
-                  ),
                 ],
               ),
             ),
-            // Container(
-            //   height: 55,
-            //   margin: EdgeInsets.symmetric(
-            //     horizontal: 10,
-            //   ).copyWith(
-            //     bottom: 20,
-            //   ),
-            //   padding: EdgeInsets.symmetric(
-            //     horizontal: 20,
-            //   ),
-            //   decoration: BoxDecoration(
-            //     borderRadius: BorderRadius.circular(30),
-            //     color: Theme.of(context).cardColor,
-            //   ),
-            //   child: Row(
-            //     children: <Widget>[
-            //       isNoti!
-            //           ? Icon(
-            //               Icons.notifications_active_outlined,
-            //               size: 25,
-            //             )
-            //           : Icon(
-            //               Icons.notifications_off_outlined,
-            //               size: 25,
-            //             ),
-            //       SizedBox(width: 15),
-            //       Text(
-            //         "Message Volume",
-            //         style: TextStyle(
-            //           fontFamily: "Arvo",
-            //           fontSize: 18,
-            //         ),
-            //       ),
-            //       Spacer(),
-            //       Switch.adaptive(
-            //         value: isNoti!,
-            //         onChanged: (bool value) {
-            //           setState(() {
-            //             isNoti = value;
-            //             saveNotiState(value);
-            //             //switch works
-            //           });
-            //         },
-            //       ),
-            //     ],
-            //   ),
-            // ),
-            Container(
-              height: 55,
-              margin: EdgeInsets.symmetric(
-                horizontal: 10,
-              ).copyWith(
-                bottom: 20,
-              ),
-              padding: EdgeInsets.symmetric(
-                horizontal: 20,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Theme.of(context).cardColor,
-              ),
-              child: Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.check_circle_outline,
-                    size: 25,
-                  ),
-                  SizedBox(width: 15),
-                  Text(
-                    "Game Version",
-                    style: TextStyle(
-                      fontFamily: "Arvo",
-                      fontSize: 18,
-                    ),
-                  ),
-                  Spacer(),
-                  Text(
-                    _packageInfo.version,
-                    style: TextStyle(
-                      fontFamily: "Arvo",
-                      fontSize: 18,
-                    ),
-                  ),
-                ],
-              ),
+            Slider.adaptive(
+              min: 0.0,
+              max: 1.0,
+              value: widget.player?.general.volume ?? 0.5,
+              onChanged: (volume) {
+                widget.player?.setVolume(volume);
+                this.setState(() {});
+              },
             ),
+            Divider(),
             SizedBox(
-              height: 55,
+              height: 20,
             ),
-            // GestureDetector(
-            //   onTap: () async {
-            //     const url = 'https://smalldreams.space/privacy-policy/';
-            //     if (await canLaunch(url)) {
-            //       await launch(url);
-            //     } else {
-            //       throw 'Could not launch $url';
-            //     }
-            //   },
-            //   child: ProfileListItem(
-            //     icon: Icons.privacy_tip_outlined,
-            //     text: 'Privacy',
-            //   ),
-            // ),
-            // GestureDetector(
-            //   onTap: () async {
-            //     const url = 'https://smalldreams.space/terms-of-service/';
-            //     if (await canLaunch(url)) {
-            //       await launch(url);
-            //     } else {
-            //       throw 'Could not launch $url';
-            //     }
-            //   },
-            //   child: ProfileListItem(
-            //     icon: Icons.policy_outlined,
-            //     text: 'Terms of Service',
-            //   ),
-            // ),
-            // SizedBox(
-            //   height: 55,
-            // ),
             GestureDetector(
               onTap: () => showAlertDialog(context),
               child: Container(
@@ -579,8 +474,7 @@ class _AppDrawerState extends State<AppDrawer> {
       children: [
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-              primary: Theme.of(context).accentColor,
-              onPrimary: Theme.of(context).primaryColor),
+              primary: Colors.black, onPrimary: Theme.of(context).primaryColor),
           child: Text(
             "YES",
             style:
@@ -595,8 +489,7 @@ class _AppDrawerState extends State<AppDrawer> {
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-              primary: Theme.of(context).accentColor,
-              onPrimary: Theme.of(context).primaryColor),
+              primary: Colors.black, onPrimary: Theme.of(context).primaryColor),
           child: Text(
             "NO",
             style:
@@ -638,301 +531,165 @@ class _AppDrawerState extends State<AppDrawer> {
 }
 
 class AppDrawerMain extends StatefulWidget {
+  final player;
+  AppDrawerMain({Key? key, this.player});
   @override
   _AppDrawerState2 createState() => new _AppDrawerState2();
 }
 
 class _AppDrawerState2 extends State<AppDrawerMain> {
-  bool? isSwitchedFT = true;
-  bool? isNoti = true;
   @override
   void initState() {
     super.initState();
-    _initPackageInfo();
-    getSwitchValues();
-    getNotiValues();
+    getVolume();
   }
 
-  PackageInfo _packageInfo = PackageInfo(
-    appName: 'Unknown',
-    packageName: 'Unknown',
-    version: 'Unknown',
-    buildNumber: 'Unknown',
-  );
-  Future<void> _initPackageInfo() async {
-    final PackageInfo info = await PackageInfo.fromPlatform();
-    setState(() {
-      _packageInfo = info;
-    });
-  }
-
-  getSwitchValues() async {
-    isSwitchedFT = await getSwitchState();
+  double? vol = 0.5;
+  getVolume() async {
+    vol = await getVolumeState();
     setState(() {});
   }
 
-  Future<bool> saveSwitchState(bool value) async {
+  saveVolumeState(value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool("switchState", value);
-    return prefs.setBool("switchState", value);
+    prefs.setDouble("volValue", value);
   }
 
-  Future<bool?> getSwitchState() async {
+  getVolumeState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? isSwitchedFT = prefs.getBool("switchState");
-    print(isSwitchedFT);
+    double? vol = prefs.getDouble('volValue');
 
-    return isSwitchedFT;
-  }
-
-  getNotiValues() async {
-    isNoti = await getNotiState();
-    setState(() {});
-  }
-
-  Future<bool> saveNotiState(bool value) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool("notiState", value);
-    return prefs.setBool("notiState", value);
-  }
-
-  Future<bool?> getNotiState() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? isNoti = prefs.getBool("notiState");
-    print(isNoti);
-
-    return isNoti;
+    return vol;
   }
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-
-    return new Drawer(
-        child: Container(
-      color: Theme.of(context).primaryColor,
-      child: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            new DrawerHeader(
-              child: Center(
-                  child: Text(
-                tr("game_name"),
-                style: TextStyle(fontSize: 30, fontFamily: "Aleo"),
-              )),
-            ),
-            Container(
-              height: 55,
-              margin: EdgeInsets.symmetric(
-                horizontal: 10,
-              ).copyWith(
-                bottom: 20,
-              ),
-              padding: EdgeInsets.symmetric(
-                horizontal: 20,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Theme.of(context).cardColor,
-              ),
-              child: Row(
-                children: <Widget>[
-                  themeProvider.isLightTheme!
-                      ? Icon(
-                          Icons.wb_sunny_rounded,
-                          size: 25,
-                        )
-                      : Icon(
-                          Icons.nights_stay,
-                          size: 25,
-                        ),
-                  SizedBox(width: 15),
-                  Text(
-                    "Change Theme",
-                    style: TextStyle(
-                      fontFamily: "Arvo",
-                      fontSize: 18,
-                    ),
-                  ),
-                  Spacer(),
-                  Switch.adaptive(
-                      value: themeProvider.isLightTheme!,
-                      onChanged: (bool value) async {
-                        await themeProvider.toggleThemeData();
-                        themeProvider.isLightTheme = value;
-                      }),
-                ],
-              ),
-            ),
-            Container(
-              height: 55,
-              margin: EdgeInsets.symmetric(
-                horizontal: 10,
-              ).copyWith(
-                bottom: 20,
-              ),
-              padding: EdgeInsets.symmetric(
-                horizontal: 20,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Theme.of(context).cardColor,
-              ),
-              child: Row(
-                children: <Widget>[
-                  isSwitchedFT!
-                      ? Icon(
-                          Icons.music_note,
-                          size: 25,
-                        )
-                      : Icon(
-                          Icons.music_off,
-                          size: 25,
-                        ),
-                  SizedBox(width: 15),
-                  Text(
-                    "Music Volume",
-                    style: TextStyle(
-                      fontFamily: "Arvo",
-                      fontSize: 18,
-                    ),
-                  ),
-                  Spacer(),
-                  Switch.adaptive(
-                    value: isSwitchedFT!,
-                    onChanged: (bool value) {
-                      setState(() {
-                        isSwitchedFT!
-                            ? FlameAudio.bgm.pause()
-                            : FlameAudio.bgm.resume();
-
-                        isSwitchedFT = value;
-                        saveSwitchState(value);
-                        //switch works
-                      });
-                    },
-                  ),
-                ],
-              ),
-            ),
-            // Container(
-            //   height: 55,
-            //   margin: EdgeInsets.symmetric(
-            //     horizontal: 10,
-            //   ).copyWith(
-            //     bottom: 20,
-            //   ),
-            //   padding: EdgeInsets.symmetric(
-            //     horizontal: 20,
-            //   ),
-            //   decoration: BoxDecoration(
-            //     borderRadius: BorderRadius.circular(30),
-            //     color: Theme.of(context).cardColor,
-            //   ),
-            //   child: Row(
-            //     children: <Widget>[
-            //       isNoti!
-            //           ? Icon(
-            //               Icons.notifications_active_outlined,
-            //               size: 25,
-            //             )
-            //           : Icon(
-            //               Icons.notifications_off_outlined,
-            //               size: 25,
-            //             ),
-            //       SizedBox(width: 15),
-            //       Text(
-            //         "Message Volume",
-            //         style: TextStyle(
-            //           fontFamily: "Arvo",
-            //           fontSize: 18,
-            //         ),
-            //       ),
-            //       Spacer(),
-            //       Switch.adaptive(
-            //         value: isNoti!,
-            //         onChanged: (bool value) {
-            //           setState(() {
-            //             isNoti = value;
-            //             saveNotiState(value);
-            //             //switch works
-            //           });
-            //         },
-            //       ),
-            //     ],
-            //   ),
-            // ),
-            Container(
-              height: 55,
-              margin: EdgeInsets.symmetric(
-                horizontal: 10,
-              ).copyWith(
-                bottom: 20,
-              ),
-              padding: EdgeInsets.symmetric(
-                horizontal: 20,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Theme.of(context).cardColor,
-              ),
-              child: Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.check_circle_outline,
-                    size: 25,
-                  ),
-                  SizedBox(width: 15),
-                  Text(
-                    "Game Version",
-                    style: TextStyle(
-                      fontFamily: "Arvo",
-                      fontSize: 18,
-                    ),
-                  ),
-                  Spacer(),
-                  Text(
-                    _packageInfo.version,
-                    style: TextStyle(
-                      fontFamily: "Arvo",
-                      fontSize: 18,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            // SizedBox(
-            //   height: 55,
-            // ),
-            // GestureDetector(
-            //   onTap: () async {
-            //     const url = 'https://smalldreams.space/privacy-policy/';
-            //     if (await canLaunch(url)) {
-            //       await launch(url);
-            //     } else {
-            //       throw 'Could not launch $url';
-            //     }
-            //   },
-            //   child: ProfileListItem(
-            //     icon: Icons.privacy_tip_outlined,
-            //     text: 'Privacy',
-            //   ),
-            // ),
-            // GestureDetector(
-            //   onTap: () async {
-            //     const url = 'https://smalldreams.space/terms-of-service/';
-            //     if (await canLaunch(url)) {
-            //       await launch(url);
-            //     } else {
-            //       throw 'Could not launch $url';
-            //     }
-            //   },
-            //   child: ProfileListItem(
-            //     icon: Icons.policy_outlined,
-            //     text: 'Terms of Service',
-            //   ),
-            // ),
+    return new SizedBox(
+        child: Drawer(
+      child: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          colors: [
+            Colors.lightGreen,
+            Colors.green,
           ],
+        )),
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              new DrawerHeader(
+                child: Center(
+                  child: Text(
+                    tr("game_name"),
+                    style: TextStyle(
+                        fontSize: 45, fontFamily: "Aleo", color: Colors.white),
+                  ),
+                ),
+              ),
+              Card(
+                child: Container(
+                  width: MediaQuery.of(context).size.width / 2,
+                  height: 55,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20,
+                  ),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Colors.transparent),
+                  child: Row(
+                    children: <Widget>[
+                      vol == 0
+                          ? Icon(
+                              Icons.music_off,
+                              size: 35,
+                            )
+                          : Icon(
+                              Icons.music_note,
+                              size: 35,
+                            ),
+                      SizedBox(width: 15),
+                      Text(
+                        "CHANGE AUDIO",
+                        style: TextStyle(fontFamily: "Julee", fontSize: 28),
+                      ),
+                      Spacer(),
+                      SliderTheme(
+                        data: SliderTheme.of(context).copyWith(
+                          activeTrackColor: Colors.lightGreen,
+                          inactiveTrackColor: Colors.grey,
+                          thumbColor: Colors.green,
+                          thumbShape:
+                              RoundSliderThumbShape(enabledThumbRadius: 10.0),
+                          overlayShape:
+                              RoundSliderOverlayShape(overlayRadius: 10.0),
+                        ),
+                        child: Slider.adaptive(
+                          min: 0.0,
+                          max: 1.0,
+                          value: vol!,
+                          onChanged: (volume) {
+                            setState(() {
+                              widget.player?.setVolume(volume);
+                              vol = volume;
+                              saveVolumeState(volume);
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                height: 55,
+                padding: EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Colors.transparent),
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.face_outlined,
+                      size: 35,
+                    ),
+                    SizedBox(width: 15),
+                    Text(
+                      "CREDITS",
+                      style: TextStyle(fontFamily: "Julee", fontSize: 28),
+                    ),
+                    Spacer(),
+                    SliderTheme(
+                      data: SliderTheme.of(context).copyWith(
+                        activeTrackColor: Colors.green,
+                        inactiveTrackColor: Colors.red,
+                        thumbShape:
+                            RoundSliderThumbShape(enabledThumbRadius: 10.0),
+                        overlayShape:
+                            RoundSliderOverlayShape(overlayRadius: 10.0),
+                      ),
+                      child: Slider.adaptive(
+                        min: 0.0,
+                        max: 1.0,
+                        value: widget.player?.general.volume ?? 0.5,
+                        onChanged: (volume) {
+                          setState(() {
+                            widget.player?.setVolume(volume);
+                            vol = volume;
+                            saveVolumeState(volume);
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Divider(),
+            ],
+          ),
         ),
       ),
     ));

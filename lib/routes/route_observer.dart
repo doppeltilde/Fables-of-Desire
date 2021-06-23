@@ -1,3 +1,5 @@
+/// Copyright (c) 2019 @Ejabu and The SmallDreams Authors.
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,9 +15,10 @@ class MyRouteObserver extends RouteObserver {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     if (lastRoute.settings.name != null && lastRoute.settings.name != "/") {
       prefs.setString('last_route', lastRoute.settings.name!);
-    } else if (previousRoute != null && previousRoute.settings.name != "/") {
-      prefs.setString('previous_route', previousRoute.settings.name!);
     }
+    // else if (previousRoute != null && previousRoute.settings.name != "/") {
+    //  prefs.setString('previous_route', previousRoute.settings.name!);
+    // }
   }
 
   @override

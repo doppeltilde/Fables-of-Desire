@@ -1,33 +1,24 @@
-/*
+/// Copyright (c) 2021 Jona T. Feucht and The SmallDreams Authors.
 
-Copyright 2021 Jona Feucht & SmallDreams
-
-*/
-
+import 'package:desktop_window/desktop_window.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flame_audio/flame_audio.dart';
+import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:fablesofdesire/global/theme.dart';
 import 'package:fablesofdesire/routes/routes.dart';
-import 'package:provider/provider.dart';
-import 'package:path_provider/path_provider.dart' as pathProvider;
+import 'package:flutter/services.dart';
+import 'dart:io' show Platform;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  FlameAudio.bgm.initialize();
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    await DesktopWindow.setMinWindowSize(Size(1000, 700));
+  } else {}
 
-  final appDocumentDirectory =
-      await pathProvider.getApplicationDocumentsDirectory();
-
-  Hive.init(appDocumentDirectory.path);
-
-  final settings = await Hive.openBox('settings');
-  bool isLightTheme = settings.get('isLightTheme') ?? true;
-
-  runApp(
-    EasyLocalization(
+  SystemChrome.setPreferredOrientations(
+          [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight])
+      .then((_) {
+    runApp(EasyLocalization(
       saveLocale: true,
       supportedLocales: [
         Locale('en'),
@@ -35,12 +26,10 @@ void main() async {
         // Locale('fr'),
       ],
       path: 'assets/languages',
+      assetLoader: YamlAssetLoader(),
       fallbackLocale: Locale('en'),
       useOnlyLangCode: true,
-      child: ChangeNotifierProvider(
-        create: (_) => ThemeProvider(isLightTheme: isLightTheme),
-        child: Home(),
-      ),
-    ),
-  );
+      child: Home(),
+    ));
+  });
 }
