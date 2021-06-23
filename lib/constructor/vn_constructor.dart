@@ -18,6 +18,8 @@ class InterludeTextSound extends StatefulWidget {
     this.charImage,
     this.route,
     this.nextRoute,
+    this.switchFade,
+    this.opacity,
   );
 
   final String? a;
@@ -28,6 +30,8 @@ class InterludeTextSound extends StatefulWidget {
   final nextRoute;
   final characterText;
   final route;
+  final switchFade;
+  final opacity;
 
   @override
   _InterludeState createState() => _InterludeState();
@@ -73,8 +77,6 @@ class _InterludeState extends State<InterludeTextSound> {
     return speed;
   }
 
-  var switchFade = false;
-  double? opacity = 0.0;
   @override
   Widget build(BuildContext context) {
     getSpeed();
@@ -82,7 +84,7 @@ class _InterludeState extends State<InterludeTextSound> {
     double width = MediaQuery.of(context).size.width;
     return Builder(
       builder: (context) {
-        if (switchFade != false) {
+        if (widget.switchFade != false) {
           return Stack(
             fit: StackFit.expand,
             children: [
@@ -90,14 +92,13 @@ class _InterludeState extends State<InterludeTextSound> {
               AnimatedOpacity(
                 // If the widget is visible, animate to 0.0 (invisible).
                 // If the widget is hidden, animate to 1.0 (fully visible).
-                opacity: opacity!,
+                opacity: widget.opacity!,
                 duration: Duration(milliseconds: 300),
                 // The green box must be a child of the AnimatedOpacity widget.
                 child: Container(
                   width: double.infinity,
                   height: double.infinity,
-                  color: Colors.red,
-                  child: Text("$opacity"),
+                  color: Colors.black,
                 ),
               )
             ],
