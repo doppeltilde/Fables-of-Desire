@@ -207,7 +207,6 @@ class _InterludeState extends State<InterludeTextSound> {
                                     surfaceColor: Colors.white,
                                     curveType: CurveType.none,
                                     width: 700,
-
                                     //color: Colors.brown[400],
                                     color: Colors.red[300],
                                     customBorderRadius: BorderRadius.only(
@@ -228,7 +227,6 @@ class _InterludeState extends State<InterludeTextSound> {
                                         //     widget.nextText.nextQuestion();
                                         //   }
                                         // },
-
                                         animatedTexts: [
                                           TyperAnimatedText(
                                             widget.characterText,

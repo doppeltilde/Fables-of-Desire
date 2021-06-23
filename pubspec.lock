@@ -6,10 +6,10 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "2c3b0c2b651ab79ba02d12f39baffa298e30f4e1"
+      resolved-ref: e0e079cef28e0986dc796fab8e1c20a4b71fa100
       url: "git://github.com/jonafeucht/Animated-Text-Kit.git"
     source: git
-    version: "4.2.1"
+    version: "4.2.1+1"
   ansicolor:
     dependency: transitive
     description:
