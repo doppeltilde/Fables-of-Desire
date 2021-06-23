@@ -74,7 +74,7 @@ class NaokiText1 {
 
     Speech(
       characterName: m,
-      characterText: "Naoki...? Good morning!",
+      characterText: "Naoki...? /are/ Good morning!",
       mcImage: "mc_happy",
     ),
     Speech(
@@ -154,10 +154,9 @@ class NaokiText1 {
       mcImage: "mc_sad",
     ),
     Speech(
-      characterName: m,
-      characterText: "Who <i>are</i> you, huh...?",
-      mcImage: "mc_neutral",
-    ),
+        characterName: m,
+        characterText: "Who [i]are[/i] you, huh...?",
+        mcImage: "mc_neutral"),
     Speech(
       characterName: m,
       characterText: "You’re Naoki.",
@@ -2551,7 +2550,7 @@ class NaokiText15 {
     // todo bg room, night, no Naoki
     Speech(
       characterName: nar,
-      characterText: "<i>Thump, thump, thump!</i>",
+      characterText: "[i]Thump, thump, thump![/i]",
     ),
     Speech(
       characterName: nar,

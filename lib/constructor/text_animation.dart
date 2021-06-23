@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:math';
-import 'package:styled_text/styled_text.dart';
 import 'package:flutter/material.dart';
+import 'package:simple_rich_text/simple_rich_text.dart';
 
 // Copyright (c) 2018 Ayush Agarwal
 
@@ -46,28 +46,75 @@ abstract class AnimatedText {
 
   /// Utility method to create a styled [Text] widget using the [textAlign] and
   /// [textStyle], but you can specify the [data].
-  Widget textWidget(String text) =>
-      // Text(
-      //       data,
-      //       textAlign: textAlign,
-      //       style: textStyle,
-      //     );
-      StyledText(
-        text: text,
-        tags: {
-          'red': StyledTextTag(style: TextStyle(color: Colors.red)),
-          'orange': StyledTextTag(style: TextStyle(color: Colors.orange)),
-          'yellow': StyledTextTag(style: TextStyle(color: Colors.yellow)),
-          'green': StyledTextTag(style: TextStyle(color: Colors.green)),
-          'blue': StyledTextTag(style: TextStyle(color: Colors.blue)),
-          'indigo': StyledTextTag(style: TextStyle(color: Colors.indigo)),
-          'purple': StyledTextTag(style: TextStyle(color: Colors.purple)),
-          'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
-          'i': StyledTextTag(style: TextStyle(fontStyle: FontStyle.italic)),
+  Widget textWidget(String data) => Builder(
+        builder: (context) {
+          if (data.isNotEmpty) {
+            return SimpleRichText(
+              data,
+              logIt: false,
+              style: textStyle,
+              textAlign: textAlign,
+              textOverflow: TextOverflow.ellipsis,
+              maxLines: 5,
+              // pre: TextSpan(text: 'PRE', style: TextStyle(color: Colors.purple)),
+              // post: TextSpan(text: 'POST', style: TextStyle(color: Colors.purple)),
+            );
+          } else {
+            return SimpleRichText(
+              "...",
+              logIt: false,
+              style: textStyle,
+              textAlign: textAlign,
+              textOverflow: TextOverflow.ellipsis,
+              maxLines: 5,
+              // pre: TextSpan(text: 'PRE', style: TextStyle(color: Colors.purple)),
+              // post: TextSpan(text: 'POST', style: TextStyle(color: Colors.purple)),
+            );
+          }
         },
-        textAlign: textAlign,
-        style: textStyle,
       );
+
+  // Text(
+  //       data,
+  //       textAlign: textAlign,
+  //       style: textStyle,
+  //     );
+  // StyledText(
+  //   text: text,
+  //   tags: {
+  //     'red': StyledTextTag(style: TextStyle(color: Colors.red)),
+  //     'orange': StyledTextTag(style: TextStyle(color: Colors.orange)),
+  //     'yellow': StyledTextTag(style: TextStyle(color: Colors.yellow)),
+  //     'green': StyledTextTag(style: TextStyle(color: Colors.green)),
+  //     'blue': StyledTextTag(style: TextStyle(color: Colors.blue)),
+  //     'indigo': StyledTextTag(style: TextStyle(color: Colors.indigo)),
+  //     'purple': StyledTextTag(style: TextStyle(color: Colors.purple)),
+  //     'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+  //     'i': StyledTextTag(style: TextStyle(fontStyle: FontStyle.italic)),
+  //   },
+  //   textAlign: textAlign,
+  //   style: textStyle,
+  // );
+  // TextStyled(
+  //   textStyle:
+  //       TextStyle(color: Colors.black, fontFamily: "Mali", fontSize: 21),
+  // ).getRichText(data);
+  // Builder(builder: (context) {
+  //   if (data.contains('/') == true) {
+  //     return SuperRichText(
+  //       text: data.replaceAll(new RegExp("/"), ''),
+  //       textAlign: textAlign,
+  //       style: textStyle,
+  //     );
+  //   } else {
+  //     return
+  // SuperRichText(
+  //   text: data,
+  //   textAlign: textAlign,
+  //   style: textStyle,
+  // );
+  //   }
+  // });
 
   /// Widget showing the complete text (when animation is complete or paused).
   /// By default, it shows a Text widget, but this may be overridden.

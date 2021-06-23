@@ -231,7 +231,7 @@ class _InterludeState extends State<InterludeTextSound> {
                                             textStyle: TextStyle(
                                                 color: Colors.black,
                                                 fontFamily: "Mali",
-                                                fontSize: 22),
+                                                fontSize: 21),
                                             speed:
                                                 Duration(milliseconds: speed!),
                                           ),
@@ -243,57 +243,41 @@ class _InterludeState extends State<InterludeTextSound> {
                                     ),
                                   );
                                 } else {
-                                  return AnimatedTextKit(
-                                    animatedTexts: [
-                                      TyperAnimatedText(
-                                        widget.characterText,
-                                        textAlign: TextAlign.left,
-                                        textStyle: TextStyle(
-                                            color: Colors.black,
-                                            fontFamily: "Mali",
-                                            fontSize: 22),
-                                        speed: Duration(milliseconds: speed!),
+                                  return ClayContainer(
+                                    spread: 1,
+                                    surfaceColor: Colors.white,
+                                    curveType: CurveType.none,
+                                    width: 700,
+                                    color: Colors.black,
+                                    customBorderRadius: BorderRadius.only(
+                                      //Radius.circular(30),
+                                      bottomRight: Radius.circular(20),
+                                      topLeft: Radius.circular(20),
+                                      topRight: Radius.circular(20),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: width * 0.025,
+                                          vertical: height * 0.025),
+                                      child: AnimatedTextKit(
+                                        animatedTexts: [
+                                          TyperAnimatedText(
+                                            widget.characterText,
+                                            textAlign: TextAlign.left,
+                                            textStyle: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: "Mali",
+                                                fontSize: 22),
+                                            speed:
+                                                Duration(milliseconds: speed!),
+                                          ),
+                                        ],
+                                        displayFullTextOnTap: true,
+                                        isRepeatingAnimation: false,
+                                        key: ValueKey(widget.n),
                                       ),
-                                    ],
-                                    displayFullTextOnTap: true,
-                                    isRepeatingAnimation: false,
-                                    // key: ValueKey(widget.n),
+                                    ),
                                   );
-                                  // ClayContainer(
-                                  //   spread: 1,
-                                  //   surfaceColor: Colors.white,
-                                  //   curveType: CurveType.none,
-                                  //   width: 700,
-                                  //   color: Colors.black,
-                                  //   customBorderRadius: BorderRadius.only(
-                                  //     //Radius.circular(30),
-                                  //     bottomRight: Radius.circular(20),
-                                  //     topLeft: Radius.circular(20),
-                                  //     topRight: Radius.circular(20),
-                                  //   ),
-                                  //   child: Padding(
-                                  //     padding: EdgeInsets.symmetric(
-                                  //         horizontal: width * 0.025,
-                                  //         vertical: height * 0.025),
-                                  //     child: AnimatedTextKit(
-                                  //       animatedTexts: [
-                                  //         TyperAnimatedText(
-                                  //           widget.characterText,
-                                  //           textAlign: TextAlign.left,
-                                  //           textStyle: TextStyle(
-                                  //               color: Colors.black,
-                                  //               fontFamily: "Mali",
-                                  //               fontSize: 22),
-                                  //           speed:
-                                  //               Duration(milliseconds: speed!),
-                                  //         ),
-                                  //       ],
-                                  //       displayFullTextOnTap: true,
-                                  //       isRepeatingAnimation: false,
-                                  //       key: ValueKey(widget.n),
-                                  //     ),
-                                  //   ),
-                                  // );
                                 }
                               },
                             ),

@@ -24,11 +24,17 @@ dependencies:
   desktop_window: ^0.4.0
   provider: ^5.0.0
   clay_containers: ^0.3.2
+  simple_rich_text: ^2.0.49
+  # super_rich_text:
+  #   git:
+  #     url: git://github.com/Bestfastfire/super_rich_text.git
+  #     ref: master
+  #flutter_text_styled: ^0.5.1
   # styled_text: ^3.0.1
-  styled_text:
-    git:
-      url: git://github.com/jonafeucht/styled_text.git
-      ref: main
+  # styled_text:
+  #   git:
+  #     url: git://github.com/jonafeucht/styled_text.git
+  #     ref: main
   # animated_text_kit:
   #   git:
   #     url: git://github.com/jonafeucht/Animated-Text-Kit.git
