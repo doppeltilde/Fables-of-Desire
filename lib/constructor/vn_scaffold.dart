@@ -22,40 +22,67 @@ class _VNState extends State<VNScaffold> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () => getOnWillPop(),
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.black,
-        body: GestureDetector(
-          onTap: () {
-            setState(() {
-              if (widget.textSound.isFinished() == true) {
-                Future.delayed(Duration(seconds: 2), () {
-                  Navigator.of(context).pushNamed(widget.nextRoute);
-                });
-
-                switchFade = true;
-                Future.delayed(Duration(milliseconds: 300), () {
+      child: Builder(
+        builder: (context) {
+          if (switchFade != false) {
+            return Scaffold(
+              body: Stack(
+                fit: StackFit.expand,
+                children: [
+                  BackgroundBuilder(
+                    image: "assets/images/bgs/" + widget.bgImage + ".jpg",
+                  ),
+                  AnimatedOpacity(
+                    // If the widget is visible, animate to 0.0 (invisible).
+                    // If the widget is hidden, animate to 1.0 (fully visible).
+                    opacity: opacity!,
+                    duration: Duration(milliseconds: 300),
+                    // The green box must be a child of the AnimatedOpacity widget.
+                    child: Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      color: Colors.black,
+                    ),
+                  )
+                ],
+              ),
+            );
+          } else {
+            return Scaffold(
+              resizeToAvoidBottomInset: false,
+              backgroundColor: Colors.black,
+              body: GestureDetector(
+                onTap: () {
                   setState(() {
-                    opacity = 1.0;
+                    if (widget.textSound.isFinished() == true) {
+                      Future.delayed(Duration(seconds: 2), () {
+                        Navigator.of(context).pushNamed(widget.nextRoute);
+                      });
+
+                      switchFade = true;
+                      Future.delayed(Duration(milliseconds: 300), () {
+                        setState(() {
+                          opacity = 1.0;
+                        });
+                      });
+                    }
+                    widget.textSound.nextQuestion();
                   });
-                });
-              }
-              widget.textSound.nextQuestion();
-            });
-          },
-          child: InterludeTextSound(
-            "assets/images/bgs/" + widget.bgImage + ".jpg",
-            widget.textSound.getCharacterName(),
-            widget.textSound.getCharacterText(),
-            widget.textSound.getNumber(),
-            widget.textSound.getMCImage(),
-            widget.textSound.getCharImage(),
-            widget.route,
-            widget.nextRoute,
-            switchFade,
-            opacity,
-          ),
-        ),
+                },
+                child: InterludeTextSound(
+                  "assets/images/bgs/" + widget.bgImage + ".jpg",
+                  widget.textSound.getCharacterName(),
+                  widget.textSound.getCharacterText(),
+                  widget.textSound.getNumber(),
+                  widget.textSound.getMCImage(),
+                  widget.textSound.getCharImage(),
+                  widget.route,
+                  widget.nextRoute,
+                ),
+              ),
+            );
+          }
+        },
       ),
     );
   }
