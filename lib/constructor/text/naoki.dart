@@ -10,6 +10,8 @@ class Speech {
   final String? charImage;
   final String? sideCharImage;
   final String? cgImg;
+  final String? bgImage;
+  final String? bgmMusic;
 
   Speech({
     this.characterName,
@@ -19,6 +21,8 @@ class Speech {
     this.charImage,
     this.sideCharImage,
     this.cgImg,
+    this.bgImage,
+    this.bgmMusic,
   });
 }
 
@@ -161,7 +165,7 @@ class NaokiText1 {
     ),
     Speech(
         characterName: m,
-        characterText: "Who [i]are[/i] you, huh...?",
+        characterText: "Who /sare/ you, huh...?",
         mcImage: "mc_neutral"),
     Speech(
       characterName: m,
