@@ -32,7 +32,7 @@ class _TextSpeedState extends State<TextSpeed> {
     return speed;
   }
 
-  int speed = 10;
+  int speed = 25;
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -70,7 +70,7 @@ class _TextSpeedState extends State<TextSpeed> {
                     Icons.pause,
                     size: 35,
                   );
-                } else if (speed <= 50) {
+                } else if (speed <= 25) {
                   return Icon(
                     Icons.fast_forward,
                     size: 35,
@@ -106,12 +106,13 @@ class _TextSpeedState extends State<TextSpeed> {
                   divisions: 10,
                   label: "$speed ms",
                   min: 0,
-                  max: 100,
+                  max: 50,
                   value: speed.toDouble(),
                   onChanged: (fast) {
                     setState(() {
                       speed = fast.toInt();
                       saveSpeedState(fast.toInt());
+                      print(speed);
                       //saveVolumeState(volume);
                     });
                   },

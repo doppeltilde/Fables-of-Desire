@@ -2,7 +2,6 @@ import 'package:dart_vlc/dart_vlc.dart';
 import 'package:fablesofdesire/global/audio/game_audio.dart';
 import 'package:fablesofdesire/routes/homepage.dart';
 import 'package:flutter/material.dart';
-import 'package:salem/core/persist/splash.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io' show Platform;
 
@@ -64,13 +63,41 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     for (var i in images)
       precacheImage(AssetImage("assets/images/sprites/" + i + ".png"), context);
-
-    return SplashLoadingScreen(
-      bgColor: Colors.white,
-      opacity: 1.0,
-      imgDuration: 250,
-      splashImage: "assets/images/logo.png",
-    );
+    return Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(
+            child: Container(
+                child: SafeArea(
+                    child: SingleChildScrollView(
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+              Center(
+                child: Container(
+                  child: Column(
+                    children: <Widget>[
+                      AnimatedOpacity(
+                        opacity: opacity!,
+                        duration: Duration(milliseconds: 250),
+                        child: Center(
+                            child: Image.asset(
+                          "assets/images/logo.png",
+                          fit: BoxFit.cover,
+                          width: MediaQuery.of(context).size.width / 3,
+                        )),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ]))))));
+    // return SplashLoadingScreen(
+    //   bgColor: Colors.white,
+    //   opacity: 1.0,
+    //   imgDuration: 250,
+    //   splashImage: "assets/images/logo.png",
+    // );
   }
 
   @override
@@ -116,13 +143,14 @@ class _SplashScreenState extends State<SplashScreen> {
       sharedPreferences = sp;
       speed = sharedPreferences!.getInt("speedValue");
       if (speed == null) {
-        speed = 100;
+        speed = 25;
         persistSpeed(speed!);
       }
     });
 
     Future.delayed(const Duration(seconds: 3), () {
-      PersistNavigation.initSplash(context, HomePage.currentRoute);
+      initSplash();
+      //PersistNavigation.initSplash(context, HomePage.currentRoute);
     });
     Future.delayed(Duration(seconds: 1), () {
       setState(() {
@@ -158,5 +186,36 @@ class _SplashScreenState extends State<SplashScreen> {
       speed = value;
     });
     sharedPreferences?.setInt("speedValue", value);
+  }
+
+  Future<void> initSplash() async {
+    final prefs = await SharedPreferences.getInstance();
+    String? notHome = prefs.getString("notHome");
+    String? lastRoute = prefs.getString('last_route');
+    String? previousRoute = prefs.getString('previous_route');
+
+    if (lastRoute != null && lastRoute != '/') {
+      Navigator.pushReplacementNamed(context, lastRoute);
+    } else if (previousRoute != null && previousRoute != '/') {
+      Navigator.pushReplacementNamed(context, previousRoute);
+    } else {
+      Navigator.of(context).pushNamed(HomePage.currentRoute);
+    }
+
+    if (lastRoute != null ||
+        lastRoute != '/' ||
+        lastRoute != "/home" ||
+        previousRoute != "/home" ||
+        previousRoute != null ||
+        previousRoute != '/') {
+      if (Platform.isWindows ||
+          Platform.isLinux && GameAudioDesktop.playAudio.isPlaying == false) {
+        GameAudioDesktop.playAudio.play(notHome!);
+      } else {
+        if (GameAudio.bgm.isPlaying == false) {
+          GameAudio.bgm.play(notHome!);
+        }
+      }
+    }
   }
 }

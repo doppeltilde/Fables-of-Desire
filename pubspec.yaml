@@ -23,7 +23,7 @@ dependencies:
   dart_vlc: ^0.0.7
   desktop_window: ^0.4.0
   provider: ^5.0.0
-  salem: ^0.0.3
+  clay_containers: ^0.3.2
 
 dependency_overrides:
   animated_text_kit:

@@ -44,7 +44,7 @@ class _BaseScreenState extends State<HomePage2> {
   void initState() {
     super.initState();
 
-    GlobalAudio.playAudio.getBGM("The_world_of_peace-");
+    GlobalAudio.playAudio.getBGM("The_world_of_peace");
 
     Future.delayed(Duration(seconds: 1), () {
       setState(() {

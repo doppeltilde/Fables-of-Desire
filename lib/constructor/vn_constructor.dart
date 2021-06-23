@@ -47,7 +47,6 @@ class _InterludeState extends State<InterludeTextSound> {
             _name = prefValue.getString('name') ?? 'MC';
           })
         });
-    getSpeed();
   }
 
   Future<Null> getSharedPrefs() async {
@@ -76,6 +75,7 @@ class _InterludeState extends State<InterludeTextSound> {
 
   @override
   Widget build(BuildContext context) {
+    getSpeed();
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Stack(
@@ -195,7 +195,8 @@ class _InterludeState extends State<InterludeTextSound> {
                           // ),
                           Container(
                             padding: EdgeInsets.symmetric(vertical: 10),
-
+                            constraints:
+                                BoxConstraints(minWidth: 100, minHeight: 100),
                             width: MediaQuery.of(context).size.width / 2.4,
                             child: Opacity(
                               opacity: 0.8,
@@ -206,6 +207,7 @@ class _InterludeState extends State<InterludeTextSound> {
                                     surfaceColor: Colors.white,
                                     curveType: CurveType.none,
                                     width: 700,
+
                                     //color: Colors.brown[400],
                                     color: Colors.red[300],
                                     customBorderRadius: BorderRadius.only(
@@ -219,6 +221,14 @@ class _InterludeState extends State<InterludeTextSound> {
                                           horizontal: width * 0.025,
                                           vertical: height * 0.025),
                                       child: AnimatedTextKit(
+                                        // todo auto text
+                                        // onNextBeforePause: (_, isLast) {
+                                        //   if (isLast) {
+
+                                        //     widget.nextText.nextQuestion();
+                                        //   }
+                                        // },
+
                                         animatedTexts: [
                                           TyperAnimatedText(
                                             widget.characterText,
@@ -328,7 +338,7 @@ class _InterludeState extends State<InterludeTextSound> {
                             //                   color: Colors.black,
                             //                   fontFamily: "Aleo",
                             //                   fontSize: 18),
-                            //               speed: Duration(milliseconds: speed!),
+                            //               speed: Duration(milliseconds: isFinished ? 0 : speed!),),
                             //             ),
                             //           ],
                             //           displayFullTextOnTap: true,
