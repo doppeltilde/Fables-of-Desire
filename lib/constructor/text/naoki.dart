@@ -2551,14 +2551,12 @@ class NaokiText15 {
     // todo bg room, night, no Naoki
     Speech(
       characterName: nar,
-      characterText: "*Thump, thump, thump!*",
-      mcImage: "transparent",
+      characterText: "<i>Thump, thump, thump!</i>",
     ),
     Speech(
       characterName: nar,
       characterText:
           "I startle to sit up in my bed as footsteps rush to my door.",
-      mcImage: "transparent",
     ),
     Speech(
       characterName: m,

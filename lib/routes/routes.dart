@@ -21,6 +21,7 @@ import 'package:fablesofdesire/screens/act2/naoki/naoki6.dart';
 import 'package:fablesofdesire/screens/act2/naoki/naoki7.dart';
 import 'package:fablesofdesire/screens/act2/naoki/naoki8.dart';
 import 'package:fablesofdesire/screens/act2/naoki/naoki9.dart';
+import 'package:fablesofdesire/screens/act2/naoki/naoki_act2_chapters.dart';
 import 'package:fablesofdesire/screens/test/chapter1.dart';
 import 'package:fablesofdesire/screens/test/chapter2.dart';
 import 'package:fablesofdesire/screens/intro.dart';
@@ -66,6 +67,9 @@ class Home extends StatelessWidget {
           return VN2();
         },
         // todo: here Naoki routes
+        "/naokiroutelists": (_) {
+          return NaokiRouteLists();
+        },
         "/naoki1": (_) {
           return Naoki1();
         },

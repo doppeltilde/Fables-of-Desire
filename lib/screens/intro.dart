@@ -158,7 +158,7 @@ class _Intro extends State<Intro> {
                                         onPressed: () {
                                           GlobalAudio.playAudio.stopAudio();
                                           Navigator.of(context)
-                                              .pushNamed('/naoki1');
+                                              .pushNamed('/naokiroutelists');
                                           // Navigator.push(
                                           //   context,
                                           //   MaterialPageRoute(

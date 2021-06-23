@@ -27,7 +27,6 @@ class _VNState extends State<VNScaffold> {
           if (switchFade != false) {
             return Scaffold(
               body: Stack(
-                fit: StackFit.expand,
                 children: [
                   BackgroundBuilder(
                     image: "assets/images/bgs/" + widget.bgImage + ".jpg",
@@ -43,7 +42,7 @@ class _VNState extends State<VNScaffold> {
                       height: double.infinity,
                       color: Colors.black,
                     ),
-                  )
+                  ),
                 ],
               ),
             );
