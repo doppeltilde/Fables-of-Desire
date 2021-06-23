@@ -9,15 +9,24 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io' show Platform;
 
 class InterludeTextSound extends StatefulWidget {
-  InterludeTextSound(this.bgImage, this.a, this.q, this.n, this.charImage,
-      this.route, this.nextRoute);
+  InterludeTextSound(
+    this.bgImage,
+    this.a,
+    this.characterText,
+    this.n,
+    this.mcImage,
+    this.charImage,
+    this.route,
+    this.nextRoute,
+  );
 
   final String? a;
   final bgImage;
+  final mcImage;
   final charImage;
   final int n;
   final nextRoute;
-  final String? q;
+  final characterText;
   final route;
 
   @override
@@ -77,7 +86,7 @@ class _InterludeState extends State<InterludeTextSound> {
         Builder(
           builder: (BuildContext context) {
             if (widget.a == "MC" || widget.a == "Narrator") {
-              return ImageBuilderMC(image: widget.charImage);
+              return ImageBuilderMC(image: widget.mcImage);
             } else {
               return ImageBuilder(image: widget.charImage);
             }
@@ -95,7 +104,7 @@ class _InterludeState extends State<InterludeTextSound> {
                   children: <Widget>[
                     Builder(
                       builder: (context) {
-                        if (widget.a! == "MC") {
+                        if (widget.a! == "MC" || widget.a == "Narrator") {
                           return Opacity(
                             opacity: 0.8,
                             child: Card(
@@ -186,6 +195,7 @@ class _InterludeState extends State<InterludeTextSound> {
                           // ),
                           Container(
                             padding: EdgeInsets.symmetric(vertical: 10),
+
                             width: MediaQuery.of(context).size.width / 2.4,
                             child: Opacity(
                               opacity: 0.8,
@@ -211,7 +221,7 @@ class _InterludeState extends State<InterludeTextSound> {
                                       child: AnimatedTextKit(
                                         animatedTexts: [
                                           TyperAnimatedText(
-                                            widget.q!,
+                                            widget.characterText,
                                             textAlign: TextAlign.left,
                                             textStyle: TextStyle(
                                                 color: Colors.black,
@@ -245,7 +255,7 @@ class _InterludeState extends State<InterludeTextSound> {
                                       child: AnimatedTextKit(
                                         animatedTexts: [
                                           TyperAnimatedText(
-                                            widget.q!,
+                                            widget.characterText,
                                             textAlign: TextAlign.left,
                                             textStyle: TextStyle(
                                                 color: Colors.black,
@@ -282,7 +292,7 @@ class _InterludeState extends State<InterludeTextSound> {
                                       child: AnimatedTextKit(
                                         animatedTexts: [
                                           TyperAnimatedText(
-                                            widget.q!,
+                                            widget.characterText,
                                             textAlign: TextAlign.left,
                                             textStyle: TextStyle(
                                                 color: Colors.black,
@@ -466,7 +476,7 @@ class _InterludeState extends State<InterludeTextSound> {
                                             child: AnimatedTextKit(
                                               animatedTexts: [
                                                 TyperAnimatedText(
-                                                  widget.q!,
+                                                  widget.characterText,
                                                   textAlign: TextAlign.left,
                                                   textStyle: TextStyle(
                                                       color: Colors.black,
@@ -591,10 +601,18 @@ class _ImageBuilderState extends State<ImageBuilder> {
             SizedBox(
               height: 50,
             ),
-            Image.asset(
-              "assets/images/sprites/" + widget.image! + ".png",
-              fit: BoxFit.cover,
-              height: MediaQuery.of(context).size.height / 1,
+            Builder(
+              builder: (context) {
+                if (widget.image != null) {
+                  return Image.asset(
+                    "assets/images/sprites/" + widget.image! + ".png",
+                    fit: BoxFit.cover,
+                    height: MediaQuery.of(context).size.height / 1,
+                  );
+                } else {
+                  return SizedBox.shrink();
+                }
+              },
             )
           ],
         )
@@ -637,34 +655,40 @@ class _ImageBuilderMCState extends State<ImageBuilderMC> {
       builder: (context) {
         if (height < 700) {
           return Align(
-            key: UniqueKey(),
-            alignment: Alignment.bottomRight,
-            child: AnimatedSwitcher(
-              duration: Duration(milliseconds: 0),
-              child: Image.asset(
-                "assets/images/sprites/" + widget.image! + ".png",
-                fit: BoxFit.cover,
-                height: MediaQuery.of(context).size.height / 1.4,
-                // key: UniqueKey(),
-                gaplessPlayback: true,
-              ),
-            ),
-          );
+              key: UniqueKey(),
+              alignment: Alignment.bottomRight,
+              child: Builder(
+                builder: (context) {
+                  if (widget.image != null) {
+                    return Image.asset(
+                      "assets/images/sprites/" + widget.image! + ".png",
+                      fit: BoxFit.cover,
+                      height: MediaQuery.of(context).size.height / 1.4,
+                      gaplessPlayback: true,
+                    );
+                  } else {
+                    return SizedBox.shrink();
+                  }
+                },
+              ));
         } else {
           return Align(
-            key: UniqueKey(),
-            alignment: Alignment.bottomRight,
-            child: AnimatedSwitcher(
-              duration: Duration(milliseconds: 0),
-              child: Image.asset(
-                "assets/images/sprites/" + widget.image! + ".png",
-                fit: BoxFit.cover,
-                height: MediaQuery.of(context).size.height / 2,
-                //key: UniqueKey(),
-                gaplessPlayback: true,
-              ),
-            ),
-          );
+              key: UniqueKey(),
+              alignment: Alignment.bottomRight,
+              child: Builder(
+                builder: (context) {
+                  if (widget.image != null) {
+                    return Image.asset(
+                      "assets/images/sprites/" + widget.image! + ".png",
+                      fit: BoxFit.cover,
+                      height: MediaQuery.of(context).size.height / 2,
+                      gaplessPlayback: true,
+                    );
+                  } else {
+                    return SizedBox.shrink();
+                  }
+                },
+              ));
         }
       },
     );

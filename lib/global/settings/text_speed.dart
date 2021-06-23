@@ -32,7 +32,7 @@ class _TextSpeedState extends State<TextSpeed> {
     return speed;
   }
 
-  int speed = 50;
+  int speed = 10;
   @override
   Widget build(BuildContext context) {
     return Column(children: [

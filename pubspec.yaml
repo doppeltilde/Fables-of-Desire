@@ -15,7 +15,6 @@ dependencies:
   url_launcher: ^6.0.6
   share: ^2.0.4
   package_info: ^2.0.2
-  animated_text_kit: ^4.2.1
   flutter_launcher_icons: ^0.9.0
   easy_localization: ^3.0.0
   easy_localization_loader: ^1.0.0
@@ -25,6 +24,12 @@ dependencies:
   desktop_window: ^0.4.0
   provider: ^5.0.0
   salem: ^0.0.3
+
+dependency_overrides:
+  animated_text_kit:
+    git:
+      url: git://github.com/jonafeucht/Animated-Text-Kit.git
+      ref: master
 
 flutter_icons:
   android: "launcher_icon" 

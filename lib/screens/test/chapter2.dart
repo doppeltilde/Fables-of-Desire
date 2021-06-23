@@ -12,7 +12,7 @@ class VN2 extends StatefulWidget {
 class _VNState extends State<VN2> {
   static const route = "/2";
   static const nextRoute = "/1";
-  TextConstructor1 textSound = TextConstructor1();
+  final textSound = TextConstructor1();
 
   @override
   void initState() {
