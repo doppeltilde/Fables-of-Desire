@@ -44,7 +44,10 @@ class _VNState extends State<VNScaffold> {
                 onTap: () {
                   setState(() {
                     if (widget.textSound.isFinished() == true) {
-                      Navigator.of(context).pushNamed(widget.nextRoute);
+                      Future.delayed(Duration(seconds: 3), () {
+                        Navigator.of(context).pushNamed(widget.nextRoute);
+                      });
+
                       fadeIn = true;
                     }
                     widget.textSound.nextQuestion();
