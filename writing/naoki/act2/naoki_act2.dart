@@ -1,5 +1,5 @@
 // Fables of Desire - Naoki Route
-//Copyright (c) 2021 Destini Islands and The SmallDreams Authors.
+// Copyright (c) 2021 Destini Islands and The SmallDreams Authors.
 
 class Speech {
   /// Needs better, more clean code focused names!
@@ -127,7 +127,6 @@ class NaokiText1 {
       characterName: nar,
       characterText:
           "/Early rays of sunlight brighten curious gray irises but I can see eyebags under them./",
-      mcImage: "transparent",
     ),
     Speech(
       characterName: m,
@@ -172,13 +171,12 @@ class NaokiText1 {
       characterName: n,
       characterText:
           "My appearance. My thoughts. The sound of my voice. Why this?",
-      mcImage: "transparent",
+      mcImage: "naoki_sad",
     ),
     Speech(
       characterName: nar,
       characterText:
-          "I stand at the entrance of his room, considering the weight of his question.",
-      mcImage: "transparent",
+          "/I stand at the entrance of his room, considering the weight of his question./",
     ),
     Speech(
       characterName: nar,
@@ -197,7 +195,7 @@ class NaokiText1 {
     Speech(
       characterName: n,
       characterText: "But…",
-      mcImage: "transparent",
+      mcImage: "naoki_sad",
     ),
     Speech(
       characterName: m,
@@ -239,12 +237,12 @@ class NaokiText1 {
     Speech(
       characterName: m,
       characterText: "I think seeing everything will help you find your place.",
-      mcImage: "transparent",
+      mcImage: "mc_neutral",
     ),
     Speech(
       characterName: n,
       characterText: "You want to show me the mountain?",
-      mcImage: "transparent",
+      mcImage: "naoki_neutral",
     ),
     Speech(
       characterName: n,
@@ -260,7 +258,7 @@ class NaokiText1 {
       characterName: m,
       characterText:
           "I’d like to show you the mountain and the temple from /my/ point of view.",
-      mcImage: "transparent",
+      mcImage: "mc_neutral",
     ),
     Speech(
       characterName: n,
@@ -270,14 +268,14 @@ class NaokiText1 {
     Speech(
       characterName: nar,
       characterText:
-          "I extend my hand to him, but it takes Naoki a moment to understand what I want.",
-      mcImage: "transparent",
+          "/I extend my hand to him, but it takes Naoki a moment to understand what I want./",
     ),
     Speech(
       characterName: nar,
       characterText:
-          "The coolness of his hand settles in mine as I excitedly hurry to get to work.",
-      mcImage: "transparent",
+          "/The coolness of his hand settles in mine as I excitedly hurry to get to work./",
+      mcImage: "mc_blush",
+      sideCharImage: "naoki_happy",
     ),
     // TODO: bgm music fade
   ];
@@ -334,7 +332,7 @@ class NaokiText2 {
       characterName: n,
       characterText:
           "Where are we going? Where is this? Why are the ceilings so high?",
-      mcImage: "transparent",
+      mcImage: "naoki_neutral",
     ),
     Speech(
       characterName: m,
@@ -344,7 +342,7 @@ class NaokiText2 {
     Speech(
       characterName: nar,
       characterText:
-          "Naoki looks up to the overpass ceiling and uses his free hand to point at the beam.",
+          "/Naoki looks up to the overpass ceiling and uses his free hand to point at the beam./",
       mcImage: "mc_neutral",
     ),
     Speech(
@@ -597,7 +595,7 @@ class NaokiText4 {
     // TODO: bg Outdoor pathway, day
     Speech(
       characterName: n,
-      characterText: "MC. I am prepared.",
+      characterText: "Okay, I'm prepared.",
       sideCharImage: "naoki_blush",
     ),
     Speech(
@@ -686,8 +684,12 @@ class NaokiText5 {
     return "Flowing_season";
   }
 
+  // TODO: bg pottery room, day
+  String? getBG() {
+    return "1710heian08_19201080";
+  }
+
   List<Speech> textBank = [
-    // TODO: bg pottery room, day
     Speech(
       characterName: m,
       characterText: "Here you go. Drink this, please.",
