@@ -67,7 +67,6 @@ class _SettingsState extends State<Credits>
           ),
         ),
         child: Scaffold(
-            //   appBar: appbar(context) as PreferredSizeWidget?,
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
             body: Stack(children: <Widget>[

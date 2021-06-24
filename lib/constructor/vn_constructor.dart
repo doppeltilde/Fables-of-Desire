@@ -9,25 +9,27 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io' show Platform;
 
 class InterludeTextSound extends StatefulWidget {
-  InterludeTextSound(
+  InterludeTextSound({
     this.bgImage,
-    this.a,
+    this.characterName,
     this.characterText,
     this.n,
     this.mcImage,
     this.sideCharImage,
     this.route,
     this.nextRoute,
-  );
+    this.nextText,
+  });
 
-  final String? a;
+  final String? characterName;
   final bgImage;
   final String? mcImage;
   final String? sideCharImage;
-  final int n;
+  final int? n;
   final nextRoute;
   final characterText;
   final route;
+  final nextText;
 
   @override
   _InterludeState createState() => _InterludeState();
@@ -82,14 +84,15 @@ class _InterludeState extends State<InterludeTextSound> {
       fit: StackFit.expand,
       children: [
         BackgroundBuilder(image: widget.bgImage),
-        // Character here
+        // Character Image here
         Builder(
           builder: (BuildContext context) {
             if (widget.mcImage != null && widget.sideCharImage != null) {
               return ImageBuilderMultiple(
                   mcImage: widget.mcImage, sideCharImage: widget.sideCharImage);
             } else {
-              if (widget.a == "MC" || widget.a == "Narrator") {
+              if (widget.characterName == "MC" ||
+                  widget.characterName == "Narrator") {
                 return ImageBuilderMC(image: widget.mcImage);
               } else {
                 return ImageBuilder(image: widget.sideCharImage);
@@ -109,14 +112,18 @@ class _InterludeState extends State<InterludeTextSound> {
                   children: <Widget>[
                     Builder(
                       builder: (context) {
-                        if (widget.a! == "MC" || widget.a == "Narrator") {
-                          return Opacity(
-                            opacity: 0.8,
-                            child: Card(
-                              color: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
+                        if (widget.characterName == "MC" ||
+                            widget.characterName == "Narrator") {
+                          return Align(
+                            alignment: Alignment.center,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.7),
+                                  border: Border.all(
+                                    color: Colors.transparent,
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20))),
                               child: Padding(
                                 padding: EdgeInsets.symmetric(
                                     vertical: 2, horizontal: 15),
@@ -132,23 +139,23 @@ class _InterludeState extends State<InterludeTextSound> {
                             ),
                           );
                         } else {
-                          return Opacity(
-                            opacity: 0.8,
-                            child: Card(
-                              color: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 2, horizontal: 15),
-                                child: Text(
-                                  widget.a!,
-                                  style: TextStyle(
-                                    fontFamily: "Julee",
-                                    fontSize: 30,
-                                    color: Colors.black,
-                                  ),
+                          return Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.7),
+                                border: Border.all(
+                                  color: Colors.transparent,
+                                ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20))),
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 2, horizontal: 15),
+                              child: Text(
+                                widget.characterName!,
+                                style: TextStyle(
+                                  fontFamily: "Julee",
+                                  fontSize: 30,
+                                  color: Colors.black,
                                 ),
                               ),
                             ),
@@ -202,8 +209,8 @@ class _InterludeState extends State<InterludeTextSound> {
                             opacity: 0.8,
                             child: Builder(
                               builder: (context) {
-                                if (widget.a! == "MC" ||
-                                    widget.a == "Narrator") {
+                                if (widget.characterName == "MC" ||
+                                    widget.characterName == "Narrator") {
                                   return ClayContainer(
                                     spread: 1,
                                     surfaceColor: Colors.white,
@@ -222,13 +229,6 @@ class _InterludeState extends State<InterludeTextSound> {
                                           horizontal: width * 0.025,
                                           vertical: height * 0.025),
                                       child: AnimatedTextKit(
-                                        // todo auto text
-                                        // onNextBeforePause: (_, isLast) {
-                                        //   if (isLast) {
-
-                                        //     widget.nextText.nextQuestion();
-                                        //   }
-                                        // },
                                         animatedTexts: [
                                           TyperAnimatedText(
                                             widget.characterText,
@@ -363,7 +363,7 @@ class _InterludeState extends State<InterludeTextSound> {
                     children: [
                       Builder(
                         builder: (context) {
-                          if (widget.a! == "MC") {
+                          if (widget.characterName == "MC") {
                             return Opacity(
                               opacity: 0.8,
                               child: Card(
@@ -397,7 +397,7 @@ class _InterludeState extends State<InterludeTextSound> {
                                   padding: EdgeInsets.symmetric(
                                       vertical: 2, horizontal: 15),
                                   child: Text(
-                                    widget.a!,
+                                    widget.characterName!,
                                     style: TextStyle(
                                       fontFamily: "Julee",
                                       fontSize: 21,

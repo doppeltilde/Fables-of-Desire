@@ -18,7 +18,7 @@ class _VNState extends State<VN2> {
   @override
   void initState() {
     super.initState();
-    GlobalAudio.playAudio.getBGM("dankengine");
+    GlobalAudio.playAudio.getBGM("summercloud");
     Future.delayed(const Duration(seconds: 5), () {
       if (this.mounted) {
         setState(() {

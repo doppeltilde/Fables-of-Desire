@@ -1,8 +1,5 @@
-import 'dart:io';
-
-import 'package:dart_vlc/dart_vlc.dart';
 import 'package:fablesofdesire/constructor/vn_scaffold.dart';
-import 'package:fablesofdesire/global/audio/game_audio.dart';
+import 'package:fablesofdesire/global/audio/global_audio.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:fablesofdesire/text/vn_text.dart';
 import 'package:flutter/material.dart';
@@ -18,17 +15,8 @@ class _VNState extends State<VN1> {
   final textSound = TextConstructor1();
 
   @override
-  void didChangeDependencies() async {
-    if (Platform.isWindows || Platform.isLinux) {
-      super.didChangeDependencies();
-      GameAudioDesktop.playAudio.player = Player(
-        id: 0,
-      );
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
+    GlobalAudio.playAudio.getBGM("thousandyearoldforest");
     return WillPopScope(
       onWillPop: () => getOnWillPop(),
       child: VNScaffold(
