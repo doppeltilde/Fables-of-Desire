@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:fablesofdesire/constructor/vn_constructor.dart';
+import 'package:fablesofdesire/global/logical_keyboard.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +20,44 @@ class _VNState extends State<VNScaffold> {
   var switchFade = false;
   double? opacity = 0.0;
   double? opacityIntro = 1.0;
+
+  void _incrementCounter() {
+    setState(() {
+      if (widget.textSound.isFinished() == true) {
+        Future.delayed(Duration(seconds: 2), () {
+          Navigator.of(context).pushNamed(widget.nextRoute);
+        });
+
+        switchFade = true;
+        Future.delayed(Duration(milliseconds: 300), () {
+          setState(() {
+            opacity = 1.0;
+          });
+        });
+      } else {
+        widget.textSound.nextQuestion();
+      }
+    });
+  }
+
+  void _decrementCounter() {
+    setState(() {
+      if (widget.textSound.isFinished() == true) {
+        Future.delayed(Duration(seconds: 2), () {
+          Navigator.of(context).pushNamed(widget.nextRoute);
+        });
+
+        switchFade = true;
+        Future.delayed(Duration(milliseconds: 300), () {
+          setState(() {
+            opacity = 1.0;
+          });
+        });
+      } else {
+        widget.textSound.nextQuestion();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,36 +115,42 @@ class _VNState extends State<VNScaffold> {
                 ),
               );
             } else {
-              return Scaffold(
-                resizeToAvoidBottomInset: false,
-                backgroundColor: Colors.black,
-                body: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      if (widget.textSound.isFinished() == true) {
-                        Future.delayed(Duration(seconds: 2), () {
-                          Navigator.of(context).pushNamed(widget.nextRoute);
-                        });
-
-                        switchFade = true;
-                        Future.delayed(Duration(milliseconds: 300), () {
-                          setState(() {
-                            opacity = 1.0;
+              return CounterShortcuts(
+                onIncrementDetected: _incrementCounter,
+                onDecrementDetected: _decrementCounter,
+                child: Scaffold(
+                  resizeToAvoidBottomInset: false,
+                  backgroundColor: Colors.black,
+                  body: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        if (widget.textSound.isFinished() == true) {
+                          Future.delayed(Duration(seconds: 2), () {
+                            Navigator.of(context).pushNamed(widget.nextRoute);
                           });
-                        });
-                      }
-                      widget.textSound.nextQuestion();
-                    });
-                  },
-                  child: InterludeTextSound(
-                    "assets/images/bgs/" + widget.bgImage + ".jpg",
-                    widget.textSound.getCharacterName(),
-                    widget.textSound.getCharacterText(),
-                    widget.textSound.getNumber(),
-                    widget.textSound.getMCImage(),
-                    widget.textSound.getSideCharImage(),
-                    widget.route,
-                    widget.nextRoute,
+
+                          switchFade = true;
+                          Future.delayed(Duration(milliseconds: 300), () {
+                            setState(() {
+                              opacity = 1.0;
+                            });
+                          });
+                        } else {
+                          widget.textSound.nextQuestion();
+                        }
+                      });
+                    },
+                    child: InterludeTextSound(
+                      bgImage: "assets/images/bgs/" + widget.bgImage + ".jpg",
+                      characterName: widget.textSound.getCharacterName(),
+                      characterText: widget.textSound.getCharacterText(),
+                      n: widget.textSound.getNumber(),
+                      mcImage: widget.textSound.getMCImage(),
+                      sideCharImage: widget.textSound.getSideCharImage(),
+                      route: widget.route,
+                      nextRoute: widget.nextRoute,
+                      nextText: widget.textSound,
+                    ),
                   ),
                 ),
               );
