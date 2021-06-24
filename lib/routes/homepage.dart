@@ -1,466 +1,246 @@
-// Primary
-import 'package:just_audio/just_audio.dart';
-import 'package:universal_io/io.dart';
-import 'dart:math';
-
-import 'package:fablesofdesire/global/globals.dart';
-import 'package:fablesofdesire/global/setings.dart';
-import 'package:flame_audio/flame_audio.dart';
-import 'package:flutter/material.dart';
+/// Copyright (c) 2021 Jona T. Feucht and The SmallDreams Authors.
+import 'package:dart_vlc/dart_vlc.dart';
+import 'package:fablesofdesire/global/audio/game_audio.dart';
+import 'package:fablesofdesire/global/audio/global_audio.dart';
+import 'package:fablesofdesire/global/credits.dart';
+import 'package:fablesofdesire/global/will_pop.dart';
+import 'package:fablesofdesire/routes/load_game.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:audio_session/audio_session.dart';
+import 'dart:io' show Platform;
+import 'package:fablesofdesire/global/setings.dart';
+import 'package:flutter/material.dart';
 
+/// Main Menu
+/// Point the splash screen here
 class HomePage extends StatefulWidget {
+  static const currentRoute = "/home";
   @override
   _WildfyreState createState() => _WildfyreState();
 }
 
 class _WildfyreState extends State<HomePage> {
-  late AudioPlayer _player;
-  final _playlist = ConcatenatingAudioSource(children: [
-    AudioSource.uri(
-      Uri.parse(
-          "https://starhelix.space/wp-content/uploads/2021/04/thousandyearoldforest.mp3"),
-    ),
-  ]);
-  static const int _startingPageId = 0;
-  bool? isSwitchedFT;
-  int selectedPageId = _startingPageId;
-  TabController? tabscon;
-  final controller = PageController(
-    initialPage: 0,
-  );
+  bool isLightTheme = true;
+
+  double? opacity = 0.0;
+
+  SharedPreferences? sharedPreferences;
+  String? notHome;
+  @override
   void initState() {
     super.initState();
-    getSharedPrefs();
-    _player = AudioPlayer();
-    _player.play();
-    _player.setLoopMode(LoopMode.one);
-    _init();
-  }
 
-  Future<void> _init() async {
-    final session = await AudioSession.instance;
-    await session.configure(AudioSessionConfiguration.speech());
-    // Listen to errors during playback.
-    _player.playbackEventStream.listen((event) {},
-        onError: (Object e, StackTrace stackTrace) {
-      print('A stream error occurred: $e');
+    GlobalAudio.playAudio.getBGM("The_world_of_peace");
+
+    Future.delayed(Duration(seconds: 1), () {
+      setState(() {
+        opacity = 1.0;
+      });
     });
-    try {
-      await _player.setAudioSource(_playlist);
-    } catch (e) {
-      // Catch load errors: 404, invalid url ...
-      print("Error loading playlist: $e");
-    }
+    SharedPreferences.getInstance().then((SharedPreferences sp) {
+      sharedPreferences = sp;
+      notHome = sharedPreferences!.getString("notHome");
+      notHome = "The_world_of_peace";
+      persistNotHome(notHome!);
+      print(notHome);
+    });
   }
 
-  @override
-  void dispose() {
-    _player.dispose();
-    super.dispose();
-  }
-
-  Future<dynamic> getSharedPrefs() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    isSwitchedFT = (prefs.getBool("switchState"));
-    if (isSwitchedFT == true) {
-      if (Platform.isWindows || Platform.isLinux) {
-      } else {
-        FlameAudio.bgm.play("warmth-of-the-sun-adi-goldstein.mp3", volume: 1.0);
-      }
-    } else {
-      //Flame.bgm.stop();
-    }
-  }
-
-  bool isLightTheme = true;
-  var scaffoldKey = new GlobalKey<ScaffoldState>();
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      endDrawerEnableOpenDragGesture: false,
-      endDrawer: AppDrawerMain(
-        player: _player,
-      ),
-      body: AppBody(player: _player, controller: controller),
-      bottomNavigationBar: new LayoutBuilder(builder: (context, constraints) {
-        if (Platform.isMacOS || Platform.isLinux || Platform.isWindows) {
-          return SizedBox.shrink();
-        } else {
-          return Theme(
-            data: Theme.of(context).copyWith(
-                // sets the background color of the `BottomNavigationBar`
-                canvasColor: Colors.white,
-                // sets the active color of the `BottomNavigationBar` if `Brightness` is light
-                primaryColor: Colors.white,
-                textTheme: Theme.of(context).textTheme.copyWith(
-                    caption: TextStyle(color: Theme.of(context).accentColor))),
-            child: BottomNavigationBar(
-                items: <BottomNavigationBarItem>[
-                  BottomNavigationBarItem(
-                    icon: Icon(
-                      selectedPageId == 0 ? Icons.menu : Icons.menu_outlined,
-                      color: Colors.black,
-                    ),
-                    label: 'HOME',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(
-                      selectedPageId == 1
-                          ? Icons.category
-                          : Icons.category_outlined,
-                      color: Colors.black,
-                    ),
-                    label: 'MORE',
-                  ),
-                ],
-                unselectedLabelStyle: TextStyle(fontSize: 18, letterSpacing: 1),
-                selectedLabelStyle: TextStyle(fontSize: 21, letterSpacing: 1),
-                selectedItemColor: Colors.black,
-                unselectedItemColor: Colors.black,
-                iconSize: 25.0,
-                currentIndex: selectedPageId,
-                onTap: (newId) {
-                  setState(() {
-                    controller.jumpToPage(newId);
-                    selectedPageId = newId;
-                  });
-                }),
-          );
-        }
-      }),
-    );
-  }
-}
-
-class AppBody extends StatelessWidget {
-  final player;
-  const AppBody({
-    Key? key,
-    this.player,
-    required PageController controller,
-  })  : _controller = controller,
-        super(key: key);
-
-  final PageController _controller;
-
-  @override
-  Widget build(BuildContext context) {
-    return PageView(
-      physics: NeverScrollableScrollPhysics(),
-      controller: _controller,
-      children: [
-        HomePage2(
-          player: player,
-        ),
-        // About(),
-        Settings(),
-      ],
-    );
-  }
-}
-
-// HomePage
-class HomePage2 extends StatefulWidget {
-  final player;
-  HomePage2({Key? key, this.player});
-  @override
-  _BaseScreenState createState() => _BaseScreenState();
-}
-
-/// The main widget state.
-class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
-  late AnimationController animationController;
-  var random = Random();
-  bool isLightTheme = true;
-
-  @override
-  void initState() {
-    super.initState();
-    getSharedPrefs();
-    animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1000),
-    )..addStatusListener(
-        (AnimationStatus status) {
-          if (status == AnimationStatus.completed) {
-            if (!mounted) return;
-            animationController.reverse();
-          }
-        },
-      );
-  }
-
-  @override
-  dispose() {
-    animationController.dispose();
-    super.dispose();
-  }
-
-  Future<Null> getSharedPrefs() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+  void persistNotHome(String value) {
     setState(() {
-      chapters = (prefs.getBool('chapterState'));
+      notHome = value;
     });
+    sharedPreferences?.setString("notHome", value);
   }
 
-  bool? chapters;
-
-  List<Widget> makeStar(double width, double height) {
-    double starsInRow = width / 50;
-    double starsInColumn = height / 50;
-    double starsNum = starsInRow != 0
-        ? starsInRow * (starsInColumn != 0 ? starsInColumn : starsInRow)
-        : starsInColumn;
-
-    List<Widget> stars = [];
-
-    for (int i = 0; i < starsNum; i++) {
-      stars.add(Star(
-        top: random.nextInt(height.floor()).toDouble(),
-        right: random.nextInt(width.floor()).toDouble(),
-        animationController: animationController,
-      ));
+  @override
+  void didChangeDependencies() {
+    if (Platform.isWindows || Platform.isLinux) {
+      super.didChangeDependencies();
+      GameAudioDesktop.playAudio.player = Player(
+        id: 0,
+      );
     }
-
-    return stars;
   }
-
-  Random? rnd;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.transparent,
-      body: Stack(
-        children: <Widget>[
-          new Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/images/main.jpg"),
-                fit: BoxFit.cover,
+    return WillPopScope(
+      onWillPop: () => getOnWillPop(),
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Colors.transparent,
+        body: Stack(
+          children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                      "assets/images/bgs/mininature_001_19201440.jpg"),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-            child: Container(
-              decoration: new BoxDecoration(
-                color: Colors.black.withOpacity(isLightTheme ? 0 : 0.4),
-              ),
-            ),
-          ),
-          ...makeStar(MediaQuery.of(context).size.width,
-              MediaQuery.of(context).size.height / 4),
-          Center(
-            child: new Container(
-              child: SafeArea(
-                child: new SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      InkWell(
-                        onTap: () async {
-                          if (Platform.isWindows || Platform.isLinux) {
-                            await widget.player.pause();
-                          } else {
-                            FlameAudio.bgm.stop();
-                          }
-
-                          Navigator.of(context).pushNamed('/1');
-                        },
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: <Widget>[
-                            Stack(
-                              children: <Widget>[
-                                Builder(builder: (context) {
-                                  if (Platform.isAndroid || Platform.isIOS) {
-                                    return Container(
-                                      color: Colors.transparent,
-                                      padding: EdgeInsets.all(5),
-                                      width:
-                                          MediaQuery.of(context).size.height /
-                                              1.1,
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                        child: Image.asset(
-                                          "assets/images/gui/menu_scroll_01.png",
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    );
-                                  } else {
-                                    return Container(
-                                      color: Colors.transparent,
-                                      padding: EdgeInsets.all(5),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                        child: Image.asset(
-                                          "assets/images/gui/menu_scroll_01.png",
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                })
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () => showAlertDialog(context),
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: <Widget>[
-                            Stack(
-                              children: <Widget>[
-                                Builder(
-                                  builder: (context) {
-                                    if (Platform.isAndroid || Platform.isIOS) {
-                                      return Container(
-                                        color: Colors.transparent,
-                                        padding: EdgeInsets.all(5),
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                1,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          child: Image.asset(
-                                            "assets/images/gui/menu_scroll_03.png",
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      );
-                                    } else {
-                                      return Column(
-                                        children: [
-                                          Container(
-                                            color: Colors.transparent,
-                                            padding: EdgeInsets.all(5),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                              child: Image.asset(
-                                                "assets/images/gui/menu_scroll_03.png",
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 30, vertical: 5),
-                                            child: Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  3,
-                                              child: TextButton(
-                                                child: Text(
-                                                  "LOAD",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 35,
-                                                      fontFamily:
-                                                          "BottleParty"),
-                                                ),
-                                                style: TextButton.styleFrom(
-                                                  backgroundColor: Colors.white,
-                                                  padding: EdgeInsets.symmetric(
-                                                      vertical: 20),
-                                                ),
-                                                onPressed: () async {
-                                                  FlameAudio.bgm.stop();
-                                                  Navigator.of(context)
-                                                      .pushNamed('/chapterone');
-                                                },
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      );
-                                    }
-                                  },
+            AnimatedOpacity(
+              opacity: opacity!,
+              duration: Duration(milliseconds: 300),
+              child: Center(
+                child: Container(
+                  child: SafeArea(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 5),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width / 3,
+                              child: ElevatedButton(
+                                child: Text(
+                                  "START",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 40,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "Julee"),
                                 ),
-                              ],
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.white,
+                                    padding: EdgeInsets.symmetric(vertical: 20),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(40.0),
+                                        side: BorderSide(color: Colors.white))),
+                                onPressed: () {
+                                  Navigator.of(context).pushNamed('/testintro');
+                                },
+                              ),
                             ),
-                          ],
-                        ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 5),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width / 3,
+                              child: ElevatedButton(
+                                child: Text(
+                                  "NAOKI ROUTE",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 35,
+                                      fontFamily: "Julee"),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.white,
+                                    padding: EdgeInsets.symmetric(vertical: 20),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(40.0),
+                                        side: BorderSide(color: Colors.white))),
+                                onPressed: () {
+                                  Navigator.of(context).pushNamed('/intro');
+                                },
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 5),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width / 3,
+                              child: ElevatedButton(
+                                child: Text(
+                                  "LOAD",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 35,
+                                      fontFamily: "Julee"),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.white,
+                                    padding: EdgeInsets.symmetric(vertical: 20),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(40.0),
+                                        side: BorderSide(color: Colors.white))),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => LoadGame()),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 5),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width / 3,
+                              child: ElevatedButton(
+                                child: Text(
+                                  "OPTIONS",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 35,
+                                      fontFamily: "Julee"),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.white,
+                                    padding: EdgeInsets.symmetric(vertical: 20),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(40.0),
+                                        side: BorderSide(color: Colors.white))),
+                                onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Settings(
+                                            route: "/home",
+                                          )),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 5),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width / 3,
+                              child: ElevatedButton(
+                                child: Text(
+                                  "CREDITS",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 35,
+                                      fontFamily: "Julee"),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.white,
+                                    padding: EdgeInsets.symmetric(vertical: 20),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(40.0),
+                                        side: BorderSide(color: Colors.white))),
+                                onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Credits()),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-
-                      // Builder(
-                      //   builder: (context) {
-                      //     // if (chapters == true) {
-                      //     if (chapters == true) {
-                      //       return Padding(
-                      //         padding: EdgeInsets.symmetric(
-                      //             horizontal: 30, vertical: 5),
-                      //         child: Container(
-                      //           width: double.infinity,
-                      //           child: TextButton(
-                      //             child: Text(
-                      //               'Chapters',
-                      //               style: TextStyle(
-                      //                 color: Colors.black,
-                      //                 fontSize: 35,
-                      //               ),
-                      //             ),
-                      //             style: TextButton.styleFrom(
-                      //               backgroundColor:
-                      //                   Colors.white,
-                      //               padding: EdgeInsets.symmetric(vertical: 20),
-                      //             ),
-                      //             onPressed: () {
-                      //               // Navigator.push(
-                      //               //   context,
-                      //               //   MaterialPageRoute(
-                      //               //       builder: (context) => Chapters()),
-                      //               // );
-                      //             },
-                      //           ),
-                      //         ),
-                      //       );
-                      //     } else
-                      //       return Container(
-                      //         decoration: BoxDecoration(
-                      //           borderRadius: BorderRadius.circular(40),
-                      //           image: DecorationImage(
-                      //             image: AssetImage(
-                      //                 "assets/images/gui/menu_scroll_03.png"),
-                      //             fit: BoxFit.cover,
-                      //           ),
-                      //         ),
-                      //         padding: EdgeInsets.symmetric(
-                      //             horizontal: 30, vertical: 5),
-                      //         child: TextButton(
-                      //           child: Text(
-                      //             '',
-                      //             style: TextStyle(
-                      //               color: Colors.black,
-                      //               fontSize: 35,
-                      //             ),
-                      //           ),
-                      //           style: TextButton.styleFrom(
-                      //             backgroundColor: Colors.transparent,
-                      //             padding: EdgeInsets.symmetric(vertical: 20),
-                      //           ),
-                      //           onPressed: () => showAlertDialog(context),
-                      //         ),
-                      //       );
-                      //   },
-                      // )
-                    ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -499,45 +279,6 @@ class _BaseScreenState extends State<HomePage2> with TickerProviderStateMixin {
       builder: (BuildContext context) {
         return alert;
       },
-    );
-  }
-}
-
-class Star extends StatefulWidget {
-  final top;
-  final right;
-  final animationController;
-
-  const Star({Key? key, this.top, this.right, this.animationController})
-      : super(key: key);
-
-  @override
-  _StarState createState() => _StarState();
-}
-
-class _StarState extends State<Star> with TickerProviderStateMixin {
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-      top: widget.top,
-      right: widget.right,
-      child: ScaleTransition(
-        alignment: Alignment.center,
-        scale: Tween<double>(begin: 0.4, end: 1.0).animate(
-          CurvedAnimation(
-            parent: widget.animationController,
-            curve: Interval(0.1, 1.0, curve: Curves.fastOutSlowIn),
-          ),
-        ),
-        child: Container(
-          width: 3,
-          height: 3,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            shape: BoxShape.circle,
-          ),
-        ),
-      ),
     );
   }
 }

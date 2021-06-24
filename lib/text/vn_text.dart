@@ -1,45 +1,80 @@
 import 'package:easy_localization/easy_localization.dart';
 
-class TextSound {
-  String? questionText;
-  String? questionAnswer;
-  String? sound;
-  String? image;
+class Speech {
+  final String? characterName;
+  final String? characterText;
+  final String? mcImage;
+  final String? charImage;
+  final String? sideImage;
 
-  TextSound(String q, String a, String s, String i) {
-    questionText = q;
-    questionAnswer = a;
-    sound = s;
-    image = i;
-  }
+  Speech({
+    this.characterName,
+    this.characterText,
+    this.mcImage,
+    this.charImage,
+    this.sideImage,
+  });
 }
 
 class TextConstructor1 {
   int textNumber = 0;
 
-  List<TextSound> textBank = [
-    TextSound(tr("mc.speech1"), tr("mc_name"), "silence", "transparent"),
-    TextSound(tr("mc.speech2"), tr("mc_name"), "silence", "transparent"),
-    TextSound(tr("mc.speech3"), tr("mc_name"), "silence", "transparent"),
-    TextSound(tr("tom.speech1"), tr("tom_name"), "silence", "tom_neutral"),
-    TextSound(tr("tom.speech2"), tr("tom_name"), "silence", "tom_neutral"),
-    TextSound(tr("tom.speech3"), tr("tom_name"), "silence", "tom_neutral"),
-    TextSound(
-        tr("naoki.speech1"), tr("naoki_name"), "silence", "naoki_neutral"),
-    TextSound(
-        tr("naoki.speech2"), tr("naoki_name"), "silence", "naoki_neutral"),
-    TextSound(
-        tr("naoki.speech3"), tr("naoki_name"), "silence", "naoki_neutral"),
-    TextSound(tr("hidetake.speech1"), tr("hidetake_name"), "silence",
-        "hidetake_neutral"),
-    TextSound(tr("hidetake.speech2"), tr("hidetake_name"), "silence",
-        "hidetake_neutral"),
-    TextSound(
-        """This is considered an error condition because it indicates that there is content that cannot be
-seen. If the content is legitimately bigger than the available space, consider clipping it with a
-ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
-like a ListView.""", tr("hidetake_name"), "silence", "hidetake_neutral"),
+  final m = "MC";
+  List<Speech> textBank = [
+    // Speech, Name, Voice, Image
+    Speech(
+        characterName: "MC",
+        characterText: "a world of wonders in a sea of broken glass",
+        mcImage: "mc_happy"),
+    Speech(
+        characterName: "Tom",
+        characterText:
+            "mirror is a song about the costs of being hard on yourself.",
+        charImage: "tom_happy"),
+    Speech(
+        characterName: "Naoki",
+        characterText:
+            "get your wish is a song about finding a reason to keep going, even if it's not for your own sake",
+        charImage: "naoki_happy"),
+    Speech(
+        characterName: "Hidetake",
+        characterText:
+            "i see Look at the Sky as a mantra to remind myself that there's good reason for hope, and that people can meaningfully improve themselves and the world.",
+        charImage: "hidetake_happy"),
+
+//     Speech("MC", "Move us to your primary inbox if you use Gmail", "mc_happy"),
+//     Speech(tr("tom_name"), "Add us to your VIP list if you use Apple Mail",
+//         "tom_neutral"),
+//     Speech(tr("tom_name"), "Add us to your favorites if you use Outlook",
+//         "tom_neutral"),
+//     Speech(
+//         tr("tom_name"),
+//         "Or some combination of the above if you use anything else. Thanks!",
+//         "tom_neutral"),
+//     Speech(tr("naoki_name"), tr("naoki.speech1"), "naoki_neutral"),
+//     Speech(tr("naoki_name"), tr("naoki.speech2"), "naoki_neutral"),
+//     Speech(tr("naoki_name"), tr("naoki.speech3"), "naoki_neutral"),
+//     Speech(tr("hidetake_name"), tr("hidetake.speech1"), "hidetake_neutral"),
+//     Speech(
+//         tr("hidetake_name"),
+//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+//         "hidetake_neutral"),
+//     Speech(
+//         tr("hidetake_name"),
+//         """This is considered an error condition because it indicates that there is content that cannot be
+// seen. If the content is legitimately bigger than the available space, consider clipping it with a
+// ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+// like a ListView.""",
+//         "hidetake_neutral"),
   ];
+
+  String? getMCImage() {
+    return textBank[textNumber].mcImage;
+  }
+
+  String? getSideCharImage() {
+    return textBank[textNumber].charImage;
+  }
 
   void nextQuestion() {
     if (textNumber < textBank.length - 1) {
@@ -47,17 +82,16 @@ like a ListView.""", tr("hidetake_name"), "silence", "hidetake_neutral"),
     }
   }
 
-  String? getQuestionText() {
-    return textBank[textNumber].questionText;
+  String? getCharacterText() {
+    return textBank[textNumber].characterText;
   }
 
-  String? getCorrectAnswer() {
-    return textBank[textNumber].questionAnswer;
+  String? getCharacterName() {
+    return textBank[textNumber].characterName;
   }
 
   bool isFinished() {
     if (textNumber >= textBank.length - 1) {
-      print('Now returning true');
       return true;
     } else {
       return false;
@@ -66,13 +100,5 @@ like a ListView.""", tr("hidetake_name"), "silence", "hidetake_neutral"),
 
   getNumber() {
     return textNumber;
-  }
-
-  String? getSound() {
-    return textBank[textNumber].sound;
-  }
-
-  String? getImage() {
-    return textBank[textNumber].image;
   }
 }

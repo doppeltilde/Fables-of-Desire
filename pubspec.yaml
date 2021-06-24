@@ -1,7 +1,7 @@
 name: fablesofdesire
 description: A new game.
 publish_to: 'none' 
-version: 1.0.0+7
+version: 1.0.0+18
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
@@ -10,35 +10,27 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.2
-  shared_preferences: ^2.0.5
-  url_launcher: ^6.0.3
-  share: ^2.0.1
-  package_info: ^2.0.0
-  animated_text_kit: ^4.2.1
+  cupertino_icons: ^1.0.3
+  shared_preferences: ^2.0.6
+  url_launcher: ^6.0.6
+  share: ^2.0.4
+  package_info: ^2.0.2
   flutter_launcher_icons: ^0.9.0
   easy_localization: ^3.0.0
-  flame_audio: ^0.1.0-rc5
-  msix: ^2.0.0
-  just_audio: ^0.7.4
+  easy_localization_loader: ^1.0.0
+  audioplayers: ^0.19.0
+  msix: ^2.1.3
+  dart_vlc: ^0.0.7
+  desktop_window: ^0.4.0
+  provider: ^5.0.0
+  clay_containers: ^0.3.2
 
-  universal_io: ^2.0.4
-  dart_vlc: ^0.0.5
-
-  
-
-# dependency_overrides:
-#   games_services:
-#     git:
-#       url: https://github.com/jonatadashi/games_services.git
-#       ref: master
-#       path: games_services
 flutter_icons:
   android: "launcher_icon" 
   ios: true
   remove_alpha_ios: true
   adaptive_icon_background: "#FFFFFF"
-  image_path: "assets/images/sprites/MC_Blush.png"
+  image_path: "assets/images/sprites/mc_happy.png"
 
 flutter:
 
@@ -50,6 +42,7 @@ flutter:
     - assets/images/
     - assets/images/sprites/
     - assets/images/gui/
+    - assets/images/bgs/
 
     - assets/languages/
 
@@ -63,6 +56,15 @@ flutter:
     - family: Julee
       fonts:
         - asset: assets/fonts/Julee-Regular.ttf
+    - family: Mali
+      fonts:
+        - asset: assets/fonts/Mali-Regular.ttf
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/Nunito-Regular.ttf
+    - family: IndieFlower
+      fonts:
+        - asset: assets/fonts/IndieFlower-Regular.ttf
 
 # flutter pub run msix:create
 msix_config:
@@ -75,7 +77,8 @@ msix_config:
   tile_icon_path: windows\runner\resources\app_icon.png
   certificate_path: C:\Users\jonaf\OneDrive\Documents\keys\openssl\fablesofdesire\CERT.pfx
   certificate_password: fablesofdesire
-  msix_version: 1.0.0.0
+  msix_version: 1.1.9.0
   icons_background_color: "#ffffff"
   architecture: x64
+  store: true
   # See https://docs.microsoft.com/en-us/windows/uwp/packaging/app-capability-declarations

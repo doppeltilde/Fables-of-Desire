@@ -1,39 +1,35 @@
-/*
+/// Copyright (c) 2021 Jona T. Feucht and The SmallDreams Authors.
 
-Copyright 2021 Jona Feucht & SmallDreams
-
-*/
-
-import 'package:dart_vlc/dart_vlc.dart';
+import 'package:desktop_window/desktop_window.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flame_audio/flame_audio.dart';
+import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:fablesofdesire/routes/routes.dart';
-import 'package:universal_io/io.dart';
+import 'package:flutter/services.dart';
+import 'dart:io' show Platform;
 
-Future<void> main() async {
-  Player? player;
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  if (Platform.isWindows || Platform.isLinux) {
-    player?.open(
-      await Media.asset('assets/audio/warmth-of-the-sun-adi-goldstein.mp3'),
-    );
-    player?.play();
-  } else {
-    FlameAudio.bgm.initialize();
-  }
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    await DesktopWindow.setMinWindowSize(Size(1000, 700));
+  } else {}
 
-  runApp(EasyLocalization(
-    saveLocale: true,
-    supportedLocales: [
-      Locale('en'),
-      Locale('de'),
-      // Locale('fr'),
-    ],
-    path: 'assets/languages',
-    fallbackLocale: Locale('en'),
-    useOnlyLangCode: true,
-    child: Home(),
-  ));
+  SystemChrome.setPreferredOrientations(
+          [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight])
+      .then((_) {
+    runApp(EasyLocalization(
+      saveLocale: true,
+      supportedLocales: [
+        Locale('en'),
+        Locale('de'),
+        // Locale('fr'),
+      ],
+      path: 'assets/languages',
+      assetLoader: YamlAssetLoader(),
+      fallbackLocale: Locale('en'),
+      useOnlyLangCode: true,
+      child: Home(),
+    ));
+  });
 }
