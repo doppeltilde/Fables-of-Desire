@@ -1,4 +1,5 @@
 import 'package:fablesofdesire/global/audio/game_audio.dart';
+import 'package:fablesofdesire/global/audio/global_audio.dart';
 import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/global/settings/settings_changers.dart';
 import 'package:fablesofdesire/routes/save_page.dart';
@@ -230,15 +231,7 @@ class _SettingsState extends State<Settings> {
                 letterSpacing: .4),
           ),
           onPressed: () {
-            if (Platform.isWindows || Platform.isLinux) {
-              setState(() {
-                GameAudioDesktop.playAudio.stop();
-              });
-            } else {
-              setState(() {
-                GameAudio.bgm.stop();
-              });
-            }
+            GlobalAudio.playAudio.stopAudio();
             Navigator.of(context).pushNamed("/home");
           },
         ),

@@ -2,6 +2,7 @@
 
 import 'package:dart_vlc/dart_vlc.dart';
 import 'package:fablesofdesire/global/audio/game_audio.dart';
+import 'package:fablesofdesire/global/audio/global_audio.dart';
 import 'package:fablesofdesire/routes/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -103,18 +104,6 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   @override
-  void didChangeDependencies() {
-    if (Platform.isWindows ||
-        Platform.isLinux && GameAudioDesktop.playAudio.isPlaying == false) {
-      super.didChangeDependencies();
-      GameAudioDesktop.playAudio.player = Player(
-        id: 0,
-      );
-    }
-    super.didChangeDependencies();
-  }
-
-  @override
   void initState() {
     super.initState();
     SharedPreferences.getInstance().then((SharedPreferences sp) {
@@ -210,13 +199,9 @@ class _SplashScreenState extends State<SplashScreen> {
         previousRoute != "/home" ||
         previousRoute != null ||
         previousRoute != '/') {
-      if (Platform.isWindows ||
-          Platform.isLinux && GameAudioDesktop.playAudio.isPlaying == false) {
-        GameAudioDesktop.playAudio.play(notHome!);
-      } else {
-        if (GameAudio.bgm.isPlaying == false) {
-          GameAudio.bgm.play(notHome!);
-        }
+      if (GlobalAudio.playAudio.isPlaying == false &&
+          notHome != "The_world_of_peace") {
+        GlobalAudio.playAudio.getBGM(notHome!);
       }
     }
   }

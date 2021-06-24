@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:fablesofdesire/constructor/vn_constructor.dart';
+import 'package:fablesofdesire/global/audio/global_audio.dart';
 import 'package:fablesofdesire/global/logical_keyboard.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class VNScaffold extends StatefulWidget {
   final bgImage;
@@ -20,6 +22,41 @@ class _VNState extends State<VNScaffold> {
   var switchFade = false;
   double? opacity = 0.0;
   double? opacityIntro = 1.0;
+  String? notHome;
+  SharedPreferences? sharedPreferences;
+
+  @override
+  void initState() {
+    super.initState();
+
+    //if (GlobalAudio.playAudio.isPlaying == false) {
+    try {
+      GlobalAudio.playAudio.getBGM(widget.textSound.getBGM().toString());
+    } catch (e) {
+      print("Previous bgm.");
+    }
+    //}
+
+    Future.delayed(Duration(seconds: 1), () {
+      setState(() {
+        opacity = 1.0;
+      });
+    });
+    SharedPreferences.getInstance().then((SharedPreferences sp) {
+      sharedPreferences = sp;
+      notHome = sharedPreferences!.getString("notHome");
+      notHome = widget.textSound.getBGM().toString();
+      persistNotHome(notHome!);
+      print(notHome);
+    });
+  }
+
+  void persistNotHome(String value) {
+    setState(() {
+      notHome = value;
+    });
+    sharedPreferences?.setString("notHome", value);
+  }
 
   void _incrementCounter() {
     setState(() {

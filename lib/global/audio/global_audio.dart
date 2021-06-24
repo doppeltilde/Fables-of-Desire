@@ -12,6 +12,7 @@ class GlobalAudio {
 class PlayAudio with WidgetsBindingObserver {
   String? notHome;
   SharedPreferences? sharedPreferences;
+  bool isPlaying = false;
 
   Future<void> persistNotHome(String value) async {
     notHome = value;
@@ -19,6 +20,7 @@ class PlayAudio with WidgetsBindingObserver {
   }
 
   Future<void> getBGM(String musicName) async {
+    isPlaying = true;
     if (Platform.isWindows || Platform.isLinux) {
       if (GameAudioDesktop.playAudio.isPlaying == false) {
         GameAudioDesktop.playAudio.play(musicName);
@@ -37,6 +39,7 @@ class PlayAudio with WidgetsBindingObserver {
   }
 
   Future<void> stopAudio() async {
+    isPlaying = false;
     if (Platform.isWindows || Platform.isLinux) {
       GameAudioDesktop.playAudio.stop();
     } else {

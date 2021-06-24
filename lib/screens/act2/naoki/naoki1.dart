@@ -1,6 +1,5 @@
 import 'package:fablesofdesire/constructor/text/naoki.dart';
 import 'package:fablesofdesire/constructor/vn_scaffold.dart';
-import 'package:fablesofdesire/global/audio/global_audio.dart';
 import 'package:flutter/material.dart';
 
 class Naoki1 extends StatefulWidget {
@@ -15,7 +14,6 @@ class _VNState extends State<Naoki1> {
 
   @override
   Widget build(BuildContext context) {
-    GlobalAudio.playAudio.getBGM(textSound.getBGM().toString());
     return VNScaffold(
       bgImage: "1710heian15_19201080",
       textSound: textSound,
