@@ -40,7 +40,7 @@ class Speech {
 
   Coloring
 
-  color:INSERTCOLOR} =  "this makes the name {color:blue}bob blue"
+  {color:INSERTCOLOR} =  "this makes the name {color:blue}bob blue"
 
   Color Map: https://pub.dev/documentation/simple_rich_text/latest/simple_rich_text/colorMap-constant.html
 */
@@ -95,11 +95,14 @@ class NaokiText1 {
     textNumber = 0;
   }
 
+  // TODO: bgm Kanui
+  String? getBGM() {
+    return "kanui";
+  }
+
   List<Speech> textBank = [
     // Character Name, Dialogue, Image
-
     // TODO: bg room, day
-    // TODO: bgm Kanui
     // TODO: Naoki skeptical over why and how he's been given human form.
 
     Speech(
@@ -320,9 +323,13 @@ class NaokiText2 {
     textNumber = 0;
   }
 
+  // TODO: bgm Red Leaf
+  String? getBGM() {
+    return "redleaf";
+  }
+
   List<Speech> textBank = [
     // TODO: bg Outdoor pathway, day
-    // TODO: bgm Red Leaf
     Speech(
       characterName: n,
       characterText:
@@ -450,9 +457,13 @@ class NaokiText3 {
     textNumber = 0;
   }
 
+  // TODO: bgm Edos journey
+  String getBGM() {
+    return "edosjourney";
+  }
+
   List<Speech> textBank = [
     // TODO: bg Hot spring, day
-    // TODO: bgm Edos journey
     Speech(
       characterName: m,
       characterText: "Here we are!",
@@ -580,9 +591,10 @@ class NaokiText4 {
     textNumber = 0;
   }
 
+  // TODO: bgm continuation from last track (Edos journey)
+
   List<Speech> textBank = [
     // TODO: bg Outdoor pathway, day
-    // TODO: bgm continuation from last track (Edos journey)
     Speech(
       characterName: n,
       characterText: "MC. I am prepared.",
@@ -669,9 +681,13 @@ class NaokiText5 {
     textNumber = 0;
   }
 
+  // TODO: bgm Flowing season
+  String? getBGM() {
+    return "Flowing_season";
+  }
+
   List<Speech> textBank = [
     // TODO: bg pottery room, day
-    // TODO: bgm Flowing season
     Speech(
       characterName: m,
       characterText: "Here you go. Drink this, please.",
@@ -824,9 +840,13 @@ class NaokiText6 {
     textNumber = 0;
   }
 
+  // TODO: bgm Japanese landscape
+  String? getBGM() {
+    return "Japaneselandscape";
+  }
+
   List<Speech> textBank = [
     // TODO: bg temple entrance, day
-    // TODO: bgm Japanese landscape
     Speech(
       characterName: nar,
       characterText:
@@ -1105,9 +1125,13 @@ class NaokiText9 {
     textNumber = 0;
   }
 
+  // TODO: bgm Edgeside
+  String? getBGM() {
+    return "edgeside";
+  }
+
   List<Speech> textBank = [
     // TODO bg boulder and flowers, sunset
-    // TODO: bgm Edgeside
     Speech(
       characterName: m,
       characterText: "You learn so quickly, Naoki. You’re really impressive.",
@@ -1338,8 +1362,7 @@ class NaokiText10 {
     // TODO screen shake
     Speech(
       characterName: n,
-      characterText:
-          "Ah. Almost… Then, I returned to the shrine.",
+      characterText: "Ah. Almost… Then, I returned to the shrine.",
       mcImage: "transparent",
     ),
     // TODO screen shake
@@ -1484,10 +1507,14 @@ class NaokiText11 {
     textNumber = 0;
   }
 
+  // TODO: bgm Month Nori Yuki
+  String? getBGM() {
+    return "monthnoriyukiriver";
+  }
+
   List<Speech> textBank = [
     // Naoki comes to also develop his own reasoning for serving as a deity of the mountain, for he finds himself inspired by MCs cause; equality. Little does he know at this point, this includes humans.
     // TODO: bg mountain path and trees, day
-    // TODO: bgm Month Nori Yuki
     Speech(
       characterName: nar,
       characterText:
@@ -1534,8 +1561,7 @@ class NaokiText11 {
     ),
     Speech(
       characterName: n,
-      characterText:
-          "You care for all the animals in the mountain, it seems.",
+      characterText: "You care for all the animals in the mountain, it seems.",
       sideCharImage: "naoki_neutral",
     ),
     Speech(
@@ -2044,10 +2070,14 @@ class NaokiText12 {
     textNumber = 0;
   }
 
+  //TODO: bgm Yogetsu
+  String? getBGM() {
+    return "yogetsu";
+  }
+
   List<Speech> textBank = [
     //Naoki is uneasy but finds footing in other areas - literature in the shrine, local history and ancient legend.
     //TODO: bg rock gardecharacterName: n, night
-    //TODO: bgm Yogetsu
     Speech(
       characterName: n,
       characterText: "I’ll do one last sweep, MC.",
@@ -2459,12 +2489,12 @@ class NaokiText14 {
     textNumber = 0;
   }
 
+  // TODO: bg outside shrine, day
   String? bgImage() {
     return "1710heian20_19201080";
   }
 
   List<Speech> textBank = [
-    // TODO: bg outside shrine, day
     Speech(
       characterName: nar,
       characterText:
@@ -2547,7 +2577,7 @@ class NaokiText14 {
       characterText: "Then I will graciously accept the offer.",
       mcImage: "transparent",
     ),
-      //TODO: bgm fade
+    //TODO: bgm fade
   ];
 }
 
@@ -2622,7 +2652,7 @@ class NaokiText15 {
       characterName: m,
       characterText: "Gah! Y-yes? Naoki, it’s late!",
       mcImage: "transparent",
-    //TODO: bgm Summer Cloud
+      //TODO: bgm Summer Cloud
     ),
     Speech(
       characterName: nar,
@@ -2842,7 +2872,7 @@ class NaokiText16 {
       characterName: n,
       characterText: "!",
       sideCharImage: "naoki_frown",
-    //TODO: bgm DIsordered Hair
+      //TODO: bgm DIsordered Hair
     ),
     Speech(
       characterName: n,
@@ -3371,8 +3401,7 @@ class NaokiText17 {
     ),
     Speech(
       characterName: m,
-      characterText:
-          "I can’t say for certain, but it’s possible.",
+      characterText: "I can’t say for certain, but it’s possible.",
       mcImage: "transparent",
     ),
     Speech(
@@ -3974,14 +4003,17 @@ class NaokiText20 {
     textNumber = 0;
   }
 
+  //TODO: bgm  Month Nori Yuki River
+  String? getBGM() {
+    return "monthnoriyukiriver";
+  }
+
   List<Speech> textBank = [
     // todo: bg mountain view, sunset
-    //TODO: bgm  Month Nori Yuki River
     Speech(
       characterName: nar,
       characterText:
-          "As we walk back to the central shrine and far enough away from prying ears, I finally stop and put down some of the tributes.",
-      mcImage: "transparent",
+          "/As we walk back to the central shrine and far enough away from prying ears, I finally stop and put down some of the tributes./",
     ),
     Speech(
       characterName: nar,
