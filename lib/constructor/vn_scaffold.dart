@@ -15,8 +15,10 @@ class VNScaffold extends StatefulWidget {
 }
 
 class _VNState extends State<VNScaffold> {
+  var introFade = true;
   var switchFade = false;
   double? opacity = 0.0;
+  double? opacityIntro = 1.0;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,17 @@ class _VNState extends State<VNScaffold> {
       onWillPop: () => getOnWillPop(),
       child: Builder(
         builder: (context) {
-          if (switchFade != false) {
+          if (this.mounted && introFade == true) {
+            Future.delayed(Duration(milliseconds: 1200), () {
+              setState(() {
+                introFade = false;
+              });
+            });
+            Future.delayed(Duration(milliseconds: 300), () {
+              setState(() {
+                opacityIntro = 0.0;
+              });
+            });
             return Scaffold(
               body: Stack(
                 children: [
@@ -32,11 +44,8 @@ class _VNState extends State<VNScaffold> {
                     image: "assets/images/bgs/" + widget.bgImage + ".jpg",
                   ),
                   AnimatedOpacity(
-                    // If the widget is visible, animate to 0.0 (invisible).
-                    // If the widget is hidden, animate to 1.0 (fully visible).
-                    opacity: opacity!,
+                    opacity: opacityIntro!,
                     duration: Duration(milliseconds: 300),
-                    // The green box must be a child of the AnimatedOpacity widget.
                     child: Container(
                       width: double.infinity,
                       height: double.infinity,
@@ -47,39 +56,60 @@ class _VNState extends State<VNScaffold> {
               ),
             );
           } else {
-            return Scaffold(
-              resizeToAvoidBottomInset: false,
-              backgroundColor: Colors.black,
-              body: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    if (widget.textSound.isFinished() == true) {
-                      Future.delayed(Duration(seconds: 2), () {
-                        Navigator.of(context).pushNamed(widget.nextRoute);
-                      });
-
-                      switchFade = true;
-                      Future.delayed(Duration(milliseconds: 300), () {
-                        setState(() {
-                          opacity = 1.0;
-                        });
-                      });
-                    }
-                    widget.textSound.nextQuestion();
-                  });
-                },
-                child: InterludeTextSound(
-                  "assets/images/bgs/" + widget.bgImage + ".jpg",
-                  widget.textSound.getCharacterName(),
-                  widget.textSound.getCharacterText(),
-                  widget.textSound.getNumber(),
-                  widget.textSound.getMCImage(),
-                  widget.textSound.getSideCharImage(),
-                  widget.route,
-                  widget.nextRoute,
+            if (switchFade != false) {
+              return Scaffold(
+                body: Stack(
+                  children: [
+                    BackgroundBuilder(
+                      image: "assets/images/bgs/" + widget.bgImage + ".jpg",
+                    ),
+                    AnimatedOpacity(
+                      opacity: opacity!,
+                      duration: Duration(milliseconds: 300),
+                      child: Container(
+                        width: double.infinity,
+                        height: double.infinity,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            );
+              );
+            } else {
+              return Scaffold(
+                resizeToAvoidBottomInset: false,
+                backgroundColor: Colors.black,
+                body: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      if (widget.textSound.isFinished() == true) {
+                        Future.delayed(Duration(seconds: 2), () {
+                          Navigator.of(context).pushNamed(widget.nextRoute);
+                        });
+
+                        switchFade = true;
+                        Future.delayed(Duration(milliseconds: 300), () {
+                          setState(() {
+                            opacity = 1.0;
+                          });
+                        });
+                      }
+                      widget.textSound.nextQuestion();
+                    });
+                  },
+                  child: InterludeTextSound(
+                    "assets/images/bgs/" + widget.bgImage + ".jpg",
+                    widget.textSound.getCharacterName(),
+                    widget.textSound.getCharacterText(),
+                    widget.textSound.getNumber(),
+                    widget.textSound.getMCImage(),
+                    widget.textSound.getSideCharImage(),
+                    widget.route,
+                    widget.nextRoute,
+                  ),
+                ),
+              );
+            }
           }
         },
       ),

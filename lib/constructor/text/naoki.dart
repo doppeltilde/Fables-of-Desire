@@ -597,7 +597,7 @@ class NaokiText4 {
     // TODO: bg Outdoor pathway, day
     Speech(
       characterName: n,
-      characterText: "MC. I am prepared.",
+      characterText: "Okay, I'm prepared.",
       sideCharImage: "naoki_blush",
     ),
     Speech(
@@ -686,8 +686,12 @@ class NaokiText5 {
     return "Flowing_season";
   }
 
+  // TODO: bg pottery room, day
+  String? getBG() {
+    return "1710heian08_19201080";
+  }
+
   List<Speech> textBank = [
-    // TODO: bg pottery room, day
     Speech(
       characterName: m,
       characterText: "Here you go. Drink this, please.",

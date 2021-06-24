@@ -15,7 +15,7 @@ class _VNState extends State<Naoki1> {
 
   @override
   Widget build(BuildContext context) {
-    GlobalAudio.playAudio.getBGM("summercloud");
+    GlobalAudio.playAudio.getBGM(textSound.getBGM().toString());
     return VNScaffold(
       bgImage: "1710heian15_19201080",
       textSound: textSound,
