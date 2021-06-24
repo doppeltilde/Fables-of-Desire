@@ -99,6 +99,7 @@ class NaokiText1 {
     // Character Name, Dialogue, Image
 
     // TODO: bg room, day
+    // TODO: bgm Kanui
     // TODO: Naoki skeptical over why and how he's been given human form.
 
     Speech(
@@ -183,7 +184,7 @@ class NaokiText1 {
     ),
     Speech(
         characterName: m,
-        characterText: "Who /sare/ you, huh...?",
+        characterText: "Who /are/ you, huh...?",
         mcImage: "mc_neutral"),
     Speech(
       characterName: m,
@@ -198,7 +199,7 @@ class NaokiText1 {
     Speech(
       characterName: m,
       characterText:
-          "You’re Naoki. What ‘Naoki’ is entirely up to you. I can give you all the explanations you want about being my familiar, but beyond that…",
+          "You’re Naoki. What ‘Naoki’ is is entirely up to you. I can give you all the explanations you want about being my familiar, but beyond that…",
       mcImage: "mc_neutral",
     ),
     Speech(
@@ -266,7 +267,7 @@ class NaokiText1 {
     Speech(
       characterName: nar,
       characterText:
-          "I extend my hand to hicharacterName: m, but it takes Naoki a moment to understand what I want.",
+          "I extend my hand to him, but it takes Naoki a moment to understand what I want.",
       mcImage: "transparent",
     ),
     Speech(
@@ -275,6 +276,7 @@ class NaokiText1 {
           "The coolness of his hand settles in mine as I excitedly hurry to get to work.",
       mcImage: "transparent",
     ),
+    // TODO: bgm music fade
   ];
 }
 
@@ -320,6 +322,7 @@ class NaokiText2 {
 
   List<Speech> textBank = [
     // TODO: bg Outdoor pathway, day
+    // TODO: bgm Red Leaf
     Speech(
       characterName: n,
       characterText:
@@ -346,7 +349,7 @@ class NaokiText2 {
     Speech(
       characterName: m,
       characterText:
-          "Ha ha… No, Naoki. You are quite tall for a hucharacterName: n, actually.",
+          "Ha ha… No, Naoki. You are quite tall for a human, actually.",
       mcImage: "mc_happy",
     ),
     Speech(
@@ -449,6 +452,7 @@ class NaokiText3 {
 
   List<Speech> textBank = [
     // TODO: bg Hot spring, day
+    // TODO: bgm Edos journey
     Speech(
       characterName: m,
       characterText: "Here we are!",
@@ -578,6 +582,7 @@ class NaokiText4 {
 
   List<Speech> textBank = [
     // TODO: bg Outdoor pathway, day
+    // TODO: bgm continuation from last track (Edos journey)
     Speech(
       characterName: n,
       characterText: "MC. I am prepared.",
@@ -666,6 +671,7 @@ class NaokiText5 {
 
   List<Speech> textBank = [
     // TODO: bg pottery room, day
+    // TODO: bgm Flowing season
     Speech(
       characterName: m,
       characterText: "Here you go. Drink this, please.",
@@ -774,6 +780,7 @@ class NaokiText5 {
       characterText: "I’m not sure how much he believes me…",
       mcImage: "transparent",
     ),
+    // TODO: music fade
   ];
 }
 
@@ -819,6 +826,7 @@ class NaokiText6 {
 
   List<Speech> textBank = [
     // TODO: bg temple entrance, day
+    // TODO: bgm Japanese landscape
     Speech(
       characterName: nar,
       characterText:
@@ -828,7 +836,7 @@ class NaokiText6 {
     Speech(
       characterName: nar,
       characterText:
-          "But Naoki slows it dowcharacterName: n, unsure how humans can create stone or of his body down long stairs.",
+          "But Naoki slows it down, unsure how humans can create stone or of his body down long stairs.",
       mcImage: "transparent",
     ),
     Speech(
@@ -882,6 +890,7 @@ class NaokiText7 {
 
   List<Speech> textBank = [
     // TODO: bg mountain path and trees, day
+    // TODO: bgm continuation from previous (Japanese landscape)
     Speech(
       characterName: m,
       characterText:
@@ -1023,6 +1032,7 @@ class NaokiText8 {
 
   List<Speech> textBank = [
     // TODO bg mountain path and trees, sunset
+    // TODO: bgm continuation from previous (Japanese landscape)
     Speech(
       characterName: m,
       characterText:
@@ -1051,6 +1061,7 @@ class NaokiText8 {
       characterText: "Okay.",
       sideCharImage: "naoki_neutral",
     ),
+    // TODO: bgm music fade
   ];
 }
 
@@ -1096,6 +1107,7 @@ class NaokiText9 {
 
   List<Speech> textBank = [
     // TODO bg boulder and flowers, sunset
+    // TODO: bgm Edgeside
     Speech(
       characterName: m,
       characterText: "You learn so quickly, Naoki. You’re really impressive.",
@@ -1162,7 +1174,7 @@ class NaokiText9 {
     ),
     Speech(
       characterName: n,
-      characterText: "I’d like to help you cook.",
+      characterText: "I’d /like/ to help you cook.",
       sideCharImage: "naoki_happy",
     ),
     Speech(
@@ -1237,6 +1249,7 @@ class NaokiText10 {
 
   List<Speech> textBank = [
     // TODO bg clearing by the lake, sunset
+    // TODO: bgm continuation from previous (Edgeside)
     Speech(
       characterName: nar,
       characterText:
@@ -1326,7 +1339,7 @@ class NaokiText10 {
     Speech(
       characterName: n,
       characterText:
-          "Ah. Almost… ThecharacterName: n, I returned to the shrine.",
+          "Ah. Almost… Then, I returned to the shrine.",
       mcImage: "transparent",
     ),
     // TODO screen shake
@@ -1427,6 +1440,7 @@ class NaokiText10 {
           "A little distracted, are we? At least he’s having fun, ha ha…",
       mcImage: "mc_happy",
     ),
+    // TODO: bgm fade
   ];
 }
 
@@ -1471,8 +1485,9 @@ class NaokiText11 {
   }
 
   List<Speech> textBank = [
-    // Naoki comes to also develop his own reasoning for serving as a deity of the mountaicharacterName: n, for he finds himself inspired by MCs cause; equality. Little does he know at this point, this includes humans.
-    // TODO bg mountain path and trees, day
+    // Naoki comes to also develop his own reasoning for serving as a deity of the mountain, for he finds himself inspired by MCs cause; equality. Little does he know at this point, this includes humans.
+    // TODO: bg mountain path and trees, day
+    // TODO: bgm Month Nori Yuki
     Speech(
       characterName: nar,
       characterText:
@@ -1520,7 +1535,7 @@ class NaokiText11 {
     Speech(
       characterName: n,
       characterText:
-          "You care for all the animals in the mountaicharacterName: n, it seems.",
+          "You care for all the animals in the mountain, it seems.",
       sideCharImage: "naoki_neutral",
     ),
     Speech(
@@ -1679,6 +1694,7 @@ class NaokiText11 {
       characterText: "Yes.",
       mcImage: "transparent",
     ),
+    // TODO: bgm Sakura full bloom
     Speech(
       characterName: n,
       characterText:
@@ -1872,7 +1888,7 @@ class NaokiText11 {
     Speech(
       characterName: m,
       characterText:
-          "You’re not entirely hucharacterName: n, you know. It’s entirely possible that you have parts of your raven form latent.",
+          "You’re not entirely human, you know. It’s entirely possible that you have parts of your raven form latent.",
       mcImage: "transparent",
     ),
     Speech(
@@ -1984,6 +2000,7 @@ class NaokiText11 {
           "Naoki doesn’t actually try to fly, but his gentle flapping throughout the day becomes a calming presence.",
       mcImage: "transparent",
     ),
+    // bgm music fade
   ];
 }
 
@@ -2029,7 +2046,8 @@ class NaokiText12 {
 
   List<Speech> textBank = [
     //Naoki is uneasy but finds footing in other areas - literature in the shrine, local history and ancient legend.
-    // todo bg rock gardecharacterName: n, night
+    //TODO: bg rock gardecharacterName: n, night
+    //TODO: bgm Yogetsu
     Speech(
       characterName: n,
       characterText: "I’ll do one last sweep, MC.",
@@ -2293,7 +2311,8 @@ class NaokiText13 {
 
   List<Speech> textBank = [
     // MC offers to teach Naoki things like basic reading, writing, and so forth. MC works a little too much and Naoki thinks it’s strange there’s so much human literature in MCs collection.
-    // todo bg outdoor pathway CORNER, day
+    //TODO: bg outdoor pathway CORNER, day
+    //TODO: bgm continuation from previous (Yogetsu)
     Speech(
       characterName: m,
       characterText: "Good morning, Naoki!",
@@ -2445,7 +2464,7 @@ class NaokiText14 {
   }
 
   List<Speech> textBank = [
-    // todo bg outside shrine, day
+    // TODO: bg outside shrine, day
     Speech(
       characterName: nar,
       characterText:
@@ -2528,6 +2547,7 @@ class NaokiText14 {
       characterText: "Then I will graciously accept the offer.",
       mcImage: "transparent",
     ),
+      //TODO: bgm fade
   ];
 }
 
@@ -2576,7 +2596,7 @@ class NaokiText15 {
   }
 
   List<Speech> textBank = [
-    // todo bg room, night, no Naoki
+    //TODO: bg room, night, no Naoki
     Speech(
       characterName: nar,
       characterText: "/Thump, thump, thump!/",
@@ -2602,6 +2622,7 @@ class NaokiText15 {
       characterName: m,
       characterText: "Gah! Y-yes? Naoki, it’s late!",
       mcImage: "transparent",
+    //TODO: bgm Summer Cloud
     ),
     Speech(
       characterName: nar,
@@ -2701,7 +2722,7 @@ class NaokiText15 {
     Speech(
       characterName: m,
       characterText:
-          "Not really… I suppose I like bright, natural colors. Greens and yellows and blues",
+          "Not really… I suppose I like bright, natural colors. Greens and yellows and blues.",
       mcImage: "mc_neutral",
     ),
     Speech(
@@ -2738,6 +2759,7 @@ class NaokiText15 {
       characterText: "Jeez…",
       mcImage: "mc_happy",
     ),
+    //TODO: bgm fade
   ];
 }
 
@@ -2787,7 +2809,7 @@ class NaokiText16 {
 
   List<Speech> textBank = [
     //Naoki finds his first trap - a dying fox within it and he’s shaken about poachers/humans
-    // todo bg bamboo forest, day
+    //TODO: bg bamboo forest, day
     Speech(
       characterName: m,
       characterText:
@@ -2808,7 +2830,7 @@ class NaokiText16 {
     Speech(
       characterName: nar,
       characterText:
-          "He’s going to think I don’t trust hicharacterName: m, but I’m honestly just concerned…",
+          "He’s going to think I don’t trust him, but I’m honestly just concerned…",
       mcImage: "transparent",
     ),
     Speech(
@@ -2820,6 +2842,7 @@ class NaokiText16 {
       characterName: n,
       characterText: "!",
       sideCharImage: "naoki_frown",
+    //TODO: bgm DIsordered Hair
     ),
     Speech(
       characterName: n,
@@ -2944,7 +2967,7 @@ class NaokiText16 {
     ),
     Speech(
       characterName: m,
-      characterText: "If you can pet, that’d help a lot.",
+      characterText: "If you can pet her, that’d help a lot.",
       mcImage: "mc_happy",
     ),
     Speech(
@@ -3104,6 +3127,7 @@ class NaokiText16 {
       characterText: "Appreciated.",
       mcImage: "mc_happy",
     ),
+    //TODO: bgm fade
   ];
 }
 
@@ -3148,7 +3172,7 @@ class NaokiText17 {
   }
 
   List<Speech> textBank = [
-    // todo bg room, day
+    //TODO: bg room, day
     Speech(
       characterName: m,
       characterText:
@@ -3192,7 +3216,8 @@ class NaokiText17 {
       mcImage: "mc_neutral",
     ),
 
-    // todo bg pond, day
+    //TODO: bg pond, day
+    //TODO: bgm Edgeside
     Speech(
       characterName: m,
       characterText: "Here it is.",
@@ -3321,10 +3346,11 @@ class NaokiText17 {
       characterText: "So poachers… poachers are why we survey the mountain?",
       sideCharImage: "naoki_frown",
     ),
+    //TODO: bgm Thousand Year Old Forest
     Speech(
       characterName: m,
       characterText:
-          "They’re not the sole reasocharacterName: n, but they are the biggest and most immediate one.",
+          "They’re not the sole reason, but they are the biggest and most immediate one.",
       mcImage: "mc_neutral",
     ),
     Speech(
@@ -3346,7 +3372,7 @@ class NaokiText17 {
     Speech(
       characterName: m,
       characterText:
-          "I can’t say for certaicharacterName: n, but it’s possible I suppose.",
+          "I can’t say for certain, but it’s possible.",
       mcImage: "transparent",
     ),
     Speech(
@@ -3437,6 +3463,7 @@ class NaokiText17 {
           "Despite wanting to hurry back to work, I say nothing and let the peaceful moment pass.",
       mcImage: "transparent",
     ),
+    //TODO: bgm music stop/fade
   ];
 }
 
@@ -3481,7 +3508,8 @@ class NaokiText18 {
   }
 
   List<Speech> textBank = [
-    // todo bg pottery room, day
+    //TODO: bg pottery room, day
+    //TODO: bgm Yogetsu
     Speech(
       characterName: m,
       characterText: "Naoki, it’s going to burn…",
@@ -3603,7 +3631,7 @@ class NaokiText18 {
     Speech(
       characterName: nar,
       characterText:
-          "Naoki bows when he exits, wings half-extended upwards as he does.",
+          "Naoki bows when he exits, wings half-extended as he does.",
       mcImage: "mc_neutral",
     ),
   ];
@@ -3652,6 +3680,7 @@ class NaokiText19 {
   List<Speech> textBank = [
     // Naoki’s first visit to the tribute house, MC sees his fear and anger
     // todo bg temple entrance, day
+    //TODO: bgm continued from before (Yogetsu)
     Speech(
       characterName: m,
       characterText:
@@ -3723,6 +3752,7 @@ class NaokiText19 {
       characterText: "Here we are.",
       mcImage: "mc_neutral",
     ),
+    //TODO: bgm stops/fades
     Speech(
       characterName: nar,
       characterText:
@@ -3753,6 +3783,7 @@ class NaokiText19 {
           "When he tears his gaze away from the crowd and back to me, I shiver.",
       mcImage: "mc_neutral",
     ),
+    //TODO: bgm Disordered Hair
     Speech(
       characterName: nar,
       characterText:
@@ -3787,12 +3818,12 @@ class NaokiText19 {
       mcImage: "mc_happy",
     ),
     Speech(
-      characterName: n,
+      characterName: man,
       characterText: "Blessings to you, Goddess!",
       mcImage: "transparent",
     ),
     Speech(
-      characterName: n,
+      characterName: man,
       characterText: "I have a request, if possible…",
       mcImage: "transparent",
     ),
@@ -3809,7 +3840,7 @@ class NaokiText19 {
     ),
     // screen shake
     Speech(
-      characterName: n,
+      characterName: man,
       characterText: "Oof!",
       mcImage: "mc_blush",
     ),
@@ -3830,7 +3861,7 @@ class NaokiText19 {
     ),
     // screen shake
     Speech(
-      characterName: n,
+      characterName: man,
       characterText:
           "Did I do something wrong? Is that your new guard? I thought he was your familiar?",
       mcImage: "transparent",
@@ -3842,12 +3873,12 @@ class NaokiText19 {
       mcImage: "transparent",
     ),
     Speech(
-      characterName: n,
+      characterName: man,
       characterText: "Okay…",
       mcImage: "transparent",
     ),
     Speech(
-      characterName: n,
+      characterName: man,
       characterText: "I was just going to ask for less rain on the west…",
       mcImage: "transparent",
     ),
@@ -3888,6 +3919,7 @@ class NaokiText19 {
           "The crowd is understandably dissatisfied by the sudden ending, but they don’t question me as they depart, some leaving behind their tributes.",
       mcImage: "mc_neutral",
     ),
+    //TODO: bgm music fades
     Speech(
       characterName: m,
       characterText: "We will only carry back the perishables for now.",
@@ -3944,6 +3976,7 @@ class NaokiText20 {
 
   List<Speech> textBank = [
     // todo: bg mountain view, sunset
+    //TODO: bgm  Month Nori Yuki River
     Speech(
       characterName: nar,
       characterText:
@@ -4080,7 +4113,7 @@ class NaokiText20 {
     ),
     Speech(
       characterName: n,
-      characterText: "You ask me to hide my wings!",
+      characterText: "You ask me to hide my /wings/!",
       sideCharImage: "naoki_frown",
     ),
     Speech(
@@ -4170,6 +4203,7 @@ class NaokiText20 {
       characterText: "…I need an answer.",
       mcImage: "transparent",
     ),
+    ////TODO: bgm music fades
     Speech(
       characterName: n,
       characterText:
