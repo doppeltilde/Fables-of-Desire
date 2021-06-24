@@ -3,6 +3,8 @@ on:
     pull_request:
       branches:
         - main
+        - alpha
+        - beta
 jobs:
   build:
     name: Build Apps
