@@ -15,8 +15,8 @@ class VNScaffold extends StatefulWidget {
   final textSound;
   final route;
   final nextRoute;
-  Function? callback;
-  int? updatedNumber;
+  final Function? callback;
+  final int? updatedNumber;
   VNScaffold({
     this.bgImage,
     this.textSound,
@@ -26,8 +26,7 @@ class VNScaffold extends StatefulWidget {
     this.updatedNumber,
   });
   @override
-  _VNState createState() =>
-      _VNState(callback: this.callback, updatedNumber: this.updatedNumber);
+  _VNState createState() => _VNState();
 }
 
 class _VNState extends State<VNScaffold> {
@@ -38,9 +37,9 @@ class _VNState extends State<VNScaffold> {
   String? notHome;
   SharedPreferences? sharedPreferences;
 
-  Function? callback;
-  int? updatedNumber;
-  _VNState({this.callback, this.updatedNumber});
+  // Function? callback;
+  // int? updatedNumber;
+  // _VNState({this.callback, this.updatedNumber});
 
   @override
   void didChangeDependencies() {
@@ -218,9 +217,11 @@ class _VNState extends State<VNScaffold> {
                           });
                         } else {
                           widget.textSound.nextQuestion();
+                          if (widget.callback != null) {
+                            widget.callback!(widget.textSound.getNumber());
+                          }
                         }
                       });
-                      this.callback!(widget.textSound.getNumber());
                     },
                     child: InterludeTextSound(
                       bgImage: "assets/images/bgs/" + widget.bgImage + ".jpg",
