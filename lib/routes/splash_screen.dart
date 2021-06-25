@@ -190,14 +190,16 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.of(context).pushNamed(HomePage.currentRoute);
     }
 
-    if (lastRoute != null ||
-        lastRoute != '/' ||
-        lastRoute != "/home" ||
-        previousRoute != "/home" ||
-        previousRoute != null ||
+    if (lastRoute != null &&
+        lastRoute != '/' &&
+        lastRoute != "/home" &&
+        previousRoute != "/home" &&
+        previousRoute != null &&
         previousRoute != '/') {
       if (GlobalAudio.playAudio.isPlaying == false &&
           notHome != "The_world_of_peace") {
+        print(lastRoute);
+        print(previousRoute);
         GlobalAudio.playAudio.getBGM(notHome!);
       }
     }

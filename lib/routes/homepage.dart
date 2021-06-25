@@ -20,7 +20,6 @@ class HomePage extends StatefulWidget {
 
 class _WildfyreState extends State<HomePage> {
   bool isLightTheme = true;
-
   double? opacity = 0.0;
 
   SharedPreferences? sharedPreferences;
@@ -100,6 +99,7 @@ class _WildfyreState extends State<HomePage> {
                                         side: BorderSide(color: Colors.white))),
                                 onPressed: () {
                                   GlobalAudio.playAudio.stopAudio();
+                                  GlobalAudio.playAudio.isPlaying = true;
                                   Navigator.of(context).pushNamed('/testintro');
                                 },
                               ),
@@ -127,6 +127,7 @@ class _WildfyreState extends State<HomePage> {
                                         side: BorderSide(color: Colors.white))),
                                 onPressed: () {
                                   GlobalAudio.playAudio.stopAudio();
+                                  GlobalAudio.playAudio.isPlaying = true;
                                   Navigator.of(context).pushNamed('/intro');
                                 },
                               ),

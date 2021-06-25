@@ -15,9 +15,19 @@ class VNScaffold extends StatefulWidget {
   final textSound;
   final route;
   final nextRoute;
-  VNScaffold({this.bgImage, this.textSound, this.route, this.nextRoute});
+  Function? callback;
+  int? updatedNumber;
+  VNScaffold({
+    this.bgImage,
+    this.textSound,
+    this.route,
+    this.nextRoute,
+    this.callback,
+    this.updatedNumber,
+  });
   @override
-  _VNState createState() => _VNState();
+  _VNState createState() =>
+      _VNState(callback: this.callback, updatedNumber: this.updatedNumber);
 }
 
 class _VNState extends State<VNScaffold> {
@@ -27,6 +37,10 @@ class _VNState extends State<VNScaffold> {
   double? opacityIntro = 1.0;
   String? notHome;
   SharedPreferences? sharedPreferences;
+
+  Function? callback;
+  int? updatedNumber;
+  _VNState({this.callback, this.updatedNumber});
 
   @override
   void didChangeDependencies() {
@@ -50,6 +64,13 @@ class _VNState extends State<VNScaffold> {
       } catch (e) {
         print(e);
       }
+    } else {
+      try {
+        GlobalAudio.playAudio.stopAudio();
+        GlobalAudio.playAudio.getBGM(widget.textSound.getBGM().toString());
+      } catch (e) {
+        print(e);
+      }
     }
 
     Future.delayed(Duration(seconds: 1), () {
@@ -61,7 +82,10 @@ class _VNState extends State<VNScaffold> {
       sharedPreferences = sp;
       notHome = sharedPreferences!.getString("notHome");
       try {
-        notHome = widget.textSound.getBGM().toString();
+        if (widget.textSound.getBGM() != null ||
+            widget.textSound.getBGM().isNotEmpty) {
+          notHome = widget.textSound.getBGM().toString();
+        }
       } catch (e) {
         print(e);
       }
@@ -196,6 +220,7 @@ class _VNState extends State<VNScaffold> {
                           widget.textSound.nextQuestion();
                         }
                       });
+                      this.callback!(widget.textSound.getNumber());
                     },
                     child: InterludeTextSound(
                       bgImage: "assets/images/bgs/" + widget.bgImage + ".jpg",
