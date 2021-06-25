@@ -111,329 +111,688 @@ class _LoadGameState extends State<LoadGame> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-          colorFilter:
-              ColorFilter.mode(Colors.black.withOpacity(1), BlendMode.dstATop),
-          image: AssetImage("assets/images/bgs/mininature_003_19201440.jpg"),
-          fit: BoxFit.cover,
-        )),
-        child: SafeArea(
-            child: Scaffold(
-          appBar: appbar(context, "LOAD GAME") as PreferredSizeWidget?,
-          backgroundColor: Colors.transparent,
-          resizeToAvoidBottomInset: false,
-          body: Stack(children: <Widget>[
-            Center(
-                child: Container(
-                    child: SafeArea(
-                        child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Center(
+    return Builder(builder: (context) {
+      if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
+        return Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+              colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(1), BlendMode.dstATop),
+              image:
+                  AssetImage("assets/images/bgs/mininature_003_19201440.jpg"),
+              fit: BoxFit.cover,
+            )),
+            child: SafeArea(
+                child: Scaffold(
+              appBar: appbar(context, "LOAD GAME") as PreferredSizeWidget?,
+              backgroundColor: Colors.transparent,
+              resizeToAvoidBottomInset: false,
+              body: Stack(children: <Widget>[
+                Center(
                     child: Container(
-                      child: Row(
-                        children: <Widget>[
-                          Spacer(),
-                          Column(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  if (saveSlotOne == null ||
-                                      saveSlotOne!.isEmpty) {
-                                    print("EMPTY");
-                                  } else {
-                                    if (Platform.isWindows ||
-                                        Platform.isLinux) {
-                                      setState(() {
-                                        GameAudioDesktop.playAudio.stop();
-                                      });
+                        child: SafeArea(
+                            child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Center(
+                        child: Container(
+                          child: Row(
+                            children: <Widget>[
+                              Spacer(),
+                              Column(
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      if (saveSlotOne == null ||
+                                          saveSlotOne!.isEmpty) {
+                                        print("EMPTY");
+                                      } else {
+                                        if (Platform.isWindows ||
+                                            Platform.isLinux) {
+                                          setState(() {
+                                            GameAudioDesktop.playAudio.stop();
+                                          });
+                                        } else {
+                                          setState(() {
+                                            GameAudio.bgm.stop();
+                                          });
+                                        }
+                                        Navigator.of(context)
+                                            .pushNamed('$saveSlotOne');
+                                      }
+                                    },
+                                    child: Builder(builder: (context) {
+                                      if (saveSlotOne == null ||
+                                          saveSlotOne!.isEmpty) {
+                                        return ChibiNeutral(
+                                          chibiImg: "MC_Happy",
+                                        );
+                                      } else {
+                                        return ChibiHappy(
+                                          chibiImg: "MC_Happy",
+                                        );
+                                      }
+                                    }),
+                                  ),
+                                  Builder(builder: (context) {
+                                    if (saveSlotOne == null ||
+                                        saveSlotOne!.isEmpty) {
+                                      return Text(
+                                        "\nEMPTY",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Aleo",
+                                            fontSize: 20),
+                                      );
                                     } else {
-                                      setState(() {
-                                        GameAudio.bgm.stop();
-                                      });
+                                      return Text(
+                                        "\nSAVED\n$saveSlotOneDate\n",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Aleo",
+                                            fontSize: 20),
+                                      );
                                     }
-                                    Navigator.of(context)
-                                        .pushNamed('$saveSlotOne');
-                                  }
-                                },
-                                child: Builder(builder: (context) {
-                                  if (saveSlotOne == null ||
-                                      saveSlotOne!.isEmpty) {
-                                    return ChibiNeutral(
-                                      chibiImg: "MC_Happy",
-                                    );
-                                  } else {
-                                    return ChibiHappy(
-                                      chibiImg: "MC_Happy",
-                                    );
-                                  }
-                                }),
-                              ),
-                              Builder(builder: (context) {
-                                if (saveSlotOne == null ||
-                                    saveSlotOne!.isEmpty) {
-                                  return Text(
-                                    "\nEMPTY",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Aleo",
-                                        fontSize: 20),
-                                  );
-                                } else {
-                                  return Text(
-                                    "\nSAVED\n$saveSlotOneDate\n",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Aleo",
-                                        fontSize: 20),
-                                  );
-                                }
-                              }),
-                              Builder(
-                                builder: (context) {
-                                  if (saveSlotOne == null ||
-                                      saveSlotOne!.isEmpty) {
-                                    return Column(children: [
-                                      SizedBox.shrink(),
-                                    ]);
-                                  } else {
-                                    return Column(
-                                      children: [
-                                        InkWell(
-                                            onTap: () async {
-                                              SharedPreferences prefs =
-                                                  await SharedPreferences
-                                                      .getInstance();
+                                  }),
+                                  Builder(
+                                    builder: (context) {
+                                      if (saveSlotOne == null ||
+                                          saveSlotOne!.isEmpty) {
+                                        return Column(children: [
+                                          SizedBox.shrink(),
+                                        ]);
+                                      } else {
+                                        return Column(
+                                          children: [
+                                            InkWell(
+                                                onTap: () async {
+                                                  SharedPreferences prefs =
+                                                      await SharedPreferences
+                                                          .getInstance();
 
-                                              setState(() {
-                                                prefs.remove("saveSlotOne");
-                                                saveSlotOne = null;
-                                              });
-                                            },
-                                            child: Container(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 10, horizontal: 25),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(30),
-                                                color: Colors.redAccent,
-                                              ),
-                                              child: Text(
-                                                "DELETE SAVE",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontFamily: "Aleo",
-                                                    fontSize: 20),
-                                              ),
-                                            )),
-                                      ],
-                                    );
-                                  }
-                                },
+                                                  setState(() {
+                                                    prefs.remove("saveSlotOne");
+                                                    saveSlotOne = null;
+                                                  });
+                                                },
+                                                child: Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 10,
+                                                      horizontal: 25),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            30),
+                                                    color: Colors.redAccent,
+                                                  ),
+                                                  child: Text(
+                                                    "DELETE SAVE",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontFamily: "Aleo",
+                                                        fontSize: 20),
+                                                  ),
+                                                )),
+                                          ],
+                                        );
+                                      }
+                                    },
+                                  ),
+                                ],
                               ),
+                              Spacer(),
+                              Column(
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      if (saveSlot2 == null ||
+                                          saveSlot2!.isEmpty) {
+                                        print("EMPTY");
+                                      } else {
+                                        if (Platform.isWindows ||
+                                            Platform.isLinux) {
+                                          setState(() {
+                                            GameAudioDesktop.playAudio.stop();
+                                          });
+                                        } else {
+                                          setState(() {
+                                            GameAudio.bgm.stop();
+                                          });
+                                        }
+                                        Navigator.of(context)
+                                            .pushNamed('$saveSlot2');
+                                      }
+                                    },
+                                    child: Builder(builder: (context) {
+                                      if (saveSlot2 == null ||
+                                          saveSlot2!.isEmpty) {
+                                        return ChibiNeutral(
+                                          chibiImg: "MC_Happy",
+                                        );
+                                      } else {
+                                        return ChibiHappy(
+                                          chibiImg: "MC_Happy",
+                                        );
+                                      }
+                                    }),
+                                  ),
+                                  Builder(builder: (context) {
+                                    if (saveSlot2 == null ||
+                                        saveSlot2!.isEmpty) {
+                                      return Text(
+                                        "\nEMPTY",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Aleo",
+                                            fontSize: 20),
+                                      );
+                                    } else {
+                                      return Text(
+                                        "\nSAVED\n$saveSlot2Date\n",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Aleo",
+                                            fontSize: 20),
+                                      );
+                                    }
+                                  }),
+                                  Builder(
+                                    builder: (context) {
+                                      if (saveSlot2 == null ||
+                                          saveSlot2!.isEmpty) {
+                                        return Column(children: [
+                                          SizedBox.shrink(),
+                                        ]);
+                                      } else {
+                                        return Column(
+                                          children: [
+                                            ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                    primary: Colors.redAccent,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 20,
+                                                            horizontal: 30)),
+                                                onPressed: () async {
+                                                  SharedPreferences prefs =
+                                                      await SharedPreferences
+                                                          .getInstance();
+
+                                                  setState(() {
+                                                    prefs.remove("saveSlot2");
+                                                    saveSlot2 = null;
+                                                  });
+                                                },
+                                                child: Text(
+                                                  "DELETE SAVE",
+                                                  style: TextStyle(
+                                                      fontFamily: "Aleo",
+                                                      color: Colors.white,
+                                                      fontSize: 18),
+                                                ))
+                                          ],
+                                        );
+                                      }
+                                    },
+                                  ),
+                                ],
+                              ),
+                              Spacer(),
+                              Column(
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      if (saveSlot3 == null ||
+                                          saveSlot3!.isEmpty) {
+                                        print("EMPTY");
+                                      } else {
+                                        if (Platform.isWindows ||
+                                            Platform.isLinux) {
+                                          setState(() {
+                                            GameAudioDesktop.playAudio.stop();
+                                          });
+                                        } else {
+                                          setState(() {
+                                            GameAudio.bgm.stop();
+                                          });
+                                        }
+                                        Navigator.of(context)
+                                            .pushNamed('$saveSlot3');
+                                      }
+                                    },
+                                    child: Builder(builder: (context) {
+                                      if (saveSlot3 == null ||
+                                          saveSlot3!.isEmpty) {
+                                        return ChibiNeutral(
+                                          chibiImg: "MC_Happy",
+                                        );
+                                      } else {
+                                        return ChibiHappy(
+                                          chibiImg: "MC_Happy",
+                                        );
+                                      }
+                                    }),
+                                  ),
+                                  Builder(builder: (context) {
+                                    if (saveSlot3 == null ||
+                                        saveSlot3!.isEmpty) {
+                                      return Text(
+                                        "\nEMPTY",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Aleo",
+                                            fontSize: 20),
+                                      );
+                                    } else {
+                                      return Text(
+                                        "\nSAVED\n$saveSlot3Date\n",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Aleo",
+                                            fontSize: 20),
+                                      );
+                                    }
+                                  }),
+                                  Builder(
+                                    builder: (context) {
+                                      if (saveSlot3 == null ||
+                                          saveSlot3!.isEmpty) {
+                                        return Column(children: [
+                                          SizedBox.shrink(),
+                                        ]);
+                                      } else {
+                                        return Column(
+                                          children: [
+                                            ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                    primary: Colors.redAccent,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 20,
+                                                            horizontal: 30)),
+                                                onPressed: () async {
+                                                  SharedPreferences prefs =
+                                                      await SharedPreferences
+                                                          .getInstance();
+
+                                                  setState(() {
+                                                    prefs.remove("saveSlot3");
+                                                    saveSlot3 = null;
+                                                  });
+                                                },
+                                                child: Text(
+                                                  "DELETE SAVE",
+                                                  style: TextStyle(
+                                                      fontFamily: "Aleo",
+                                                      color: Colors.white,
+                                                      fontSize: 18),
+                                                ))
+                                          ],
+                                        );
+                                      }
+                                    },
+                                  ),
+                                ],
+                              ),
+                              Spacer(),
                             ],
                           ),
-                          Spacer(),
-                          Column(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  if (saveSlot2 == null || saveSlot2!.isEmpty) {
-                                    print("EMPTY");
-                                  } else {
-                                    if (Platform.isWindows ||
-                                        Platform.isLinux) {
-                                      setState(() {
-                                        GameAudioDesktop.playAudio.stop();
-                                      });
-                                    } else {
-                                      setState(() {
-                                        GameAudio.bgm.stop();
-                                      });
-                                    }
-                                    Navigator.of(context)
-                                        .pushNamed('$saveSlot2');
-                                  }
-                                },
-                                child: Builder(builder: (context) {
-                                  if (saveSlot2 == null || saveSlot2!.isEmpty) {
-                                    return ChibiNeutral(
-                                      chibiImg: "MC_Happy",
-                                    );
-                                  } else {
-                                    return ChibiHappy(
-                                      chibiImg: "MC_Happy",
-                                    );
-                                  }
-                                }),
-                              ),
-                              Builder(builder: (context) {
-                                if (saveSlot2 == null || saveSlot2!.isEmpty) {
-                                  return Text(
-                                    "\nEMPTY",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Aleo",
-                                        fontSize: 20),
-                                  );
-                                } else {
-                                  return Text(
-                                    "\nSAVED\n$saveSlot2Date\n",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Aleo",
-                                        fontSize: 20),
-                                  );
-                                }
-                              }),
-                              Builder(
-                                builder: (context) {
-                                  if (saveSlot2 == null || saveSlot2!.isEmpty) {
-                                    return Column(children: [
-                                      SizedBox.shrink(),
-                                    ]);
-                                  } else {
-                                    return Column(
-                                      children: [
-                                        ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                primary: Colors.redAccent,
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: 20,
-                                                    horizontal: 30)),
-                                            onPressed: () async {
-                                              SharedPreferences prefs =
-                                                  await SharedPreferences
-                                                      .getInstance();
-
-                                              setState(() {
-                                                prefs.remove("saveSlot2");
-                                                saveSlot2 = null;
-                                              });
-                                            },
-                                            child: Text(
-                                              "DELETE SAVE",
-                                              style: TextStyle(
-                                                  fontFamily: "Aleo",
-                                                  color: Colors.white,
-                                                  fontSize: 18),
-                                            ))
-                                      ],
-                                    );
-                                  }
-                                },
-                              ),
-                            ],
-                          ),
-                          Spacer(),
-                          Column(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  if (saveSlot3 == null || saveSlot3!.isEmpty) {
-                                    print("EMPTY");
-                                  } else {
-                                    if (Platform.isWindows ||
-                                        Platform.isLinux) {
-                                      setState(() {
-                                        GameAudioDesktop.playAudio.stop();
-                                      });
-                                    } else {
-                                      setState(() {
-                                        GameAudio.bgm.stop();
-                                      });
-                                    }
-                                    Navigator.of(context)
-                                        .pushNamed('$saveSlot3');
-                                  }
-                                },
-                                child: Builder(builder: (context) {
-                                  if (saveSlot3 == null || saveSlot3!.isEmpty) {
-                                    return ChibiNeutral(
-                                      chibiImg: "MC_Happy",
-                                    );
-                                  } else {
-                                    return ChibiHappy(
-                                      chibiImg: "MC_Happy",
-                                    );
-                                  }
-                                }),
-                              ),
-                              Builder(builder: (context) {
-                                if (saveSlot3 == null || saveSlot3!.isEmpty) {
-                                  return Text(
-                                    "\nEMPTY",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Aleo",
-                                        fontSize: 20),
-                                  );
-                                } else {
-                                  return Text(
-                                    "\nSAVED\n$saveSlot3Date\n",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Aleo",
-                                        fontSize: 20),
-                                  );
-                                }
-                              }),
-                              Builder(
-                                builder: (context) {
-                                  if (saveSlot3 == null || saveSlot3!.isEmpty) {
-                                    return Column(children: [
-                                      SizedBox.shrink(),
-                                    ]);
-                                  } else {
-                                    return Column(
-                                      children: [
-                                        ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                primary: Colors.redAccent,
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: 20,
-                                                    horizontal: 30)),
-                                            onPressed: () async {
-                                              SharedPreferences prefs =
-                                                  await SharedPreferences
-                                                      .getInstance();
-
-                                              setState(() {
-                                                prefs.remove("saveSlot3");
-                                                saveSlot3 = null;
-                                              });
-                                            },
-                                            child: Text(
-                                              "DELETE SAVE",
-                                              style: TextStyle(
-                                                  fontFamily: "Aleo",
-                                                  color: Colors.white,
-                                                  fontSize: 18),
-                                            ))
-                                      ],
-                                    );
-                                  }
-                                },
-                              ),
-                            ],
-                          ),
-                          Spacer(),
-                        ],
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
+                )))),
+                backbutton(context)
+              ]),
+            )));
+      } else {
+        return Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+              colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(1), BlendMode.dstATop),
+              image:
+                  AssetImage("assets/images/bgs/mininature_003_19201440.jpg"),
+              fit: BoxFit.cover,
+            )),
+            child: SafeArea(
+                child: Scaffold(
+              appBar: AppBar(
+                elevation: 0,
+                centerTitle: true,
+                backgroundColor: Colors.green,
+                title: Text("LOAD GAME"),
               ),
-            )))),
-            backbutton(context)
-          ]),
-        )));
+              backgroundColor: Colors.transparent,
+              resizeToAvoidBottomInset: false,
+              body: Stack(children: <Widget>[
+                Center(
+                    child: Container(
+                        child: SafeArea(
+                            child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Center(
+                        child: Container(
+                          child: Row(
+                            children: <Widget>[
+                              Spacer(),
+                              Column(
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      if (saveSlotOne == null ||
+                                          saveSlotOne!.isEmpty) {
+                                        print("EMPTY");
+                                      } else {
+                                        if (Platform.isWindows ||
+                                            Platform.isLinux) {
+                                          setState(() {
+                                            GameAudioDesktop.playAudio.stop();
+                                          });
+                                        } else {
+                                          setState(() {
+                                            GameAudio.bgm.stop();
+                                          });
+                                        }
+                                        Navigator.of(context)
+                                            .pushNamed('$saveSlotOne');
+                                      }
+                                    },
+                                    child: Builder(builder: (context) {
+                                      if (saveSlotOne == null ||
+                                          saveSlotOne!.isEmpty) {
+                                        return ChibiNeutral(
+                                          chibiImg: "MC_Happy",
+                                        );
+                                      } else {
+                                        return ChibiHappy(
+                                          chibiImg: "MC_Happy",
+                                        );
+                                      }
+                                    }),
+                                  ),
+                                  Builder(builder: (context) {
+                                    if (saveSlotOne == null ||
+                                        saveSlotOne!.isEmpty) {
+                                      return Text(
+                                        "\nEMPTY",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Aleo",
+                                            fontSize: 20),
+                                      );
+                                    } else {
+                                      return Text(
+                                        "\nSAVED\n$saveSlotOneDate\n",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Aleo",
+                                            fontSize: 20),
+                                      );
+                                    }
+                                  }),
+                                  Builder(
+                                    builder: (context) {
+                                      if (saveSlotOne == null ||
+                                          saveSlotOne!.isEmpty) {
+                                        return Column(children: [
+                                          SizedBox.shrink(),
+                                        ]);
+                                      } else {
+                                        return Column(
+                                          children: [
+                                            InkWell(
+                                                onTap: () async {
+                                                  SharedPreferences prefs =
+                                                      await SharedPreferences
+                                                          .getInstance();
+
+                                                  setState(() {
+                                                    prefs.remove("saveSlotOne");
+                                                    saveSlotOne = null;
+                                                  });
+                                                },
+                                                child: Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 10,
+                                                      horizontal: 25),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            30),
+                                                    color: Colors.redAccent,
+                                                  ),
+                                                  child: Text(
+                                                    "DELETE SAVE",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontFamily: "Aleo",
+                                                        fontSize: 20),
+                                                  ),
+                                                )),
+                                          ],
+                                        );
+                                      }
+                                    },
+                                  ),
+                                ],
+                              ),
+                              Spacer(),
+                              Column(
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      if (saveSlot2 == null ||
+                                          saveSlot2!.isEmpty) {
+                                        print("EMPTY");
+                                      } else {
+                                        if (Platform.isWindows ||
+                                            Platform.isLinux) {
+                                          setState(() {
+                                            GameAudioDesktop.playAudio.stop();
+                                          });
+                                        } else {
+                                          setState(() {
+                                            GameAudio.bgm.stop();
+                                          });
+                                        }
+                                        Navigator.of(context)
+                                            .pushNamed('$saveSlot2');
+                                      }
+                                    },
+                                    child: Builder(builder: (context) {
+                                      if (saveSlot2 == null ||
+                                          saveSlot2!.isEmpty) {
+                                        return ChibiNeutral(
+                                          chibiImg: "MC_Happy",
+                                        );
+                                      } else {
+                                        return ChibiHappy(
+                                          chibiImg: "MC_Happy",
+                                        );
+                                      }
+                                    }),
+                                  ),
+                                  Builder(builder: (context) {
+                                    if (saveSlot2 == null ||
+                                        saveSlot2!.isEmpty) {
+                                      return Text(
+                                        "\nEMPTY",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Aleo",
+                                            fontSize: 20),
+                                      );
+                                    } else {
+                                      return Text(
+                                        "\nSAVED\n$saveSlot2Date\n",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Aleo",
+                                            fontSize: 20),
+                                      );
+                                    }
+                                  }),
+                                  Builder(
+                                    builder: (context) {
+                                      if (saveSlot2 == null ||
+                                          saveSlot2!.isEmpty) {
+                                        return Column(children: [
+                                          SizedBox.shrink(),
+                                        ]);
+                                      } else {
+                                        return Column(
+                                          children: [
+                                            ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                    primary: Colors.redAccent,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 20,
+                                                            horizontal: 30)),
+                                                onPressed: () async {
+                                                  SharedPreferences prefs =
+                                                      await SharedPreferences
+                                                          .getInstance();
+
+                                                  setState(() {
+                                                    prefs.remove("saveSlot2");
+                                                    saveSlot2 = null;
+                                                  });
+                                                },
+                                                child: Text(
+                                                  "DELETE SAVE",
+                                                  style: TextStyle(
+                                                      fontFamily: "Aleo",
+                                                      color: Colors.white,
+                                                      fontSize: 18),
+                                                ))
+                                          ],
+                                        );
+                                      }
+                                    },
+                                  ),
+                                ],
+                              ),
+                              Spacer(),
+                              Column(
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      if (saveSlot3 == null ||
+                                          saveSlot3!.isEmpty) {
+                                        print("EMPTY");
+                                      } else {
+                                        if (Platform.isWindows ||
+                                            Platform.isLinux) {
+                                          setState(() {
+                                            GameAudioDesktop.playAudio.stop();
+                                          });
+                                        } else {
+                                          setState(() {
+                                            GameAudio.bgm.stop();
+                                          });
+                                        }
+                                        Navigator.of(context)
+                                            .pushNamed('$saveSlot3');
+                                      }
+                                    },
+                                    child: Builder(builder: (context) {
+                                      if (saveSlot3 == null ||
+                                          saveSlot3!.isEmpty) {
+                                        return ChibiNeutral(
+                                          chibiImg: "MC_Happy",
+                                        );
+                                      } else {
+                                        return ChibiHappy(
+                                          chibiImg: "MC_Happy",
+                                        );
+                                      }
+                                    }),
+                                  ),
+                                  Builder(builder: (context) {
+                                    if (saveSlot3 == null ||
+                                        saveSlot3!.isEmpty) {
+                                      return Text(
+                                        "\nEMPTY",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Aleo",
+                                            fontSize: 20),
+                                      );
+                                    } else {
+                                      return Text(
+                                        "\nSAVED\n$saveSlot3Date\n",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Aleo",
+                                            fontSize: 20),
+                                      );
+                                    }
+                                  }),
+                                  Builder(
+                                    builder: (context) {
+                                      if (saveSlot3 == null ||
+                                          saveSlot3!.isEmpty) {
+                                        return Column(children: [
+                                          SizedBox.shrink(),
+                                        ]);
+                                      } else {
+                                        return Column(
+                                          children: [
+                                            ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                    primary: Colors.redAccent,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 20,
+                                                            horizontal: 30)),
+                                                onPressed: () async {
+                                                  SharedPreferences prefs =
+                                                      await SharedPreferences
+                                                          .getInstance();
+
+                                                  setState(() {
+                                                    prefs.remove("saveSlot3");
+                                                    saveSlot3 = null;
+                                                  });
+                                                },
+                                                child: Text(
+                                                  "DELETE SAVE",
+                                                  style: TextStyle(
+                                                      fontFamily: "Aleo",
+                                                      color: Colors.white,
+                                                      fontSize: 18),
+                                                ))
+                                          ],
+                                        );
+                                      }
+                                    },
+                                  ),
+                                ],
+                              ),
+                              Spacer(),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )))),
+              ]),
+            )));
+      }
+    });
   }
 }

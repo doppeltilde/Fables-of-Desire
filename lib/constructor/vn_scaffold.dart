@@ -44,13 +44,13 @@ class _VNState extends State<VNScaffold> {
   void initState() {
     super.initState();
 
-    //if (GlobalAudio.playAudio.isPlaying == false) {
-    try {
-      GlobalAudio.playAudio.getBGM(widget.textSound.getBGM().toString());
-    } catch (e) {
-      print(e);
+    if (GlobalAudio.playAudio.isPlaying == false) {
+      try {
+        GlobalAudio.playAudio.getBGM(widget.textSound.getBGM().toString());
+      } catch (e) {
+        print(e);
+      }
     }
-    //}
 
     Future.delayed(Duration(seconds: 1), () {
       setState(() {

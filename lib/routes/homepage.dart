@@ -99,6 +99,7 @@ class _WildfyreState extends State<HomePage> {
                                             BorderRadius.circular(40.0),
                                         side: BorderSide(color: Colors.white))),
                                 onPressed: () {
+                                  GlobalAudio.playAudio.stopAudio();
                                   Navigator.of(context).pushNamed('/testintro');
                                 },
                               ),
@@ -125,6 +126,7 @@ class _WildfyreState extends State<HomePage> {
                                             BorderRadius.circular(40.0),
                                         side: BorderSide(color: Colors.white))),
                                 onPressed: () {
+                                  GlobalAudio.playAudio.stopAudio();
                                   Navigator.of(context).pushNamed('/intro');
                                 },
                               ),

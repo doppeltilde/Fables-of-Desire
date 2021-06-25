@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fablesofdesire/global/audio/global_audio.dart';
 import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/global/settings/settings_changers.dart';
@@ -41,176 +43,393 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-          colorFilter: new ColorFilter.mode(
-              Colors.black.withOpacity(1), BlendMode.dstATop),
-          image: AssetImage("assets/images/bgs/mininature_003_19201440.jpg"),
-          fit: BoxFit.cover,
-        )),
-        child: Scaffold(
-            appBar: appbar(context, "SETTINGS") as PreferredSizeWidget?,
-            resizeToAvoidBottomInset: false,
-            backgroundColor: Colors.transparent,
-            body: Stack(children: <Widget>[
-              Builder(builder: (context) {
-                if (widget.route != "/home") {
-                  return Center(
-                    child: Container(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                        child: SafeArea(
-                          child: Row(
-                            children: <Widget>[
-                              Flexible(
-                                child: SingleChildScrollView(
-                                  child: SettingsChangers(),
-                                ),
-                              ),
-                              Flexible(
-                                child: Container(
-                                  padding: EdgeInsets.only(left: 15),
-                                  child: SingleChildScrollView(
-                                    child: Column(
-                                      children: <Widget>[
-                                        Builder(
-                                          builder: (context) {
-                                            if (widget.route != "/home") {
-                                              return InkWell(
-                                                onTap: () => Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        SaveGame(
-                                                      route: widget.route,
-                                                    ),
-                                                  ),
-                                                ),
-                                                child: Container(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      2,
-                                                  height: 55,
-                                                  padding: EdgeInsets.symmetric(
-                                                    horizontal: 20,
-                                                  ),
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30),
-                                                    color: Theme.of(context)
-                                                        .cardColor,
-                                                  ),
-                                                  child: Row(
-                                                    children: <Widget>[
-                                                      Icon(
-                                                        Icons.save,
-                                                        size: 35,
-                                                      ),
-                                                      SizedBox(width: 15),
-                                                      Text(
-                                                        "SAVE GAME",
-                                                        style: TextStyle(
-                                                            fontFamily: "Julee",
-                                                            fontSize: 28),
-                                                      ),
-                                                      Spacer(),
-                                                      Icon(
-                                                        Icons
-                                                            .chevron_right_rounded,
-                                                        color: Colors.black,
-                                                        size: 25,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              );
-                                            } else {
-                                              return SizedBox.shrink();
-                                            }
-                                          },
-                                        ),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
-                                        Builder(
-                                          builder: (context) {
-                                            if (widget.route != "/home") {
-                                              return InkWell(
-                                                onTap: () =>
-                                                    showAlertDialog(context),
-                                                child: Container(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      2,
-                                                  height: 55,
-                                                  padding: EdgeInsets.symmetric(
-                                                    horizontal: 20,
-                                                  ),
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30),
-                                                    color: Colors.red,
-                                                  ),
-                                                  child: Row(
-                                                    children: <Widget>[
-                                                      Icon(
-                                                        Icons.restart_alt,
-                                                        color: Colors.white,
-                                                        size: 35,
-                                                      ),
-                                                      SizedBox(width: 15),
-                                                      Text(
-                                                        "Go to Main Menu",
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontFamily: "Julee",
-                                                            fontSize: 28),
-                                                      ),
-                                                      Spacer(),
-                                                      Icon(
-                                                        Icons
-                                                            .chevron_right_rounded,
-                                                        color: Colors.white,
-                                                        size: 25,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              );
-                                            } else {
-                                              return SizedBox.shrink();
-                                            }
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                } else {
-                  return Center(
-                      child: Container(
-                          width: MediaQuery.of(context).size.width / 1.7,
-                          child: Padding(
+      decoration: BoxDecoration(
+          image: DecorationImage(
+        colorFilter: new ColorFilter.mode(
+            Colors.black.withOpacity(1), BlendMode.dstATop),
+        image: AssetImage("assets/images/bgs/mininature_003_19201440.jpg"),
+        fit: BoxFit.cover,
+      )),
+      child: Builder(
+        builder: (context) {
+          if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
+            return Scaffold(
+              appBar: appbar(context, "SETTINGS") as PreferredSizeWidget?,
+              resizeToAvoidBottomInset: false,
+              backgroundColor: Colors.transparent,
+              body: Stack(
+                children: <Widget>[
+                  Builder(
+                    builder: (context) {
+                      if (widget.route != "/home") {
+                        return Center(
+                          child: Container(
+                            child: Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 5),
-                              child: SingleChildScrollView(
-                                child: SettingsChangers(),
-                              ))));
-                }
-              }),
-              backbutton(context),
-            ])));
+                                  const EdgeInsets.symmetric(horizontal: 30.0),
+                              child: SafeArea(
+                                child: Row(
+                                  children: <Widget>[
+                                    Flexible(
+                                      child: SingleChildScrollView(
+                                        child: SettingsChangers(),
+                                      ),
+                                    ),
+                                    Flexible(
+                                      child: Container(
+                                        padding: EdgeInsets.only(left: 15),
+                                        child: SingleChildScrollView(
+                                          child: Column(
+                                            children: <Widget>[
+                                              Builder(
+                                                builder: (context) {
+                                                  if (widget.route != "/home") {
+                                                    return InkWell(
+                                                      onTap: () =>
+                                                          Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              SaveGame(
+                                                            route: widget.route,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      child: Container(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            2,
+                                                        height: 55,
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                          horizontal: 20,
+                                                        ),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(30),
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .cardColor,
+                                                        ),
+                                                        child: Row(
+                                                          children: <Widget>[
+                                                            Icon(
+                                                              Icons.save,
+                                                              size: 35,
+                                                            ),
+                                                            SizedBox(width: 15),
+                                                            Text(
+                                                              "SAVE GAME",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Julee",
+                                                                  fontSize: 28),
+                                                            ),
+                                                            Spacer(),
+                                                            Icon(
+                                                              Icons
+                                                                  .chevron_right_rounded,
+                                                              color:
+                                                                  Colors.black,
+                                                              size: 25,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    );
+                                                  } else {
+                                                    return SizedBox.shrink();
+                                                  }
+                                                },
+                                              ),
+                                              SizedBox(
+                                                height: 15,
+                                              ),
+                                              Builder(
+                                                builder: (context) {
+                                                  if (widget.route != "/home") {
+                                                    return InkWell(
+                                                      onTap: () =>
+                                                          showAlertDialog(
+                                                              context),
+                                                      child: Container(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            2,
+                                                        height: 55,
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                          horizontal: 20,
+                                                        ),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(30),
+                                                          color: Colors.red,
+                                                        ),
+                                                        child: Row(
+                                                          children: <Widget>[
+                                                            Icon(
+                                                              Icons.restart_alt,
+                                                              color:
+                                                                  Colors.white,
+                                                              size: 35,
+                                                            ),
+                                                            SizedBox(width: 15),
+                                                            Text(
+                                                              "Go to Main Menu",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontFamily:
+                                                                      "Julee",
+                                                                  fontSize: 28),
+                                                            ),
+                                                            Spacer(),
+                                                            Icon(
+                                                              Icons
+                                                                  .chevron_right_rounded,
+                                                              color:
+                                                                  Colors.white,
+                                                              size: 25,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    );
+                                                  } else {
+                                                    return SizedBox.shrink();
+                                                  }
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      } else {
+                        return Center(
+                            child: Container(
+                                width: MediaQuery.of(context).size.width / 1.7,
+                                child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 5),
+                                    child: SingleChildScrollView(
+                                      child: SettingsChangers(),
+                                    ))));
+                      }
+                    },
+                  ),
+                  backbutton(context),
+                ],
+              ),
+            );
+          } else {
+            return Scaffold(
+              appBar: AppBar(
+                elevation: 0,
+                centerTitle: true,
+                backgroundColor: Colors.green,
+                title: Text("SETTINGS"),
+              ),
+              resizeToAvoidBottomInset: false,
+              backgroundColor: Colors.transparent,
+              body: Stack(
+                children: <Widget>[
+                  Builder(
+                    builder: (context) {
+                      if (widget.route != "/home") {
+                        return Center(
+                          child: Container(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 30.0),
+                              child: SafeArea(
+                                child: Row(
+                                  children: <Widget>[
+                                    Flexible(
+                                      child: SingleChildScrollView(
+                                        child: SettingsChangers(),
+                                      ),
+                                    ),
+                                    Flexible(
+                                      child: Container(
+                                        padding: EdgeInsets.only(left: 15),
+                                        child: SingleChildScrollView(
+                                          child: Column(
+                                            children: <Widget>[
+                                              Builder(
+                                                builder: (context) {
+                                                  if (widget.route != "/home") {
+                                                    return InkWell(
+                                                      onTap: () =>
+                                                          Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              SaveGame(
+                                                            route: widget.route,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      child: Container(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            2,
+                                                        height: 55,
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                          horizontal: 20,
+                                                        ),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(30),
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .cardColor,
+                                                        ),
+                                                        child: Row(
+                                                          children: <Widget>[
+                                                            Icon(
+                                                              Icons.save,
+                                                              size: 35,
+                                                            ),
+                                                            SizedBox(width: 15),
+                                                            Text(
+                                                              "SAVE GAME",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Julee",
+                                                                  fontSize: 28),
+                                                            ),
+                                                            Spacer(),
+                                                            Icon(
+                                                              Icons
+                                                                  .chevron_right_rounded,
+                                                              color:
+                                                                  Colors.black,
+                                                              size: 25,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    );
+                                                  } else {
+                                                    return SizedBox.shrink();
+                                                  }
+                                                },
+                                              ),
+                                              SizedBox(
+                                                height: 15,
+                                              ),
+                                              Builder(
+                                                builder: (context) {
+                                                  if (widget.route != "/home") {
+                                                    return InkWell(
+                                                      onTap: () =>
+                                                          showAlertDialog(
+                                                              context),
+                                                      child: Container(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            2,
+                                                        height: 55,
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                          horizontal: 20,
+                                                        ),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(30),
+                                                          color: Colors.red,
+                                                        ),
+                                                        child: Row(
+                                                          children: <Widget>[
+                                                            Icon(
+                                                              Icons.restart_alt,
+                                                              color:
+                                                                  Colors.white,
+                                                              size: 35,
+                                                            ),
+                                                            SizedBox(width: 15),
+                                                            Text(
+                                                              "Go to Main Menu",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontFamily:
+                                                                      "Julee",
+                                                                  fontSize: 28),
+                                                            ),
+                                                            Spacer(),
+                                                            Icon(
+                                                              Icons
+                                                                  .chevron_right_rounded,
+                                                              color:
+                                                                  Colors.white,
+                                                              size: 25,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    );
+                                                  } else {
+                                                    return SizedBox.shrink();
+                                                  }
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      } else {
+                        return Center(
+                            child: Container(
+                                width: MediaQuery.of(context).size.width / 1.7,
+                                child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 5),
+                                    child: SingleChildScrollView(
+                                      child: SettingsChangers(),
+                                    ))));
+                      }
+                    },
+                  ),
+                ],
+              ),
+            );
+          }
+        },
+      ),
+    );
   }
 
   showAlertDialog(BuildContext context) {

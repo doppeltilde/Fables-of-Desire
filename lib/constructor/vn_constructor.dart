@@ -272,7 +272,7 @@ class _InterludeState extends State<InterludeTextSound> {
                                             textStyle: TextStyle(
                                                 color: Colors.black,
                                                 fontFamily: "Mali",
-                                                fontSize: 22),
+                                                fontSize: 21),
                                             speed:
                                                 Duration(milliseconds: speed!),
                                           ),
@@ -411,43 +411,41 @@ class _InterludeState extends State<InterludeTextSound> {
                         },
                       ),
                       Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal:
-                                  MediaQuery.of(context).size.width / 4.4),
-                          child: Column(
-                            children: [
-                              Stack(
-                                  alignment: Alignment.centerLeft,
-                                  children: <Widget>[
-                                    Stack(
-                                      children: <Widget>[
-                                        Container(
-                                          color: Colors.transparent,
-                                          padding: EdgeInsets.all(5),
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              2,
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                            child: Image.asset(
-                                              "assets/images/gui/textbox_scroll_03.png",
-                                              fit: BoxFit.cover,
-                                              gaplessPlayback: true,
-                                            ),
+                        padding: EdgeInsets.symmetric(
+                            horizontal:
+                                MediaQuery.of(context).size.width / 4.4),
+                        child: Column(
+                          children: [
+                            Stack(alignment: Alignment.centerLeft, children: <
+                                Widget>[
+                              Container(
+                                padding: EdgeInsets.symmetric(vertical: 10),
+                                // constraints:
+                                //     BoxConstraints(minWidth: 100, minHeight: 100),
+                                width: MediaQuery.of(context).size.width / 2.4,
+                                child: Opacity(
+                                  opacity: 0.8,
+                                  child: Builder(
+                                    builder: (context) {
+                                      if (widget.characterName == "MC" ||
+                                          widget.characterName == "Narrator") {
+                                        return ClayContainer(
+                                          spread: 1,
+                                          surfaceColor: Colors.white,
+                                          curveType: CurveType.none,
+                                          width: 700,
+                                          //color: Colors.brown[400],
+                                          color: Colors.red[300],
+                                          customBorderRadius: BorderRadius.only(
+                                            //Radius.circular(30),
+                                            bottomLeft: Radius.circular(20),
+                                            topLeft: Radius.circular(20),
+                                            topRight: Radius.circular(20),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    FittedBox(
-                                      fit: BoxFit.scaleDown,
-                                      child: Stack(
-                                        children: <Widget>[
-                                          Container(
-                                            color: Colors.transparent,
+                                          child: Padding(
                                             padding: EdgeInsets.symmetric(
-                                                vertical: 15, horizontal: 70),
+                                                horizontal: width * 0.025,
+                                                vertical: height * 0.025),
                                             child: AnimatedTextKit(
                                               animatedTexts: [
                                                 TyperAnimatedText(
@@ -455,8 +453,8 @@ class _InterludeState extends State<InterludeTextSound> {
                                                   textAlign: TextAlign.left,
                                                   textStyle: TextStyle(
                                                       color: Colors.black,
-                                                      fontFamily: "Aleo",
-                                                      fontSize: 18),
+                                                      fontFamily: "Mali",
+                                                      fontSize: 20),
                                                   speed: Duration(
                                                       milliseconds: speed!),
                                                 ),
@@ -466,12 +464,80 @@ class _InterludeState extends State<InterludeTextSound> {
                                               key: ValueKey(widget.n),
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                    ),
-                                  ]),
-                            ],
-                          )),
+                                        );
+                                      } else {
+                                        return ClayContainer(
+                                          spread: 1,
+                                          surfaceColor: Colors.white,
+                                          curveType: CurveType.none,
+                                          width: 700,
+                                          color: Colors.black,
+                                          customBorderRadius: BorderRadius.only(
+                                            //Radius.circular(30),
+                                            bottomRight: Radius.circular(20),
+                                            topLeft: Radius.circular(20),
+                                            topRight: Radius.circular(20),
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: width * 0.025,
+                                                vertical: height * 0.025),
+                                            child: AnimatedTextKit(
+                                              animatedTexts: [
+                                                TyperAnimatedText(
+                                                  widget.characterText,
+                                                  textAlign: TextAlign.left,
+                                                  textStyle: TextStyle(
+                                                      color: Colors.black,
+                                                      fontFamily: "Mali",
+                                                      fontSize: 20),
+                                                  speed: Duration(
+                                                      milliseconds: speed!),
+                                                ),
+                                              ],
+                                              displayFullTextOnTap: true,
+                                              isRepeatingAnimation: false,
+                                              key: ValueKey(widget.n),
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                    },
+                                  ),
+                                ),
+                                // FittedBox(
+                                //   fit: BoxFit.fitHeight,
+                                //   child: Stack(
+                                //     children: <Widget>[
+                                //       Container(
+                                //         color: Colors.transparent,
+                                //         padding: EdgeInsets.symmetric(
+                                //             vertical: 15, horizontal: 70),
+                                //         child: AnimatedTextKit(
+                                //           animatedTexts: [
+                                //             TyperAnimatedText(
+                                //               widget.q!,
+                                //               textAlign: TextAlign.left,
+                                //               textStyle: TextStyle(
+                                //                   color: Colors.black,
+                                //                   fontFamily: "Aleo",
+                                //                   fontSize: 18),
+                                //               speed: Duration(milliseconds: isFinished ? 0 : speed!),),
+                                //             ),
+                                //           ],
+                                //           displayFullTextOnTap: true,
+                                //           isRepeatingAnimation: false,
+                                //           key: ValueKey(widget.n),
+                                //         ),
+                                //       ),
+                                //     ],
+                                //   ),
+                                // ),
+                              ),
+                            ]),
+                          ],
+                        ),
+                      ),
                     ],
                   )
                 ],

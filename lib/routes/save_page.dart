@@ -1,5 +1,7 @@
 /// Copyright (c) 2021 Jona T. Feucht and The SmallDreams Authors.
 
+import 'dart:io';
+
 import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/routes/consts/consts.dart';
 import 'package:flutter/material.dart';
@@ -130,405 +132,869 @@ class _LoadGameState extends State<SaveGame> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-          colorFilter: new ColorFilter.mode(
-              Colors.black.withOpacity(1), BlendMode.dstATop),
-          image: AssetImage("assets/images/bgs/mininature_003_19201440.jpg"),
-          fit: BoxFit.cover,
-        )),
-        child: SafeArea(
-            child: Scaffold(
-          appBar: appbar(context, "SAVE GAME") as PreferredSizeWidget?,
-          backgroundColor: Colors.transparent,
-          resizeToAvoidBottomInset: false,
-          body: Stack(children: <Widget>[
-            Center(
-                child: new Container(
-                    child: SafeArea(
-                        child: new SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
+    return Builder(
+      builder: (context) {
+        if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
+          return Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+              colorFilter: new ColorFilter.mode(
+                  Colors.black.withOpacity(1), BlendMode.dstATop),
+              image:
+                  AssetImage("assets/images/bgs/mininature_003_19201440.jpg"),
+              fit: BoxFit.cover,
+            )),
+            child: SafeArea(
+              child: Scaffold(
+                appBar: appbar(context, "SAVE GAME") as PreferredSizeWidget?,
+                backgroundColor: Colors.transparent,
+                resizeToAvoidBottomInset: false,
+                body: Stack(children: <Widget>[
                   Center(
-                    child: new Container(
-                      child: Row(
-                        children: <Widget>[
-                          Spacer(),
-                          Column(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  if (saveSlotOne == null ||
-                                      saveSlotOne!.isEmpty) {
-                                    setState(() {
-                                      saveSlotOne = widget.route;
-                                      saveSlotOneState(widget.route);
-                                      DateTime now = DateTime.now();
-                                      String dateFormat =
-                                          DateFormat("dd-MM-yyyy HH:mm:ss")
-                                              .format(now);
-                                      saveSlotOneDateState(
-                                          "$dateFormat".toString());
-                                      saveSlotOneDate =
-                                          "$dateFormat".toString();
-                                      //print(saveSlotOne);
-                                    });
-                                  } else {
-                                    showAlertDialog(context);
-                                  }
-                                },
-                                child: Builder(builder: (context) {
-                                  if (saveSlotOne == null ||
-                                      saveSlotOne!.isEmpty) {
-                                    return ChibiNeutral(
-                                      chibiImg: "MC_Happy",
-                                    );
-                                  } else {
-                                    return ChibiHappy(
-                                      chibiImg: "MC_Happy",
-                                    );
-                                  }
-                                }),
-                              ),
-                              Builder(builder: (context) {
-                                if (saveSlotOne == null ||
-                                    saveSlotOne!.isEmpty) {
-                                  return Text(
-                                    "\nEMPTY",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Aleo",
-                                        fontSize: 20),
-                                  );
-                                } else {
-                                  return Text(
-                                    "\nSAVED\n$saveSlotOneDate\n",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Aleo",
-                                        fontSize: 20),
-                                  );
-                                }
-                              }),
-                              Builder(
-                                builder: (context) {
-                                  if (saveSlotOne == null ||
-                                      saveSlotOne!.isEmpty) {
-                                    return Column(children: [
-                                      SizedBox.shrink(),
-                                    ]);
-                                  } else {
-                                    return Column(
-                                      children: [
-                                        ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                              primary: Colors.white,
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 20,
-                                                  horizontal: 30)),
-                                          onPressed: () {
-                                            if (saveSlotOne == null ||
-                                                saveSlotOne!.isEmpty) {
-                                              //print("EMPTY");
-                                            } else {
-                                              Navigator.of(context)
-                                                  .pushNamed('$saveSlotOne');
-                                            }
-                                          },
-                                          child: Text(
-                                            "LOAD SAVE",
-                                            style: TextStyle(
-                                                fontFamily: "Aleo",
-                                                color: Colors.black,
-                                                fontSize: 18),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        TextButton(
-                                            style: TextButton.styleFrom(
-                                                backgroundColor:
-                                                    Colors.redAccent,
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: 20,
-                                                    horizontal: 30)),
-                                            onPressed: () async {
-                                              SharedPreferences prefs =
-                                                  await SharedPreferences
-                                                      .getInstance();
+                      child: new Container(
+                          child: SafeArea(
+                              child: new SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Center(
+                          child: new Container(
+                            child: Row(
+                              children: <Widget>[
+                                Spacer(),
+                                Column(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        if (saveSlotOne == null ||
+                                            saveSlotOne!.isEmpty) {
+                                          setState(() {
+                                            saveSlotOne = widget.route;
+                                            saveSlotOneState(widget.route);
+                                            DateTime now = DateTime.now();
+                                            String dateFormat = DateFormat(
+                                                    "dd-MM-yyyy HH:mm:ss")
+                                                .format(now);
+                                            saveSlotOneDateState(
+                                                "$dateFormat".toString());
+                                            saveSlotOneDate =
+                                                "$dateFormat".toString();
+                                            //print(saveSlotOne);
+                                          });
+                                        } else {
+                                          showAlertDialog(context);
+                                        }
+                                      },
+                                      child: Builder(builder: (context) {
+                                        if (saveSlotOne == null ||
+                                            saveSlotOne!.isEmpty) {
+                                          return ChibiNeutral(
+                                            chibiImg: "MC_Happy",
+                                          );
+                                        } else {
+                                          return ChibiHappy(
+                                            chibiImg: "MC_Happy",
+                                          );
+                                        }
+                                      }),
+                                    ),
+                                    Builder(builder: (context) {
+                                      if (saveSlotOne == null ||
+                                          saveSlotOne!.isEmpty) {
+                                        return Text(
+                                          "\nEMPTY",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Aleo",
+                                              fontSize: 20),
+                                        );
+                                      } else {
+                                        return Text(
+                                          "\nSAVED\n$saveSlotOneDate\n",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Aleo",
+                                              fontSize: 20),
+                                        );
+                                      }
+                                    }),
+                                    Builder(
+                                      builder: (context) {
+                                        if (saveSlotOne == null ||
+                                            saveSlotOne!.isEmpty) {
+                                          return Column(children: [
+                                            SizedBox.shrink(),
+                                          ]);
+                                        } else {
+                                          return Column(
+                                            children: [
+                                              ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                    primary: Colors.white,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 20,
+                                                            horizontal: 30)),
+                                                onPressed: () {
+                                                  if (saveSlotOne == null ||
+                                                      saveSlotOne!.isEmpty) {
+                                                    //print("EMPTY");
+                                                  } else {
+                                                    Navigator.of(context)
+                                                        .pushNamed(
+                                                            '$saveSlotOne');
+                                                  }
+                                                },
+                                                child: Text(
+                                                  "LOAD SAVE",
+                                                  style: TextStyle(
+                                                      fontFamily: "Aleo",
+                                                      color: Colors.black,
+                                                      fontSize: 18),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              TextButton(
+                                                  style: TextButton.styleFrom(
+                                                      backgroundColor:
+                                                          Colors.redAccent,
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 20,
+                                                              horizontal: 30)),
+                                                  onPressed: () async {
+                                                    SharedPreferences prefs =
+                                                        await SharedPreferences
+                                                            .getInstance();
 
-                                              setState(() {
-                                                prefs.remove("saveSlotOne");
-                                                saveSlotOne = null;
-                                              });
-                                            },
-                                            child: Text(
-                                              "DELETE SAVE",
-                                              style: TextStyle(
-                                                  fontFamily: "Aleo",
-                                                  color: Colors.white,
-                                                  fontSize: 15),
-                                            ))
-                                      ],
-                                    );
-                                  }
-                                },
-                              ),
-                            ],
-                          ),
-                          Spacer(),
-                          Column(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  if (saveSlot2 == null || saveSlot2!.isEmpty) {
-                                    setState(() {
-                                      saveSlot2 = widget.route;
-                                      saveSlot2State(widget.route);
-                                      DateTime now = DateTime.now();
-                                      String dateFormat =
-                                          DateFormat("dd-MM-yyyy HH:mm:ss")
-                                              .format(now);
-                                      saveSlot2DateState(
-                                          "$dateFormat".toString());
-                                      saveSlot2Date = "$dateFormat".toString();
-                                      //print(saveSlot2);
-                                    });
-                                  } else {
-                                    showAlertDialog2(context);
-                                  }
-                                },
-                                child: Builder(builder: (context) {
-                                  if (saveSlot2 == null || saveSlot2!.isEmpty) {
-                                    return ChibiNeutral(
-                                      chibiImg: "MC_Happy",
-                                    );
-                                  } else {
-                                    return ChibiHappy(
-                                      chibiImg: "MC_Happy",
-                                    );
-                                  }
-                                }),
-                              ),
-                              Builder(builder: (context) {
-                                if (saveSlot2 == null || saveSlot2!.isEmpty) {
-                                  return Text(
-                                    "\nEMPTY",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Aleo",
-                                        fontSize: 20),
-                                  );
-                                } else {
-                                  return Text(
-                                    "\nSAVED\n$saveSlot2Date\n",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Aleo",
-                                        fontSize: 20),
-                                  );
-                                }
-                              }),
-                              Builder(
-                                builder: (context) {
-                                  if (saveSlot2 == null || saveSlot2!.isEmpty) {
-                                    return Column(children: [
-                                      SizedBox.shrink(),
-                                    ]);
-                                  } else {
-                                    return Column(
-                                      children: [
-                                        ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                primary: Colors.white,
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: 20,
-                                                    horizontal: 30)),
-                                            onPressed: () {
-                                              if (saveSlot2 == null ||
-                                                  saveSlot2!.isEmpty) {
-                                                //print("EMPTY");
-                                              } else {
-                                                Navigator.of(context)
-                                                    .pushNamed('$saveSlot2');
-                                              }
-                                            },
-                                            child: Text(
-                                              "LOAD SAVE",
-                                              style: TextStyle(
-                                                  fontFamily: "Aleo",
-                                                  color: Colors.black,
-                                                  fontSize: 18),
-                                            )),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        TextButton(
-                                            style: TextButton.styleFrom(
-                                                backgroundColor:
-                                                    Colors.redAccent,
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: 20,
-                                                    horizontal: 30)),
-                                            onPressed: () async {
-                                              SharedPreferences prefs =
-                                                  await SharedPreferences
-                                                      .getInstance();
+                                                    setState(() {
+                                                      prefs.remove(
+                                                          "saveSlotOne");
+                                                      saveSlotOne = null;
+                                                    });
+                                                  },
+                                                  child: Text(
+                                                    "DELETE SAVE",
+                                                    style: TextStyle(
+                                                        fontFamily: "Aleo",
+                                                        color: Colors.white,
+                                                        fontSize: 15),
+                                                  ))
+                                            ],
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                Spacer(),
+                                Column(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        if (saveSlot2 == null ||
+                                            saveSlot2!.isEmpty) {
+                                          setState(() {
+                                            saveSlot2 = widget.route;
+                                            saveSlot2State(widget.route);
+                                            DateTime now = DateTime.now();
+                                            String dateFormat = DateFormat(
+                                                    "dd-MM-yyyy HH:mm:ss")
+                                                .format(now);
+                                            saveSlot2DateState(
+                                                "$dateFormat".toString());
+                                            saveSlot2Date =
+                                                "$dateFormat".toString();
+                                            //print(saveSlot2);
+                                          });
+                                        } else {
+                                          showAlertDialog2(context);
+                                        }
+                                      },
+                                      child: Builder(builder: (context) {
+                                        if (saveSlot2 == null ||
+                                            saveSlot2!.isEmpty) {
+                                          return ChibiNeutral(
+                                            chibiImg: "MC_Happy",
+                                          );
+                                        } else {
+                                          return ChibiHappy(
+                                            chibiImg: "MC_Happy",
+                                          );
+                                        }
+                                      }),
+                                    ),
+                                    Builder(builder: (context) {
+                                      if (saveSlot2 == null ||
+                                          saveSlot2!.isEmpty) {
+                                        return Text(
+                                          "\nEMPTY",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Aleo",
+                                              fontSize: 20),
+                                        );
+                                      } else {
+                                        return Text(
+                                          "\nSAVED\n$saveSlot2Date\n",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Aleo",
+                                              fontSize: 20),
+                                        );
+                                      }
+                                    }),
+                                    Builder(
+                                      builder: (context) {
+                                        if (saveSlot2 == null ||
+                                            saveSlot2!.isEmpty) {
+                                          return Column(children: [
+                                            SizedBox.shrink(),
+                                          ]);
+                                        } else {
+                                          return Column(
+                                            children: [
+                                              ElevatedButton(
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                          primary: Colors.white,
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  vertical: 20,
+                                                                  horizontal:
+                                                                      30)),
+                                                  onPressed: () {
+                                                    if (saveSlot2 == null ||
+                                                        saveSlot2!.isEmpty) {
+                                                      //print("EMPTY");
+                                                    } else {
+                                                      Navigator.of(context)
+                                                          .pushNamed(
+                                                              '$saveSlot2');
+                                                    }
+                                                  },
+                                                  child: Text(
+                                                    "LOAD SAVE",
+                                                    style: TextStyle(
+                                                        fontFamily: "Aleo",
+                                                        color: Colors.black,
+                                                        fontSize: 18),
+                                                  )),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              TextButton(
+                                                  style: TextButton.styleFrom(
+                                                      backgroundColor:
+                                                          Colors.redAccent,
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 20,
+                                                              horizontal: 30)),
+                                                  onPressed: () async {
+                                                    SharedPreferences prefs =
+                                                        await SharedPreferences
+                                                            .getInstance();
 
-                                              setState(() {
-                                                prefs.remove("saveSlot2");
-                                                saveSlot2 = null;
-                                                //print(saveSlot2);
-                                              });
-                                            },
-                                            child: Text(
-                                              "DELETE SAVE",
-                                              style: TextStyle(
-                                                  fontFamily: "Aleo",
-                                                  color: Colors.white,
-                                                  fontSize: 15),
-                                            )),
-                                      ],
-                                    );
-                                  }
-                                },
-                              ),
-                            ],
-                          ),
-                          Spacer(),
-                          Column(
-                            children: [
-                              InkWell(onTap: () {
-                                if (saveSlot3 == null || saveSlot3!.isEmpty) {
-                                  setState(() {
-                                    saveSlot3 = widget.route;
-                                    saveSlot3State(widget.route);
-                                    DateTime now = DateTime.now();
-                                    String dateFormat =
-                                        DateFormat("dd-MM-yyyy HH:mm:ss")
-                                            .format(now);
-                                    saveSlot3DateState(
-                                        "$dateFormat".toString());
-                                    saveSlot3Date = "$dateFormat".toString();
-                                    // print(saveSlot3);
-                                  });
-                                } else {
-                                  showAlertDialog3(context);
-                                }
-                              }, child: Builder(builder: (context) {
-                                if (saveSlot3 == null || saveSlot3!.isEmpty) {
-                                  return ChibiNeutral(
-                                    chibiImg: "MC_Happy",
-                                  );
-                                } else {
-                                  return ChibiHappy(
-                                    chibiImg: "MC_Happy",
-                                  );
-                                }
-                              })),
-                              Builder(builder: (context) {
-                                if (saveSlot3 == null || saveSlot3!.isEmpty) {
-                                  return Text(
-                                    "\nEMPTY",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Aleo",
-                                        fontSize: 20),
-                                  );
-                                } else {
-                                  return Text(
-                                    "\nSAVED\n$saveSlot3Date\n",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Aleo",
-                                        fontSize: 20),
-                                  );
-                                }
-                              }),
-                              Builder(
-                                builder: (context) {
-                                  if (saveSlot3 == null || saveSlot3!.isEmpty) {
-                                    return Column(children: [
-                                      SizedBox.shrink(),
-                                    ]);
-                                  } else {
-                                    return Column(
-                                      children: [
-                                        ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                primary: Colors.white,
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: 20,
-                                                    horizontal: 30)),
-                                            onPressed: () {
-                                              if (saveSlot3 == null ||
-                                                  saveSlot3!.isEmpty) {
-                                                //print("EMPTY");
-                                              } else {
-                                                Navigator.of(context)
-                                                    .pushNamed('$saveSlot3');
-                                              }
-                                            },
-                                            child: Text(
-                                              "LOAD SAVE",
-                                              style: TextStyle(
-                                                  fontFamily: "Aleo",
-                                                  color: Colors.black,
-                                                  fontSize: 18),
-                                            )),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        TextButton(
-                                            style: TextButton.styleFrom(
-                                                backgroundColor:
-                                                    Colors.redAccent,
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: 20,
-                                                    horizontal: 30)),
-                                            onPressed: () async {
-                                              SharedPreferences prefs =
-                                                  await SharedPreferences
-                                                      .getInstance();
+                                                    setState(() {
+                                                      prefs.remove("saveSlot2");
+                                                      saveSlot2 = null;
+                                                      //print(saveSlot2);
+                                                    });
+                                                  },
+                                                  child: Text(
+                                                    "DELETE SAVE",
+                                                    style: TextStyle(
+                                                        fontFamily: "Aleo",
+                                                        color: Colors.white,
+                                                        fontSize: 15),
+                                                  )),
+                                            ],
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                Spacer(),
+                                Column(
+                                  children: [
+                                    InkWell(onTap: () {
+                                      if (saveSlot3 == null ||
+                                          saveSlot3!.isEmpty) {
+                                        setState(() {
+                                          saveSlot3 = widget.route;
+                                          saveSlot3State(widget.route);
+                                          DateTime now = DateTime.now();
+                                          String dateFormat =
+                                              DateFormat("dd-MM-yyyy HH:mm:ss")
+                                                  .format(now);
+                                          saveSlot3DateState(
+                                              "$dateFormat".toString());
+                                          saveSlot3Date =
+                                              "$dateFormat".toString();
+                                          // print(saveSlot3);
+                                        });
+                                      } else {
+                                        showAlertDialog3(context);
+                                      }
+                                    }, child: Builder(builder: (context) {
+                                      if (saveSlot3 == null ||
+                                          saveSlot3!.isEmpty) {
+                                        return ChibiNeutral(
+                                          chibiImg: "MC_Happy",
+                                        );
+                                      } else {
+                                        return ChibiHappy(
+                                          chibiImg: "MC_Happy",
+                                        );
+                                      }
+                                    })),
+                                    Builder(builder: (context) {
+                                      if (saveSlot3 == null ||
+                                          saveSlot3!.isEmpty) {
+                                        return Text(
+                                          "\nEMPTY",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Aleo",
+                                              fontSize: 20),
+                                        );
+                                      } else {
+                                        return Text(
+                                          "\nSAVED\n$saveSlot3Date\n",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Aleo",
+                                              fontSize: 20),
+                                        );
+                                      }
+                                    }),
+                                    Builder(
+                                      builder: (context) {
+                                        if (saveSlot3 == null ||
+                                            saveSlot3!.isEmpty) {
+                                          return Column(children: [
+                                            SizedBox.shrink(),
+                                          ]);
+                                        } else {
+                                          return Column(
+                                            children: [
+                                              ElevatedButton(
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                          primary: Colors.white,
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  vertical: 20,
+                                                                  horizontal:
+                                                                      30)),
+                                                  onPressed: () {
+                                                    if (saveSlot3 == null ||
+                                                        saveSlot3!.isEmpty) {
+                                                      //print("EMPTY");
+                                                    } else {
+                                                      Navigator.of(context)
+                                                          .pushNamed(
+                                                              '$saveSlot3');
+                                                    }
+                                                  },
+                                                  child: Text(
+                                                    "LOAD SAVE",
+                                                    style: TextStyle(
+                                                        fontFamily: "Aleo",
+                                                        color: Colors.black,
+                                                        fontSize: 18),
+                                                  )),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              TextButton(
+                                                  style: TextButton.styleFrom(
+                                                      backgroundColor:
+                                                          Colors.redAccent,
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 20,
+                                                              horizontal: 30)),
+                                                  onPressed: () async {
+                                                    SharedPreferences prefs =
+                                                        await SharedPreferences
+                                                            .getInstance();
 
-                                              setState(() {
-                                                prefs.remove("saveSlot3");
-                                                saveSlot3 = null;
-                                                //print(saveSlot3);
-                                              });
-                                            },
-                                            child: Text(
-                                              "DELETE SAVE",
-                                              style: TextStyle(
-                                                  fontFamily: "Aleo",
-                                                  color: Colors.white,
-                                                  fontSize: 15),
-                                            )),
-                                      ],
-                                    );
-                                  }
-                                },
-                              ),
-                            ],
+                                                    setState(() {
+                                                      prefs.remove("saveSlot3");
+                                                      saveSlot3 = null;
+                                                      //print(saveSlot3);
+                                                    });
+                                                  },
+                                                  child: Text(
+                                                    "DELETE SAVE",
+                                                    style: TextStyle(
+                                                        fontFamily: "Aleo",
+                                                        color: Colors.white,
+                                                        fontSize: 15),
+                                                  )),
+                                            ],
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                Spacer(),
+                              ],
+                            ),
                           ),
-                          Spacer(),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                  )))),
+                  backbutton(context)
+                ]),
               ),
-            )))),
-            backbutton(context)
-          ]),
-        )));
+            ),
+          );
+        } else {
+          return Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+              colorFilter: new ColorFilter.mode(
+                  Colors.black.withOpacity(1), BlendMode.dstATop),
+              image:
+                  AssetImage("assets/images/bgs/mininature_003_19201440.jpg"),
+              fit: BoxFit.cover,
+            )),
+            child: SafeArea(
+              child: Scaffold(
+                appBar: AppBar(
+                  elevation: 0,
+                  centerTitle: true,
+                  backgroundColor: Colors.green,
+                  title: Text("SAVE GAME"),
+                ),
+                backgroundColor: Colors.transparent,
+                resizeToAvoidBottomInset: false,
+                body: Stack(children: <Widget>[
+                  Center(
+                      child: new Container(
+                          child: SafeArea(
+                              child: new SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Center(
+                          child: new Container(
+                            child: Row(
+                              children: <Widget>[
+                                Spacer(),
+                                Column(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        if (saveSlotOne == null ||
+                                            saveSlotOne!.isEmpty) {
+                                          setState(() {
+                                            saveSlotOne = widget.route;
+                                            saveSlotOneState(widget.route);
+                                            DateTime now = DateTime.now();
+                                            String dateFormat = DateFormat(
+                                                    "dd-MM-yyyy HH:mm:ss")
+                                                .format(now);
+                                            saveSlotOneDateState(
+                                                "$dateFormat".toString());
+                                            saveSlotOneDate =
+                                                "$dateFormat".toString();
+                                            //print(saveSlotOne);
+                                          });
+                                        } else {
+                                          showAlertDialog(context);
+                                        }
+                                      },
+                                      child: Builder(builder: (context) {
+                                        if (saveSlotOne == null ||
+                                            saveSlotOne!.isEmpty) {
+                                          return ChibiNeutral(
+                                            chibiImg: "MC_Happy",
+                                          );
+                                        } else {
+                                          return ChibiHappy(
+                                            chibiImg: "MC_Happy",
+                                          );
+                                        }
+                                      }),
+                                    ),
+                                    Builder(builder: (context) {
+                                      if (saveSlotOne == null ||
+                                          saveSlotOne!.isEmpty) {
+                                        return Text(
+                                          "\nEMPTY",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Aleo",
+                                              fontSize: 20),
+                                        );
+                                      } else {
+                                        return Text(
+                                          "\nSAVED\n$saveSlotOneDate\n",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Aleo",
+                                              fontSize: 20),
+                                        );
+                                      }
+                                    }),
+                                    Builder(
+                                      builder: (context) {
+                                        if (saveSlotOne == null ||
+                                            saveSlotOne!.isEmpty) {
+                                          return Column(children: [
+                                            SizedBox.shrink(),
+                                          ]);
+                                        } else {
+                                          return Column(
+                                            children: [
+                                              ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                    primary: Colors.white,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 20,
+                                                            horizontal: 30)),
+                                                onPressed: () {
+                                                  if (saveSlotOne == null ||
+                                                      saveSlotOne!.isEmpty) {
+                                                    //print("EMPTY");
+                                                  } else {
+                                                    Navigator.of(context)
+                                                        .pushNamed(
+                                                            '$saveSlotOne');
+                                                  }
+                                                },
+                                                child: Text(
+                                                  "LOAD SAVE",
+                                                  style: TextStyle(
+                                                      fontFamily: "Aleo",
+                                                      color: Colors.black,
+                                                      fontSize: 18),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              TextButton(
+                                                  style: TextButton.styleFrom(
+                                                      backgroundColor:
+                                                          Colors.redAccent,
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 20,
+                                                              horizontal: 30)),
+                                                  onPressed: () async {
+                                                    SharedPreferences prefs =
+                                                        await SharedPreferences
+                                                            .getInstance();
+
+                                                    setState(() {
+                                                      prefs.remove(
+                                                          "saveSlotOne");
+                                                      saveSlotOne = null;
+                                                    });
+                                                  },
+                                                  child: Text(
+                                                    "DELETE SAVE",
+                                                    style: TextStyle(
+                                                        fontFamily: "Aleo",
+                                                        color: Colors.white,
+                                                        fontSize: 15),
+                                                  ))
+                                            ],
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                Spacer(),
+                                Column(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        if (saveSlot2 == null ||
+                                            saveSlot2!.isEmpty) {
+                                          setState(() {
+                                            saveSlot2 = widget.route;
+                                            saveSlot2State(widget.route);
+                                            DateTime now = DateTime.now();
+                                            String dateFormat = DateFormat(
+                                                    "dd-MM-yyyy HH:mm:ss")
+                                                .format(now);
+                                            saveSlot2DateState(
+                                                "$dateFormat".toString());
+                                            saveSlot2Date =
+                                                "$dateFormat".toString();
+                                            //print(saveSlot2);
+                                          });
+                                        } else {
+                                          showAlertDialog2(context);
+                                        }
+                                      },
+                                      child: Builder(builder: (context) {
+                                        if (saveSlot2 == null ||
+                                            saveSlot2!.isEmpty) {
+                                          return ChibiNeutral(
+                                            chibiImg: "MC_Happy",
+                                          );
+                                        } else {
+                                          return ChibiHappy(
+                                            chibiImg: "MC_Happy",
+                                          );
+                                        }
+                                      }),
+                                    ),
+                                    Builder(builder: (context) {
+                                      if (saveSlot2 == null ||
+                                          saveSlot2!.isEmpty) {
+                                        return Text(
+                                          "\nEMPTY",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Aleo",
+                                              fontSize: 20),
+                                        );
+                                      } else {
+                                        return Text(
+                                          "\nSAVED\n$saveSlot2Date\n",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Aleo",
+                                              fontSize: 20),
+                                        );
+                                      }
+                                    }),
+                                    Builder(
+                                      builder: (context) {
+                                        if (saveSlot2 == null ||
+                                            saveSlot2!.isEmpty) {
+                                          return Column(children: [
+                                            SizedBox.shrink(),
+                                          ]);
+                                        } else {
+                                          return Column(
+                                            children: [
+                                              ElevatedButton(
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                          primary: Colors.white,
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  vertical: 20,
+                                                                  horizontal:
+                                                                      30)),
+                                                  onPressed: () {
+                                                    if (saveSlot2 == null ||
+                                                        saveSlot2!.isEmpty) {
+                                                      //print("EMPTY");
+                                                    } else {
+                                                      Navigator.of(context)
+                                                          .pushNamed(
+                                                              '$saveSlot2');
+                                                    }
+                                                  },
+                                                  child: Text(
+                                                    "LOAD SAVE",
+                                                    style: TextStyle(
+                                                        fontFamily: "Aleo",
+                                                        color: Colors.black,
+                                                        fontSize: 18),
+                                                  )),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              TextButton(
+                                                  style: TextButton.styleFrom(
+                                                      backgroundColor:
+                                                          Colors.redAccent,
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 20,
+                                                              horizontal: 30)),
+                                                  onPressed: () async {
+                                                    SharedPreferences prefs =
+                                                        await SharedPreferences
+                                                            .getInstance();
+
+                                                    setState(() {
+                                                      prefs.remove("saveSlot2");
+                                                      saveSlot2 = null;
+                                                      //print(saveSlot2);
+                                                    });
+                                                  },
+                                                  child: Text(
+                                                    "DELETE SAVE",
+                                                    style: TextStyle(
+                                                        fontFamily: "Aleo",
+                                                        color: Colors.white,
+                                                        fontSize: 15),
+                                                  )),
+                                            ],
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                Spacer(),
+                                Column(
+                                  children: [
+                                    InkWell(onTap: () {
+                                      if (saveSlot3 == null ||
+                                          saveSlot3!.isEmpty) {
+                                        setState(() {
+                                          saveSlot3 = widget.route;
+                                          saveSlot3State(widget.route);
+                                          DateTime now = DateTime.now();
+                                          String dateFormat =
+                                              DateFormat("dd-MM-yyyy HH:mm:ss")
+                                                  .format(now);
+                                          saveSlot3DateState(
+                                              "$dateFormat".toString());
+                                          saveSlot3Date =
+                                              "$dateFormat".toString();
+                                          // print(saveSlot3);
+                                        });
+                                      } else {
+                                        showAlertDialog3(context);
+                                      }
+                                    }, child: Builder(builder: (context) {
+                                      if (saveSlot3 == null ||
+                                          saveSlot3!.isEmpty) {
+                                        return ChibiNeutral(
+                                          chibiImg: "MC_Happy",
+                                        );
+                                      } else {
+                                        return ChibiHappy(
+                                          chibiImg: "MC_Happy",
+                                        );
+                                      }
+                                    })),
+                                    Builder(builder: (context) {
+                                      if (saveSlot3 == null ||
+                                          saveSlot3!.isEmpty) {
+                                        return Text(
+                                          "\nEMPTY",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Aleo",
+                                              fontSize: 20),
+                                        );
+                                      } else {
+                                        return Text(
+                                          "\nSAVED\n$saveSlot3Date\n",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Aleo",
+                                              fontSize: 20),
+                                        );
+                                      }
+                                    }),
+                                    Builder(
+                                      builder: (context) {
+                                        if (saveSlot3 == null ||
+                                            saveSlot3!.isEmpty) {
+                                          return Column(children: [
+                                            SizedBox.shrink(),
+                                          ]);
+                                        } else {
+                                          return Column(
+                                            children: [
+                                              ElevatedButton(
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                          primary: Colors.white,
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  vertical: 20,
+                                                                  horizontal:
+                                                                      30)),
+                                                  onPressed: () {
+                                                    if (saveSlot3 == null ||
+                                                        saveSlot3!.isEmpty) {
+                                                      //print("EMPTY");
+                                                    } else {
+                                                      Navigator.of(context)
+                                                          .pushNamed(
+                                                              '$saveSlot3');
+                                                    }
+                                                  },
+                                                  child: Text(
+                                                    "LOAD SAVE",
+                                                    style: TextStyle(
+                                                        fontFamily: "Aleo",
+                                                        color: Colors.black,
+                                                        fontSize: 18),
+                                                  )),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              TextButton(
+                                                  style: TextButton.styleFrom(
+                                                      backgroundColor:
+                                                          Colors.redAccent,
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 20,
+                                                              horizontal: 30)),
+                                                  onPressed: () async {
+                                                    SharedPreferences prefs =
+                                                        await SharedPreferences
+                                                            .getInstance();
+
+                                                    setState(() {
+                                                      prefs.remove("saveSlot3");
+                                                      saveSlot3 = null;
+                                                      //print(saveSlot3);
+                                                    });
+                                                  },
+                                                  child: Text(
+                                                    "DELETE SAVE",
+                                                    style: TextStyle(
+                                                        fontFamily: "Aleo",
+                                                        color: Colors.white,
+                                                        fontSize: 15),
+                                                  )),
+                                            ],
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                Spacer(),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )))),
+                ]),
+              ),
+            ),
+          );
+        }
+      },
+    );
   }
 
   showAlertDialog(BuildContext context) {
