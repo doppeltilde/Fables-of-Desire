@@ -1,5 +1,5 @@
 // Fables of Desire - Naoki Route
-// Copyright (c) 2021 Destini Islands and The SmallDreams Authors.
+//Copyright (c) 2021 Destini Islands and The SmallDreams Authors.
 
 class Speech {
   /// Needs better, more clean code focused names!
@@ -12,6 +12,7 @@ class Speech {
   final String? cgImg;
   final String? bgImage;
   final String? bgmMusic;
+  final nextScene;
 
   Speech({
     this.characterName,
@@ -23,6 +24,7 @@ class Speech {
     this.cgImg,
     this.bgImage,
     this.bgmMusic,
+    this.nextScene,
   });
 }
 
@@ -417,7 +419,7 @@ class NaokiText2 {
 
 class NaokiText3 {
   int textNumber = 0;
-  void nextQuestion() {
+  nextQuestion() {
     if (textNumber < textBank.length - 1) {
       textNumber++;
     }
@@ -462,6 +464,7 @@ class NaokiText3 {
 
   List<Speech> textBank = [
     // TODO: bg Hot spring, day
+    // 0
     Speech(
       characterName: m,
       characterText: "Here we are!",
@@ -546,53 +549,10 @@ class NaokiText3 {
       characterText: "Understood. Thank you.",
       sideCharImage: "naoki_happy",
     ),
-  ];
-}
 
-class NaokiText4 {
-  int textNumber = 0;
-  void nextQuestion() {
-    if (textNumber < textBank.length - 1) {
-      textNumber++;
-    }
-  }
-
-  String? getCharacterText() {
-    return textBank[textNumber].characterText;
-  }
-
-  String? getCharacterName() {
-    return textBank[textNumber].characterName;
-  }
-
-  bool isFinished() {
-    if (textNumber >= textBank.length - 1) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  getNumber() {
-    return textNumber;
-  }
-
-  String? getMCImage() {
-    return textBank[textNumber].mcImage;
-  }
-
-  String? getSideCharImage() {
-    return textBank[textNumber].sideCharImage;
-  }
-
-  void reset() {
-    textNumber = 0;
-  }
-
-  // TODO: bgm continuation from last track (Edos journey)
-
-  List<Speech> textBank = [
+    // TODO: bgm continuation from last track (Edos journey)
     // TODO: bg Outdoor pathway, day
+
     Speech(
       characterName: n,
       characterText: "Okay, I'm prepared.",
