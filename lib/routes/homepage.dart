@@ -36,20 +36,6 @@ class _WildfyreState extends State<HomePage> {
         opacity = 1.0;
       });
     });
-    SharedPreferences.getInstance().then((SharedPreferences sp) {
-      sharedPreferences = sp;
-      notHome = sharedPreferences!.getString("notHome");
-      notHome = "The_world_of_peace";
-      persistNotHome(notHome!);
-      print(notHome);
-    });
-  }
-
-  void persistNotHome(String value) {
-    setState(() {
-      notHome = value;
-    });
-    sharedPreferences?.setString("notHome", value);
   }
 
   @override

@@ -1,6 +1,9 @@
 import 'dart:async';
+import 'dart:io';
 
+import 'package:dart_vlc/dart_vlc.dart';
 import 'package:fablesofdesire/constructor/vn_constructor.dart';
+import 'package:fablesofdesire/global/audio/game_audio.dart';
 import 'package:fablesofdesire/global/audio/global_audio.dart';
 import 'package:fablesofdesire/global/logical_keyboard.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
@@ -26,6 +29,18 @@ class _VNState extends State<VNScaffold> {
   SharedPreferences? sharedPreferences;
 
   @override
+  void didChangeDependencies() {
+    if (Platform.isWindows ||
+        Platform.isLinux && GameAudioDesktop.playAudio.isPlaying == false) {
+      super.didChangeDependencies();
+      GameAudioDesktop.playAudio.player = Player(
+        id: 0,
+      );
+    }
+    super.didChangeDependencies();
+  }
+
+  @override
   void initState() {
     super.initState();
 
@@ -33,7 +48,7 @@ class _VNState extends State<VNScaffold> {
     try {
       GlobalAudio.playAudio.getBGM(widget.textSound.getBGM().toString());
     } catch (e) {
-      print("Previous bgm.");
+      print(e);
     }
     //}
 
@@ -45,7 +60,12 @@ class _VNState extends State<VNScaffold> {
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       sharedPreferences = sp;
       notHome = sharedPreferences!.getString("notHome");
-      notHome = widget.textSound.getBGM().toString();
+      try {
+        notHome = widget.textSound.getBGM().toString();
+      } catch (e) {
+        print(e);
+      }
+
       persistNotHome(notHome!);
       print(notHome);
     });
