@@ -48,7 +48,8 @@ class Home extends StatelessWidget {
       navigatorObservers: <NavigatorObserver>[
         MyRouteObserver(),
       ],
-
+      onUnknownRoute: (settings) =>
+          MaterialPageRoute(builder: (context) => HomePage()),
       routes: {
         '/': (_) {
           return SplashScreen();
@@ -81,9 +82,9 @@ class Home extends StatelessWidget {
         "/naoki3": (_) {
           return Naoki3();
         },
-        "/naoki4": (_) {
-          return Naoki4();
-        },
+        // "/naoki4": (_) {
+        //   return Naoki4();
+        // },
         "/naoki5": (_) {
           return Naoki5();
         },
