@@ -17,13 +17,14 @@ import 'package:fablesofdesire/screens/act2/naoki/naoki19.dart';
 import 'package:fablesofdesire/screens/act2/naoki/naoki2.dart';
 import 'package:fablesofdesire/screens/act2/naoki/naoki20.dart';
 import 'package:fablesofdesire/screens/act2/naoki/naoki3.dart';
-import 'package:fablesofdesire/screens/act2/naoki/naoki4.dart';
 import 'package:fablesofdesire/screens/act2/naoki/naoki5.dart';
 import 'package:fablesofdesire/screens/act2/naoki/naoki6.dart';
 import 'package:fablesofdesire/screens/act2/naoki/naoki7.dart';
 import 'package:fablesofdesire/screens/act2/naoki/naoki8.dart';
 import 'package:fablesofdesire/screens/act2/naoki/naoki9.dart';
 import 'package:fablesofdesire/screens/act2/naoki/naoki_act2_chapters.dart';
+import 'package:fablesofdesire/screens/act3/naoki/naoki_act3_1.dart';
+import 'package:fablesofdesire/screens/end_credits.dart';
 import 'package:fablesofdesire/screens/test/chapter1.dart';
 import 'package:fablesofdesire/screens/test/chapter2.dart';
 import 'package:fablesofdesire/screens/intro.dart';
@@ -59,6 +60,9 @@ class Home extends StatelessWidget {
         },
         '/testintro': (_) {
           return TestIntro();
+        },
+        '/endcredits': (_) {
+          return EndCredits();
         },
         '/intro': (_) {
           return Intro();
@@ -132,6 +136,9 @@ class Home extends StatelessWidget {
         },
         "/naoki20": (_) {
           return Naoki20();
+        },
+        "/naoki21": (_) {
+          return Naoki21();
         },
       },
     );

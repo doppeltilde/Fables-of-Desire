@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class NaokiRouteLists extends StatelessWidget {
   List<String> routelist = [
+    "/endcredits",
     "/naoki1",
     "/naoki2",
     "/naoki3",
@@ -22,7 +23,8 @@ class NaokiRouteLists extends StatelessWidget {
     "/naoki17",
     "/naoki18",
     "/naoki19",
-    "/naoki20"
+    "/naoki20",
+    "/naoki21",
   ];
   @override
   Widget build(BuildContext context) {

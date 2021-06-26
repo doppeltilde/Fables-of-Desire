@@ -1,4 +1,4 @@
-import 'package:fablesofdesire/constructor/text/naoki.dart';
+import 'package:fablesofdesire/constructor/text/naoki/naoki_act2_text.dart';
 import 'package:fablesofdesire/constructor/vn_scaffold.dart';
 import 'package:fablesofdesire/global/transition_screeen.dart';
 import 'package:flutter/material.dart';
