@@ -5,6 +5,10 @@ on:
         - main
         - alpha
         - beta
+    push:
+      branches:
+        - develop
+        
 jobs:
   build:
     name: Build Apps
@@ -27,3 +31,9 @@ jobs:
           flutter config --enable-windows-desktop
           flutter run -d windows
           flutter build windows
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: windows build
+          path: build/windows/runner/Release
