@@ -212,354 +212,2013 @@ class NaokiAct3BranchA1 {
       characterText: "…But I will try my best, as you command.",
       sideCharImage: "naoki_happy",
     ),
+  ];
+}
 
-//         //As Naoki and MC continue with their duties, Naoki’s anger turns into more of a fearfulness, but he comes to appreciate (gradually) her sense of equality in regards to all beings
-//         // bg outdoor pathway CORNER, day, only MC
+class NaokiAct3BranchA2 {
+  int textNumber = 0;
 
-//         Speech(characterName: nar, characterText:"It was scary having an argument with Naoki, but after I confirmed I do love the mountain animals, he seems to be trying to understand humans.", mcImage: "mc_neutral",),
-//         Speech(characterName: nar, characterText:"The work never stops, but now more can be accomplished than ever before.", mcImage: "transparent",),
-//         Speech(characterName: nar, characterText:"The aches and pains I’ve been accustomed to now come and go. I don’t think I’ve ever slept this much in my life.", mcImage: "mc_happy",),
-//         Speech(characterName: n, characterText:"MC!", mcImage: "mc_neutral",),
-//         // Raven Naoki appear
-//         Speech(characterName: nar, characterText:"Naoki rushes to me, breathless, a broom still in hand that will snap in half if he clutches it any tighter.", sideCharImage:"raven_naoki_blush",),
-//         Speech(characterName: m, characterText:"Y-yes? What’s wrong?", mcImage: "mc_sad",),
-//         Speech(characterName: n, characterText:"T-there’s a… a human! There’s a human in the temple!", sideCharImage:"raven_naoki_frown",),
-//         Speech(characterName: m, characterText:"Oh! Let’s go welcome them!", mcImage: "mc_happy",),
-//         // screen shake
-//         Speech(characterName: n, characterText:"What? No! It’s an /intruder/!", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Humans are not forbidden to come to the temple, Naoki.", mcImage: "mc_sad",),
-//         Speech(characterName: n, characterText:"Well, they should be!", mcImage: "transparent",),
-//         Speech(wo, characterText:"Excuse me, MC?", mcImage: "transparent",),
-//         // screen shake
-//         Speech(characterName: n, characterText:"You will not address her so casually!", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Oh! It’s you!", mcImage: "mc_happy",),
-//         Speech(characterName: m, characterText:"Naoki. This woman is from the family that has lived closest to this temple for generations.", mcImage: "mc_neutral",),
-//         Speech(characterName: m, characterText:"Ina. It’s so nice to see you again. Have you come to repurpose our old materials?", mcImage: "mc_happy",),
-//         Speech(i, characterText:"I have! It’s also about time to replace your utensils, correct?", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"That would be lovely.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Naoki, please introduce yourself.", mcImage: "mc_neutral",),
-//         Speech(characterName: nar, characterText:"If I didn’t know hicharacterName: m, it’d look like he was ready to completely ignore me.", sideCharImage:"raven_naoki_sad",),
-//         Speech(characterName: nar, characterText:"But Naoki sighs and gives a curt bow to Ina. It’s not an apology, but it’s something.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"…Hello.", sideCharImage:"raven_naoki_neutral",),
-//         Speech(characterName: m, characterText:"You’ve gotten so big. Even your hair is so long now.", mcImage: "mc_happy",),
-//         Speech(characterName: nar, characterText:"I pat her head before turning to Naoki again.", mcImage: "transparent",),
-//         Speech(characterName: nar, characterText:"It’s as good a time as ever.", mcImage: "mc_neutral",),
-//         Speech(characterName: m, characterText:"Hey, Ina? If you have the time, would you mind visiting once a week or so?", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"W-what?", sideCharImage:"raven_naoki_frown",),
-//         Speech(i, characterText:"Sure. What would you like me to do?", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"My familiar is learning to write and you have such pretty handwriting. I think you’d be a much better teacher than I.", mcImage: "mc_happy",),
-//         // screen shake
-//         Speech(characterName: n, characterText:"I don’t need it!", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Yes, you really, /really/ do.", mcImage:"mc_frown",),
-//         Speech(characterName: n, characterText:"Erk…", sideCharImage:"raven_naoki_sad",),
-//         Speech(i, characterText:"I can make time for that.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Thank you. I’d appreciate it.", mcImage: "mc_happy",),
-//         Speech(characterName: nar, characterText:"Ina takes off to pack up our old utensils and materials and Naoki waits until she’s out of sight before furiously flapping his wings.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"Why?", sideCharImage:"raven_naoki_frown",),
-//         Speech(characterName: m, characterText:"You haven’t had much personal exposure. This will be a good opportunity for you to learn about kind humans.", mcImage: "mc_neutral",),
-//         Speech(characterName: n, characterText:"…I already know that.", sideCharImage:"raven_naoki_sad",),
-//         Speech(characterName: m, characterText:"What?", mcImage: "mc_sad",),
-//         Speech(characterName: n, characterText:"The way you speak and interact with humans is the same as with the other animals.", sideCharImage:"raven_naoki_neutral",),
-//         Speech(characterName: n, characterText:"I do not need to be locked in a room with a human to see that ‘Ina’ is nice.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"…", mcImage:"mc_blush",),
-//         Speech(characterName: n, characterText:"What.", sideCharImage:"raven_naoki_sad",),
-//         Speech(characterName: m, characterText:"I’m just so happy to hear that, Naoki…", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"…I’m returning to work! I still do not see your point of view!", sideCharImage:"raven_naoki_blush",),
-//         Speech(characterName: m, characterText:"Have fun!", mcImage: "mc_happy",),
-//         Speech(characterName: n, characterText:"Hmph.", mcImage: "transparent",),
-//         Speech(characterName: nar, characterText:"Naoki’s wings stretch fully as he stalks away in the opposite direction of Ina.", mcImage: "transparent",),
-//         // Naoki off screen
-//         Speech(characterName: m, characterText:"You’re pretty childish sometimes, Naoki!", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"You missed a spot!", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Ha ha…", mcImage: "transparent",),
-//         //As MC and Naoki take a walk and Naoki tells of the horror he’s read of humans in books
-//         // bg room, night, only MC
-//         Speech(characterName: nar, characterText:"As promised, Ina comes to tutor Naoki the following week.", mcImage: "mc_neutral",),
-//         Speech(characterName: nar, characterText:"But I don’t know how it went. When she left, Naoki simply returned to work.", mcImage: "mc_sad",),
-//         Speech(characterName: nar, characterText:"It’s one of my first times going to Naoki’s room since he first became my familiar.", mcImage: "mc_neutral",),
-//         // screen shake
-//         Speech(characterName: m, characterText:"Hello? Naoki?", mcImage: "transparent",),
-//         // Raven Naoki appear
-//         Speech(characterName: n, characterText:"Oh. Hello.", sideCharImage:"raven_naoki_neutral",),
-//         Speech(characterName: m, characterText:"I’m just checking up on you.", mcImage: "mc_happy",),
-//         Speech(characterName: n, characterText:"Yes… Please, come in.", sideCharImage:"raven_naoki_happy",),
-//         Speech(characterName: m, characterText:"Sure. Thank you.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Oh… what’s all this, Naoki?", mcImage: "mc_neutral",),
-//         Speech(characterName: n, characterText:"Huh? A-ah…", sideCharImage:"raven_naoki_blush",),
-//         Speech(characterName: n, characterText:"I seem to have started a collection of sorts. I didn’t realize I had so much.", mcImage: "transparent",),
-//         Speech(characterName: nar, characterText:"Naoki’s room absolutely /glitters/ with shiny objects neatly placed about.", mcImage: "transparent",),
-//         Speech(characterName: nar, characterText:"A few poetry books from the library sit next to his bedding, while the other half of the room is covered with sparkling rocks, glass, and metals that are organized by size and color.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Have you been collecting these the whole time?", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"‘A love that frees your heart is one that has been allowed to sprout wings.’", sideCharImage:"raven_naoki_neutral",),
-//         Speech(characterName: n, characterText:"Ahem…", sideCharImage:"raven_naoki_blush",),
-//         Speech(characterName: n, characterText:"Yes, since we began our mountain rounds…", sideCharImage:"raven_naoki_sad",),
-//         Speech(characterName: n, characterText:"I’ll clean it.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"No! No, this is great!", mcImage: "mc_happy",),
-//         Speech(characterName: m, characterText:"If you like it, please keep it.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"It’s okay?", sideCharImage:"raven_naoki_neutral",),
-//         Speech(characterName: m, characterText:"Of course it is. It makes you happy, right?", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Never be afraid to do what makes you happy as long as it doesn’t hurt anyone.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"Alright.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"Then…", sideCharImage:"raven_naoki_happy",),
-//         Speech(characterName: n, characterText:"I would like to go on a walk with you.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Huh? Right now?", mcImage:"mc_blush",),
-//         Speech(characterName: n, characterText:"Yes. It would make me happy.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Oh. W-well, I suppose I am done working for today.", mcImage: "mc_happy",),
-//         Speech(characterName: n, characterText:"Ina mentioned a festival.", sideCharImage:"raven_naoki_neutral",),
-//         Speech(characterName: m, characterText:"Would you like to see a human festival, Naoki?", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"…Not in particular. But I suppose we can make it short.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Ha ha, yes. Short.", mcImage: "mc_happy",),
-//         // bg summer festival packed
-//         Speech(characterName: nar, characterText:"We find a quiet spot right outside the local village, close enough to hear and see the festivities without being spotted.", mcImage: "transparent",),
-//         Speech(characterName: nar, characterText:"It’s absolutely bustling despite it being so late. People chat and walk among food stalls without a care in the world.", mcImage: "transparent",),
-//         Speech(characterName: nar, characterText:"Away from the warmth of fire and bodies, Naoki’s wings serve as a shield from the wind, stretched around us both.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"What do you think, Naoki?", mcImage: "mc_happy",),
-//         Speech(characterName: n, characterText:"It’s loud.", sideCharImage:"raven_naoki_neutral",),
-//         Speech(characterName: m, characterText:"Ha ha… yes, I suppose it is.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"But what have you learned recently on humans?", mcImage: "mc_neutral",),
-//         Speech(characterName: n, characterText:"The more I read about thecharacterName: m, the worse they make their case.", sideCharImage:"raven_naoki_sad",),
-//         Speech(characterName: m, characterText:"Why’s that?", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"They document their own atrocities. It’s hard to believe good things about them.", sideCharImage:"raven_naoki_frown",),
-//         Speech(characterName: n, characterText:"Entire communities destroyed over things like thievery and prostitution. Scandals and murder about.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Surely you read something other than that?", mcImage: "mc_sad",),
-//         Speech(characterName: n, characterText:"If humans have much kindness to thecharacterName: m, it is not in their history texts.", sideCharImage:"raven_naoki_sad",),
-//         Speech(characterName: m, characterText:"…Look there, Naoki.", mcImage: "mc_happy",),
-//         Speech(characterName: nar, characterText:"His gaze follows my finger that points to one of the food stalls and the performance artist next to it.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"The artist puts on a show to attract people to buy food from the stall. He doesn’t do it for profit, but out of kindness.", sideCharImage:"raven_naoki_neutral",),
-//         Speech(characterName: m, characterText:"And that family there is learning a dance together.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"And that couple there are attempting to hide while they kiss.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"Why would they do that?", sideCharImage:"raven_naoki_sad",),
-//         Speech(characterName: m, characterText:"Well, I suppose it must be embarrassing for them.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"I mean why do humans kiss at all? I see it often in the texts but there’s no formal explanation. Is it a type of mating call?", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Ha ha…", sideCharImage:"raven_naoki_neutral",),
-//         Speech(characterName: m, characterText:"Sorry, I don’t mean to laugh.", mcImage:"mc_blush",),
-//         Speech(characterName: m, characterText:"It’s not always a mating call. Sometimes it is just a form of affection.", mcImage: "mc_happy",),
-//         Speech(characterName: n, characterText:"ThecharacterName: n, should I be kissing you?", sideCharImage:"raven_naoki_sad",),
-//         Speech(characterName: m, characterText:"N-no! I-it’s complicated.", mcImage:"mc_blush",),
-//         Speech(characterName: n, characterText:"Hm…", sideCharImage:"raven_naoki_neutral",),
-//         Speech(characterName: n, characterText:"If you’re trying to get me to sympathize with the humans, it won’t work.", mcImage: "mc_neutral",),
-//         Speech(characterName: n, characterText:"Humans are anathema to the mountain and all of nature.", sideCharImage:"raven_naoki_frown",),
-//         Speech(characterName: m, characterText:"…You’re using big words and big ideas with a small mind.", mcImage:"mc_frown",),
-//         // screen shake
-//         Speech(characterName: n, characterText:"How big must my mind be to forgive humans who hunt animals?", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"You are being biased against them and not looking at it logically.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"Should I get closer to a trap then?", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Humans are not so different from the rest of the animals!", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"…You believing that is the same as approving of their methods, of their killing.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"Perhaps worse if you are a god.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"Humans are prone to corruption. It’s in their /blood/. No amount of shiny festival lights will cover up their crimes! They’ll only keep going and going and—", sideCharImage: "naoki_sad",),
-//         Speech(characterName: m, characterText:"No!", mcImage: "transparent",),
-//         Speech(characterName: nar, characterText:"I shake my head as I feel myself reaching a boiling point that I haven’t before.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"The only corruption I see right now is my familiar, so blinded by his fear and hatred to live up to the cause of equality.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"…", sideCharImage:"raven_naoki_sad",),
-//         Speech(characterName: m, characterText:"I beg you to ponder why you feel this way. To take the time to find out how humans are different from one another.", mcImage: "mc_sad",),
-//         Speech(characterName: m, characterText:"For the good of the mountain.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"…", mcImage: "transparent",),
+  void nextQuestion() {
+    if (textNumber < textBank.length - 1) {
+      textNumber++;
+    }
+  }
 
-//         //During a night of chess, Naoki shares his reflections and compliments MC
-//         //bg clearing by the lake, day
-//         Speech(characterName: nar, characterText:"To my surprise, Naoki invited me to play chess today.", mcImage: "mc_neutral",),
-//         Speech(characterName: nar, characterText:"Apparently, Ina taught him and they play every time she comes.", mcImage: "transparent",),
-//         Speech(characterName: nar, characterText:"Which I don’t understand, considering his views on humans…", mcImage: "mc_sad",),
-//         Speech(characterName: n, characterText:"The next tribute is soon.", sideCharImage:"raven_naoki_neutral",),
-//         Speech(characterName: m, characterText:"Oh! Yes, it is. We’ll have to take a trip and clean the temple.", mcImage: "mc_neutral",),
-//         Speech(characterName: n, characterText:"Ever diligent.", sideCharImage:"raven_naoki_happy",),
-//         Speech(characterName: m, characterText:"Is there something on your mind?", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"Hm…", sideCharImage:"raven_naoki_neutral",),
-//         Speech(characterName: n, characterText:"I think… you’re incredible for how you manage to fit all the complexities of humans and animals like.", mcImage: "transparent",),
-//         Speech(characterName: nar, characterText:"Huh…?", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"Checkmate.", sideCharImage:"raven_naoki_happy",),
-//         Speech(characterName: m, characterText:"Gah! Were you trying to distract me?", mcImage:"mc_frown",),
-//         Speech(characterName: n, characterText:"Ha ha…", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"I mean my words with no ulterior motives.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"…You’re hot and cold, Naoki.", mcImage: "mc_sad",),
-//         Speech(characterName: n, characterText:"Hm?", sideCharImage:"raven_naoki_neutral",),
-//         Speech(characterName: m, characterText:"You tell me you support my cause. You back out. You tell me I’m incredible for not hating humans, then tell me you hate humans.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"It’s hard to believe you.", sideCharImage:"raven_naoki_sad",),
-//         Speech(characterName: n, characterText:"…I know. You are a saint for putting up with me.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"I only wish you could see the world as I do. The only difference between us is my patience.", mcImage: "mc_neutral",),
-//         Speech(characterName: n, characterText:"Patience…", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"Yes. Patience.", sideCharImage:"raven_naoki_happy",),
-//         Speech(characterName: nar, characterText:"Naoki picks up my king piece and brings it close to his face.", mcImage: "transparent",),
-//         Speech(characterName: nar, characterText:"I never know what he’s thinking.", mcImage: "transparent",),
-//         //MC lets Naoki meet a human child and he changes his opinion on humans
-//         // bg room, day
-//         Speech(characterName: nar, characterText:"For the first time in what feels like years, I wake up from a dream.", mcImage: "mc_neutral",),
-//         Speech(characterName: nar, characterText:"I can’t remember it exactly. But the feeling of small hands in mine linger.", mcImage: "mc_happy",),
-//         // bg Hot spring, day
-//         Speech(characterName: m, characterText:"Naoki!", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"Ah!", sideCharImage:"raven_naoki_blush",),
-//         Speech(characterName: n, characterText:"Y-yes?", sideCharImage:"raven_naoki_frown",),
-//         Speech(characterName: m, characterText:"When you’re done with your bath, please meet me at the entrance. We’re going to the shrine today.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"The… shrine? With the humans?", sideCharImage:"raven_naoki_sad",),
-//         Speech(characterName: m, characterText:"Correct.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"…Yes, MC.", mcImage: "transparent",),
-//         Speech(characterName: nar, characterText:"It doesn’t escape my notice how Naoki sinks further into the hot water as if he wants to escape under the bubbles.", mcImage: "transparent",),
-//         //bg temple entrance, day
-//         Speech(characterName: m, characterText:"Here we are.", mcImage: "mc_happy",),
-//         Speech(characterName: n, characterText:"So we are.", sideCharImage: "naoki_sad",),
-//         Speech(characterName: nar, characterText:"I spot my target easily. I only need to shoot the child an encouraging smile before he comes barreling over and away from his parents.", mcImage: "transparent",),
-//         // screen shake
-//         Speech(characterName: n, characterText:"A-ah!", sideCharImage: "naoki_frown",),
-//         Speech(characterName: m, characterText:"Hello there. How are you today, young one?", mcImage: "transparent",),
-//         Speech(c, characterText:"Hiii!", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"This is my friend, Naoki.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"What do you think you’re doing?", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Say hello, Naoki. Just talk.", mcImage: "mc_happy",),
-//         Speech(characterName: n, characterText:"U-uh… hello?", sideCharImage: "naoki_sad",),
-//         Speech(c, characterText:"You talk funny.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"Excuse me?", sideCharImage: "naoki_frown",),
-//         Speech(c, characterText:"Your hair is so long.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"What of it?", mcImage: "transparent",),
-//         // screen shake
-//         Speech(characterName: n, characterText:"O-ow!", sideCharImage: "naoki_sad",),
-//         Speech(characterName: m, characterText:"Ha ha…", mcImage: "transparent",),
-//         Speech(c, characterText:"I’m sorry. Did that hurt? Please don’t cry.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"Of course I’m not going to /cry/.", sideCharImage: "naoki_frown",),
-//         Speech(c, characterText:"Really?", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"Yes!", sideCharImage: "naoki_sad",),
-//         Speech(c, characterText:"I think I’d cry if I looked like a girl. Are you a girl?", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"What is the difference!", sideCharImage: "naoki_frown",),
-//         Speech(c, characterText:"I’m sorry, miss. I won’t touch your pretty hair anymore.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"P-pretty?", sideCharImage:"naoki_blush",),
-//         Speech(characterName: m, characterText:"Well, you /do/ have pretty hair, Naoki…", mcImage: "transparent",),
-//         Speech(characterName: nar, characterText:"He clicks his tongue and gently pushes the child’s hand away from his hair.", sideCharImage: "naoki_frown",),
-//         Speech(characterName: n, characterText:"You are a ridiculous human!", mcImage: "transparent",),
-//         Speech(c, characterText:"Aren’t you a hucharacterName: n, too?", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"I… I’m different.", mcImage: "transparent",),
-//         Speech(characterName: nar, characterText:"He steps back and unfurls his wings with a heavy sigh.", sideCharImage:"raven_naoki_sad",),
-//         Speech(characterName: n, characterText:"See?", sideCharImage:"raven_naoki_neutral",),
-//         Speech(c, characterText:"Oooh! You have wings! That’s so cool!", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"Cool?", sideCharImage:"raven_naoki_blush",),
-//         Speech(c, characterText:"I want wings too! How did you do that!", mcImage: "transparent",),
-//         // screen shake
-//         Speech(characterName: n, characterText:"Don’t tug on them!", sideCharImage:"raven_naoki_frown",),
-//         Speech(c, characterText:"Miss, can you fly? What kind of wings are they?", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"I don’t know. I’m a raven.", sideCharImage:"raven_naoki_neutral",),
-//         Speech(c, characterText:"Is that the black one?", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"Yes, it is.", sideCharImage:"raven_naoki_happy",),
-//         Speech(c, characterText:"I’ve never seen a raven up close.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"That’s because you’re so small and ravens fly up high.", mcImage: "transparent",),
-//         Speech(c, characterText:"I’m not small!", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"Ha ha… Yes, you are. But that means you can see things ravens can’t, right? You’re closer to the ground.", mcImage: "transparent",),
-//         Speech(c, characterText:"Hmmm… I guess… But I wanna fly! I’d fly to the top of the mountain!", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"It’s far too cold up there. Not worth it at all. You’d freeze.", mcImage: "transparent",),
-//         Speech(c, characterText:"But I want to go! I don’t care!", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"You don’t care about freezing? You don’t mind being an icicle?", mcImage: "transparent",),
-//         Speech(c, characterText:"Wait… no, I don’t want that!", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"Are you sure? I heard icicles are a tasty treat.", mcImage: "transparent",),
-//         Speech(c, characterText:"Nooooo!", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"Ha ha ha ha…", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"There are many animals on the mountain that can fly you know. And even the ones who can’t have other fun things they can do.", mcImage: "transparent",),
-//         Speech(c, characterText:"Really?", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"Of course. You should appreciate what you have and learn about all the animals.", mcImage: "transparent",),
-//         Speech(c, characterText:"But I don’t know anything…", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"Then seek out information. Ask questions.", mcImage: "transparent",),
-//         Speech(c, characterText:"Okay… what do ravens eat? Do they like candy?", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"They eat all sorts of things. Meat and eggs, berries and other plants. I imagine they might candy as well.", mcImage: "transparent",),
-//         Speech(c, characterText:"Ohhh so they’re like me! I eat those too!", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"I… suppose you do.", sideCharImage:"raven_naoki_neutral",),
-//         Speech(characterName: n, characterText:"It’s time to go!", mcImage: "transparent",),
-//         Speech(c, characterText:"Oh! Coming!", mcImage: "transparent",),
-//         Speech(c, characterText:"I’m sorry, my mom and dad are waiting for me, Miss.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"I don’t need an apology, don’t be silly.", sideCharImage:"raven_naoki_happy",),
-//         Speech(c, characterText:"Okay! Bye!", mcImage: "transparent",),
-//         // screen shake
-//         Speech(characterName: n, characterText:"?!", sideCharImage:"raven_naoki_blush",),
-//         Speech(characterName: nar, characterText:"The child hugs Naoki before running back off to join his parents, mischievously grinning as he spins a feather between his fingers.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"Sigh…", sideCharImage:"raven_naoki_sad",),
-//         Speech(characterName: m, characterText:"You had fun.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"H-huh? I wouldn’t say that…", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"But I understand why you brought me here now.", sideCharImage:"raven_naoki_neutral",),
-//         Speech(characterName: n, characterText:"That was a human child. They didn’t know… anything. They were just as ridiculous as a cub.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"If it’s not protected, it could just as easily fall prey to something.", sideCharImage:"raven_naoki_sad",),
-//         Speech(characterName: m, characterText:"That’s right, Naoki…", mcImage: "transparent",),
-//         Speech(characterName: nar, characterText:"Naoki exhales and watches as the child disappears out of view.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"And it will grow up hunting like all carnivorous animals. For itself. For its parents.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"It doesn’t know what it’s like to be a raven any more than a raven knows how to be a human.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"It is just a child. It is not… evil. Or good.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"…", sideCharImage:"raven_naoki_neutral",),
-//         Speech(characterName: n, characterText:"Thank you, MC. I think I understand now.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Do you really?", mcImage: "mc_happy",),
-//         Speech(characterName: n, characterText:"As much as I can at the moment.", sideCharImage:"raven_naoki_happy",),
-//         Speech(characterName: m, characterText:"Then I’m happy.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"Well, that’s always a good thing.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Is it now?", mcImage: "transparent",),
-//         Speech(characterName: nar, characterText:"Naoki smiles in my direction for a moment before pacing the shrine on his owcharacterName: n, gaze turned toward the clear sky.", mcImage: "transparent",),
-//         // Naoki prepares MC a meal and Naoki confesses (misunderstood) romantic feelings
-//         //bg clearing by the lake, sunset
-//         Speech(characterName: m, characterText:"Oh! There you are!", mcImage: "mc_happy",),
-//         Speech(characterName: m, characterText:"Ina told me to find you here. What’s going on?", mcImage: "transparent",),
-//         Speech(characterName: nar, characterText:"I’m worn from today’s duties, but I still manage to keep the weariness from my voice as I hurry to Naoki’s side.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"There you are.", sideCharImage:"naoki_happy",),
-//         Speech(characterName: m, characterText:"What’s all this?", mcImage: "mc_neutral",),
-//         Speech(characterName: nar, characterText:"It’s a silly question as I approach. It’s clearly an elaborate dinner set up for us near the temple lake. The delicious smell of mint and crispy face makes its way to my nostrils.", mcImage: "transparent",),
-//         Speech(characterName: nar, characterText:"Naoki bows and waits for me to take a seat, which I do, albeit confused.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"What’s the occasiocharacterName: n, Naoki?", mcImage: "transparent",),
-//         Speech(characterName: nar, characterText:"He’s cooked a few times now, but never to this extent. It’s by all means a feast, far too much for two people.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"I wanted to thank you for your perseverance and kindness.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Y-you can start by sitting! Please stop bowing!", mcImage:"mc_blush",),
-//         Speech(characterName: nar, characterText:"He takes a seat, still polite as he pours me tea in elaborate, traditional fashion.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Did… Ina teach you this as well?", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"No. This was all on my own. From my own research.", sideCharImage:"naoki_neutral",),
-//         Speech(characterName: m, characterText:"That’s amazing, Naoki…", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"…", sideCharImage:"naoki_happy",),
-//         Speech(characterName: n, characterText:"We’ve been together quite some time now, have we?", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Yes. We have.", mcImage: "mc_happy",),
-//         Speech(characterName: n, characterText:"ThecharacterName: n, please enjoy.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"…I will. Thank you.", mcImage: "transparent",),
-//         Speech(characterName: nar, characterText:"Naoki eats only a little, instead insisting on explaining each dish and cutting my own.", sideCharImage:"naoki_neutral",),
-//         Speech(characterName: nar, characterText:"It’s a bit too much but it is not my place to refuse gifts.", mcImage: "transparent",),
-//         Speech(characterName: nar, characterText:"It reminds me of when Naoki first became my familiar, awkward and stumbling and asking me personal questions I’d never considered before.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"I can’t say I have a favorite type of dress cut. Whatever kimono is most comfortable was always my go-to choice.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"I don’t think that’s true. You tend to avoid wearing darker colors.", sideCharImage:"naoki_happy",),
-//         Speech(characterName: m, characterText:"What, really? I never noticed.", mcImage: "mc_sad",),
-//         Speech(characterName: n, characterText:"It’s true! But I think these colors suit your personality.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"And what’s that?", mcImage: "mc_happy",),
-//         Speech(characterName: n, characterText:"Simple-minded and affable.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Hey!", mcImage:"mc_frown",),
-//         Speech(characterName: n, characterText:"Ha ha ha… I’m sorry. I’m just kidding.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"I’m not sure you are!", mcImage: "mc_happy",),
-//         Speech(characterName: nar, characterText:"He turns his head to hide his smile but he’s doing a terrible job.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Gosh. I’m really full…", mcImage: "mc_sad",),
-//         Speech(characterName: m, characterText:"Let’s try to save the rest for tomorrow.", mcImage: "mc_happy",),
-//         Speech(characterName: n, characterText:"No. Wait.", sideCharImage: "naoki_sad",),
-//         Speech(characterName: nar, characterText:"Naoki scoots closer to me, still kneeling and folding his hands into his sleeves.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"When I first became your familiar, I was confused in many ways.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"But I’ve read things recently. Understood things recently.", sideCharImage:"naoki_blush",),
-//         Speech(characterName: m, characterText:"I know you have.", mcImage: "mc_neutral",),
-//         Speech(characterName: n, characterText:"No. It’s…", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"You are beautiful. A deity to proudly serve.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Thank you, Naoki.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"No. No, it’s more than that. Even if you weren’t a deity. Even if you did not have a shrine.", sideCharImage:"naoki_happy",),
-//         Speech(characterName: n, characterText:"I would serve at your side.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Naoki…", mcImage: "transparent",),
-//         Speech(characterName: nar, characterText:"Just this once, I let myself get a bit carried away.", mcImage: "transparent",),
-//         Speech(characterName: nar, characterText:"I happily wrap my arms around him in a hug, squeezing him tight against me.", sideCharImage:"naoki_blush",),
-//         // screen shake
-//         Speech(characterName: m, characterText:"Thank you. I don’t know what to say. You’ve changed my life as well. You’re dear to me.", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"N-no, you don’t understand…", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"What don’t I understand about your sincere devotiocharacterName: n, Naoki?", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"You’ve made me the happiest I’ve felt in /years/.", mcImage: "transparent",),
-//         Speech(characterName: nar, characterText:"I pull away enough to look him in the eye, squeezing his shoulders.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"I won’t forget tonight. But we should sleep, don’t you think?", mcImage: "transparent",),
-//         Speech(characterName: n, characterText:"MC!", sideCharImage: "naoki_sad",),
-//         Speech(characterName: nar, characterText:"He grabs both my hands, leaning close.", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Y-yes?", mcImage: "mc_sad",),
-//         Speech(characterName: n, characterText:"It’s not devotion! It has nothing to do with that!", mcImage: "transparent",),
-//         Speech(characterName: m, characterText:"Then what? Just tell me, Naoki, whatever it is.", mcImage: "transparent",),
-//         // [First Kiss CG – eyes open]
-//         Speech(characterName: nar, characterText:"He hesitates for a moment before loosening his grip on me.", mcImage: "transparent",),
-//         Speech(characterName: nar, characterText:"Naoki… kisses me.", mcImage: "transparent",),
-//         Speech(characterName: nar, characterText:"He finishes leaning in and /kisses/ me, lips cool but soft against my own like a sunset prayer."),
-//         Speech(characterName: nar, characterText:"All the confusion and skepticischaracterName: m, all the quiet moments of morning walks, and every decision I’ve made has led him here.", mcImage: "transparent",),
-//         // choice A
-//         Speech(characterName: nar, characterText:"And I’m okay with that.", mcImage: "transparent",),
-//         //jump to NaokiAct4BranchA
-//         Speech(characterName: nar, characterText:"But he is my familiar.", mcImage: "transparent",),
-//         // choice B
-//         //jump to NaokiAct4BranchA_B
-// ];
+  String? getCharacterText() {
+    return textBank[textNumber].characterText;
+  }
+
+  String? getCharacterName() {
+    return textBank[textNumber].characterName;
+  }
+
+  bool isFinished() {
+    if (textNumber >= textBank.length - 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  getNumber() {
+    return textNumber;
+  }
+
+  String? getMCImage() {
+    return textBank[textNumber].mcImage;
+  }
+
+  String? getSideCharImage() {
+    return textBank[textNumber].sideCharImage;
+  }
+
+  void reset() {
+    textNumber = 0;
+  }
+
+  String? getBGM() {
+    return "";
+  }
+
+  String? getBgImage() {
+    return "1710heian22_19201080";
+  }
+
+  List<Speech> textBank = [
+    //As Naoki and MC continue with their duties, Naoki’s anger turns into more of a fearfulness, but he comes to appreciate (gradually) her sense of equality in regards to all beings
+    // bg outdoor pathway CORNER, day, only MC
+
+    Speech(
+      characterName: nar,
+      characterText:
+          "It was scary having an argument with Naoki, but after I confirmed I do love the mountain animals, he seems to be trying to understand humans.",
+      mcImage: "mc_neutral",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "The work never stops, but now more can be accomplished than ever before.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "The aches and pains I’ve been accustomed to now come and go. I don’t think I’ve ever slept this much in my life.",
+      mcImage: "mc_happy",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "MC!",
+      mcImage: "mc_neutral",
+    ),
+    // Raven Naoki appear
+    Speech(
+      characterName: nar,
+      characterText:
+          "Naoki rushes to me, breathless, a broom still in hand that will snap in half if he clutches it any tighter.",
+      sideCharImage: "raven_naoki_blush",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Y-yes? What’s wrong?",
+      mcImage: "mc_sad",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "T-there’s a… a human! There’s a human in the temple!",
+      sideCharImage: "raven_naoki_frown",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Oh! Let’s go welcome them!",
+      mcImage: "mc_happy",
+    ),
+    // screen shake
+    Speech(
+      characterName: n,
+      characterText: "What? No! It’s an /intruder/!",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Humans are not forbidden to come to the temple, Naoki.",
+      mcImage: "mc_sad",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Well, they should be!",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: wo,
+      characterText: "Excuse me, MC?",
+      mcImage: "transparent",
+    ),
+    // screen shake
+    Speech(
+      characterName: n,
+      characterText: "You will not address her so casually!",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Oh! It’s you!",
+      mcImage: "mc_happy",
+    ),
+    Speech(
+      characterName: m,
+      characterText:
+          "Naoki. This woman is from the family that has lived closest to this temple for generations.",
+      mcImage: "mc_neutral",
+    ),
+    Speech(
+      characterName: m,
+      characterText:
+          "Ina. It’s so nice to see you again. Have you come to repurpose our old materials?",
+      mcImage: "mc_happy",
+    ),
+    Speech(
+      characterName: i,
+      characterText:
+          "I have! It’s also about time to replace your utensils, correct?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "That would be lovely.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Naoki, please introduce yourself.",
+      mcImage: "mc_neutral",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "If I didn’t know hicharacterName: m, it’d look like he was ready to completely ignore me.",
+      sideCharImage: "raven_naoki_sad",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "But Naoki sighs and gives a curt bow to Ina. It’s not an apology, but it’s something.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "…Hello.",
+      sideCharImage: "raven_naoki_neutral",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "You’ve gotten so big. Even your hair is so long now.",
+      mcImage: "mc_happy",
+    ),
+    Speech(
+      characterName: nar,
+      characterText: "I pat her head before turning to Naoki again.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: nar,
+      characterText: "It’s as good a time as ever.",
+      mcImage: "mc_neutral",
+    ),
+    Speech(
+      characterName: m,
+      characterText:
+          "Hey, Ina? If you have the time, would you mind visiting once a week or so?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "W-what?",
+      sideCharImage: "raven_naoki_frown",
+    ),
+    Speech(
+      characterName: i,
+      characterText: "Sure. What would you like me to do?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText:
+          "My familiar is learning to write and you have such pretty handwriting. I think you’d be a much better teacher than I.",
+      mcImage: "mc_happy",
+    ),
+    // screen shake
+    Speech(
+      characterName: n,
+      characterText: "I don’t need it!",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Yes, you really, /really/ do.",
+      mcImage: "mc_frown",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Erk…",
+      sideCharImage: "raven_naoki_sad",
+    ),
+    Speech(
+      characterName: i,
+      characterText: "I can make time for that.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Thank you. I’d appreciate it.",
+      mcImage: "mc_happy",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "Ina takes off to pack up our old utensils and materials and Naoki waits until she’s out of sight before furiously flapping his wings.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Why?",
+      sideCharImage: "raven_naoki_frown",
+    ),
+    Speech(
+      characterName: m,
+      characterText:
+          "You haven’t had much personal exposure. This will be a good opportunity for you to learn about kind humans.",
+      mcImage: "mc_neutral",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "…I already know that.",
+      sideCharImage: "raven_naoki_sad",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "What?",
+      mcImage: "mc_sad",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "The way you speak and interact with humans is the same as with the other animals.",
+      sideCharImage: "raven_naoki_neutral",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "I do not need to be locked in a room with a human to see that ‘Ina’ is nice.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "…",
+      mcImage: "mc_blush",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "What.",
+      sideCharImage: "raven_naoki_sad",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "I’m just so happy to hear that, Naoki…",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "…I’m returning to work! I still do not see your point of view!",
+      sideCharImage: "raven_naoki_blush",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Have fun!",
+      mcImage: "mc_happy",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Hmph.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "Naoki’s wings stretch fully as he stalks away in the opposite direction of Ina.",
+      mcImage: "transparent",
+    ),
+    // Naoki off screen
+    Speech(
+      characterName: m,
+      characterText: "You’re pretty childish sometimes, Naoki!",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "You missed a spot!",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Ha ha…",
+      mcImage: "transparent",
+    ),
+  ];
+}
+
+class NaokiAct3BranchA3 {
+  int textNumber = 0;
+
+  void nextQuestion() {
+    if (textNumber < textBank.length - 1) {
+      textNumber++;
+    }
+  }
+
+  String? getCharacterText() {
+    return textBank[textNumber].characterText;
+  }
+
+  String? getCharacterName() {
+    return textBank[textNumber].characterName;
+  }
+
+  bool isFinished() {
+    if (textNumber >= textBank.length - 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  getNumber() {
+    return textNumber;
+  }
+
+  String? getMCImage() {
+    return textBank[textNumber].mcImage;
+  }
+
+  String? getSideCharImage() {
+    return textBank[textNumber].sideCharImage;
+  }
+
+  void reset() {
+    textNumber = 0;
+  }
+
+  String? getBGM() {
+    return "";
+  }
+
+  String? getBgImage() {
+    return "1710heian15_n_19201080";
+  }
+
+  List<Speech> textBank = [
+    //As MC and Naoki take a walk and Naoki tells of the horror he’s read of humans in books
+    // bg room, night, only MC
+    Speech(
+      characterName: nar,
+      characterText:
+          "As promised, Ina comes to tutor Naoki the following week.",
+      mcImage: "mc_neutral",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "But I don’t know how it went. When she left, Naoki simply returned to work.",
+      mcImage: "mc_sad",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "It’s one of my first times going to Naoki’s room since he first became my familiar.",
+      mcImage: "mc_neutral",
+    ),
+    // screen shake
+    Speech(
+      characterName: m,
+      characterText: "Hello? Naoki?",
+      mcImage: "transparent",
+    ),
+    // Raven Naoki appear
+    Speech(
+      characterName: n,
+      characterText: "Oh. Hello.",
+      sideCharImage: "raven_naoki_neutral",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "I’m just checking up on you.",
+      mcImage: "mc_happy",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Yes… Please, come in.",
+      sideCharImage: "raven_naoki_happy",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Sure. Thank you.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Oh… what’s all this, Naoki?",
+      mcImage: "mc_neutral",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Huh? A-ah…",
+      sideCharImage: "raven_naoki_blush",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "I seem to have started a collection of sorts. I didn’t realize I had so much.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "Naoki’s room absolutely /glitters/ with shiny objects neatly placed about.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "A few poetry books from the library sit next to his bedding, while the other half of the room is covered with sparkling rocks, glass, and metals that are organized by size and color.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Have you been collecting these the whole time?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "‘A love that frees your heart is one that has been allowed to sprout wings.’",
+      sideCharImage: "raven_naoki_neutral",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Ahem…",
+      sideCharImage: "raven_naoki_blush",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Yes, since we began our mountain rounds…",
+      sideCharImage: "raven_naoki_sad",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "I’ll clean it.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "No! No, this is great!",
+      mcImage: "mc_happy",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "If you like it, please keep it.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "It’s okay?",
+      sideCharImage: "raven_naoki_neutral",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Of course it is. It makes you happy, right?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText:
+          "Never be afraid to do what makes you happy as long as it doesn’t hurt anyone.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Alright.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Then…",
+      sideCharImage: "raven_naoki_happy",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "I would like to go on a walk with you.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Huh? Right now?",
+      mcImage: "mc_blush",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Yes. It would make me happy.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Oh. W-well, I suppose I am done working for today.",
+      mcImage: "mc_happy",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Ina mentioned a festival.",
+      sideCharImage: "raven_naoki_neutral",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Would you like to see a human festival, Naoki?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "…Not in particular. But I suppose we can make it short.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Ha ha, yes. Short.",
+      mcImage: "mc_happy",
+    ),
+  ];
+}
+
+class NaokiAct3BranchA4 {
+  int textNumber = 0;
+
+  void nextQuestion() {
+    if (textNumber < textBank.length - 1) {
+      textNumber++;
+    }
+  }
+
+  String? getCharacterText() {
+    return textBank[textNumber].characterText;
+  }
+
+  String? getCharacterName() {
+    return textBank[textNumber].characterName;
+  }
+
+  bool isFinished() {
+    if (textNumber >= textBank.length - 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  getNumber() {
+    return textNumber;
+  }
+
+  String? getMCImage() {
+    return textBank[textNumber].mcImage;
+  }
+
+  String? getSideCharImage() {
+    return textBank[textNumber].sideCharImage;
+  }
+
+  void reset() {
+    textNumber = 0;
+  }
+
+  String? getBGM() {
+    return "";
+  }
+
+  String? getBgImage() {
+    return "SummerFestivalPacked";
+  }
+
+  List<Speech> textBank = [
+    // bg summer festival packed
+    Speech(
+      characterName: nar,
+      characterText:
+          "We find a quiet spot right outside the local village, close enough to hear and see the festivities without being spotted.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "It’s absolutely bustling despite it being so late. People chat and walk among food stalls without a care in the world.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "Away from the warmth of fire and bodies, Naoki’s wings serve as a shield from the wind, stretched around us both.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "What do you think, Naoki?",
+      mcImage: "mc_happy",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "It’s loud.",
+      sideCharImage: "raven_naoki_neutral",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Ha ha… yes, I suppose it is.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "But what have you learned recently on humans?",
+      mcImage: "mc_neutral",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "The more I read about thecharacterName: m, the worse they make their case.",
+      sideCharImage: "raven_naoki_sad",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Why’s that?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "They document their own atrocities. It’s hard to believe good things about them.",
+      sideCharImage: "raven_naoki_frown",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "Entire communities destroyed over things like thievery and prostitution. Scandals and murder about.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Surely you read something other than that?",
+      mcImage: "mc_sad",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "If humans have much kindness to thecharacterName: m, it is not in their history texts.",
+      sideCharImage: "raven_naoki_sad",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "…Look there, Naoki.",
+      mcImage: "mc_happy",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "His gaze follows my finger that points to one of the food stalls and the performance artist next to it.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText:
+          "The artist puts on a show to attract people to buy food from the stall. He doesn’t do it for profit, but out of kindness.",
+      sideCharImage: "raven_naoki_neutral",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "And that family there is learning a dance together.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText:
+          "And that couple there are attempting to hide while they kiss.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Why would they do that?",
+      sideCharImage: "raven_naoki_sad",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Well, I suppose it must be embarrassing for them.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "I mean why do humans kiss at all? I see it often in the texts but there’s no formal explanation. Is it a type of mating call?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Ha ha…",
+      sideCharImage: "raven_naoki_neutral",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Sorry, I don’t mean to laugh.",
+      mcImage: "mc_blush",
+    ),
+    Speech(
+      characterName: m,
+      characterText:
+          "It’s not always a mating call. Sometimes it is just a form of affection.",
+      mcImage: "mc_happy",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "ThecharacterName: n, should I be kissing you?",
+      sideCharImage: "raven_naoki_sad",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "N-no! I-it’s complicated.",
+      mcImage: "mc_blush",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Hm…",
+      sideCharImage: "raven_naoki_neutral",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "If you’re trying to get me to sympathize with the humans, it won’t work.",
+      mcImage: "mc_neutral",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Humans are anathema to the mountain and all of nature.",
+      sideCharImage: "raven_naoki_frown",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "…You’re using big words and big ideas with a small mind.",
+      mcImage: "mc_frown",
+    ),
+    // screen shake
+    Speech(
+      characterName: n,
+      characterText:
+          "How big must my mind be to forgive humans who hunt animals?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText:
+          "You are being biased against them and not looking at it logically.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Should I get closer to a trap then?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText:
+          "Humans are not so different from the rest of the animals!",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "…You believing that is the same as approving of their methods, of their killing.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Perhaps worse if you are a god.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "Humans are prone to corruption. It’s in their /blood/. No amount of shiny festival lights will cover up their crimes! They’ll only keep going and going and—",
+      sideCharImage: "naoki_sad",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "No!",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "I shake my head as I feel myself reaching a boiling point that I haven’t before.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText:
+          "The only corruption I see right now is my familiar, so blinded by his fear and hatred to live up to the cause of equality.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "…",
+      sideCharImage: "raven_naoki_sad",
+    ),
+    Speech(
+      characterName: m,
+      characterText:
+          "I beg you to ponder why you feel this way. To take the time to find out how humans are different from one another.",
+      mcImage: "mc_sad",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "For the good of the mountain.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "…",
+      mcImage: "transparent",
+    ),
+  ];
+}
+
+class NaokiAct3BranchA5 {
+  int textNumber = 0;
+
+  void nextQuestion() {
+    if (textNumber < textBank.length - 1) {
+      textNumber++;
+    }
+  }
+
+  String? getCharacterText() {
+    return textBank[textNumber].characterText;
+  }
+
+  String? getCharacterName() {
+    return textBank[textNumber].characterName;
+  }
+
+  bool isFinished() {
+    if (textNumber >= textBank.length - 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  getNumber() {
+    return textNumber;
+  }
+
+  String? getMCImage() {
+    return textBank[textNumber].mcImage;
+  }
+
+  String? getSideCharImage() {
+    return textBank[textNumber].sideCharImage;
+  }
+
+  void reset() {
+    textNumber = 0;
+  }
+
+  String? getBGM() {
+    return "";
+  }
+
+  String? getBgImage() {
+    return "1710heian07_19201080";
+  }
+
+  List<Speech> textBank = [
+    //During a night of chess, Naoki shares his reflections and compliments MC
+    //bg clearing by the lake, day
+    Speech(
+      characterName: nar,
+      characterText: "To my surprise, Naoki invited me to play chess today.",
+      mcImage: "mc_neutral",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "Apparently, Ina taught him and they play every time she comes.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "Which I don’t understand, considering his views on humans…",
+      mcImage: "mc_sad",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "The next tribute is soon.",
+      sideCharImage: "raven_naoki_neutral",
+    ),
+    Speech(
+      characterName: m,
+      characterText:
+          "Oh! Yes, it is. We’ll have to take a trip and clean the temple.",
+      mcImage: "mc_neutral",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Ever diligent.",
+      sideCharImage: "raven_naoki_happy",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Is there something on your mind?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Hm…",
+      sideCharImage: "raven_naoki_neutral",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "I think… you’re incredible for how you manage to fit all the complexities of humans and animals like.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: nar,
+      characterText: "Huh…?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Checkmate.",
+      sideCharImage: "raven_naoki_happy",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Gah! Were you trying to distract me?",
+      mcImage: "mc_frown",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Ha ha…",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "I mean my words with no ulterior motives.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "…You’re hot and cold, Naoki.",
+      mcImage: "mc_sad",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Hm?",
+      sideCharImage: "raven_naoki_neutral",
+    ),
+    Speech(
+      characterName: m,
+      characterText:
+          "You tell me you support my cause. You back out. You tell me I’m incredible for not hating humans, then tell me you hate humans.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "It’s hard to believe you.",
+      sideCharImage: "raven_naoki_sad",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "…I know. You are a saint for putting up with me.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText:
+          "I only wish you could see the world as I do. The only difference between us is my patience.",
+      mcImage: "mc_neutral",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Patience…",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Yes. Patience.",
+      sideCharImage: "raven_naoki_happy",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "Naoki picks up my king piece and brings it close to his face.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: nar,
+      characterText: "I never know what he’s thinking.",
+      mcImage: "transparent",
+    ),
+  ];
+}
+
+class NaokiAct3BranchA6 {
+  int textNumber = 0;
+
+  void nextQuestion() {
+    if (textNumber < textBank.length - 1) {
+      textNumber++;
+    }
+  }
+
+  String? getCharacterText() {
+    return textBank[textNumber].characterText;
+  }
+
+  String? getCharacterName() {
+    return textBank[textNumber].characterName;
+  }
+
+  bool isFinished() {
+    if (textNumber >= textBank.length - 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  getNumber() {
+    return textNumber;
+  }
+
+  String? getMCImage() {
+    return textBank[textNumber].mcImage;
+  }
+
+  String? getSideCharImage() {
+    return textBank[textNumber].sideCharImage;
+  }
+
+  void reset() {
+    textNumber = 0;
+  }
+
+  String? getBGM() {
+    return "";
+  }
+
+  List<Speech> textBank = [
+    //MC lets Naoki meet a human child and he changes his opinion on humans
+    //todo: bg room, day
+    Speech(
+      characterName: nar,
+      characterText:
+          "For the first time in what feels like years, I wake up from a dream.",
+      mcImage: "mc_neutral",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "I can’t remember it exactly. But the feeling of small hands in mine linger.",
+      mcImage: "mc_happy",
+    ),
+    //todo: bg Hot spring, day
+    Speech(
+      characterName: m,
+      characterText: "Naoki!",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Ah!",
+      sideCharImage: "raven_naoki_blush",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Y-yes?",
+      sideCharImage: "raven_naoki_frown",
+    ),
+    Speech(
+      characterName: m,
+      characterText:
+          "When you’re done with your bath, please meet me at the entrance. We’re going to the shrine today.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "The… shrine? With the humans?",
+      sideCharImage: "raven_naoki_sad",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Correct.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "…Yes, MC.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "It doesn’t escape my notice how Naoki sinks further into the hot water as if he wants to escape under the bubbles.",
+      mcImage: "transparent",
+    ),
+    //todo: bg temple entrance, day
+    Speech(
+      characterName: m,
+      characterText: "Here we are.",
+      mcImage: "mc_happy",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "So we are.",
+      sideCharImage: "naoki_sad",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "I spot my target easily. I only need to shoot the child an encouraging smile before he comes barreling over and away from his parents.",
+      mcImage: "transparent",
+    ),
+    // screen shake
+    Speech(
+      characterName: n,
+      characterText: "A-ah!",
+      sideCharImage: "naoki_frown",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Hello there. How are you today, young one?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: c,
+      characterText: "Hiii!",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "This is my friend, Naoki.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "What do you think you’re doing?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Say hello, Naoki. Just talk.",
+      mcImage: "mc_happy",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "U-uh… hello?",
+      sideCharImage: "naoki_sad",
+    ),
+    Speech(
+      characterName: c,
+      characterText: "You talk funny.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Excuse me?",
+      sideCharImage: "naoki_frown",
+    ),
+    Speech(
+      characterName: c,
+      characterText: "Your hair is so long.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "What of it?",
+      mcImage: "transparent",
+    ),
+    // screen shake
+    Speech(
+      characterName: n,
+      characterText: "O-ow!",
+      sideCharImage: "naoki_sad",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Ha ha…",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: c,
+      characterText: "I’m sorry. Did that hurt? Please don’t cry.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Of course I’m not going to /cry/.",
+      sideCharImage: "naoki_frown",
+    ),
+    Speech(
+      characterName: c,
+      characterText: "Really?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Yes!",
+      sideCharImage: "naoki_sad",
+    ),
+    Speech(
+      characterName: c,
+      characterText: "I think I’d cry if I looked like a girl. Are you a girl?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "What is the difference!",
+      sideCharImage: "naoki_frown",
+    ),
+    Speech(
+      characterName: c,
+      characterText: "I’m sorry, miss. I won’t touch your pretty hair anymore.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "P-pretty?",
+      sideCharImage: "naoki_blush",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Well, you /do/ have pretty hair, Naoki…",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "He clicks his tongue and gently pushes the child’s hand away from his hair.",
+      sideCharImage: "naoki_frown",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "You are a ridiculous human!",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: c,
+      characterText: "Aren’t you a hucharacterName: n, too?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "I… I’m different.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: nar,
+      characterText: "He steps back and unfurls his wings with a heavy sigh.",
+      sideCharImage: "raven_naoki_sad",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "See?",
+      sideCharImage: "raven_naoki_neutral",
+    ),
+    Speech(
+      characterName: c,
+      characterText: "Oooh! You have wings! That’s so cool!",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Cool?",
+      sideCharImage: "raven_naoki_blush",
+    ),
+    Speech(
+      characterName: c,
+      characterText: "I want wings too! How did you do that!",
+      mcImage: "transparent",
+    ),
+    // screen shake
+    Speech(
+      characterName: n,
+      characterText: "Don’t tug on them!",
+      sideCharImage: "raven_naoki_frown",
+    ),
+    Speech(
+      characterName: c,
+      characterText: "Miss, can you fly? What kind of wings are they?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "I don’t know. I’m a raven.",
+      sideCharImage: "raven_naoki_neutral",
+    ),
+    Speech(
+      characterName: c,
+      characterText: "Is that the black one?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Yes, it is.",
+      sideCharImage: "raven_naoki_happy",
+    ),
+    Speech(
+      characterName: c,
+      characterText: "I’ve never seen a raven up close.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "That’s because you’re so small and ravens fly up high.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: c,
+      characterText: "I’m not small!",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "Ha ha… Yes, you are. But that means you can see things ravens can’t, right? You’re closer to the ground.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: c,
+      characterText:
+          "Hmmm… I guess… But I wanna fly! I’d fly to the top of the mountain!",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "It’s far too cold up there. Not worth it at all. You’d freeze.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: c,
+      characterText: "But I want to go! I don’t care!",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "You don’t care about freezing? You don’t mind being an icicle?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: c,
+      characterText: "Wait… no, I don’t want that!",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Are you sure? I heard icicles are a tasty treat.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: c,
+      characterText: "Nooooo!",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Ha ha ha ha…",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "There are many animals on the mountain that can fly you know. And even the ones who can’t have other fun things they can do.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: c,
+      characterText: "Really?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "Of course. You should appreciate what you have and learn about all the animals.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: c,
+      characterText: "But I don’t know anything…",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Then seek out information. Ask questions.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: c,
+      characterText: "Okay… what do ravens eat? Do they like candy?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "They eat all sorts of things. Meat and eggs, berries and other plants. I imagine they might candy as well.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: c,
+      characterText: "Ohhh so they’re like me! I eat those too!",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "I… suppose you do.",
+      sideCharImage: "raven_naoki_neutral",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "It’s time to go!",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: c,
+      characterText: "Oh! Coming!",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: c,
+      characterText: "I’m sorry, my mom and dad are waiting for me, Miss.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "I don’t need an apology, don’t be silly.",
+      sideCharImage: "raven_naoki_happy",
+    ),
+    Speech(
+      characterName: c,
+      characterText: "Okay! Bye!",
+      mcImage: "transparent",
+    ),
+    // screen shake
+    Speech(
+      characterName: n,
+      characterText: "?!",
+      sideCharImage: "raven_naoki_blush",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "The child hugs Naoki before running back off to join his parents, mischievously grinning as he spins a feather between his fingers.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Sigh…",
+      sideCharImage: "raven_naoki_sad",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "You had fun.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "H-huh? I wouldn’t say that…",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "But I understand why you brought me here now.",
+      sideCharImage: "raven_naoki_neutral",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "That was a human child. They didn’t know… anything. They were just as ridiculous as a cub.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "If it’s not protected, it could just as easily fall prey to something.",
+      sideCharImage: "raven_naoki_sad",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "That’s right, Naoki…",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "Naoki exhales and watches as the child disappears out of view.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "And it will grow up hunting like all carnivorous animals. For itself. For its parents.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "It doesn’t know what it’s like to be a raven any more than a raven knows how to be a human.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "It is just a child. It is not… evil. Or good.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "…",
+      sideCharImage: "raven_naoki_neutral",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Thank you, MC. I think I understand now.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Do you really?",
+      mcImage: "mc_happy",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "As much as I can at the moment.",
+      sideCharImage: "raven_naoki_happy",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Then I’m happy.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Well, that’s always a good thing.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Is it now?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "Naoki smiles in my direction for a moment before pacing the shrine on his own, gaze turned toward the clear sky.",
+      mcImage: "transparent",
+    ),
+  ];
+}
+
+class NaokiAct3BranchA7 {
+  int textNumber = 0;
+
+  void nextQuestion() {
+    if (textNumber < textBank.length - 1) {
+      textNumber++;
+    }
+  }
+
+  String? getCharacterText() {
+    return textBank[textNumber].characterText;
+  }
+
+  String? getCharacterName() {
+    return textBank[textNumber].characterName;
+  }
+
+  bool isFinished() {
+    if (textNumber >= textBank.length - 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  getNumber() {
+    return textNumber;
+  }
+
+  String? getMCImage() {
+    return textBank[textNumber].mcImage;
+  }
+
+  String? getSideCharImage() {
+    return textBank[textNumber].sideCharImage;
+  }
+
+  void reset() {
+    textNumber = 0;
+  }
+
+  String? getBGM() {
+    return "";
+  }
+
+  String? getBgImage() {
+    return "1710heian09_y_19201080";
+  }
+
+  List<Speech> textBank = [
+    // Naoki prepares MC a meal and Naoki confesses (misunderstood) romantic feelings
+    //bg clearing by the lake, sunset
+    Speech(
+      characterName: m,
+      characterText: "Oh! There you are!",
+      mcImage: "mc_happy",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Ina told me to find you here. What’s going on?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "I’m worn from today’s duties, but I still manage to keep the weariness from my voice as I hurry to Naoki’s side.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "There you are.",
+      sideCharImage: "naoki_happy",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "What’s all this?",
+      mcImage: "mc_neutral",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "It’s a silly question as I approach. It’s clearly an elaborate dinner set up for us near the temple lake. The delicious smell of mint and crispy face makes its way to my nostrils.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "Naoki bows and waits for me to take a seat, which I do, albeit confused.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "What’s the occasiocharacterName: n, Naoki?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "He’s cooked a few times now, but never to this extent. It’s by all means a feast, far too much for two people.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "I wanted to thank you for your perseverance and kindness.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Y-you can start by sitting! Please stop bowing!",
+      mcImage: "mc_blush",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "He takes a seat, still polite as he pours me tea in elaborate, traditional fashion.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Did… Ina teach you this as well?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "No. This was all on my own. From my own research.",
+      sideCharImage: "naoki_neutral",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "That’s amazing, Naoki…",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "…",
+      sideCharImage: "naoki_happy",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "We’ve been together quite some time now, have we?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Yes. We have.",
+      mcImage: "mc_happy",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "ThecharacterName: n, please enjoy.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "…I will. Thank you.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "Naoki eats only a little, instead insisting on explaining each dish and cutting my own.",
+      sideCharImage: "naoki_neutral",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "It’s a bit too much but it is not my place to refuse gifts.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "It reminds me of when Naoki first became my familiar, awkward and stumbling and asking me personal questions I’d never considered before.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText:
+          "I can’t say I have a favorite type of dress cut. Whatever kimono is most comfortable was always my go-to choice.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "I don’t think that’s true. You tend to avoid wearing darker colors.",
+      sideCharImage: "naoki_happy",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "What, really? I never noticed.",
+      mcImage: "mc_sad",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "It’s true! But I think these colors suit your personality.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "And what’s that?",
+      mcImage: "mc_happy",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Simple-minded and affable.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Hey!",
+      mcImage: "mc_frown",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "Ha ha ha… I’m sorry. I’m just kidding.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "I’m not sure you are!",
+      mcImage: "mc_happy",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "He turns his head to hide his smile but he’s doing a terrible job.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Gosh. I’m really full…",
+      mcImage: "mc_sad",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Let’s try to save the rest for tomorrow.",
+      mcImage: "mc_happy",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "No. Wait.",
+      sideCharImage: "naoki_sad",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "Naoki scoots closer to me, still kneeling and folding his hands into his sleeves.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "When I first became your familiar, I was confused in many ways.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "But I’ve read things recently. Understood things recently.",
+      sideCharImage: "naoki_blush",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "I know you have.",
+      mcImage: "mc_neutral",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "No. It’s…",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "You are beautiful. A deity to proudly serve.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Thank you, Naoki.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText:
+          "No. No, it’s more than that. Even if you weren’t a deity. Even if you did not have a shrine.",
+      sideCharImage: "naoki_happy",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "I would serve at your side.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Naoki…",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: nar,
+      characterText: "Just this once, I let myself get a bit carried away.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "I happily wrap my arms around him in a hug, squeezing him tight against me.",
+      sideCharImage: "naoki_blush",
+    ),
+    // screen shake
+    Speech(
+      characterName: m,
+      characterText:
+          "Thank you. I don’t know what to say. You’ve changed my life as well. You’re dear to me.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "N-no, you don’t understand…",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText:
+          "What don’t I understand about your sincere devotiocharacterName: n, Naoki?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "You’ve made me the happiest I’ve felt in /years/.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: nar,
+      characterText:
+          "I pull away enough to look him in the eye, squeezing his shoulders.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText:
+          "I won’t forget tonight. But we should sleep, don’t you think?",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "MC!",
+      sideCharImage: "naoki_sad",
+    ),
+    Speech(
+      characterName: nar,
+      characterText: "He grabs both my hands, leaning close.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Y-yes?",
+      mcImage: "mc_sad",
+    ),
+    Speech(
+      characterName: n,
+      characterText: "It’s not devotion! It has nothing to do with that!",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: m,
+      characterText: "Then what? Just tell me, Naoki, whatever it is.",
+      mcImage: "transparent",
+    ),
+    // [First Kiss CG – eyes open]
+    Speech(
+      characterName: nar,
+      characterText:
+          "He hesitates for a moment before loosening his grip on me.",
+      mcImage: "transparent",
+    ),
+    Speech(
+      characterName: nar,
+      characterText: "Naoki… kisses me.",
+      mcImage: "transparent",
+    ),
+    Speech(
+        characterName: nar,
+        characterText:
+            "He finishes leaning in and /kisses/ me, lips cool but soft against my own like a sunset prayer."),
+    Speech(
+      characterName: nar,
+      characterText:
+          "All the confusion and skepticischaracterName: m, all the quiet moments of morning walks, and every decision I’ve made has led him here.",
+      mcImage: "transparent",
+    ),
+    // choice A
+    Speech(
+      characterName: nar,
+      characterText: "And I’m okay with that.",
+      mcImage: "transparent",
+    ),
+    //jump to NaokiAct4BranchA
+    Speech(
+      characterName: nar,
+      characterText: "But he is my familiar.",
+      mcImage: "transparent",
+    ),
+    // choice B
+    //jump to NaokiAct4BranchA_B
 
 // NaokiAct3BranchB = [
 //     // bg mountain view, sunset (continuation of Act 2 choice B)

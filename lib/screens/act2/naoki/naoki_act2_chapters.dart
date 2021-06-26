@@ -25,6 +25,11 @@ class NaokiRouteLists extends StatelessWidget {
     "/naoki19",
     "/naoki20",
     "/naoki21",
+    "/naoki22",
+    "/naoki23",
+    "/naoki24",
+    "/naoki25",
+    "/naoki26",
   ];
   @override
   Widget build(BuildContext context) {
