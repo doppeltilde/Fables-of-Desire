@@ -25,10 +25,10 @@ import 'package:fablesofdesire/screens/act2/naoki/naoki9.dart';
 import 'package:fablesofdesire/screens/act2/naoki/naoki_act2_chapters.dart';
 import 'package:fablesofdesire/screens/act3/naoki/naoki_act3_1.dart';
 import 'package:fablesofdesire/screens/end_credits.dart';
-import 'package:fablesofdesire/screens/test/chapter1.dart';
-import 'package:fablesofdesire/screens/test/chapter2.dart';
+import 'package:fablesofdesire/test/chapter1.dart';
+import 'package:fablesofdesire/test/chapter2.dart';
 import 'package:fablesofdesire/screens/intro.dart';
-import 'package:fablesofdesire/screens/test/test_intro.dart';
+import 'package:fablesofdesire/test/test_intro.dart';
 import 'package:flutter/material.dart';
 import 'homepage.dart';
 

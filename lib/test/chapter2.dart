@@ -2,7 +2,7 @@ import 'package:fablesofdesire/constructor/text_animation.dart';
 import 'package:fablesofdesire/constructor/vn_scaffold.dart';
 import 'package:fablesofdesire/global/audio/global_audio.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
-import 'package:fablesofdesire/text/vn_text.dart';
+import 'package:fablesofdesire/test/text/vn_text.dart';
 import 'package:flutter/material.dart';
 
 class VN2 extends StatefulWidget {
