@@ -40,7 +40,7 @@ jobs:
       - run: flutter pub get
       - run: flutter build ios --no-codesign
     
-    build_macos:
+  build_macos:
     name: Build macOS
     runs-on: macos-latest
     timeout-minutes: 30
