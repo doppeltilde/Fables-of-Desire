@@ -8,11 +8,12 @@ on:
     push:
       branches:
         - develop
-        
+
 jobs:
   build:
     name: Build Apps
     runs-on: windows-latest
+    timeout-minutes: 60
     steps:
       - name: Checkout repository
         uses: actions/checkout@v1
@@ -29,7 +30,6 @@ jobs:
       - name: Build Windows
         run: |
           flutter config --enable-windows-desktop
-          flutter run -d windows
           flutter build windows
 
       - name: Upload build artifacts
