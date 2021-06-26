@@ -47,7 +47,6 @@ class Bgm extends WidgetsBindingObserver {
   /// It is safe to call this function even when a current BGM track is
   /// playing.
   Future<void> play(String filename, {double volume = 1.0}) async {
-    //AudioService service = Provider.of<AudioService>(context);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     double? vol = prefs.getDouble('volValue');
     print(vol);
@@ -57,7 +56,14 @@ class Bgm extends WidgetsBindingObserver {
     }
 
     isPlaying = true;
-    audioPlayer = await audioCache.loop(filename + ".mp3", volume: vol ?? 1.0);
+    if (filename.isNotEmpty) {
+      audioPlayer =
+          await audioCache.loop(filename + ".mp3", volume: vol ?? 1.0);
+    } else {
+      String? notHome = prefs.getString("notHome");
+      audioPlayer =
+          await audioCache.loop(notHome! + ".mp3", volume: vol ?? 1.0);
+    }
   }
 
   /// Stops the currently playing background music track (if any).

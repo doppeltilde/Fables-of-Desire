@@ -23,7 +23,12 @@ import 'package:fablesofdesire/screens/act2/naoki/naoki7.dart';
 import 'package:fablesofdesire/screens/act2/naoki/naoki8.dart';
 import 'package:fablesofdesire/screens/act2/naoki/naoki9.dart';
 import 'package:fablesofdesire/screens/act2/naoki/naoki_act2_chapters.dart';
-import 'package:fablesofdesire/screens/act3/naoki/naoki_act3_1.dart';
+import 'package:fablesofdesire/screens/act3/naokiA/naokiA_act3_1.dart';
+import 'package:fablesofdesire/screens/act3/naokiA/naokiA_act3_2.dart';
+import 'package:fablesofdesire/screens/act3/naokiA/naokiA_act3_3.dart';
+import 'package:fablesofdesire/screens/act3/naokiA/naokiA_act3_4.dart';
+import 'package:fablesofdesire/screens/act3/naokiA/naokiA_act3_5.dart';
+import 'package:fablesofdesire/screens/act3/naokiA/naokiA_act3_6.dart';
 import 'package:fablesofdesire/screens/end_credits.dart';
 import 'package:fablesofdesire/test/chapter1.dart';
 import 'package:fablesofdesire/test/chapter2.dart';
@@ -139,6 +144,21 @@ class Home extends StatelessWidget {
         },
         "/naoki21": (_) {
           return Naoki21();
+        },
+        "/naoki22": (_) {
+          return Naoki22();
+        },
+        "/naoki23": (_) {
+          return Naoki23();
+        },
+        "/naoki24": (_) {
+          return Naoki24();
+        },
+        "/naoki25": (_) {
+          return Naoki25();
+        },
+        "/naoki26": (_) {
+          return Naoki26();
         },
       },
     );

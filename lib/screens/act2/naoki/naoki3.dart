@@ -1,6 +1,5 @@
 import 'package:fablesofdesire/constructor/text/naoki/naoki_act2_text.dart';
 import 'package:fablesofdesire/constructor/vn_scaffold.dart';
-import 'package:fablesofdesire/global/transition_screeen.dart';
 import 'package:flutter/material.dart';
 
 class Naoki3 extends StatefulWidget {
@@ -21,50 +20,22 @@ class _VNState extends State<Naoki3> {
     });
   }
 
-  @override
-  void initState() {
-    super.initState();
-
-    Future.delayed(const Duration(seconds: 5), () {
-      setState(() {
-        visible = false;
-      });
-    });
+  String? _bgImage() {
+    if (_thisNumber! <= 14) {
+      return "Hotspring_Morning";
+    } else {
+      return "1710heian22_19201080";
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    print(_thisNumber);
-
-    return Builder(builder: (context) {
-      if (_thisNumber! <= 14) {
-        return VNScaffold(
-          callback: this.callback,
-          bgImage: "Hotspring_Morning",
-          textSound: textSound,
-          route: route,
-          nextRoute: nextRoute,
-        );
-      } else {
-        return Builder(
-          builder: (context) {
-            if (visible == true) {
-              return TransitionScreen(
-                visible: visible,
-                text: "Some time later...",
-              );
-            } else {
-              return VNScaffold(
-                callback: this.callback,
-                bgImage: "1710heian22_19201080",
-                textSound: textSound,
-                route: route,
-                nextRoute: nextRoute,
-              );
-            }
-          },
-        );
-      }
-    });
+    return VNScaffold(
+      callback: this.callback,
+      bgImage: _bgImage(),
+      textSound: textSound,
+      route: route,
+      nextRoute: nextRoute,
+    );
   }
 }

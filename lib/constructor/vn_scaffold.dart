@@ -61,14 +61,14 @@ class _VNState extends State<VNScaffold> {
       try {
         GlobalAudio.playAudio.getBGM(widget.textSound.getBGM().toString());
       } catch (e) {
-        print(e);
+        GlobalAudio.playAudio.getBGM(notHome ?? "");
       }
     } else {
       try {
         GlobalAudio.playAudio.stopAudio();
         GlobalAudio.playAudio.getBGM(widget.textSound.getBGM().toString());
       } catch (e) {
-        print(e);
+        GlobalAudio.playAudio.getBGM(notHome ?? "");
       }
     }
 
@@ -81,8 +81,7 @@ class _VNState extends State<VNScaffold> {
       sharedPreferences = sp;
       notHome = sharedPreferences!.getString("notHome");
       try {
-        if (widget.textSound.getBGM() != null ||
-            widget.textSound.getBGM().isNotEmpty) {
+        if (widget.textSound.getBGM().isNotEmpty) {
           notHome = widget.textSound.getBGM().toString();
         }
       } catch (e) {
@@ -116,6 +115,9 @@ class _VNState extends State<VNScaffold> {
         });
       } else {
         widget.textSound.nextQuestion();
+        if (widget.callback != null) {
+          widget.callback!(widget.textSound.getNumber());
+        }
       }
     });
   }
@@ -135,6 +137,9 @@ class _VNState extends State<VNScaffold> {
         });
       } else {
         widget.textSound.nextQuestion();
+        if (widget.callback != null) {
+          widget.callback!(widget.textSound.getNumber());
+        }
       }
     });
   }
