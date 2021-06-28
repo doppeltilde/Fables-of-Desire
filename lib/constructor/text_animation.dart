@@ -52,7 +52,7 @@ abstract class AnimatedText {
         builder: (context) {
           if (data.isNotEmpty) {
             return SimpleRichText(
-              "› " + data,
+              "\n› " + data + "\n",
               logIt: false,
               style: textStyle,
               textAlign: textAlign,
@@ -63,7 +63,7 @@ abstract class AnimatedText {
             );
           } else {
             return SimpleRichText(
-              "› ···",
+              "\n› ···" + "\n",
               logIt: false,
               style: textStyle,
               textAlign: textAlign,

@@ -402,8 +402,8 @@ class _InterludeState extends State<InterludeTextSound> {
                                   child: Text(
                                     "$_name",
                                     style: TextStyle(
-                                      fontFamily: "Julee",
-                                      fontSize: 21,
+                                      fontFamily: "IndieFlower",
+                                      fontSize: 19,
                                       color: Colors.black,
                                     ),
                                   ),
@@ -424,8 +424,8 @@ class _InterludeState extends State<InterludeTextSound> {
                                   child: Text(
                                     widget.characterName!,
                                     style: TextStyle(
-                                      fontFamily: "Julee",
-                                      fontSize: 21,
+                                      fontFamily: "IndieFlower",
+                                      fontSize: 19,
                                       color: Colors.black,
                                     ),
                                   ),
@@ -447,70 +447,85 @@ class _InterludeState extends State<InterludeTextSound> {
                                 padding: EdgeInsets.symmetric(vertical: 10),
                                 // constraints:
                                 //     BoxConstraints(minWidth: 100, minHeight: 100),
-                                width: MediaQuery.of(context).size.width / 2.4,
+                                width: MediaQuery.of(context).size.width / 2,
                                 child: Builder(
                                   builder: (context) {
                                     if (widget.characterName == "MC" ||
                                         widget.characterName == "Narrator") {
                                       return Container(
                                         decoration: BoxDecoration(
-                                            color:
-                                                Colors.white.withOpacity(0.8),
+                                            image: DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/images/gui/textbox_scroll_03.png'),
+                                              fit: BoxFit.fill,
+                                            ),
+                                            color: Colors.white.withOpacity(0),
                                             border: Border.all(
                                               color:
-                                                  Colors.black.withOpacity(0.7),
+                                                  Colors.white.withOpacity(0),
                                             ),
                                             borderRadius: new BorderRadius.only(
                                               topLeft:
-                                                  const Radius.circular(25.0),
+                                                  const Radius.circular(0.0),
                                               topRight:
-                                                  const Radius.circular(25.0),
+                                                  const Radius.circular(0.0),
                                               bottomLeft:
-                                                  const Radius.circular(25.0),
+                                                  const Radius.circular(0.0),
                                             )),
-                                        child: Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: width * 0.025,
-                                              vertical: height * 0.025),
-                                          child: AnimatedTextKit(
-                                            animatedTexts: [
-                                              TyperAnimatedText(
-                                                widget.characterText,
-                                                textAlign: TextAlign.left,
-                                                textStyle: TextStyle(
-                                                    color: Colors.black,
-                                                    fontFamily: "Mali",
-                                                    fontSize: 20),
-                                                speed: Duration(
-                                                    milliseconds: speed!),
+                                        child: Stack(
+                                          children: [
+                                            Opacity(
+                                              opacity: 1,
+                                              child: Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: width * 0.03,
+                                                    vertical: height * 0.025),
+                                                child: AnimatedTextKit(
+                                                  animatedTexts: [
+                                                    TyperAnimatedText(
+                                                      widget.characterText,
+                                                      textAlign: TextAlign.left,
+                                                      textStyle: TextStyle(
+                                                          color: Colors.black,
+                                                          fontFamily: "Mali",
+                                                          fontSize: 18),
+                                                      speed: Duration(
+                                                          milliseconds: speed!),
+                                                    ),
+                                                  ],
+                                                  displayFullTextOnTap: true,
+                                                  isRepeatingAnimation: false,
+                                                  key: ValueKey(widget.n),
+                                                ),
                                               ),
-                                            ],
-                                            displayFullTextOnTap: true,
-                                            isRepeatingAnimation: false,
-                                            key: ValueKey(widget.n),
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       );
                                     } else {
                                       return Container(
                                         decoration: BoxDecoration(
-                                            color:
-                                                Colors.white.withOpacity(0.8),
+                                            image: DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/images/gui/textbox_scroll_03.png'),
+                                              fit: BoxFit.fill,
+                                            ),
+                                            color: Colors.white.withOpacity(0),
                                             border: Border.all(
                                               color:
-                                                  Colors.black.withOpacity(0.7),
+                                                  Colors.black.withOpacity(0),
                                             ),
                                             borderRadius: new BorderRadius.only(
                                               topLeft:
-                                                  const Radius.circular(25.0),
+                                                  const Radius.circular(0.0),
                                               topRight:
-                                                  const Radius.circular(25.0),
+                                                  const Radius.circular(0.0),
                                               bottomRight:
-                                                  const Radius.circular(25.0),
+                                                  const Radius.circular(0.0),
                                             )),
                                         child: Padding(
                                           padding: EdgeInsets.symmetric(
-                                              horizontal: width * 0.025,
+                                              horizontal: width * 0.03,
                                               vertical: height * 0.025),
                                           child: AnimatedTextKit(
                                             animatedTexts: [
@@ -520,7 +535,7 @@ class _InterludeState extends State<InterludeTextSound> {
                                                 textStyle: TextStyle(
                                                     color: Colors.black,
                                                     fontFamily: "Mali",
-                                                    fontSize: 20),
+                                                    fontSize: 18),
                                                 speed: Duration(
                                                     milliseconds: speed!),
                                               ),

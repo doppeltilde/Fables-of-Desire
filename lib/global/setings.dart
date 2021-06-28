@@ -43,7 +43,7 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
+    return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
         colorFilter: new ColorFilter.mode(

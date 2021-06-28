@@ -80,192 +80,396 @@ class _WildfyreState extends State<HomePage> {
                 height: MediaQuery.of(context).size.height / 2,
               ),
             ),
-            RotatedBox(
-              quarterTurns: 2,
-              child: Container(
-                transform: Matrix4.translationValues(
-                    MediaQuery.of(context).size.height * 0, 150, 0.0),
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Image.asset(
-                    "assets/images/sprites/Chibi_Tomiichi.png",
-                    height: MediaQuery.of(context).size.height / 2,
-                  ),
-                ),
-              ),
-            ),
-            AnimatedOpacity(
-              opacity: opacity!,
-              duration: Duration(milliseconds: 300),
-              child: Center(
-                child: Container(
-                  child: SafeArea(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 30, vertical: 5),
-                            child: Container(
-                              width: MediaQuery.of(context).size.width / 3,
-                              child: ElevatedButton(
-                                child: Text(
-                                  "START",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 40,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: "Mali"),
-                                ),
-                                style: ElevatedButton.styleFrom(
-                                    primary: Colors.white,
-                                    padding: EdgeInsets.symmetric(vertical: 20),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                        side: BorderSide(color: Colors.white))),
-                                onPressed: () {
-                                  GlobalAudio.playAudio.stopAudio();
-                                  GlobalAudio.playAudio.isPlaying = true;
-                                  Navigator.of(context).pushNamed('/testintro');
-                                },
-                              ),
-                            ),
-                          ),
-                          Builder(builder: (context) {
-                            if (kReleaseMode) {
-                              return Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 30, vertical: 5),
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width / 3,
-                                  child: ElevatedButton(
-                                    child: Text(
-                                      "NAOKI ROUTE",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 35,
-                                          fontFamily: "Mali"),
-                                    ),
-                                    style: ElevatedButton.styleFrom(
-                                        primary: Colors.white,
-                                        padding:
-                                            EdgeInsets.symmetric(vertical: 20),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20.0),
-                                            side: BorderSide(
-                                                color: Colors.white))),
-                                    onPressed: () {
-                                      GlobalAudio.playAudio.stopAudio();
-                                      GlobalAudio.playAudio.isPlaying = true;
-                                      Navigator.of(context).pushNamed('/intro');
-                                    },
-                                  ),
-                                ),
-                              );
-                            } else {
-                              return SizedBox.shrink();
-                            }
-                          }),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 30, vertical: 5),
-                            child: Container(
-                              width: MediaQuery.of(context).size.width / 3,
-                              child: ElevatedButton(
-                                child: Text(
-                                  "LOAD",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 35,
-                                      fontFamily: "Mali"),
-                                ),
-                                style: ElevatedButton.styleFrom(
-                                    primary: Colors.white,
-                                    padding: EdgeInsets.symmetric(vertical: 20),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                        side: BorderSide(color: Colors.white))),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => LoadGame()),
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 30, vertical: 5),
-                            child: Container(
-                              width: MediaQuery.of(context).size.width / 3,
-                              child: ElevatedButton(
-                                child: Text(
-                                  "OPTIONS",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 35,
-                                      fontFamily: "Mali"),
-                                ),
-                                style: ElevatedButton.styleFrom(
-                                    primary: Colors.white,
-                                    padding: EdgeInsets.symmetric(vertical: 20),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                        side: BorderSide(color: Colors.white))),
-                                onPressed: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Settings(
-                                            route: "/home",
-                                          )),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 30, vertical: 5),
-                            child: Container(
-                              width: MediaQuery.of(context).size.width / 3,
-                              child: ElevatedButton(
-                                child: Text(
-                                  "CREDITS",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 35,
-                                      fontFamily: "Mali"),
-                                ),
-                                style: ElevatedButton.styleFrom(
-                                    primary: Colors.white,
-                                    padding: EdgeInsets.symmetric(vertical: 20),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                        side: BorderSide(color: Colors.white))),
-                                onPressed: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Credits()),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+            Builder(builder: (context) {
+              if (UniversalPlatform.isAndroid || UniversalPlatform.isIOS) {
+                return RotatedBox(
+                  quarterTurns: 2,
+                  child: Container(
+                    transform: Matrix4.translationValues(
+                        MediaQuery.of(context).size.height * 0.3, 45, 0.0),
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Image.asset(
+                        "assets/images/sprites/Chibi_Tomiichi.png",
+                        height: MediaQuery.of(context).size.height / 2,
                       ),
                     ),
                   ),
-                ),
-              ),
-            ),
+                );
+              } else {
+                return RotatedBox(
+                  quarterTurns: 2,
+                  child: Container(
+                    transform: Matrix4.translationValues(
+                        MediaQuery.of(context).size.height * 0, 150, 0.0),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Image.asset(
+                        "assets/images/sprites/Chibi_Tomiichi.png",
+                        height: MediaQuery.of(context).size.height / 2,
+                      ),
+                    ),
+                  ),
+                );
+              }
+            }),
+            Builder(
+              builder: (context) {
+                if (UniversalPlatform.isAndroid || UniversalPlatform.isIOS) {
+                  return AnimatedOpacity(
+                    opacity: opacity!,
+                    duration: Duration(milliseconds: 300),
+                    child: Center(
+                      child: Container(
+                        child: SafeArea(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 5),
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 3,
+                                    child: ElevatedButton(
+                                      child: Text(
+                                        "START",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Mali"),
+                                      ),
+                                      style: ElevatedButton.styleFrom(
+                                          primary: Colors.white,
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 12),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(20.0),
+                                              side: BorderSide(
+                                                  color: Colors.white))),
+                                      onPressed: () {
+                                        GlobalAudio.playAudio.stopAudio();
+                                        GlobalAudio.playAudio.isPlaying = true;
+                                        Navigator.of(context)
+                                            .pushNamed('/testintro');
+                                      },
+                                    ),
+                                  ),
+                                ),
+                                Builder(builder: (context) {
+                                  if (!kReleaseMode) {
+                                    return Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 5, vertical: 5),
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                3,
+                                        child: ElevatedButton(
+                                          child: Text(
+                                            "NAOKI ROUTE",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 22,
+                                                fontFamily: "Mali"),
+                                          ),
+                                          style: ElevatedButton.styleFrom(
+                                              primary: Colors.white,
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 12),
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0),
+                                                  side: BorderSide(
+                                                      color: Colors.white))),
+                                          onPressed: () {
+                                            GlobalAudio.playAudio.stopAudio();
+                                            GlobalAudio.playAudio.isPlaying =
+                                                true;
+                                            Navigator.of(context)
+                                                .pushNamed('/intro');
+                                          },
+                                        ),
+                                      ),
+                                    );
+                                  } else {
+                                    return SizedBox.shrink();
+                                  }
+                                }),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 30, vertical: 5),
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 3,
+                                    child: ElevatedButton(
+                                      child: Text(
+                                        "LOAD",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 22,
+                                            fontFamily: "Mali"),
+                                      ),
+                                      style: ElevatedButton.styleFrom(
+                                          primary: Colors.white,
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 12),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(20.0),
+                                              side: BorderSide(
+                                                  color: Colors.white))),
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => LoadGame()),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 30, vertical: 5),
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 3,
+                                    child: ElevatedButton(
+                                      child: Text(
+                                        "OPTIONS",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 22,
+                                            fontFamily: "Mali"),
+                                      ),
+                                      style: ElevatedButton.styleFrom(
+                                          primary: Colors.white,
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 12),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(20.0),
+                                              side: BorderSide(
+                                                  color: Colors.white))),
+                                      onPressed: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Settings(
+                                                  route: "/home",
+                                                )),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                _buttonCredits(
+                                  context,
+                                  "CREDITS",
+                                  22,
+                                  12,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                } else {
+                  return AnimatedOpacity(
+                    opacity: opacity!,
+                    duration: Duration(milliseconds: 300),
+                    child: Center(
+                      child: Container(
+                        child: SafeArea(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 30, vertical: 5),
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 3,
+                                    child: ElevatedButton(
+                                      child: Text(
+                                        "START",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 40,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Mali"),
+                                      ),
+                                      style: ElevatedButton.styleFrom(
+                                          primary: Colors.white,
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 20),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(20.0),
+                                              side: BorderSide(
+                                                  color: Colors.white))),
+                                      onPressed: () {
+                                        GlobalAudio.playAudio.stopAudio();
+                                        GlobalAudio.playAudio.isPlaying = true;
+                                        Navigator.of(context)
+                                            .pushNamed('/testintro');
+                                      },
+                                    ),
+                                  ),
+                                ),
+                                Builder(builder: (context) {
+                                  if (kReleaseMode) {
+                                    return Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 30, vertical: 5),
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                3,
+                                        child: ElevatedButton(
+                                          child: Text(
+                                            "NAOKI ROUTE",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 35,
+                                                fontFamily: "Mali"),
+                                          ),
+                                          style: ElevatedButton.styleFrom(
+                                              primary: Colors.white,
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 20),
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0),
+                                                  side: BorderSide(
+                                                      color: Colors.white))),
+                                          onPressed: () {
+                                            GlobalAudio.playAudio.stopAudio();
+                                            GlobalAudio.playAudio.isPlaying =
+                                                true;
+                                            Navigator.of(context)
+                                                .pushNamed('/intro');
+                                          },
+                                        ),
+                                      ),
+                                    );
+                                  } else {
+                                    return SizedBox.shrink();
+                                  }
+                                }),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 30, vertical: 5),
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 3,
+                                    child: ElevatedButton(
+                                      child: Text(
+                                        "LOAD",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 35,
+                                            fontFamily: "Mali"),
+                                      ),
+                                      style: ElevatedButton.styleFrom(
+                                          primary: Colors.white,
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 20),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(20.0),
+                                              side: BorderSide(
+                                                  color: Colors.white))),
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => LoadGame()),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 30, vertical: 5),
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 3,
+                                    child: ElevatedButton(
+                                      child: Text(
+                                        "OPTIONS",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 35,
+                                            fontFamily: "Mali"),
+                                      ),
+                                      style: ElevatedButton.styleFrom(
+                                          primary: Colors.white,
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 20),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(20.0),
+                                              side: BorderSide(
+                                                  color: Colors.white))),
+                                      onPressed: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Settings(
+                                                  route: "/home",
+                                                )),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                _buttonCredits(context, "CREDITS", 35, 12),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }
+              },
+            )
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buttonCredits(context, text, double size, double vertical) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+      child: Container(
+        width: MediaQuery.of(context).size.width / 3,
+        child: ElevatedButton(
+          child: Text(
+            text,
+            style: TextStyle(
+                color: Colors.black, fontSize: size, fontFamily: "Mali"),
+          ),
+          style: ElevatedButton.styleFrom(
+              primary: Colors.white,
+              padding: EdgeInsets.symmetric(vertical: vertical),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                  side: BorderSide(color: Colors.white))),
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Credits()),
+          ),
         ),
       ),
     );

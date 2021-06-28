@@ -201,23 +201,21 @@ class _LoadGameState extends State<SaveGame> {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (context) {
-        if (UniversalPlatform.isMacOS ||
-            UniversalPlatform.isWindows ||
-            UniversalPlatform.isLinux ||
-            UniversalPlatform.isWeb) {
-          return Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-              colorFilter: new ColorFilter.mode(
-                  Colors.black.withOpacity(1), BlendMode.dstATop),
-              image:
-                  AssetImage("assets/images/bgs/mininature_003_19201440.jpg"),
-              fit: BoxFit.cover,
-            )),
-            child: SafeArea(
-              child: Scaffold(
+    return Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+          colorFilter: new ColorFilter.mode(
+              Colors.black.withOpacity(1), BlendMode.dstATop),
+          image: AssetImage("assets/images/bgs/mininature_003_19201440.jpg"),
+          fit: BoxFit.cover,
+        )),
+        child: Builder(
+          builder: (context) {
+            if (UniversalPlatform.isMacOS ||
+                UniversalPlatform.isWindows ||
+                UniversalPlatform.isLinux ||
+                UniversalPlatform.isWeb) {
+              return Scaffold(
                 appBar: appbar(context, "SAVE GAME") as PreferredSizeWidget?,
                 backgroundColor: Colors.transparent,
                 resizeToAvoidBottomInset: false,
@@ -505,21 +503,9 @@ class _LoadGameState extends State<SaveGame> {
                   )))),
                   backbutton(context)
                 ]),
-              ),
-            ),
-          );
-        } else {
-          return Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-              colorFilter: new ColorFilter.mode(
-                  Colors.black.withOpacity(1), BlendMode.dstATop),
-              image:
-                  AssetImage("assets/images/bgs/mininature_003_19201440.jpg"),
-              fit: BoxFit.cover,
-            )),
-            child: SafeArea(
-              child: Scaffold(
+              );
+            } else {
+              return Scaffold(
                 appBar: AppBar(
                   elevation: 0,
                   centerTitle: true,
@@ -920,12 +906,10 @@ class _LoadGameState extends State<SaveGame> {
                     ),
                   )))),
                 ]),
-              ),
-            ),
-          );
-        }
-      },
-    );
+              );
+            }
+          },
+        ));
   }
 
   Widget deleteButton(context, slot) {

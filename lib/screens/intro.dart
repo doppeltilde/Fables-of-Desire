@@ -2,11 +2,11 @@
 // NAME TEST
 //
 
-import 'package:fablesofdesire/global/audio/global_audio.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 class Intro extends StatefulWidget {
   @override
@@ -71,15 +71,44 @@ class _Intro extends State<Intro> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
-                                Text(
-                                  "Character Name",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: "Nunito",
-                                      fontSize: 65),
-                                ),
-                                SizedBox(
-                                  height: 50,
+                                Builder(
+                                  builder: (context) {
+                                    if (UniversalPlatform.isIOS ||
+                                        UniversalPlatform.isAndroid) {
+                                      return Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: <Widget>[
+                                            Text(
+                                              "Character Name",
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily: "Nunito",
+                                                  fontSize: 35),
+                                            ),
+                                            SizedBox(
+                                              height: 14,
+                                            )
+                                          ]);
+                                    } else {
+                                      return Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: <Widget>[
+                                            Text(
+                                              "Character Name",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily: "Nunito",
+                                                  fontSize: 65),
+                                            ),
+                                            SizedBox(
+                                              height: 50,
+                                            )
+                                          ]);
+                                    }
+                                  },
                                 ),
                                 Container(
                                   width: MediaQuery.of(context).size.width / 3,
@@ -124,49 +153,131 @@ class _Intro extends State<Intro> {
                               ],
                             ),
                           ),
-                          SizedBox(
-                            height: 30,
-                          ),
                           Builder(
                             builder: (context) {
-                              if (_controller!.text.isEmpty ||
-                                  _controller!.text.length >= 11) {
-                                return SizedBox.shrink();
+                              if (UniversalPlatform.isIOS ||
+                                  UniversalPlatform.isAndroid) {
+                                return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      SizedBox(
+                                        height: 12,
+                                      ),
+                                      Builder(
+                                        builder: (context) {
+                                          if (_controller!.text.isEmpty ||
+                                              _controller!.text.length >= 11) {
+                                            return SizedBox.shrink();
+                                          } else {
+                                            return Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 30, vertical: 5),
+                                              child: Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
+                                                child: ElevatedButton(
+                                                    child: Text(
+                                                      "CONTINUE",
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 22,
+                                                          fontFamily: "Mali"),
+                                                    ),
+                                                    style: ElevatedButton.styleFrom(
+                                                        primary: Colors.white,
+                                                        padding:
+                                                            EdgeInsets
+                                                                .symmetric(
+                                                                    vertical:
+                                                                        14),
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        20.0),
+                                                            side: BorderSide(
+                                                                color: Colors
+                                                                    .white))),
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pushNamed(
+                                                              '/naokiroutelists');
+                                                      // Navigator.push(
+                                                      //   context,
+                                                      //   MaterialPageRoute(
+                                                      //       builder: (context) => PrefName()),
+                                                      // );
+                                                    }),
+                                              ),
+                                            );
+                                          }
+                                        },
+                                      ),
+                                    ]);
                               } else {
-                                return Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 30, vertical: 5),
-                                  child: Container(
-                                    width:
-                                        MediaQuery.of(context).size.width / 5,
-                                    child: ElevatedButton(
-                                        child: Text(
-                                          "CONTINUE",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 30,
-                                              fontFamily: "Mali"),
-                                        ),
-                                        style: ElevatedButton.styleFrom(
-                                            primary: Colors.white,
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: 20),
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(30.0),
-                                                side: BorderSide(
-                                                    color: Colors.white))),
-                                        onPressed: () {
-                                          Navigator.of(context)
-                                              .pushNamed('/naokiroutelists');
-                                          // Navigator.push(
-                                          //   context,
-                                          //   MaterialPageRoute(
-                                          //       builder: (context) => PrefName()),
-                                          // );
-                                        }),
-                                  ),
-                                );
+                                return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      SizedBox(
+                                        height: 30,
+                                      ),
+                                      Builder(
+                                        builder: (context) {
+                                          if (_controller!.text.isEmpty ||
+                                              _controller!.text.length >= 11) {
+                                            return SizedBox.shrink();
+                                          } else {
+                                            return Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 30, vertical: 5),
+                                              child: Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
+                                                child: ElevatedButton(
+                                                    child: Text(
+                                                      "CONTINUE",
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 30,
+                                                          fontFamily: "Mali"),
+                                                    ),
+                                                    style: ElevatedButton.styleFrom(
+                                                        primary: Colors.white,
+                                                        padding:
+                                                            EdgeInsets
+                                                                .symmetric(
+                                                                    vertical:
+                                                                        20),
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        30.0),
+                                                            side: BorderSide(
+                                                                color: Colors
+                                                                    .white))),
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pushNamed(
+                                                              '/naokiroutelists');
+                                                      // Navigator.push(
+                                                      //   context,
+                                                      //   MaterialPageRoute(
+                                                      //       builder: (context) => PrefName()),
+                                                      // );
+                                                    }),
+                                              ),
+                                            );
+                                          }
+                                        },
+                                      ),
+                                    ]);
                               }
                             },
                           ),
