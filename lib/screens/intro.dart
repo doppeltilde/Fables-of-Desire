@@ -49,7 +49,8 @@ class _Intro extends State<Intro> {
       child: new Scaffold(
         resizeToAvoidBottomInset: false,
         //backgroundColor: Colors.redAccent,
-        backgroundColor: Colors.red[300],
+        // backgroundColor: Colors.red[300],
+        backgroundColor: Colors.black,
         body: Stack(
           children: <Widget>[
             new Center(
@@ -74,7 +75,7 @@ class _Intro extends State<Intro> {
                                   "Character Name",
                                   style: TextStyle(
                                       color: Colors.white,
-                                      fontFamily: "Julee",
+                                      fontFamily: "Nunito",
                                       fontSize: 65),
                                 ),
                                 SizedBox(
@@ -144,7 +145,7 @@ class _Intro extends State<Intro> {
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 30,
-                                              fontFamily: "Julee"),
+                                              fontFamily: "Mali"),
                                         ),
                                         style: ElevatedButton.styleFrom(
                                             primary: Colors.white,
@@ -156,7 +157,6 @@ class _Intro extends State<Intro> {
                                                 side: BorderSide(
                                                     color: Colors.white))),
                                         onPressed: () {
-                                          GlobalAudio.playAudio.stopAudio();
                                           Navigator.of(context)
                                               .pushNamed('/naokiroutelists');
                                           // Navigator.push(

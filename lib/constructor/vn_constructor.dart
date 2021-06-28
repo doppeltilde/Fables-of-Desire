@@ -1,7 +1,5 @@
 import 'dart:ui';
 
-import 'package:clay_containers/clay_containers.dart';
-import 'package:clay_containers/widgets/clay_container.dart';
 import 'package:fablesofdesire/constructor/text_animation.dart';
 import 'package:fablesofdesire/global/globals.dart';
 import 'package:flutter/material.dart';
@@ -75,6 +73,18 @@ class _InterludeState extends State<InterludeTextSound> {
     return speed;
   }
 
+  List images = [
+    "icon_hover_scroll_08",
+    "icon_hover_scroll_05",
+  ];
+  @override
+  void didChangeDependencies() {
+    for (var i in images)
+      precacheImage(AssetImage("assets/images/gui/" + i + ".png"), context);
+
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     getSpeed();
@@ -130,8 +140,8 @@ class _InterludeState extends State<InterludeTextSound> {
                                 child: Text(
                                   "$_name",
                                   style: TextStyle(
-                                    fontFamily: "Julee",
-                                    fontSize: 30,
+                                    fontFamily: "IndieFlower",
+                                    fontSize: 32,
                                     color: Colors.black,
                                   ),
                                 ),
@@ -153,8 +163,8 @@ class _InterludeState extends State<InterludeTextSound> {
                               child: Text(
                                 widget.characterName!,
                                 style: TextStyle(
-                                  fontFamily: "Julee",
-                                  fontSize: 30,
+                                  fontFamily: "IndieFlower",
+                                  fontSize: 32,
                                   color: Colors.black,
                                 ),
                               ),
@@ -205,88 +215,99 @@ class _InterludeState extends State<InterludeTextSound> {
                           // constraints:
                           //     BoxConstraints(minWidth: 100, minHeight: 100),
                           width: MediaQuery.of(context).size.width / 2.4,
-                          child: Opacity(
-                            opacity: 0.8,
-                            child: Builder(
-                              builder: (context) {
-                                if (widget.characterName == "MC" ||
-                                    widget.characterName == "Narrator") {
-                                  return ClayContainer(
-                                    spread: 1,
-                                    surfaceColor: Colors.white,
-                                    curveType: CurveType.none,
-                                    width: 700,
-                                    //color: Colors.brown[400],
-                                    color: Colors.red[300],
-                                    customBorderRadius: BorderRadius.only(
-                                      //Radius.circular(30),
-                                      bottomLeft: Radius.circular(20),
-                                      topLeft: Radius.circular(20),
-                                      topRight: Radius.circular(20),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: width * 0.025,
-                                          vertical: height * 0.025),
-                                      child: AnimatedTextKit(
-                                        animatedTexts: [
-                                          TyperAnimatedText(
-                                            widget.characterText,
-                                            textAlign: TextAlign.left,
-                                            textStyle: TextStyle(
-                                                color: Colors.black,
-                                                fontFamily: "Mali",
-                                                fontSize: 21),
-                                            speed:
-                                                Duration(milliseconds: speed!),
-                                          ),
-                                        ],
-                                        displayFullTextOnTap: true,
-                                        isRepeatingAnimation: false,
-                                        key: ValueKey(widget.n),
+                          child: Builder(
+                            builder: (context) {
+                              if (widget.characterName == "MC" ||
+                                  widget.characterName == "Narrator") {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                            'assets/images/gui/textbox_scroll_03.png'),
+                                        fit: BoxFit.fill,
                                       ),
-                                    ),
-                                  );
-                                } else {
-                                  return ClayContainer(
-                                    spread: 1,
-                                    surfaceColor: Colors.white,
-                                    curveType: CurveType.none,
-                                    width: 700,
-                                    color: Colors.black,
-                                    customBorderRadius: BorderRadius.only(
-                                      //Radius.circular(30),
-                                      bottomRight: Radius.circular(20),
-                                      topLeft: Radius.circular(20),
-                                      topRight: Radius.circular(20),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: width * 0.025,
-                                          vertical: height * 0.025),
-                                      child: AnimatedTextKit(
-                                        animatedTexts: [
-                                          TyperAnimatedText(
-                                            widget.characterText,
-                                            textAlign: TextAlign.left,
-                                            textStyle: TextStyle(
-                                                color: Colors.black,
-                                                fontFamily: "Mali",
-                                                fontSize: 21),
-                                            speed:
-                                                Duration(milliseconds: speed!),
-                                          ),
-                                        ],
-                                        displayFullTextOnTap: true,
-                                        isRepeatingAnimation: false,
-                                        key: ValueKey(widget.n),
+                                      color: Colors.white.withOpacity(0),
+                                      border: Border.all(
+                                        color: Colors.white.withOpacity(0),
                                       ),
+                                      borderRadius: new BorderRadius.only(
+                                        topLeft: const Radius.circular(0.0),
+                                        topRight: const Radius.circular(0.0),
+                                        bottomLeft: const Radius.circular(0.0),
+                                      )),
+                                  child: Stack(
+                                    children: [
+                                      Opacity(
+                                        opacity: 1,
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: width * 0.025,
+                                              vertical: height * 0.025),
+                                          child: AnimatedTextKit(
+                                            animatedTexts: [
+                                              TyperAnimatedText(
+                                                widget.characterText,
+                                                textAlign: TextAlign.left,
+                                                textStyle: TextStyle(
+                                                    color: Colors.black,
+                                                    fontFamily: "Mali",
+                                                    fontSize: 21),
+                                                speed: Duration(
+                                                    milliseconds: speed!),
+                                              ),
+                                            ],
+                                            displayFullTextOnTap: true,
+                                            isRepeatingAnimation: false,
+                                            key: ValueKey(widget.n),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              } else {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                            'assets/images/gui/textbox_scroll_03.png'),
+                                        fit: BoxFit.fill,
+                                      ),
+                                      color: Colors.white.withOpacity(0),
+                                      border: Border.all(
+                                        color: Colors.black.withOpacity(0),
+                                      ),
+                                      borderRadius: new BorderRadius.only(
+                                        topLeft: const Radius.circular(0.0),
+                                        topRight: const Radius.circular(0.0),
+                                        bottomRight: const Radius.circular(0.0),
+                                      )),
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: width * 0.025,
+                                        vertical: height * 0.025),
+                                    child: AnimatedTextKit(
+                                      animatedTexts: [
+                                        TyperAnimatedText(
+                                          widget.characterText,
+                                          textAlign: TextAlign.left,
+                                          textStyle: TextStyle(
+                                              color: Colors.black,
+                                              fontFamily: "Mali",
+                                              fontSize: 21),
+                                          speed: Duration(milliseconds: speed!),
+                                        ),
+                                      ],
+                                      displayFullTextOnTap: true,
+                                      isRepeatingAnimation: false,
+                                      key: ValueKey(widget.n),
                                     ),
-                                  );
-                                }
-                              },
-                            ),
+                                  ),
+                                );
+                              }
+                            },
                           ),
+
                           // FittedBox(
                           //   fit: BoxFit.fitHeight,
                           //   child: Stack(
@@ -423,88 +444,93 @@ class _InterludeState extends State<InterludeTextSound> {
                                 // constraints:
                                 //     BoxConstraints(minWidth: 100, minHeight: 100),
                                 width: MediaQuery.of(context).size.width / 2.4,
-                                child: Opacity(
-                                  opacity: 0.8,
-                                  child: Builder(
-                                    builder: (context) {
-                                      if (widget.characterName == "MC" ||
-                                          widget.characterName == "Narrator") {
-                                        return ClayContainer(
-                                          spread: 1,
-                                          surfaceColor: Colors.white,
-                                          curveType: CurveType.none,
-                                          width: 700,
-                                          //color: Colors.brown[400],
-                                          color: Colors.red[300],
-                                          customBorderRadius: BorderRadius.only(
-                                            //Radius.circular(30),
-                                            bottomLeft: Radius.circular(20),
-                                            topLeft: Radius.circular(20),
-                                            topRight: Radius.circular(20),
-                                          ),
-                                          child: Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: width * 0.025,
-                                                vertical: height * 0.025),
-                                            child: AnimatedTextKit(
-                                              animatedTexts: [
-                                                TyperAnimatedText(
-                                                  widget.characterText,
-                                                  textAlign: TextAlign.left,
-                                                  textStyle: TextStyle(
-                                                      color: Colors.black,
-                                                      fontFamily: "Mali",
-                                                      fontSize: 20),
-                                                  speed: Duration(
-                                                      milliseconds: speed!),
-                                                ),
-                                              ],
-                                              displayFullTextOnTap: true,
-                                              isRepeatingAnimation: false,
-                                              key: ValueKey(widget.n),
+                                child: Builder(
+                                  builder: (context) {
+                                    if (widget.characterName == "MC" ||
+                                        widget.characterName == "Narrator") {
+                                      return Container(
+                                        decoration: BoxDecoration(
+                                            color:
+                                                Colors.white.withOpacity(0.8),
+                                            border: Border.all(
+                                              color:
+                                                  Colors.black.withOpacity(0.7),
                                             ),
+                                            borderRadius: new BorderRadius.only(
+                                              topLeft:
+                                                  const Radius.circular(25.0),
+                                              topRight:
+                                                  const Radius.circular(25.0),
+                                              bottomLeft:
+                                                  const Radius.circular(25.0),
+                                            )),
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: width * 0.025,
+                                              vertical: height * 0.025),
+                                          child: AnimatedTextKit(
+                                            animatedTexts: [
+                                              TyperAnimatedText(
+                                                widget.characterText,
+                                                textAlign: TextAlign.left,
+                                                textStyle: TextStyle(
+                                                    color: Colors.black,
+                                                    fontFamily: "Mali",
+                                                    fontSize: 20),
+                                                speed: Duration(
+                                                    milliseconds: speed!),
+                                              ),
+                                            ],
+                                            displayFullTextOnTap: true,
+                                            isRepeatingAnimation: false,
+                                            key: ValueKey(widget.n),
                                           ),
-                                        );
-                                      } else {
-                                        return ClayContainer(
-                                          spread: 1,
-                                          surfaceColor: Colors.white,
-                                          curveType: CurveType.none,
-                                          width: 700,
-                                          color: Colors.black,
-                                          customBorderRadius: BorderRadius.only(
-                                            //Radius.circular(30),
-                                            bottomRight: Radius.circular(20),
-                                            topLeft: Radius.circular(20),
-                                            topRight: Radius.circular(20),
-                                          ),
-                                          child: Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: width * 0.025,
-                                                vertical: height * 0.025),
-                                            child: AnimatedTextKit(
-                                              animatedTexts: [
-                                                TyperAnimatedText(
-                                                  widget.characterText,
-                                                  textAlign: TextAlign.left,
-                                                  textStyle: TextStyle(
-                                                      color: Colors.black,
-                                                      fontFamily: "Mali",
-                                                      fontSize: 20),
-                                                  speed: Duration(
-                                                      milliseconds: speed!),
-                                                ),
-                                              ],
-                                              displayFullTextOnTap: true,
-                                              isRepeatingAnimation: false,
-                                              key: ValueKey(widget.n),
+                                        ),
+                                      );
+                                    } else {
+                                      return Container(
+                                        decoration: BoxDecoration(
+                                            color:
+                                                Colors.white.withOpacity(0.8),
+                                            border: Border.all(
+                                              color:
+                                                  Colors.black.withOpacity(0.7),
                                             ),
+                                            borderRadius: new BorderRadius.only(
+                                              topLeft:
+                                                  const Radius.circular(25.0),
+                                              topRight:
+                                                  const Radius.circular(25.0),
+                                              bottomRight:
+                                                  const Radius.circular(25.0),
+                                            )),
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: width * 0.025,
+                                              vertical: height * 0.025),
+                                          child: AnimatedTextKit(
+                                            animatedTexts: [
+                                              TyperAnimatedText(
+                                                widget.characterText,
+                                                textAlign: TextAlign.left,
+                                                textStyle: TextStyle(
+                                                    color: Colors.black,
+                                                    fontFamily: "Mali",
+                                                    fontSize: 20),
+                                                speed: Duration(
+                                                    milliseconds: speed!),
+                                              ),
+                                            ],
+                                            displayFullTextOnTap: true,
+                                            isRepeatingAnimation: false,
+                                            key: ValueKey(widget.n),
                                           ),
-                                        );
-                                      }
-                                    },
-                                  ),
+                                        ),
+                                      );
+                                    }
+                                  },
                                 ),
+
                                 // FittedBox(
                                 //   fit: BoxFit.fitHeight,
                                 //   child: Stack(

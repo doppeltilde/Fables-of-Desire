@@ -16,7 +16,9 @@ class _TextSpeedState extends State<SettingsChangers> {
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
         BGMVolume(),
-        Divider(),
+        SizedBox(
+          height: 10,
+        ),
         // VoiceVolume(),
         // Divider(),
         // SFXVolume(),

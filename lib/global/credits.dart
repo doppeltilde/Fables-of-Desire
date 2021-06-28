@@ -1,5 +1,6 @@
 import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/global/settings_widget.dart';
+import 'package:fablesofdesire/screens/end_credits.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -78,16 +79,23 @@ class _SettingsState extends State<Credits>
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-                          ProfileListItem(
-                            icon: Icons.face_outlined,
-                            text: 'Credits',
+                          GestureDetector(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EndCredits()),
+                            ),
+                            child: ProfileListItem(
+                              icon: Icons.face_outlined,
+                              text: 'Credits',
+                            ),
                           ),
                           SizedBox(
                             height: 55,
                           ),
                           ProfileListItem(
                             icon: Icons.privacy_tip_outlined,
-                            text: 'Privacy',
+                            text: 'Privacy Policy',
                           ),
                           ProfileListItem(
                             icon: Icons.policy_outlined,
@@ -106,7 +114,7 @@ class _SettingsState extends State<Credits>
                             splashColor: Colors.transparent,
                             child: ProfileListItem(
                               icon: Icons.article_outlined,
-                              text: 'Licenses',
+                              text: 'More info',
                             ),
                           ),
                           InkWell(
@@ -172,12 +180,23 @@ class _SettingsState extends State<Credits>
               backbutton(context)
             ])));
   }
+
+  // void _showDialog() {
+  //   showAboutDialog(
+  //       context: context,
+  //       applicationName: 'Flutter',
+  //       applicationIcon: FlutterLogo(),
+  //       applicationVersion: '1.0.0',
+  //       children: [
+  //         Text('This is an About Dialog in Flutter'),
+  //       ]);
+  // }
 }
 
 class LicensesSimplePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Theme(
-        data: ThemeData.dark(),
+        data: ThemeData.light(),
         child: LicensePage(
           applicationName: 'Fables of Desire',
           applicationIcon: Padding(

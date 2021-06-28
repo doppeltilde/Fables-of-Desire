@@ -111,28 +111,25 @@ class _SettingsState extends State<Settings> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(30),
-                                                          color:
-                                                              Theme.of(context)
-                                                                  .cardColor,
+                                                          color: Colors.white
+                                                              .withOpacity(0.8),
                                                         ),
                                                         child: Row(
                                                           children: <Widget>[
-                                                            Icon(
-                                                              Icons.save,
-                                                              size: 35,
-                                                            ),
+                                                            Image.asset(
+                                                                "assets/images/gui/savehover.png"),
                                                             SizedBox(width: 15),
                                                             Text(
                                                               "SAVE GAME",
                                                               style: TextStyle(
                                                                   fontFamily:
-                                                                      "Julee",
+                                                                      "Mali",
                                                                   fontSize: 28),
                                                             ),
                                                             Spacer(),
                                                             Icon(
                                                               Icons
-                                                                  .chevron_right_rounded,
+                                                                  .arrow_forward,
                                                               color:
                                                                   Colors.black,
                                                               size: 25,
@@ -176,12 +173,8 @@ class _SettingsState extends State<Settings> {
                                                         ),
                                                         child: Row(
                                                           children: <Widget>[
-                                                            Icon(
-                                                              Icons.restart_alt,
-                                                              color:
-                                                                  Colors.white,
-                                                              size: 35,
-                                                            ),
+                                                            Image.asset(
+                                                                "assets/images/gui/full.png"),
                                                             SizedBox(width: 15),
                                                             Text(
                                                               "Go to Main Menu",
@@ -189,13 +182,13 @@ class _SettingsState extends State<Settings> {
                                                                   color: Colors
                                                                       .white,
                                                                   fontFamily:
-                                                                      "Julee",
+                                                                      "Mali",
                                                                   fontSize: 28),
                                                             ),
                                                             Spacer(),
                                                             Icon(
                                                               Icons
-                                                                  .chevron_right_rounded,
+                                                                  .arrow_forward,
                                                               color:
                                                                   Colors.white,
                                                               size: 25,
@@ -301,9 +294,8 @@ class _SettingsState extends State<Settings> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(30),
-                                                          color:
-                                                              Theme.of(context)
-                                                                  .cardColor,
+                                                          color: Colors.white
+                                                              .withOpacity(0.7),
                                                         ),
                                                         child: Row(
                                                           children: <Widget>[
@@ -316,7 +308,7 @@ class _SettingsState extends State<Settings> {
                                                               "SAVE GAME",
                                                               style: TextStyle(
                                                                   fontFamily:
-                                                                      "Julee",
+                                                                      "Mali",
                                                                   fontSize: 28),
                                                             ),
                                                             Spacer(),
@@ -379,7 +371,7 @@ class _SettingsState extends State<Settings> {
                                                                   color: Colors
                                                                       .white,
                                                                   fontFamily:
-                                                                      "Julee",
+                                                                      "Mali",
                                                                   fontSize: 28),
                                                             ),
                                                             Spacer(),
@@ -479,18 +471,22 @@ class _SettingsState extends State<Settings> {
       backgroundColor: Colors.transparent,
       insetPadding: EdgeInsets.all(10),
       child: Container(
-        width: MediaQuery.of(context).size.width / 2,
-        height: 200,
+        width: MediaQuery.of(context).size.width / 3,
+        height: 230,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15), color: Colors.amberAccent),
+            borderRadius: BorderRadius.circular(15), color: Colors.green),
         padding: EdgeInsets.fromLTRB(20, 50, 20, 20),
         child: Column(
           children: <Widget>[
             Text("Go to Main Menu",
-                style: TextStyle(fontSize: 28, fontFamily: "Aleo"),
+                style: TextStyle(
+                    fontSize: 30, fontFamily: "Mali", color: Colors.white),
                 textAlign: TextAlign.center),
             Text("Are you sure about that?",
-                style: TextStyle(fontSize: 24, fontFamily: "Aleo"),
+                style: TextStyle(
+                    fontSize: 25,
+                    fontFamily: "IndieFlower",
+                    color: Colors.white),
                 textAlign: TextAlign.center),
             Spacer(),
             continueButton,

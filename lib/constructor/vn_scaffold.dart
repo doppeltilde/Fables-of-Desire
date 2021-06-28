@@ -59,16 +59,20 @@ class _VNState extends State<VNScaffold> {
 
     if (GlobalAudio.playAudio.isPlaying == false) {
       try {
-        GlobalAudio.playAudio.getBGM(widget.textSound.getBGM().toString());
+        if (widget.textSound.getBGM().isNotEmpty) {
+          GlobalAudio.playAudio.getBGM(widget.textSound.getBGM().toString());
+        }
       } catch (e) {
-        GlobalAudio.playAudio.getBGM(notHome ?? "");
+        //GlobalAudio.playAudio.getBGM(notHome ?? "");
       }
     } else {
       try {
-        GlobalAudio.playAudio.stopAudio();
-        GlobalAudio.playAudio.getBGM(widget.textSound.getBGM().toString());
+        if (widget.textSound.getBGM().isNotEmpty) {
+          GlobalAudio.playAudio.stopAudio();
+          GlobalAudio.playAudio.getBGM(widget.textSound.getBGM().toString());
+        }
       } catch (e) {
-        GlobalAudio.playAudio.getBGM(notHome ?? "");
+        //GlobalAudio.playAudio.getBGM(notHome ?? "");
       }
     }
 
@@ -85,7 +89,7 @@ class _VNState extends State<VNScaffold> {
           notHome = widget.textSound.getBGM().toString();
         }
       } catch (e) {
-        print(e);
+        print("EMPTY");
       }
 
       persistNotHome(notHome!);
@@ -162,6 +166,7 @@ class _VNState extends State<VNScaffold> {
               });
             });
             return Scaffold(
+              backgroundColor: Colors.black,
               body: Stack(
                 children: [
                   BackgroundBuilder(
@@ -182,6 +187,7 @@ class _VNState extends State<VNScaffold> {
           } else {
             if (switchFade != false) {
               return Scaffold(
+                backgroundColor: Colors.black,
                 body: Stack(
                   children: [
                     BackgroundBuilder(

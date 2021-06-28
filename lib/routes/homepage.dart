@@ -5,6 +5,7 @@ import 'package:fablesofdesire/global/audio/global_audio.dart';
 import 'package:fablesofdesire/global/credits.dart';
 import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:fablesofdesire/routes/load_game.dart';
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io' show Platform;
 import 'package:fablesofdesire/global/setings.dart';
@@ -65,6 +66,34 @@ class _WildfyreState extends State<HomePage> {
                 ),
               ),
             ),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Image.asset(
+                "assets/images/sprites/Chibi_Hidetake.png",
+                height: MediaQuery.of(context).size.height / 2,
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Image.asset(
+                "assets/images/sprites/Chibi_Naoki.png",
+                height: MediaQuery.of(context).size.height / 2,
+              ),
+            ),
+            RotatedBox(
+              quarterTurns: 2,
+              child: Container(
+                transform: Matrix4.translationValues(
+                    MediaQuery.of(context).size.height * 0, 150, 0.0),
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Image.asset(
+                    "assets/images/sprites/Chibi_Tomiichi.png",
+                    height: MediaQuery.of(context).size.height / 2,
+                  ),
+                ),
+              ),
+            ),
             AnimatedOpacity(
               opacity: opacity!,
               duration: Duration(milliseconds: 300),
@@ -88,14 +117,14 @@ class _WildfyreState extends State<HomePage> {
                                       color: Colors.black,
                                       fontSize: 40,
                                       fontWeight: FontWeight.bold,
-                                      fontFamily: "Julee"),
+                                      fontFamily: "Mali"),
                                 ),
                                 style: ElevatedButton.styleFrom(
                                     primary: Colors.white,
                                     padding: EdgeInsets.symmetric(vertical: 20),
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(40.0),
+                                            BorderRadius.circular(20.0),
                                         side: BorderSide(color: Colors.white))),
                                 onPressed: () {
                                   GlobalAudio.playAudio.stopAudio();
@@ -105,34 +134,42 @@ class _WildfyreState extends State<HomePage> {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 30, vertical: 5),
-                            child: Container(
-                              width: MediaQuery.of(context).size.width / 3,
-                              child: ElevatedButton(
-                                child: Text(
-                                  "NAOKI ROUTE",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 35,
-                                      fontFamily: "Julee"),
+                          Builder(builder: (context) {
+                            if (kReleaseMode) {
+                              return Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 30, vertical: 5),
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width / 3,
+                                  child: ElevatedButton(
+                                    child: Text(
+                                      "NAOKI ROUTE",
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 35,
+                                          fontFamily: "Mali"),
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                        primary: Colors.white,
+                                        padding:
+                                            EdgeInsets.symmetric(vertical: 20),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                            side: BorderSide(
+                                                color: Colors.white))),
+                                    onPressed: () {
+                                      GlobalAudio.playAudio.stopAudio();
+                                      GlobalAudio.playAudio.isPlaying = true;
+                                      Navigator.of(context).pushNamed('/intro');
+                                    },
+                                  ),
                                 ),
-                                style: ElevatedButton.styleFrom(
-                                    primary: Colors.white,
-                                    padding: EdgeInsets.symmetric(vertical: 20),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(40.0),
-                                        side: BorderSide(color: Colors.white))),
-                                onPressed: () {
-                                  GlobalAudio.playAudio.stopAudio();
-                                  GlobalAudio.playAudio.isPlaying = true;
-                                  Navigator.of(context).pushNamed('/intro');
-                                },
-                              ),
-                            ),
-                          ),
+                              );
+                            } else {
+                              return SizedBox.shrink();
+                            }
+                          }),
                           Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 30, vertical: 5),
@@ -144,14 +181,14 @@ class _WildfyreState extends State<HomePage> {
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 35,
-                                      fontFamily: "Julee"),
+                                      fontFamily: "Mali"),
                                 ),
                                 style: ElevatedButton.styleFrom(
                                     primary: Colors.white,
                                     padding: EdgeInsets.symmetric(vertical: 20),
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(40.0),
+                                            BorderRadius.circular(20.0),
                                         side: BorderSide(color: Colors.white))),
                                 onPressed: () {
                                   Navigator.push(
@@ -174,14 +211,14 @@ class _WildfyreState extends State<HomePage> {
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 35,
-                                      fontFamily: "Julee"),
+                                      fontFamily: "Mali"),
                                 ),
                                 style: ElevatedButton.styleFrom(
                                     primary: Colors.white,
                                     padding: EdgeInsets.symmetric(vertical: 20),
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(40.0),
+                                            BorderRadius.circular(20.0),
                                         side: BorderSide(color: Colors.white))),
                                 onPressed: () => Navigator.push(
                                   context,
@@ -204,14 +241,14 @@ class _WildfyreState extends State<HomePage> {
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 35,
-                                      fontFamily: "Julee"),
+                                      fontFamily: "Mali"),
                                 ),
                                 style: ElevatedButton.styleFrom(
                                     primary: Colors.white,
                                     padding: EdgeInsets.symmetric(vertical: 20),
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(40.0),
+                                            BorderRadius.circular(20.0),
                                         side: BorderSide(color: Colors.white))),
                                 onPressed: () => Navigator.push(
                                   context,

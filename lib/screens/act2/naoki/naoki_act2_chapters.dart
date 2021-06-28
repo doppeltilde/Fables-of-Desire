@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class NaokiRouteLists extends StatelessWidget {
   List<String> routelist = [
-    "/endcredits",
     "/naoki1",
     "/naoki2",
     "/naoki3",
@@ -48,14 +47,20 @@ class NaokiRouteLists extends StatelessWidget {
           itemBuilder: (context, i) => Padding(
             padding: EdgeInsets.all(8.0),
             child: Center(
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.black,
-                      padding:
-                          EdgeInsets.symmetric(vertical: 20, horizontal: 30)),
-                  onPressed: () =>
-                      Navigator.of(context).pushNamed(routelist[i]),
-                  child: Text(routelist[i])),
+              child: Container(
+                width: MediaQuery.of(context).size.width / 3.5,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        primary: Colors.black,
+                        padding:
+                            EdgeInsets.symmetric(vertical: 20, horizontal: 30)),
+                    onPressed: () =>
+                        Navigator.of(context).pushNamed(routelist[i]),
+                    child: Text(
+                      routelist[i],
+                      style: TextStyle(color: Colors.white),
+                    )),
+              ),
             ),
           ),
         )));

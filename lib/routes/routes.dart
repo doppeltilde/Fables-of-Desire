@@ -1,6 +1,5 @@
 /// Copyright (c) 2021 Jona T. Feucht and The SmallDreams Authors.
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:fablesofdesire/routes/route_observer.dart';
 import 'package:fablesofdesire/routes/splash_screen.dart';
 import 'package:fablesofdesire/screens/act2/naoki/naoki1.dart';
@@ -29,6 +28,7 @@ import 'package:fablesofdesire/screens/act3/naokiA/naokiA_act3_3.dart';
 import 'package:fablesofdesire/screens/act3/naokiA/naokiA_act3_4.dart';
 import 'package:fablesofdesire/screens/act3/naokiA/naokiA_act3_5.dart';
 import 'package:fablesofdesire/screens/act3/naokiA/naokiA_act3_6.dart';
+import 'package:fablesofdesire/screens/act3/naokiB/naokiB_Act3_1.dart';
 import 'package:fablesofdesire/screens/end_credits.dart';
 import 'package:fablesofdesire/test/chapter1.dart';
 import 'package:fablesofdesire/test/chapter2.dart';
@@ -45,9 +45,9 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
+      // localizationsDelegates: context.localizationDelegates,
+      // supportedLocales: context.supportedLocales,
+      // locale: context.locale,
       debugShowCheckedModeBanner: false,
       title: 'Fables of Desire',
       //initialRoute: '/',
@@ -159,6 +159,10 @@ class Home extends StatelessWidget {
         },
         "/naoki26": (_) {
           return Naoki26();
+        },
+        // Naoki act3_b
+        "/naokib1": (_) {
+          return NaokiB1();
         },
       },
     );

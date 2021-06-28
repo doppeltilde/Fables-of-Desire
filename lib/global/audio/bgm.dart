@@ -60,9 +60,10 @@ class Bgm extends WidgetsBindingObserver {
       audioPlayer =
           await audioCache.loop(filename + ".mp3", volume: vol ?? 1.0);
     } else {
-      String? notHome = prefs.getString("notHome");
-      audioPlayer =
-          await audioCache.loop(notHome! + ".mp3", volume: vol ?? 1.0);
+      print("BGM continuation");
+      // String? notHome = prefs.getString("notHome");
+      // audioPlayer =
+      //     await audioCache.loop(notHome! + ".mp3", volume: vol ?? 1.0);
     }
   }
 

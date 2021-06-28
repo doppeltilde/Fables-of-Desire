@@ -1,7 +1,50 @@
 import 'dart:async';
 import 'package:fablesofdesire/global/audio/global_audio.dart';
+import 'package:fablesofdesire/global/end_credits_comp.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+class EndCredits2 extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<EndCredits2> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: EndCreditsScene([
+      Section(title: 'Cast', roles: [
+        Role(name: 'Role 1', crew: [Responsable('John Doe')]),
+        Role(name: 'Role 2', crew: [Responsable('John Doe')]),
+        Role(name: 'Role 3', crew: [Responsable('John Doe')]),
+        Role(name: 'Role 4', crew: [Responsable('John Doe')]),
+        Role(name: 'Role 5', crew: [Responsable('John Doe')]),
+      ]),
+      Section(title: 'Producers', roles: [
+        Role(name: 'Executive producer', crew: [
+          Responsable('John Doe'),
+          Responsable('John Doe'),
+          Responsable('John Doe')
+        ]),
+        Role(name: 'Producer', crew: [
+          Responsable('John Doe'),
+          Responsable('John Doe'),
+          Responsable('John Doe')
+        ])
+      ]),
+      Section(title: 'Other', roles: [
+        Role(name: 'Role', crew: [
+          Responsable('John Doe'),
+          Responsable('John Doe'),
+          Responsable('John Doe'),
+          Responsable('John Doe')
+        ])
+      ])
+    ]));
+  }
+}
 
 class EndCredits extends StatefulWidget {
   @override
@@ -10,13 +53,31 @@ class EndCredits extends StatefulWidget {
 
 /// The main widget state.
 class _BaseScreenState extends State<EndCredits> with TickerProviderStateMixin {
+  late AnimationController cc;
+  late Animation<double> anim;
   late AnimationController animation;
   late Animation<double> _fadeInFadeOut;
-
+  SharedPreferences? sharedPreferences;
+  double? vol = 1.0;
   @override
   void initState() {
     super.initState();
+    cc = AnimationController(
+      duration: Duration(seconds: 1),
+      vsync: this,
+    );
 
+    anim = CurvedAnimation(
+      parent: cc,
+      curve: Curves.easeInOutCubic,
+    ).drive(Tween(begin: 0, end: 2));
+    SharedPreferences.getInstance().then((SharedPreferences sp) {
+      sharedPreferences = sp;
+      vol = sharedPreferences!.getDouble("volValue");
+
+      vol = 1.0;
+      persistVol(vol!);
+    });
     GlobalAudio.playAudio.getBGM("placeholder");
 
     animation = AnimationController(
@@ -28,8 +89,16 @@ class _BaseScreenState extends State<EndCredits> with TickerProviderStateMixin {
     animation.forward();
   }
 
+  void persistVol(double value) {
+    setState(() {
+      vol = value;
+    });
+    sharedPreferences?.setDouble("volValue", value);
+  }
+
   @override
   void dispose() {
+    cc.dispose();
     super.dispose();
   }
 
@@ -38,14 +107,56 @@ class _BaseScreenState extends State<EndCredits> with TickerProviderStateMixin {
   bool scroll = true;
 
   _scroll() {
-    double maxExtent = _scrollController.position.maxScrollExtent;
-    double distanceDifference = maxExtent - _scrollController.offset;
-    double durationDouble = distanceDifference / speedFactor;
+    // ignore: invalid_use_of_protected_member
+    if (_scrollController.positions.isNotEmpty) {
+      double maxExtent = _scrollController.position.maxScrollExtent;
+      double distanceDifference = maxExtent - _scrollController.offset;
+      double durationDouble = distanceDifference / speedFactor;
 
-    _scrollController.animateTo(_scrollController.position.maxScrollExtent,
-        duration: Duration(seconds: durationDouble.toInt()),
-        curve: Curves.linear);
+      _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+          duration: Duration(seconds: durationDouble.toInt()),
+          curve: Curves.linear);
+    }
   }
+
+  List<Map<String, dynamic>> roles = [
+    {
+      "roleName": "Executive Producer",
+      "name": "Neeka",
+    },
+    {
+      "roleName": "Hidetake Writer",
+      "name": "Neeka",
+    },
+    {
+      "roleName": "Naoki Writer",
+      "name": "Destini Islands",
+    },
+    {
+      "roleName": "Tomiichi Writer",
+      "name": "Neeka",
+    },
+    {
+      "roleName": "Character Art",
+      "name": "Neeka",
+    },
+    {
+      "roleName": "Chibi Art",
+      "name": "Neeka",
+    },
+    {
+      "roleName": "Background Art",
+      "name": "Neeka",
+    },
+    {
+      "roleName": "Music",
+      "name": "Neeka",
+    },
+    {
+      "roleName": "Developer",
+      "name": "Jona T. Feucht",
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -214,92 +325,127 @@ But that's a story for another time...
                       SizedBox(
                         height: MediaQuery.of(context).size.height / 2,
                       ),
-                      heading(
-                        "Writers:",
-                      ),
-                      new Padding(
-                        padding: EdgeInsets.only(
-                            top: 5.0, bottom: 5, left: 30, right: 30),
-                        child: new Text(
-                          "Chris",
-                          textAlign: TextAlign.center,
-                          style: new TextStyle(
-                            fontSize: 20.0,
-                            color: Colors.white,
-                            fontFamily: "SpaceMono",
-                          ),
+                      Text(
+                        "Credits",
+                        style: new TextStyle(
+                          fontSize: 32.0,
+                          color: Colors.white,
+                          fontFamily: "Nunito",
                         ),
                       ),
-                      heading(
-                        "Developers:",
-                      ),
-                      textUrl(
-                        'https://jona.space/?ref=danceoflove',
-                        "Jona 타다시 Feucht",
-                      ),
-                      heading(
-                        "Published by:",
-                      ),
-                      textUrl('https://smalldreams.co', "SmallDreams"),
-                      heading(
-                        "Music by:",
-                      ),
-                      textUrl('https://starhelix.space', "Some random text"),
-                      heading(
-                        "Main Image by:",
-                      ),
-                      // textUrl(
-                      //     'https://www.artstation.com/snatti', "Atey Ghailan"),
-                      // heading(
-                      //   "Classroom by:",
-                      // ),
-                      // textUrl('https://www.deviantart.com/ah-kai', "AH-Kai"),
-                      // heading(
-                      //   "Sci-Fi images by:",
-                      // ),
-                      // textUrl('https://sparth.tumblr.com/', "SPARTH"),
-                      heading(
-                        "Other",
-                      ),
-                      new Padding(
-                        padding: EdgeInsets.only(
-                            top: 5.0, bottom: 5, left: 30, right: 30),
-                        child: new Text(
-                          "Other images are property of their respective owners.",
-                          textAlign: TextAlign.center,
-                          style: new TextStyle(
-                            fontSize: 20.0,
-                            color: Colors.white,
-                            fontFamily: "SpaceMono",
-                          ),
-                        ),
-                      ),
+                      for (var i in roles)
+                        Container(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
+                            margin: const EdgeInsets.only(bottom: 24.0),
+                            child: Column(children: <Widget>[
+                              SizedBox(height: 16.0),
+                              Container(
+                                margin:
+                                    EdgeInsets.only(bottom: 10 > 1 ? 8.0 : 0.0),
+                                child: IntrinsicHeight(
+                                    child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        children: <Widget>[
+                                      Expanded(
+                                          child: Text(i["roleName"],
+                                              style: new TextStyle(
+                                                fontSize: 24.0,
+                                                color: Colors.white,
+                                                fontFamily: "Nunito",
+                                              ),
+                                              textAlign: TextAlign.end)),
+                                      SizedBox(width: 16.0),
+                                      Expanded(
+                                          child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                            Container(
+                                                margin: const EdgeInsets.only(
+                                                    bottom: 4.0),
+                                                child: Text(i["name"],
+                                                    style: new TextStyle(
+                                                      fontSize: 24.0,
+                                                      color: Colors.white,
+                                                      fontFamily: "Nunito",
+                                                    ),
+                                                    textAlign: TextAlign.start))
+                                          ]))
+                                    ])),
+                              )
+                            ])),
                       SizedBox(
                         height: MediaQuery.of(context).size.height / 2,
                       ),
-
                       new Padding(
                         padding: EdgeInsets.only(
                             top: 30.0, bottom: 5, left: 30, right: 30),
                         child: new Text(
                           "Other:",
                           style: new TextStyle(
-                            fontSize: 21.0,
+                            fontSize: 40.0,
                             color: Colors.white,
                             fontFamily: "BottleParty",
                           ),
                         ),
                       ),
-                      new Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: MediaQuery.of(context).size.width / 3),
-                        child: new Text(
-                          "Hey, I'm a 20 y/o developer. It is very hard for small developers to succeed in the App Store. So, please *RATE 5 STARS* and support the development further. Thank You so much!",
-                          textAlign: TextAlign.justify,
-                          style: new TextStyle(
-                            fontSize: 20.0,
+                      SizedBox(
+                        height: 20,
+                      ),
+                      GestureDetector(
+                        onTap: () async {
+                          const url = 'https://github.com/SmallDreams/Engine';
+                          if (await canLaunch(url)) {
+                            await launch(url);
+                          } else {
+                            throw 'Could not launch $url';
+                          }
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
                             color: Colors.white,
-                            fontFamily: "Mali",
+                          ),
+                          padding:
+                              EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                          child: new Text(
+                            "Developed with ❤️ in the\nSalem Engine.",
+                            textAlign: TextAlign.center,
+                            style: new TextStyle(
+                              fontSize: 24.0,
+                              color: Colors.black,
+                              fontFamily: "Mali",
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          cc
+                            ..reset()
+                            ..forward();
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          width: 170,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.white,
+                          ),
+                          child: RotationTransition(
+                            turns: anim,
+                            child: FlutterLogo(
+                              size: 110,
+                              style: FlutterLogoStyle.horizontal,
+                            ),
                           ),
                         ),
                       ),

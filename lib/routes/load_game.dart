@@ -167,11 +167,11 @@ class _LoadGameState extends State<LoadGame> {
                                       if (saveSlotOne == null ||
                                           saveSlotOne!.isEmpty) {
                                         return ChibiNeutral(
-                                          chibiImg: "MC_Happy",
+                                          chibiImg: "Chibi_Hidetake",
                                         );
                                       } else {
                                         return ChibiHappy(
-                                          chibiImg: "MC_Happy",
+                                          chibiImg: "Chibi_Hidetake",
                                         );
                                       }
                                     }),
@@ -183,7 +183,7 @@ class _LoadGameState extends State<LoadGame> {
                                         "\nEMPTY",
                                         style: TextStyle(
                                             color: Colors.white,
-                                            fontFamily: "Aleo",
+                                            fontFamily: "Mali",
                                             fontSize: 20),
                                       );
                                     } else {
@@ -192,7 +192,7 @@ class _LoadGameState extends State<LoadGame> {
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                             color: Colors.white,
-                                            fontFamily: "Aleo",
+                                            fontFamily: "Mali",
                                             fontSize: 20),
                                       );
                                     }
@@ -232,7 +232,7 @@ class _LoadGameState extends State<LoadGame> {
                                                     "DELETE SAVE",
                                                     style: TextStyle(
                                                         color: Colors.white,
-                                                        fontFamily: "Aleo",
+                                                        fontFamily: "Mali",
                                                         fontSize: 20),
                                                   ),
                                                 )),
@@ -270,11 +270,11 @@ class _LoadGameState extends State<LoadGame> {
                                       if (saveSlot2 == null ||
                                           saveSlot2!.isEmpty) {
                                         return ChibiNeutral(
-                                          chibiImg: "MC_Happy",
+                                          chibiImg: "Chibi_Tomiichi",
                                         );
                                       } else {
                                         return ChibiHappy(
-                                          chibiImg: "MC_Happy",
+                                          chibiImg: "Chibi_Tomiichi",
                                         );
                                       }
                                     }),
@@ -286,7 +286,7 @@ class _LoadGameState extends State<LoadGame> {
                                         "\nEMPTY",
                                         style: TextStyle(
                                             color: Colors.white,
-                                            fontFamily: "Aleo",
+                                            fontFamily: "Mali",
                                             fontSize: 20),
                                       );
                                     } else {
@@ -295,7 +295,7 @@ class _LoadGameState extends State<LoadGame> {
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                             color: Colors.white,
-                                            fontFamily: "Aleo",
+                                            fontFamily: "Mali",
                                             fontSize: 20),
                                       );
                                     }
@@ -310,14 +310,8 @@ class _LoadGameState extends State<LoadGame> {
                                       } else {
                                         return Column(
                                           children: [
-                                            ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                    primary: Colors.redAccent,
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            vertical: 20,
-                                                            horizontal: 30)),
-                                                onPressed: () async {
+                                            InkWell(
+                                                onTap: () async {
                                                   SharedPreferences prefs =
                                                       await SharedPreferences
                                                           .getInstance();
@@ -327,13 +321,24 @@ class _LoadGameState extends State<LoadGame> {
                                                     saveSlot2 = null;
                                                   });
                                                 },
-                                                child: Text(
-                                                  "DELETE SAVE",
-                                                  style: TextStyle(
-                                                      fontFamily: "Aleo",
-                                                      color: Colors.white,
-                                                      fontSize: 18),
-                                                ))
+                                                child: Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 10,
+                                                      horizontal: 25),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            30),
+                                                    color: Colors.redAccent,
+                                                  ),
+                                                  child: Text(
+                                                    "DELETE SAVE",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontFamily: "Mali",
+                                                        fontSize: 20),
+                                                  ),
+                                                )),
                                           ],
                                         );
                                       }
@@ -368,11 +373,11 @@ class _LoadGameState extends State<LoadGame> {
                                       if (saveSlot3 == null ||
                                           saveSlot3!.isEmpty) {
                                         return ChibiNeutral(
-                                          chibiImg: "MC_Happy",
+                                          chibiImg: "Chibi_Naoki",
                                         );
                                       } else {
                                         return ChibiHappy(
-                                          chibiImg: "MC_Happy",
+                                          chibiImg: "Chibi_Naoki",
                                         );
                                       }
                                     }),
@@ -384,7 +389,7 @@ class _LoadGameState extends State<LoadGame> {
                                         "\nEMPTY",
                                         style: TextStyle(
                                             color: Colors.white,
-                                            fontFamily: "Aleo",
+                                            fontFamily: "Mali",
                                             fontSize: 20),
                                       );
                                     } else {
@@ -393,7 +398,7 @@ class _LoadGameState extends State<LoadGame> {
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                             color: Colors.white,
-                                            fontFamily: "Aleo",
+                                            fontFamily: "Mali",
                                             fontSize: 20),
                                       );
                                     }
@@ -408,14 +413,8 @@ class _LoadGameState extends State<LoadGame> {
                                       } else {
                                         return Column(
                                           children: [
-                                            ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                    primary: Colors.redAccent,
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            vertical: 20,
-                                                            horizontal: 30)),
-                                                onPressed: () async {
+                                            InkWell(
+                                                onTap: () async {
                                                   SharedPreferences prefs =
                                                       await SharedPreferences
                                                           .getInstance();
@@ -425,13 +424,24 @@ class _LoadGameState extends State<LoadGame> {
                                                     saveSlot3 = null;
                                                   });
                                                 },
-                                                child: Text(
-                                                  "DELETE SAVE",
-                                                  style: TextStyle(
-                                                      fontFamily: "Aleo",
-                                                      color: Colors.white,
-                                                      fontSize: 18),
-                                                ))
+                                                child: Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 10,
+                                                      horizontal: 25),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            30),
+                                                    color: Colors.redAccent,
+                                                  ),
+                                                  child: Text(
+                                                    "DELETE SAVE",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontFamily: "Mali",
+                                                        fontSize: 20),
+                                                  ),
+                                                )),
                                           ],
                                         );
                                       }
@@ -510,11 +520,11 @@ class _LoadGameState extends State<LoadGame> {
                                       if (saveSlotOne == null ||
                                           saveSlotOne!.isEmpty) {
                                         return ChibiNeutral(
-                                          chibiImg: "MC_Happy",
+                                          chibiImg: "Chibi_Hidetake",
                                         );
                                       } else {
                                         return ChibiHappy(
-                                          chibiImg: "MC_Happy",
+                                          chibiImg: "Chibi_Hidetake",
                                         );
                                       }
                                     }),
@@ -526,7 +536,7 @@ class _LoadGameState extends State<LoadGame> {
                                         "\nEMPTY",
                                         style: TextStyle(
                                             color: Colors.white,
-                                            fontFamily: "Aleo",
+                                            fontFamily: "Mali",
                                             fontSize: 20),
                                       );
                                     } else {
@@ -535,7 +545,7 @@ class _LoadGameState extends State<LoadGame> {
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                             color: Colors.white,
-                                            fontFamily: "Aleo",
+                                            fontFamily: "Mali",
                                             fontSize: 20),
                                       );
                                     }
@@ -575,7 +585,7 @@ class _LoadGameState extends State<LoadGame> {
                                                     "DELETE SAVE",
                                                     style: TextStyle(
                                                         color: Colors.white,
-                                                        fontFamily: "Aleo",
+                                                        fontFamily: "Mali",
                                                         fontSize: 20),
                                                   ),
                                                 )),
@@ -613,11 +623,11 @@ class _LoadGameState extends State<LoadGame> {
                                       if (saveSlot2 == null ||
                                           saveSlot2!.isEmpty) {
                                         return ChibiNeutral(
-                                          chibiImg: "MC_Happy",
+                                          chibiImg: "Chibi_Tomiichi",
                                         );
                                       } else {
                                         return ChibiHappy(
-                                          chibiImg: "MC_Happy",
+                                          chibiImg: "Chibi_Tomiichi",
                                         );
                                       }
                                     }),
@@ -629,7 +639,7 @@ class _LoadGameState extends State<LoadGame> {
                                         "\nEMPTY",
                                         style: TextStyle(
                                             color: Colors.white,
-                                            fontFamily: "Aleo",
+                                            fontFamily: "Mali",
                                             fontSize: 20),
                                       );
                                     } else {
@@ -638,7 +648,7 @@ class _LoadGameState extends State<LoadGame> {
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                             color: Colors.white,
-                                            fontFamily: "Aleo",
+                                            fontFamily: "Mali",
                                             fontSize: 20),
                                       );
                                     }
@@ -673,7 +683,7 @@ class _LoadGameState extends State<LoadGame> {
                                                 child: Text(
                                                   "DELETE SAVE",
                                                   style: TextStyle(
-                                                      fontFamily: "Aleo",
+                                                      fontFamily: "Mali",
                                                       color: Colors.white,
                                                       fontSize: 18),
                                                 ))
@@ -711,11 +721,11 @@ class _LoadGameState extends State<LoadGame> {
                                       if (saveSlot3 == null ||
                                           saveSlot3!.isEmpty) {
                                         return ChibiNeutral(
-                                          chibiImg: "MC_Happy",
+                                          chibiImg: "Chibi_Naoki",
                                         );
                                       } else {
                                         return ChibiHappy(
-                                          chibiImg: "MC_Happy",
+                                          chibiImg: "Chibi_Naoki",
                                         );
                                       }
                                     }),
@@ -727,7 +737,7 @@ class _LoadGameState extends State<LoadGame> {
                                         "\nEMPTY",
                                         style: TextStyle(
                                             color: Colors.white,
-                                            fontFamily: "Aleo",
+                                            fontFamily: "Mali",
                                             fontSize: 20),
                                       );
                                     } else {
@@ -736,7 +746,7 @@ class _LoadGameState extends State<LoadGame> {
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                             color: Colors.white,
-                                            fontFamily: "Aleo",
+                                            fontFamily: "Mali",
                                             fontSize: 20),
                                       );
                                     }
@@ -771,7 +781,7 @@ class _LoadGameState extends State<LoadGame> {
                                                 child: Text(
                                                   "DELETE SAVE",
                                                   style: TextStyle(
-                                                      fontFamily: "Aleo",
+                                                      fontFamily: "Mali",
                                                       color: Colors.white,
                                                       fontSize: 18),
                                                 ))

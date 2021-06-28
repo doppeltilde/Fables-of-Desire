@@ -2,7 +2,6 @@
 
 import 'dart:io';
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:fablesofdesire/global/setings.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -155,7 +154,7 @@ class SettingsClip extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10.0),
                       child: Image.asset(
-                        "assets/images/gui/more.png",
+                        "assets/images/gui/icon_hover_scroll_08.png",
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -185,7 +184,7 @@ dynamic skipClip(context, nextRoute) {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10.0),
                     child: Image.asset(
-                      "assets/images/gui/fastforwardhover.png",
+                      "assets/images/gui/icon_hover_scroll_05.png",
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -373,7 +372,7 @@ class _AppDrawerState extends State<AppDrawer> {
             new DrawerHeader(
               child: Center(
                   child: Text(
-                tr("game_name"),
+                "Fables of Desire",
                 style: TextStyle(fontSize: 30, fontFamily: "Aleo"),
               )),
             ),
@@ -582,7 +581,7 @@ class _AppDrawerState2 extends State<AppDrawerMain> {
               new DrawerHeader(
                 child: Center(
                   child: Text(
-                    tr("game_name"),
+                    "Fables of Desire",
                     style: TextStyle(
                         fontSize: 45, fontFamily: "Aleo", color: Colors.white),
                   ),

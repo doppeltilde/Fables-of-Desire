@@ -130,6 +130,75 @@ class _LoadGameState extends State<SaveGame> {
     return saveSlot3Date;
   }
 
+  callback(newValue, name) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (name == "saveSlotOne") {
+      setState(() {
+        prefs.remove("saveSlotOne");
+        saveSlotOne = null;
+      });
+    } else if (name == "saveSlot2") {
+      setState(() {
+        prefs.remove("saveSlot2");
+        saveSlot2 = null;
+      });
+    } else if (name == "saveSlot3") {
+      setState(() {
+        prefs.remove("saveSlot3");
+        saveSlot3 = null;
+      });
+    }
+  }
+
+  callback2(newValue, name) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (name == "saveSlotOne") {
+      setState(() {
+        prefs.remove("saveSlotOne");
+        saveSlotOne = null;
+      });
+    } else if (name == "saveSlot2") {
+      setState(() {
+        prefs.remove("saveSlot2");
+        saveSlot2 = null;
+      });
+    } else if (name == "saveSlot3") {
+      setState(() {
+        prefs.remove("saveSlot3");
+        saveSlot3 = null;
+      });
+    }
+  }
+
+  callbackSave(getRoute, name) async {
+    print(getRoute);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (getRoute.contains("naoki") == true) {
+      if (getRoute == null || getRoute.isEmpty) {
+        setState(() {
+          name = name;
+          saveSlotOneState(name);
+          DateTime now = DateTime.now();
+          String dateFormat = DateFormat("dd-MM-yyyy HH:mm:ss").format(now);
+          saveSlotOneDateState("$dateFormat".toString());
+          saveSlotOneDate = "$dateFormat".toString();
+        });
+      } else {
+        showAlertDialog(context);
+      }
+    } else if (name == "saveSlot2") {
+      setState(() {
+        prefs.remove("saveSlot2");
+        saveSlot2 = null;
+      });
+    } else if (name == "saveSlot3") {
+      setState(() {
+        prefs.remove("saveSlot3");
+        saveSlot3 = null;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Builder(
@@ -165,40 +234,41 @@ class _LoadGameState extends State<SaveGame> {
                                 Spacer(),
                                 Column(
                                   children: [
-                                    InkWell(
-                                      onTap: () {
-                                        if (saveSlotOne == null ||
-                                            saveSlotOne!.isEmpty) {
-                                          setState(() {
-                                            saveSlotOne = widget.route;
-                                            saveSlotOneState(widget.route);
-                                            DateTime now = DateTime.now();
-                                            String dateFormat = DateFormat(
-                                                    "dd-MM-yyyy HH:mm:ss")
-                                                .format(now);
-                                            saveSlotOneDateState(
-                                                "$dateFormat".toString());
-                                            saveSlotOneDate =
-                                                "$dateFormat".toString();
-                                            //print(saveSlotOne);
-                                          });
-                                        } else {
-                                          showAlertDialog(context);
-                                        }
-                                      },
-                                      child: Builder(builder: (context) {
-                                        if (saveSlotOne == null ||
-                                            saveSlotOne!.isEmpty) {
-                                          return ChibiNeutral(
-                                            chibiImg: "MC_Happy",
-                                          );
-                                        } else {
-                                          return ChibiHappy(
-                                            chibiImg: "MC_Happy",
-                                          );
-                                        }
-                                      }),
-                                    ),
+                                    InkWell(onTap: () {
+                                      if (saveSlotOne == null ||
+                                          saveSlotOne!.isEmpty) {
+                                        setState(() {
+                                          saveSlotOne = widget.route;
+                                          saveSlotOneState(widget.route);
+                                          DateTime now = DateTime.now();
+                                          String dateFormat =
+                                              DateFormat("dd-MM-yyyy HH:mm:ss")
+                                                  .format(now);
+                                          saveSlotOneDateState(
+                                              "$dateFormat".toString());
+                                          saveSlotOneDate =
+                                              "$dateFormat".toString();
+                                        });
+                                      } else {
+                                        showAlertDialog(context);
+                                      }
+                                    }, child: Builder(builder: (context) {
+                                      if (saveSlotOne == null ||
+                                          saveSlotOne!.isEmpty) {
+                                        return ChibiNeutral(
+                                          chibiImg: "Chibi_Hidetake",
+                                        );
+                                      } else {
+                                        return ChibiHappy(
+                                          chibiImg: "Chibi_Hidetake",
+                                        );
+                                      }
+                                    })),
+                                    // GetSave(
+                                    //   getRoute: widget.route,
+                                    //   getRouteName: "saveSlotOne",
+                                    //   callbackSave: this.callbackSave,
+                                    // ),
                                     Builder(builder: (context) {
                                       if (saveSlotOne == null ||
                                           saveSlotOne!.isEmpty) {
@@ -206,16 +276,21 @@ class _LoadGameState extends State<SaveGame> {
                                           "\nEMPTY",
                                           style: TextStyle(
                                               color: Colors.white,
-                                              fontFamily: "Aleo",
+                                              fontFamily: "Mali",
                                               fontSize: 20),
                                         );
                                       } else {
+                                        //String _route = widget.route;
                                         return Text(
                                           "\nSAVED\n$saveSlotOneDate\n",
+                                          // +
+                                          //     "Chapter: " +
+                                          //     _route.replaceAll(
+                                          //         new RegExp(r'[^\w\s]+'), ''),
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               color: Colors.white,
-                                              fontFamily: "Aleo",
+                                              fontFamily: "Mali",
                                               fontSize: 20),
                                         );
                                       }
@@ -230,60 +305,17 @@ class _LoadGameState extends State<SaveGame> {
                                         } else {
                                           return Column(
                                             children: [
-                                              ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                    primary: Colors.white,
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            vertical: 20,
-                                                            horizontal: 30)),
-                                                onPressed: () {
-                                                  if (saveSlotOne == null ||
-                                                      saveSlotOne!.isEmpty) {
-                                                    //print("EMPTY");
-                                                  } else {
-                                                    Navigator.of(context)
-                                                        .pushNamed(
-                                                            '$saveSlotOne');
-                                                  }
-                                                },
-                                                child: Text(
-                                                  "LOAD SAVE",
-                                                  style: TextStyle(
-                                                      fontFamily: "Aleo",
-                                                      color: Colors.black,
-                                                      fontSize: 18),
-                                                ),
+                                              LoadButton(
+                                                getSlot: saveSlotOne,
                                               ),
                                               SizedBox(
                                                 height: 10,
                                               ),
-                                              TextButton(
-                                                  style: TextButton.styleFrom(
-                                                      backgroundColor:
-                                                          Colors.redAccent,
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              vertical: 20,
-                                                              horizontal: 30)),
-                                                  onPressed: () async {
-                                                    SharedPreferences prefs =
-                                                        await SharedPreferences
-                                                            .getInstance();
-
-                                                    setState(() {
-                                                      prefs.remove(
-                                                          "saveSlotOne");
-                                                      saveSlotOne = null;
-                                                    });
-                                                  },
-                                                  child: Text(
-                                                    "DELETE SAVE",
-                                                    style: TextStyle(
-                                                        fontFamily: "Aleo",
-                                                        color: Colors.white,
-                                                        fontSize: 15),
-                                                  ))
+                                              DeleteButton(
+                                                saveSlot: saveSlotOne,
+                                                saveSlotName: "saveSlotOne",
+                                                callback: this.callback,
+                                              ),
                                             ],
                                           );
                                         }
@@ -319,11 +351,11 @@ class _LoadGameState extends State<SaveGame> {
                                         if (saveSlot2 == null ||
                                             saveSlot2!.isEmpty) {
                                           return ChibiNeutral(
-                                            chibiImg: "MC_Happy",
+                                            chibiImg: "Chibi_Naoki",
                                           );
                                         } else {
                                           return ChibiHappy(
-                                            chibiImg: "MC_Happy",
+                                            chibiImg: "Chibi_Naoki",
                                           );
                                         }
                                       }),
@@ -335,7 +367,7 @@ class _LoadGameState extends State<SaveGame> {
                                           "\nEMPTY",
                                           style: TextStyle(
                                               color: Colors.white,
-                                              fontFamily: "Aleo",
+                                              fontFamily: "Mali",
                                               fontSize: 20),
                                         );
                                       } else {
@@ -344,7 +376,7 @@ class _LoadGameState extends State<SaveGame> {
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               color: Colors.white,
-                                              fontFamily: "Aleo",
+                                              fontFamily: "Mali",
                                               fontSize: 20),
                                         );
                                       }
@@ -359,61 +391,17 @@ class _LoadGameState extends State<SaveGame> {
                                         } else {
                                           return Column(
                                             children: [
-                                              ElevatedButton(
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                          primary: Colors.white,
-                                                          padding: EdgeInsets
-                                                              .symmetric(
-                                                                  vertical: 20,
-                                                                  horizontal:
-                                                                      30)),
-                                                  onPressed: () {
-                                                    if (saveSlot2 == null ||
-                                                        saveSlot2!.isEmpty) {
-                                                      //print("EMPTY");
-                                                    } else {
-                                                      Navigator.of(context)
-                                                          .pushNamed(
-                                                              '$saveSlot2');
-                                                    }
-                                                  },
-                                                  child: Text(
-                                                    "LOAD SAVE",
-                                                    style: TextStyle(
-                                                        fontFamily: "Aleo",
-                                                        color: Colors.black,
-                                                        fontSize: 18),
-                                                  )),
+                                              LoadButton(
+                                                getSlot: saveSlot2,
+                                              ),
                                               SizedBox(
                                                 height: 10,
                                               ),
-                                              TextButton(
-                                                  style: TextButton.styleFrom(
-                                                      backgroundColor:
-                                                          Colors.redAccent,
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              vertical: 20,
-                                                              horizontal: 30)),
-                                                  onPressed: () async {
-                                                    SharedPreferences prefs =
-                                                        await SharedPreferences
-                                                            .getInstance();
-
-                                                    setState(() {
-                                                      prefs.remove("saveSlot2");
-                                                      saveSlot2 = null;
-                                                      //print(saveSlot2);
-                                                    });
-                                                  },
-                                                  child: Text(
-                                                    "DELETE SAVE",
-                                                    style: TextStyle(
-                                                        fontFamily: "Aleo",
-                                                        color: Colors.white,
-                                                        fontSize: 15),
-                                                  )),
+                                              DeleteButton(
+                                                saveSlot: saveSlot2,
+                                                saveSlotName: "saveSlot2",
+                                                callback: this.callback,
+                                              ),
                                             ],
                                           );
                                         }
@@ -447,11 +435,11 @@ class _LoadGameState extends State<SaveGame> {
                                       if (saveSlot3 == null ||
                                           saveSlot3!.isEmpty) {
                                         return ChibiNeutral(
-                                          chibiImg: "MC_Happy",
+                                          chibiImg: "Chibi_Tomiichi",
                                         );
                                       } else {
                                         return ChibiHappy(
-                                          chibiImg: "MC_Happy",
+                                          chibiImg: "Chibi_Tomiichi",
                                         );
                                       }
                                     })),
@@ -462,7 +450,7 @@ class _LoadGameState extends State<SaveGame> {
                                           "\nEMPTY",
                                           style: TextStyle(
                                               color: Colors.white,
-                                              fontFamily: "Aleo",
+                                              fontFamily: "Mali",
                                               fontSize: 20),
                                         );
                                       } else {
@@ -471,7 +459,7 @@ class _LoadGameState extends State<SaveGame> {
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               color: Colors.white,
-                                              fontFamily: "Aleo",
+                                              fontFamily: "Mali",
                                               fontSize: 20),
                                         );
                                       }
@@ -486,61 +474,17 @@ class _LoadGameState extends State<SaveGame> {
                                         } else {
                                           return Column(
                                             children: [
-                                              ElevatedButton(
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                          primary: Colors.white,
-                                                          padding: EdgeInsets
-                                                              .symmetric(
-                                                                  vertical: 20,
-                                                                  horizontal:
-                                                                      30)),
-                                                  onPressed: () {
-                                                    if (saveSlot3 == null ||
-                                                        saveSlot3!.isEmpty) {
-                                                      //print("EMPTY");
-                                                    } else {
-                                                      Navigator.of(context)
-                                                          .pushNamed(
-                                                              '$saveSlot3');
-                                                    }
-                                                  },
-                                                  child: Text(
-                                                    "LOAD SAVE",
-                                                    style: TextStyle(
-                                                        fontFamily: "Aleo",
-                                                        color: Colors.black,
-                                                        fontSize: 18),
-                                                  )),
+                                              LoadButton(
+                                                getSlot: saveSlot3,
+                                              ),
                                               SizedBox(
                                                 height: 10,
                                               ),
-                                              TextButton(
-                                                  style: TextButton.styleFrom(
-                                                      backgroundColor:
-                                                          Colors.redAccent,
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              vertical: 20,
-                                                              horizontal: 30)),
-                                                  onPressed: () async {
-                                                    SharedPreferences prefs =
-                                                        await SharedPreferences
-                                                            .getInstance();
-
-                                                    setState(() {
-                                                      prefs.remove("saveSlot3");
-                                                      saveSlot3 = null;
-                                                      //print(saveSlot3);
-                                                    });
-                                                  },
-                                                  child: Text(
-                                                    "DELETE SAVE",
-                                                    style: TextStyle(
-                                                        fontFamily: "Aleo",
-                                                        color: Colors.white,
-                                                        fontSize: 15),
-                                                  )),
+                                              DeleteButton(
+                                                saveSlot: saveSlot3,
+                                                saveSlotName: "saveSlot3",
+                                                callback: this.callback,
+                                              ),
                                             ],
                                           );
                                         }
@@ -622,11 +566,11 @@ class _LoadGameState extends State<SaveGame> {
                                         if (saveSlotOne == null ||
                                             saveSlotOne!.isEmpty) {
                                           return ChibiNeutral(
-                                            chibiImg: "MC_Happy",
+                                            chibiImg: "Chibi_Hidetake",
                                           );
                                         } else {
                                           return ChibiHappy(
-                                            chibiImg: "MC_Happy",
+                                            chibiImg: "Chibi_Hidetake",
                                           );
                                         }
                                       }),
@@ -638,7 +582,7 @@ class _LoadGameState extends State<SaveGame> {
                                           "\nEMPTY",
                                           style: TextStyle(
                                               color: Colors.white,
-                                              fontFamily: "Aleo",
+                                              fontFamily: "Mali",
                                               fontSize: 20),
                                         );
                                       } else {
@@ -647,7 +591,7 @@ class _LoadGameState extends State<SaveGame> {
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               color: Colors.white,
-                                              fontFamily: "Aleo",
+                                              fontFamily: "Mali",
                                               fontSize: 20),
                                         );
                                       }
@@ -682,7 +626,7 @@ class _LoadGameState extends State<SaveGame> {
                                                 child: Text(
                                                   "LOAD SAVE",
                                                   style: TextStyle(
-                                                      fontFamily: "Aleo",
+                                                      fontFamily: "Mali",
                                                       color: Colors.black,
                                                       fontSize: 18),
                                                 ),
@@ -690,15 +634,8 @@ class _LoadGameState extends State<SaveGame> {
                                               SizedBox(
                                                 height: 10,
                                               ),
-                                              TextButton(
-                                                  style: TextButton.styleFrom(
-                                                      backgroundColor:
-                                                          Colors.redAccent,
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              vertical: 20,
-                                                              horizontal: 30)),
-                                                  onPressed: () async {
+                                              InkWell(
+                                                  onTap: () async {
                                                     SharedPreferences prefs =
                                                         await SharedPreferences
                                                             .getInstance();
@@ -709,13 +646,25 @@ class _LoadGameState extends State<SaveGame> {
                                                       saveSlotOne = null;
                                                     });
                                                   },
-                                                  child: Text(
-                                                    "DELETE SAVE",
-                                                    style: TextStyle(
-                                                        fontFamily: "Aleo",
-                                                        color: Colors.white,
-                                                        fontSize: 15),
-                                                  ))
+                                                  child: Container(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 10,
+                                                            horizontal: 25),
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              30),
+                                                      color: Colors.redAccent,
+                                                    ),
+                                                    child: Text(
+                                                      "DELETE SAVE",
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontFamily: "Mali",
+                                                          fontSize: 20),
+                                                    ),
+                                                  )),
                                             ],
                                           );
                                         }
@@ -751,11 +700,11 @@ class _LoadGameState extends State<SaveGame> {
                                         if (saveSlot2 == null ||
                                             saveSlot2!.isEmpty) {
                                           return ChibiNeutral(
-                                            chibiImg: "MC_Happy",
+                                            chibiImg: "Chibi_Naoki",
                                           );
                                         } else {
                                           return ChibiHappy(
-                                            chibiImg: "MC_Happy",
+                                            chibiImg: "Chibi_Naoki",
                                           );
                                         }
                                       }),
@@ -767,7 +716,7 @@ class _LoadGameState extends State<SaveGame> {
                                           "\nEMPTY",
                                           style: TextStyle(
                                               color: Colors.white,
-                                              fontFamily: "Aleo",
+                                              fontFamily: "Mali",
                                               fontSize: 20),
                                         );
                                       } else {
@@ -776,7 +725,7 @@ class _LoadGameState extends State<SaveGame> {
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               color: Colors.white,
-                                              fontFamily: "Aleo",
+                                              fontFamily: "Mali",
                                               fontSize: 20),
                                         );
                                       }
@@ -813,22 +762,15 @@ class _LoadGameState extends State<SaveGame> {
                                                   child: Text(
                                                     "LOAD SAVE",
                                                     style: TextStyle(
-                                                        fontFamily: "Aleo",
+                                                        fontFamily: "Mali",
                                                         color: Colors.black,
                                                         fontSize: 18),
                                                   )),
                                               SizedBox(
                                                 height: 10,
                                               ),
-                                              TextButton(
-                                                  style: TextButton.styleFrom(
-                                                      backgroundColor:
-                                                          Colors.redAccent,
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              vertical: 20,
-                                                              horizontal: 30)),
-                                                  onPressed: () async {
+                                              InkWell(
+                                                  onTap: () async {
                                                     SharedPreferences prefs =
                                                         await SharedPreferences
                                                             .getInstance();
@@ -836,15 +778,26 @@ class _LoadGameState extends State<SaveGame> {
                                                     setState(() {
                                                       prefs.remove("saveSlot2");
                                                       saveSlot2 = null;
-                                                      //print(saveSlot2);
                                                     });
                                                   },
-                                                  child: Text(
-                                                    "DELETE SAVE",
-                                                    style: TextStyle(
-                                                        fontFamily: "Aleo",
-                                                        color: Colors.white,
-                                                        fontSize: 15),
+                                                  child: Container(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 10,
+                                                            horizontal: 25),
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              30),
+                                                      color: Colors.redAccent,
+                                                    ),
+                                                    child: Text(
+                                                      "DELETE SAVE",
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontFamily: "Mali",
+                                                          fontSize: 20),
+                                                    ),
                                                   )),
                                             ],
                                           );
@@ -879,11 +832,11 @@ class _LoadGameState extends State<SaveGame> {
                                       if (saveSlot3 == null ||
                                           saveSlot3!.isEmpty) {
                                         return ChibiNeutral(
-                                          chibiImg: "MC_Happy",
+                                          chibiImg: "Chibi_Tomiichi",
                                         );
                                       } else {
                                         return ChibiHappy(
-                                          chibiImg: "MC_Happy",
+                                          chibiImg: "Chibi_Tomiichi",
                                         );
                                       }
                                     })),
@@ -894,7 +847,7 @@ class _LoadGameState extends State<SaveGame> {
                                           "\nEMPTY",
                                           style: TextStyle(
                                               color: Colors.white,
-                                              fontFamily: "Aleo",
+                                              fontFamily: "Mali",
                                               fontSize: 20),
                                         );
                                       } else {
@@ -903,7 +856,7 @@ class _LoadGameState extends State<SaveGame> {
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               color: Colors.white,
-                                              fontFamily: "Aleo",
+                                              fontFamily: "Mali",
                                               fontSize: 20),
                                         );
                                       }
@@ -940,39 +893,14 @@ class _LoadGameState extends State<SaveGame> {
                                                   child: Text(
                                                     "LOAD SAVE",
                                                     style: TextStyle(
-                                                        fontFamily: "Aleo",
+                                                        fontFamily: "Mali",
                                                         color: Colors.black,
                                                         fontSize: 18),
                                                   )),
                                               SizedBox(
                                                 height: 10,
                                               ),
-                                              TextButton(
-                                                  style: TextButton.styleFrom(
-                                                      backgroundColor:
-                                                          Colors.redAccent,
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              vertical: 20,
-                                                              horizontal: 30)),
-                                                  onPressed: () async {
-                                                    SharedPreferences prefs =
-                                                        await SharedPreferences
-                                                            .getInstance();
-
-                                                    setState(() {
-                                                      prefs.remove("saveSlot3");
-                                                      saveSlot3 = null;
-                                                      //print(saveSlot3);
-                                                    });
-                                                  },
-                                                  child: Text(
-                                                    "DELETE SAVE",
-                                                    style: TextStyle(
-                                                        fontFamily: "Aleo",
-                                                        color: Colors.white,
-                                                        fontSize: 15),
-                                                  )),
+                                              deleteButton(context, saveSlot3),
                                             ],
                                           );
                                         }
@@ -997,36 +925,65 @@ class _LoadGameState extends State<SaveGame> {
     );
   }
 
+  Widget deleteButton(context, slot) {
+    return InkWell(
+        onTap: () async {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+
+          setState(() {
+            print("$slot");
+            prefs.remove("$slot");
+            slot = null;
+          });
+        },
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            color: Colors.redAccent,
+          ),
+          child: Text(
+            "DELETE SAVE",
+            style: TextStyle(
+                color: Colors.white, fontFamily: "Mali", fontSize: 20),
+          ),
+        ));
+  }
+
   showAlertDialog(BuildContext context) {
     // set up the buttons
+    void _getStuff() {
+      {
+        return setState(() {
+          saveSlotOne = widget.route;
+          saveSlotOneState(widget.route);
+          DateTime now = DateTime.now();
+          String dateFormat = DateFormat("dd-MM-yyyy HH:mm:ss").format(now);
+          saveSlotOneDateState("$dateFormat".toString());
+          saveSlotOneDate = "$dateFormat".toString();
+          //print(saveSlotOne);
+        });
+      }
+    }
 
     Widget continueButton = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         ElevatedButton(
-          style: ElevatedButton.styleFrom(primary: Colors.white),
-          child: Text(
-            "YES",
-            style: TextStyle(
-                color: Colors.black,
-                fontFamily: "Aleo",
-                fontSize: 18,
-                letterSpacing: .4),
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-            setState(() {
-              saveSlotOne = widget.route;
-              saveSlotOneState(widget.route);
-              DateTime now = DateTime.now();
-              String dateFormat = DateFormat("dd-MM-yyyy HH:mm:ss").format(now);
-              saveSlotOneDateState("$dateFormat".toString());
-              saveSlotOneDate = "$dateFormat".toString();
-              //print(saveSlotOne);
-            });
-          },
-        ),
+            style: ElevatedButton.styleFrom(primary: Colors.white),
+            child: Text(
+              "YES",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: "Mali",
+                  fontSize: 18,
+                  letterSpacing: .4),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+              _getStuff();
+            }),
         SizedBox(
           width: 10,
         ),
@@ -1037,7 +994,7 @@ class _LoadGameState extends State<SaveGame> {
             "NO",
             style: TextStyle(
                 color: Colors.black,
-                fontFamily: "Aleo",
+                fontFamily: "Mali",
                 fontSize: 18,
                 letterSpacing: .4),
           ),
@@ -1048,22 +1005,32 @@ class _LoadGameState extends State<SaveGame> {
       ],
     );
 
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      backgroundColor: Colors.amber,
-      title: Text(
-        "Override Save",
-        textAlign: TextAlign.center,
-        style: TextStyle(fontFamily: "Aleo", fontSize: 30, letterSpacing: .2),
+    Dialog alert = Dialog(
+      backgroundColor: Colors.transparent,
+      insetPadding: EdgeInsets.all(10),
+      child: Container(
+        width: MediaQuery.of(context).size.width / 3,
+        height: 230,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15), color: Colors.green),
+        padding: EdgeInsets.fromLTRB(20, 50, 20, 20),
+        child: Column(
+          children: <Widget>[
+            Text("Override Save",
+                style: TextStyle(
+                    fontSize: 30, fontFamily: "Mali", color: Colors.white),
+                textAlign: TextAlign.center),
+            Text("Are you sure about that?",
+                style: TextStyle(
+                    fontSize: 25,
+                    fontFamily: "IndieFlower",
+                    color: Colors.white),
+                textAlign: TextAlign.center),
+            Spacer(),
+            continueButton,
+          ],
+        ),
       ),
-      content: Text(
-        "Are you sure about that?",
-        textAlign: TextAlign.center,
-        style: TextStyle(fontFamily: "Aleo", fontSize: 20, letterSpacing: .4),
-      ),
-      actions: [
-        continueButton,
-      ],
     );
 
     // show the dialog
@@ -1077,34 +1044,38 @@ class _LoadGameState extends State<SaveGame> {
 
   showAlertDialog2(BuildContext context) {
     // set up the buttons
+    void _getStuff() {
+      {
+        return setState(() {
+          saveSlot2 = widget.route;
+          saveSlot2State(widget.route);
+          DateTime now = DateTime.now();
+          String dateFormat = DateFormat("dd-MM-yyyy HH:mm:ss").format(now);
+          saveSlot2DateState("$dateFormat".toString());
+          saveSlot2Date = "$dateFormat".toString();
+          //print(saveSlotOne);
+        });
+      }
+    }
 
     Widget continueButton = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         ElevatedButton(
-          style: ElevatedButton.styleFrom(primary: Colors.white),
-          child: Text(
-            "YES",
-            style: TextStyle(
-                color: Colors.black,
-                fontFamily: "Aleo",
-                fontSize: 18,
-                letterSpacing: .4),
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-            setState(() {
-              saveSlot2 = widget.route;
-              saveSlot2State(widget.route);
-              DateTime now = DateTime.now();
-              String dateFormat = DateFormat("dd-MM-yyyy HH:mm:ss").format(now);
-              saveSlot2DateState("$dateFormat".toString());
-              saveSlot2Date = "$dateFormat".toString();
-              //print(saveSlot2);
-            });
-          },
-        ),
+            style: ElevatedButton.styleFrom(primary: Colors.white),
+            child: Text(
+              "YES",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: "Mali",
+                  fontSize: 18,
+                  letterSpacing: .4),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+              _getStuff();
+            }),
         SizedBox(
           width: 10,
         ),
@@ -1115,7 +1086,7 @@ class _LoadGameState extends State<SaveGame> {
             "NO",
             style: TextStyle(
                 color: Colors.black,
-                fontFamily: "Aleo",
+                fontFamily: "Mali",
                 fontSize: 18,
                 letterSpacing: .4),
           ),
@@ -1126,22 +1097,32 @@ class _LoadGameState extends State<SaveGame> {
       ],
     );
 
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      backgroundColor: Colors.amber,
-      title: Text(
-        "Override Save",
-        textAlign: TextAlign.center,
-        style: TextStyle(fontFamily: "Aleo", fontSize: 30, letterSpacing: .2),
+    Dialog alert = Dialog(
+      backgroundColor: Colors.transparent,
+      insetPadding: EdgeInsets.all(10),
+      child: Container(
+        width: MediaQuery.of(context).size.width / 3,
+        height: 230,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15), color: Colors.green),
+        padding: EdgeInsets.fromLTRB(20, 50, 20, 20),
+        child: Column(
+          children: <Widget>[
+            Text("Override Save",
+                style: TextStyle(
+                    fontSize: 30, fontFamily: "Mali", color: Colors.white),
+                textAlign: TextAlign.center),
+            Text("Are you sure about that?",
+                style: TextStyle(
+                    fontSize: 25,
+                    fontFamily: "IndieFlower",
+                    color: Colors.white),
+                textAlign: TextAlign.center),
+            Spacer(),
+            continueButton,
+          ],
+        ),
       ),
-      content: Text(
-        "Are you sure about that?",
-        textAlign: TextAlign.center,
-        style: TextStyle(fontFamily: "Aleo", fontSize: 20, letterSpacing: .4),
-      ),
-      actions: [
-        continueButton,
-      ],
     );
 
     // show the dialog
@@ -1155,34 +1136,38 @@ class _LoadGameState extends State<SaveGame> {
 
   showAlertDialog3(BuildContext context) {
     // set up the buttons
+    void _getStuff() {
+      {
+        return setState(() {
+          saveSlot3 = widget.route;
+          saveSlot3State(widget.route);
+          DateTime now = DateTime.now();
+          String dateFormat = DateFormat("dd-MM-yyyy HH:mm:ss").format(now);
+          saveSlot3DateState("$dateFormat".toString());
+          saveSlot3Date = "$dateFormat".toString();
+          //print(saveSlotOne);
+        });
+      }
+    }
 
     Widget continueButton = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         ElevatedButton(
-          style: ElevatedButton.styleFrom(primary: Colors.white),
-          child: Text(
-            "YES",
-            style: TextStyle(
-                color: Colors.black,
-                fontFamily: "Aleo",
-                fontSize: 18,
-                letterSpacing: .4),
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-            setState(() {
-              saveSlot3 = widget.route;
-              saveSlot3State(widget.route);
-              DateTime now = DateTime.now();
-              String dateFormat = DateFormat("dd-MM-yyyy HH:mm:ss").format(now);
-              saveSlot3DateState("$dateFormat".toString());
-              saveSlot3Date = "$dateFormat".toString();
-              // print(saveSlot3);
-            });
-          },
-        ),
+            style: ElevatedButton.styleFrom(primary: Colors.white),
+            child: Text(
+              "YES",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: "Mali",
+                  fontSize: 18,
+                  letterSpacing: .4),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+              _getStuff();
+            }),
         SizedBox(
           width: 10,
         ),
@@ -1193,7 +1178,7 @@ class _LoadGameState extends State<SaveGame> {
             "NO",
             style: TextStyle(
                 color: Colors.black,
-                fontFamily: "Aleo",
+                fontFamily: "Mali",
                 fontSize: 18,
                 letterSpacing: .4),
           ),
@@ -1204,22 +1189,32 @@ class _LoadGameState extends State<SaveGame> {
       ],
     );
 
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      backgroundColor: Colors.amber,
-      title: Text(
-        "Override Save",
-        textAlign: TextAlign.center,
-        style: TextStyle(fontFamily: "Aleo", fontSize: 30, letterSpacing: .2),
+    Dialog alert = Dialog(
+      backgroundColor: Colors.transparent,
+      insetPadding: EdgeInsets.all(10),
+      child: Container(
+        width: MediaQuery.of(context).size.width / 3,
+        height: 230,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15), color: Colors.green),
+        padding: EdgeInsets.fromLTRB(20, 50, 20, 20),
+        child: Column(
+          children: <Widget>[
+            Text("Override Save",
+                style: TextStyle(
+                    fontSize: 30, fontFamily: "Mali", color: Colors.white),
+                textAlign: TextAlign.center),
+            Text("Are you sure about that?",
+                style: TextStyle(
+                    fontSize: 25,
+                    fontFamily: "IndieFlower",
+                    color: Colors.white),
+                textAlign: TextAlign.center),
+            Spacer(),
+            continueButton,
+          ],
+        ),
       ),
-      content: Text(
-        "Are you sure about that?",
-        textAlign: TextAlign.center,
-        style: TextStyle(fontFamily: "Aleo", fontSize: 20, letterSpacing: .4),
-      ),
-      actions: [
-        continueButton,
-      ],
     );
 
     // show the dialog
