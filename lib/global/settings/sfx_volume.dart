@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:io' show Platform;
+import 'package:universal_platform/universal_platform.dart';
 
 class SFXVolume extends StatefulWidget {
   final player;
@@ -90,7 +90,8 @@ class _TextSpeedState extends State<SFXVolume> {
                   value: vol!,
                   onChanged: (volume) {
                     setState(() {
-                      if (Platform.isWindows || Platform.isLinux) {
+                      if (UniversalPlatform.isWindows ||
+                          UniversalPlatform.isLinux) {
                         widget.player?.setVolume(volume);
                       } else {
                         widget.audioPlayer?.setVolume(volume);

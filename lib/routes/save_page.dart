@@ -1,6 +1,6 @@
 /// Copyright (c) 2021 Jona T. Feucht and The SmallDreams Authors.
 
-import 'dart:io';
+import 'package:universal_platform/universal_platform.dart';
 
 import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/routes/consts/consts.dart';
@@ -203,7 +203,10 @@ class _LoadGameState extends State<SaveGame> {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
+        if (UniversalPlatform.isMacOS ||
+            UniversalPlatform.isWindows ||
+            UniversalPlatform.isLinux ||
+            UniversalPlatform.isWeb) {
           return Container(
             decoration: BoxDecoration(
                 image: DecorationImage(

@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io' show Platform;
 
+import 'package:universal_platform/universal_platform.dart';
+
 class LoadGame extends StatefulWidget {
   final route;
   LoadGame({Key? key, this.route});
@@ -112,7 +114,10 @@ class _LoadGameState extends State<LoadGame> {
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
-      if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
+      if (UniversalPlatform.isMacOS ||
+          UniversalPlatform.isWindows ||
+          UniversalPlatform.isLinux ||
+          UniversalPlatform.isWeb) {
         return Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
@@ -149,8 +154,8 @@ class _LoadGameState extends State<LoadGame> {
                                           saveSlotOne!.isEmpty) {
                                         print("EMPTY");
                                       } else {
-                                        if (Platform.isWindows ||
-                                            Platform.isLinux) {
+                                        if (UniversalPlatform.isWindows ||
+                                            UniversalPlatform.isLinux) {
                                           setState(() {
                                             GameAudioDesktop.playAudio.stop();
                                           });
@@ -252,8 +257,8 @@ class _LoadGameState extends State<LoadGame> {
                                           saveSlot2!.isEmpty) {
                                         print("EMPTY");
                                       } else {
-                                        if (Platform.isWindows ||
-                                            Platform.isLinux) {
+                                        if (UniversalPlatform.isWindows ||
+                                            UniversalPlatform.isLinux) {
                                           setState(() {
                                             GameAudioDesktop.playAudio.stop();
                                           });
@@ -355,8 +360,8 @@ class _LoadGameState extends State<LoadGame> {
                                           saveSlot3!.isEmpty) {
                                         print("EMPTY");
                                       } else {
-                                        if (Platform.isWindows ||
-                                            Platform.isLinux) {
+                                        if (UniversalPlatform.isWindows ||
+                                            UniversalPlatform.isLinux) {
                                           setState(() {
                                             GameAudioDesktop.playAudio.stop();
                                           });
@@ -502,8 +507,8 @@ class _LoadGameState extends State<LoadGame> {
                                           saveSlotOne!.isEmpty) {
                                         print("EMPTY");
                                       } else {
-                                        if (Platform.isWindows ||
-                                            Platform.isLinux) {
+                                        if (UniversalPlatform.isWindows ||
+                                            UniversalPlatform.isLinux) {
                                           setState(() {
                                             GameAudioDesktop.playAudio.stop();
                                           });
@@ -605,8 +610,8 @@ class _LoadGameState extends State<LoadGame> {
                                           saveSlot2!.isEmpty) {
                                         print("EMPTY");
                                       } else {
-                                        if (Platform.isWindows ||
-                                            Platform.isLinux) {
+                                        if (UniversalPlatform.isWindows ||
+                                            UniversalPlatform.isLinux) {
                                           setState(() {
                                             GameAudioDesktop.playAudio.stop();
                                           });
@@ -703,8 +708,8 @@ class _LoadGameState extends State<LoadGame> {
                                           saveSlot3!.isEmpty) {
                                         print("EMPTY");
                                       } else {
-                                        if (Platform.isWindows ||
-                                            Platform.isLinux) {
+                                        if (UniversalPlatform.isWindows ||
+                                            UniversalPlatform.isLinux) {
                                           setState(() {
                                             GameAudioDesktop.playAudio.stop();
                                           });

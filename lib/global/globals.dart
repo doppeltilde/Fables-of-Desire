@@ -6,6 +6,7 @@ import 'package:fablesofdesire/global/setings.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 Widget appbar(context, name) {
   return AppBar(
@@ -95,7 +96,10 @@ class Buttons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (BuildContext context) {
-      if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
+      if (UniversalPlatform.isMacOS ||
+          UniversalPlatform.isWindows ||
+          UniversalPlatform.isLinux ||
+          UniversalPlatform.isWeb) {
         return SafeArea(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,

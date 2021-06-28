@@ -1,6 +1,5 @@
 import 'dart:async';
-import 'dart:io';
-
+import 'package:universal_platform/universal_platform.dart';
 import 'package:dart_vlc/dart_vlc.dart';
 import 'package:fablesofdesire/constructor/vn_constructor.dart';
 import 'package:fablesofdesire/global/audio/game_audio.dart';
@@ -43,8 +42,9 @@ class _VNState extends State<VNScaffold> {
 
   @override
   void didChangeDependencies() {
-    if (Platform.isWindows ||
-        Platform.isLinux && GameAudioDesktop.playAudio.isPlaying == false) {
+    if (UniversalPlatform.isWindows ||
+        UniversalPlatform.isLinux &&
+            GameAudioDesktop.playAudio.isPlaying == false) {
       super.didChangeDependencies();
       GameAudioDesktop.playAudio.player = Player(
         id: 0,

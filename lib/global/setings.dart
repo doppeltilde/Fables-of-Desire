@@ -6,6 +6,7 @@ import 'package:fablesofdesire/global/settings/settings_changers.dart';
 import 'package:fablesofdesire/routes/save_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 class Settings extends StatefulWidget {
   final route;
@@ -52,7 +53,10 @@ class _SettingsState extends State<Settings> {
       )),
       child: Builder(
         builder: (context) {
-          if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
+          if (UniversalPlatform.isMacOS ||
+              UniversalPlatform.isWindows ||
+              UniversalPlatform.isLinux ||
+              UniversalPlatform.isWeb) {
             return Scaffold(
               appBar: appbar(context, "SETTINGS") as PreferredSizeWidget?,
               resizeToAvoidBottomInset: false,

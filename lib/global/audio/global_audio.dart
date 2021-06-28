@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:universal_platform/universal_platform.dart';
 import 'package:fablesofdesire/global/audio/game_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,7 +16,7 @@ class PlayAudio with WidgetsBindingObserver {
 
   Future<void> getBGM(String musicName) async {
     isPlaying = true;
-    if (Platform.isWindows || Platform.isLinux) {
+    if (UniversalPlatform.isWindows || UniversalPlatform.isLinux) {
       if (GameAudioDesktop.playAudio.isPlaying == false) {
         GameAudioDesktop.playAudio.play(musicName);
       } else {
@@ -35,7 +35,7 @@ class PlayAudio with WidgetsBindingObserver {
 
   Future<void> stopAudio() async {
     //isPlaying = false;
-    if (Platform.isWindows || Platform.isLinux) {
+    if (UniversalPlatform.isWindows || UniversalPlatform.isLinux) {
       GameAudioDesktop.playAudio.stop();
     } else {
       GameAudio.bgm.stop();
@@ -44,7 +44,7 @@ class PlayAudio with WidgetsBindingObserver {
 
   // @override
   // void didChangeDependencies() {
-  //   if (Platform.isWindows || Platform.isLinux) {
+  //   if (UniversalPlatform.isWindows || UniversalPlatform.isLinux) {
   //     super.didChangeDependencies();
   //     GameAudioDesktop.playAudio.player = Player(
   //       id: 0,

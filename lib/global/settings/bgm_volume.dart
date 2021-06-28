@@ -1,7 +1,7 @@
 import 'package:fablesofdesire/global/audio/game_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:io' show Platform;
+import 'package:universal_platform/universal_platform.dart';
 
 class BGMVolume extends StatefulWidget {
   @override
@@ -104,7 +104,8 @@ class _TextSpeedState extends State<BGMVolume> {
                   value: vol ?? 1.0,
                   onChanged: (volume) {
                     setState(() {
-                      if (Platform.isWindows || Platform.isLinux) {
+                      if (UniversalPlatform.isWindows ||
+                          UniversalPlatform.isLinux) {
                         GameAudioDesktop.playAudio.player?.setVolume(volume);
                       } else {
                         GameAudio.bgm.audioPlayer!.setVolume(volume);

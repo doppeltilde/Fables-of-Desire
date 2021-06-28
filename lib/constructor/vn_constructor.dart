@@ -4,7 +4,8 @@ import 'package:fablesofdesire/constructor/text_animation.dart';
 import 'package:fablesofdesire/global/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:io' show Platform;
+
+import 'package:universal_platform/universal_platform.dart';
 
 class InterludeTextSound extends StatefulWidget {
   InterludeTextSound({
@@ -113,7 +114,10 @@ class _InterludeState extends State<InterludeTextSound> {
 
         Builder(
           builder: (context) {
-            if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
+            if (UniversalPlatform.isMacOS ||
+                UniversalPlatform.isWindows ||
+                UniversalPlatform.isLinux ||
+                UniversalPlatform.isWeb) {
               return Padding(
                 padding: EdgeInsets.only(bottom: 20),
                 child: Column(
