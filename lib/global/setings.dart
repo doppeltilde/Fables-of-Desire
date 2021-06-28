@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:universal_platform/universal_platform.dart';
 
 import 'package:fablesofdesire/global/audio/global_audio.dart';
 import 'package:fablesofdesire/global/globals.dart';
@@ -52,7 +52,9 @@ class _SettingsState extends State<Settings> {
       )),
       child: Builder(
         builder: (context) {
-          if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
+          if (UniversalPlatform.isMacOS ||
+              UniversalPlatform.isWindows ||
+              UniversalPlatform.isLinux) {
             return Scaffold(
               appBar: appbar(context, "SETTINGS") as PreferredSizeWidget?,
               resizeToAvoidBottomInset: false,

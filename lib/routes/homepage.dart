@@ -7,7 +7,7 @@ import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:fablesofdesire/routes/load_game.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:io' show Platform;
+import 'package:universal_platform/universal_platform.dart';
 import 'package:fablesofdesire/global/setings.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +40,7 @@ class _WildfyreState extends State<HomePage> {
 
   @override
   void didChangeDependencies() {
-    if (Platform.isWindows || Platform.isLinux) {
+    if (UniversalPlatform.isWindows || UniversalPlatform.isLinux) {
       super.didChangeDependencies();
       GameAudioDesktop.playAudio.player = Player(
         id: 0,

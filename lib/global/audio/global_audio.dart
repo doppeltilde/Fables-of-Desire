@@ -1,4 +1,5 @@
-import 'dart:io';
+import 'package:fablesofdesire/global/audio/bgm_web.dart';
+import 'package:universal_platform/universal_platform.dart';
 import 'package:fablesofdesire/global/audio/game_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,7 +17,7 @@ class PlayAudio with WidgetsBindingObserver {
 
   Future<void> getBGM(String musicName) async {
     isPlaying = true;
-    if (Platform.isWindows || Platform.isLinux) {
+    if (UniversalPlatform.isWindows || UniversalPlatform.isLinux) {
       if (GameAudioDesktop.playAudio.isPlaying == false) {
         GameAudioDesktop.playAudio.play(musicName);
       } else {
@@ -24,27 +25,27 @@ class PlayAudio with WidgetsBindingObserver {
         GameAudioDesktop.playAudio.play(musicName);
       }
     } else {
-      if (GameAudio.bgm.isPlaying == false) {
-        GameAudio.bgm.play(musicName);
+      if (GameAudioMobile.playAudio.isPlaying == false) {
+        GameAudioMobile.playAudio.play(musicName);
       } else {
-        GameAudio.bgm.stop();
-        GameAudio.bgm.play(musicName);
+        GameAudioMobile.playAudio.stop();
+        GameAudioMobile.playAudio.play(musicName);
       }
     }
   }
 
   Future<void> stopAudio() async {
     //isPlaying = false;
-    if (Platform.isWindows || Platform.isLinux) {
+    if (UniversalPlatform.isWindows || UniversalPlatform.isLinux) {
       GameAudioDesktop.playAudio.stop();
     } else {
-      GameAudio.bgm.stop();
+      GameAudioMobile.playAudio.stop();
     }
   }
 
   // @override
   // void didChangeDependencies() {
-  //   if (Platform.isWindows || Platform.isLinux) {
+  //   if (UniversalPlatform.isWindows || UniversalPlatform.isLinux) {
   //     super.didChangeDependencies();
   //     GameAudioDesktop.playAudio.player = Player(
   //       id: 0,

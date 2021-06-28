@@ -1,6 +1,6 @@
 // Gestures
 
-import 'dart:io';
+import 'package:universal_platform/universal_platform.dart';
 
 import 'package:fablesofdesire/global/setings.dart';
 import 'package:flutter/gestures.dart';
@@ -95,7 +95,9 @@ class Buttons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (BuildContext context) {
-      if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
+      if (UniversalPlatform.isMacOS ||
+          UniversalPlatform.isWindows ||
+          UniversalPlatform.isLinux) {
         return SafeArea(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,

@@ -1,8 +1,8 @@
 // Primary
-import 'dart:io';
 
-import 'package:just_audio/just_audio.dart';
+import 'package:fablesofdesire/global/audio/bgm_web.dart';
 import 'dart:math';
+import 'package:universal_platform/universal_platform.dart';
 
 import 'package:fablesofdesire/global/globals.dart';
 import 'package:fablesofdesire/global/setings.dart';
@@ -15,8 +15,6 @@ class HomePage2 extends StatefulWidget {
 }
 
 class _WildfyreState extends State<HomePage2> {
-  late AudioPlayer _player;
-
   static const int _startingPageId = 0;
   bool? isSwitchedFT;
   int selectedPageId = _startingPageId;
@@ -28,28 +26,14 @@ class _WildfyreState extends State<HomePage2> {
   void initState() {
     super.initState();
     getSharedPrefs();
-    _player = AudioPlayer();
-    _player
-      ..setAudioSource(
-        AudioSource.uri(
-          Uri.parse("asset:///assets/audio/cherrycolored.mp3"),
-        ),
-      )
-      ..play()
-      ..setLoopMode(LoopMode.one);
-  }
-
-  @override
-  void dispose() {
-    _player.dispose();
-    super.dispose();
+    GameAudioMobile.playAudio.play("cherrycolored");
   }
 
   Future<dynamic> getSharedPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     isSwitchedFT = (prefs.getBool("switchState"));
     if (isSwitchedFT == true) {
-      if (Platform.isWindows || Platform.isLinux) {
+      if (UniversalPlatform.isWindows || UniversalPlatform.isLinux) {
       } else {}
     } else {
       //Flame.bgm.stop();
@@ -61,12 +45,12 @@ class _WildfyreState extends State<HomePage2> {
   Widget build(BuildContext context) {
     return Scaffold(
       endDrawerEnableOpenDragGesture: false,
-      endDrawer: AppDrawerMain(
-        player: _player,
-      ),
-      body: AppBody(player: _player, controller: controller),
+      endDrawer: AppDrawerMain(),
+      body: AppBody(controller: controller),
       bottomNavigationBar: new LayoutBuilder(builder: (context, constraints) {
-        if (Platform.isMacOS || Platform.isLinux || Platform.isWindows) {
+        if (UniversalPlatform.isMacOS ||
+            UniversalPlatform.isLinux ||
+            UniversalPlatform.isWindows) {
           return SizedBox.shrink();
         } else {
           return Theme(
@@ -226,7 +210,8 @@ class _BaseScreenState extends State<HomePage3> with TickerProviderStateMixin {
                             Stack(
                               children: <Widget>[
                                 Builder(builder: (context) {
-                                  if (Platform.isAndroid || Platform.isIOS) {
+                                  if (UniversalPlatform.isAndroid ||
+                                      UniversalPlatform.isIOS) {
                                     return Container(
                                       color: Colors.transparent,
                                       padding: EdgeInsets.all(5),
@@ -271,7 +256,8 @@ class _BaseScreenState extends State<HomePage3> with TickerProviderStateMixin {
                               children: <Widget>[
                                 Builder(
                                   builder: (context) {
-                                    if (Platform.isAndroid || Platform.isIOS) {
+                                    if (UniversalPlatform.isAndroid ||
+                                        UniversalPlatform.isIOS) {
                                       return Container(
                                         color: Colors.transparent,
                                         padding: EdgeInsets.all(5),

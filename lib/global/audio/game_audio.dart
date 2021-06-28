@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:dart_vlc/dart_vlc.dart';
 import 'package:fablesofdesire/global/audio/bgm.dart';
@@ -60,7 +58,6 @@ class PlayAudio extends WidgetsBindingObserver {
   Future<void> play(String filename, {double volume = 1.0}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     double? vol = prefs.getDouble('volValue');
-
     await player?.open(
       new Playlist(
         playlistMode: PlaylistMode.loop,
