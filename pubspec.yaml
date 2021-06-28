@@ -25,6 +25,7 @@ dependencies:
   desktop_window: ^0.4.0
   provider: ^5.0.0
   salem: any
+  just_audio: ^0.8.0
 
 flutter_icons:
   android: "launcher_icon" 

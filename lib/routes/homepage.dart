@@ -129,7 +129,7 @@ class _WildfyreState extends State<HomePage> {
                                 onPressed: () {
                                   GlobalAudio.playAudio.stopAudio();
                                   GlobalAudio.playAudio.isPlaying = true;
-                                  Navigator.of(context).pushNamed('/testintro');
+                                  Navigator.of(context).pushNamed('/homepage2');
                                 },
                               ),
                             ),

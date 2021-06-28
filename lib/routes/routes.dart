@@ -1,5 +1,6 @@
 /// Copyright (c) 2021 Jona T. Feucht and The SmallDreams Authors.
 
+import 'package:fablesofdesire/routes/homepage2.dart';
 import 'package:fablesofdesire/routes/route_observer.dart';
 import 'package:fablesofdesire/routes/splash_screen.dart';
 import 'package:fablesofdesire/screens/act2/naoki/naoki1.dart';
@@ -59,6 +60,9 @@ class Home extends StatelessWidget {
       routes: {
         '/': (_) {
           return SplashScreen();
+        },
+        "/homepage2": (_) {
+          return HomePage2();
         },
         HomePage.currentRoute: (_) {
           return HomePage();
