@@ -75,8 +75,8 @@ class _InterludeState extends State<InterludeTextSound> {
   }
 
   List images = [
-    "icon_hover_scroll_08",
-    "icon_hover_scroll_05",
+    "icon_ground_scroll_05",
+    "more",
   ];
   @override
   void didChangeDependencies() {
@@ -218,7 +218,7 @@ class _InterludeState extends State<InterludeTextSound> {
                           padding: EdgeInsets.symmetric(vertical: 10),
                           // constraints:
                           //     BoxConstraints(minWidth: 100, minHeight: 100),
-                          width: MediaQuery.of(context).size.width / 2.4,
+                          width: MediaQuery.of(context).size.width / 2.05,
                           child: Builder(
                             builder: (context) {
                               if (widget.characterName == "MC" ||
@@ -245,7 +245,7 @@ class _InterludeState extends State<InterludeTextSound> {
                                         opacity: 1,
                                         child: Padding(
                                           padding: EdgeInsets.symmetric(
-                                              horizontal: width * 0.025,
+                                              horizontal: width * 0.03,
                                               vertical: height * 0.025),
                                           child: AnimatedTextKit(
                                             animatedTexts: [
@@ -288,7 +288,7 @@ class _InterludeState extends State<InterludeTextSound> {
                                       )),
                                   child: Padding(
                                     padding: EdgeInsets.symmetric(
-                                        horizontal: width * 0.025,
+                                        horizontal: width * 0.03,
                                         vertical: height * 0.025),
                                     child: AnimatedTextKit(
                                       animatedTexts: [

@@ -155,7 +155,7 @@ class _WildfyreState extends State<HomePage> {
                                         GlobalAudio.playAudio.stopAudio();
                                         GlobalAudio.playAudio.isPlaying = true;
                                         Navigator.of(context)
-                                            .pushNamed('/testintro');
+                                            .pushNamed('/naoki1');
                                       },
                                     ),
                                   ),
@@ -320,13 +320,13 @@ class _WildfyreState extends State<HomePage> {
                                         GlobalAudio.playAudio.stopAudio();
                                         GlobalAudio.playAudio.isPlaying = true;
                                         Navigator.of(context)
-                                            .pushNamed('/testintro');
+                                            .pushNamed('/naoki1');
                                       },
                                     ),
                                   ),
                                 ),
                                 Builder(builder: (context) {
-                                  if (kReleaseMode) {
+                                  if (!kReleaseMode) {
                                     return Padding(
                                       padding: EdgeInsets.symmetric(
                                           horizontal: 30, vertical: 5),
@@ -432,7 +432,7 @@ class _WildfyreState extends State<HomePage> {
                                     ),
                                   ),
                                 ),
-                                _buttonCredits(context, "CREDITS", 35, 12),
+                                _buttonCredits(context, "CREDITS", 35, 20),
                               ],
                             ),
                           ),

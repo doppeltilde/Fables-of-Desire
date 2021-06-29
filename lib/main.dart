@@ -1,18 +1,19 @@
 /// Copyright (c) 2021 Jona T. Feucht and The SmallDreams Authors.
 
-import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/material.dart';
-import 'package:fablesofdesire/routes/routes.dart';
 import 'package:flutter/services.dart';
 import 'package:universal_platform/universal_platform.dart';
+import 'package:fablesofdesire/routes/routes.dart';
+import 'package:window_size/window_size.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (UniversalPlatform.isWindows ||
       UniversalPlatform.isLinux ||
       UniversalPlatform.isMacOS) {
-    await DesktopWindow.setMinWindowSize(Size(1000, 700));
-  } else {}
+    setWindowMinSize(const Size(1000, 600));
+    setWindowMaxSize(Size.infinite);
+  }
 
   SystemChrome.setPreferredOrientations(
           [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight])

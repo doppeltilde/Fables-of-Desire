@@ -1,7 +1,5 @@
 // Gestures
 
-import 'dart:io';
-
 import 'package:fablesofdesire/global/setings.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -158,7 +156,7 @@ class SettingsClip extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10.0),
                       child: Image.asset(
-                        "assets/images/gui/icon_hover_scroll_08.png",
+                        "assets/images/gui/more.png",
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -188,7 +186,7 @@ dynamic skipClip(context, nextRoute) {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10.0),
                     child: Image.asset(
-                      "assets/images/gui/icon_hover_scroll_05.png",
+                      "assets/images/gui/icon_ground_scroll_05.png",
                       fit: BoxFit.cover,
                     ),
                   ),
