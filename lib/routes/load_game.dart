@@ -275,11 +275,11 @@ class _LoadGameState extends State<LoadGame> {
                                         if (saveSlot2 == null ||
                                             saveSlot2!.isEmpty) {
                                           return ChibiNeutral(
-                                            chibiImg: "Chibi_Tomiichi",
+                                            chibiImg: "Chibi_Naoki",
                                           );
                                         } else {
                                           return ChibiHappy(
-                                            chibiImg: "Chibi_Tomiichi",
+                                            chibiImg: "Chibi_Naoki",
                                           );
                                         }
                                       }),
@@ -379,11 +379,11 @@ class _LoadGameState extends State<LoadGame> {
                                         if (saveSlot3 == null ||
                                             saveSlot3!.isEmpty) {
                                           return ChibiNeutral(
-                                            chibiImg: "Chibi_Naoki",
+                                            chibiImg: "Chibi_Tomiichi",
                                           );
                                         } else {
                                           return ChibiHappy(
-                                            chibiImg: "Chibi_Naoki",
+                                            chibiImg: "Chibi_Tomiichi",
                                           );
                                         }
                                       }),
@@ -630,11 +630,11 @@ class _LoadGameState extends State<LoadGame> {
                                         if (saveSlot2 == null ||
                                             saveSlot2!.isEmpty) {
                                           return ChibiNeutral(
-                                            chibiImg: "Chibi_Tomiichi",
+                                            chibiImg: "Chibi_Naoki",
                                           );
                                         } else {
                                           return ChibiHappy(
-                                            chibiImg: "Chibi_Tomiichi",
+                                            chibiImg: "Chibi_Naoki",
                                           );
                                         }
                                       }),
@@ -731,11 +731,11 @@ class _LoadGameState extends State<LoadGame> {
                                         if (saveSlot3 == null ||
                                             saveSlot3!.isEmpty) {
                                           return ChibiNeutral(
-                                            chibiImg: "Chibi_Naoki",
+                                            chibiImg: "Chibi_Tomiichi",
                                           );
                                         } else {
                                           return ChibiHappy(
-                                            chibiImg: "Chibi_Naoki",
+                                            chibiImg: "Chibi_Tomiichi",
                                           );
                                         }
                                       }),

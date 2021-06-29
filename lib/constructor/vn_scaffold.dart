@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/gestures.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:dart_vlc/dart_vlc.dart';
 import 'package:fablesofdesire/constructor/vn_constructor.dart';
@@ -148,6 +149,7 @@ class _VNState extends State<VNScaffold> {
     });
   }
 
+  var isPressed;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -213,6 +215,22 @@ class _VNState extends State<VNScaffold> {
                   resizeToAvoidBottomInset: false,
                   backgroundColor: Colors.black,
                   body: GestureDetector(
+                    onLongPressStart: (_) async {
+                      isPressed = true;
+                      do {
+                        //print('long pressing');
+                        setState(() {
+                          if (widget.textSound.isFinished() != true) {
+                            widget.textSound.nextQuestion();
+                            if (widget.callback != null) {
+                              widget.callback!(widget.textSound.getNumber());
+                            }
+                          }
+                        });
+                        await Future.delayed(Duration(milliseconds: 100));
+                      } while (isPressed);
+                    },
+                    onLongPressEnd: (_) => setState(() => isPressed = false),
                     onTap: () {
                       setState(() {
                         if (widget.textSound.isFinished() == true) {

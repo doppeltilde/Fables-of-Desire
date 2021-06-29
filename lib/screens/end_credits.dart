@@ -112,10 +112,11 @@ class _BaseScreenState extends State<EndCredits> with TickerProviderStateMixin {
       double maxExtent = _scrollController.position.maxScrollExtent;
       double distanceDifference = maxExtent - _scrollController.offset;
       double durationDouble = distanceDifference / speedFactor;
-
-      _scrollController.animateTo(_scrollController.position.maxScrollExtent,
-          duration: Duration(seconds: durationDouble.toInt()),
-          curve: Curves.linear);
+      if (durationDouble != 0) {
+        _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+            duration: Duration(seconds: durationDouble.toInt()),
+            curve: Curves.linear);
+      }
     }
   }
 

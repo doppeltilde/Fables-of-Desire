@@ -214,8 +214,8 @@ showAlertDialog(BuildContext context, nextRoute) {
           "YES",
           style: TextStyle(
               color: Colors.black,
-              fontFamily: "Aleo",
-              fontSize: 22,
+              fontFamily: "Mali",
+              fontSize: 18,
               letterSpacing: .4),
         ),
         onPressed: () {
@@ -232,8 +232,8 @@ showAlertDialog(BuildContext context, nextRoute) {
           "NO",
           style: TextStyle(
               color: Colors.black,
-              fontFamily: "Aleo",
-              fontSize: 22,
+              fontFamily: "Mali",
+              fontSize: 18,
               letterSpacing: .4),
         ),
         onPressed: () {
@@ -251,17 +251,20 @@ showAlertDialog(BuildContext context, nextRoute) {
           width: MediaQuery.of(context).size.width / 2,
           height: 200,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: Colors.amberAccent),
+              borderRadius: BorderRadius.circular(15), color: Colors.green),
           padding: EdgeInsets.fromLTRB(20, 50, 20, 20),
           child: Column(
             children: <Widget>[
-              Text("Chapter Skip",
-                  style: TextStyle(fontSize: 28, fontFamily: "Aleo"),
+              Text("Skip Chapter",
+                  style: TextStyle(
+                      fontSize: 30, fontFamily: "Mali", color: Colors.white),
                   textAlign: TextAlign.center),
 
               Text("Are you sure about that?",
-                  style: TextStyle(fontSize: 24, fontFamily: "Aleo"),
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontFamily: "IndieFlower",
+                      color: Colors.white),
                   textAlign: TextAlign.center),
               Spacer(),
               continueButton,

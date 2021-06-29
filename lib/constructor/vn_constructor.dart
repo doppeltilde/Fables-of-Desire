@@ -35,8 +35,8 @@ class InterludeTextSound extends StatefulWidget {
 }
 
 class _InterludeState extends State<InterludeTextSound> {
-  bool? isNoti;
-  int? speed = 50;
+  bool? isNoti = true;
+  int? speed = 25;
 
   String? _name;
 
@@ -257,7 +257,7 @@ class _InterludeState extends State<InterludeTextSound> {
                                                     fontFamily: "Mali",
                                                     fontSize: 21),
                                                 speed: Duration(
-                                                    milliseconds: speed!),
+                                                    milliseconds: speed ?? 25),
                                               ),
                                             ],
                                             displayFullTextOnTap: true,
@@ -299,7 +299,8 @@ class _InterludeState extends State<InterludeTextSound> {
                                               color: Colors.black,
                                               fontFamily: "Mali",
                                               fontSize: 21),
-                                          speed: Duration(milliseconds: speed!),
+                                          speed: Duration(
+                                              milliseconds: speed ?? 25),
                                         ),
                                       ],
                                       displayFullTextOnTap: true,
@@ -490,7 +491,8 @@ class _InterludeState extends State<InterludeTextSound> {
                                                           fontFamily: "Mali",
                                                           fontSize: 18),
                                                       speed: Duration(
-                                                          milliseconds: speed!),
+                                                          milliseconds:
+                                                              speed ?? 25),
                                                     ),
                                                   ],
                                                   displayFullTextOnTap: true,
@@ -537,7 +539,7 @@ class _InterludeState extends State<InterludeTextSound> {
                                                     fontFamily: "Mali",
                                                     fontSize: 18),
                                                 speed: Duration(
-                                                    milliseconds: speed!),
+                                                    milliseconds: speed ?? 25),
                                               ),
                                             ],
                                             displayFullTextOnTap: true,

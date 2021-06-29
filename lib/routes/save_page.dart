@@ -889,7 +889,11 @@ class _LoadGameState extends State<SaveGame> {
                                               SizedBox(
                                                 height: 10,
                                               ),
-                                              deleteButton(context, saveSlot3),
+                                              DeleteButton(
+                                                saveSlot: saveSlot3,
+                                                saveSlotName: "saveSlot3",
+                                                callback: this.callback,
+                                              ),
                                             ],
                                           );
                                         }
