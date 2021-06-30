@@ -11,7 +11,7 @@ class Naoki20 extends StatefulWidget {
 
 class _VNState extends State<Naoki20> {
   final String route = "/naoki20";
-  final String nextRoute = "/naoki21";
+  final String nextRoute = "/endcredits";
   final textSound = NaokiText20();
   int _thisNumber = 0;
   callback(updatedNumber) {
@@ -66,6 +66,62 @@ class _VNState extends State<Naoki20> {
   }
 
   showAlertDialog(BuildContext context) {
+    Widget continueButton = Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(primary: Colors.white),
+          child: Text(
+            "Main Menu",
+            style: TextStyle(
+                color: Colors.black,
+                fontFamily: "Mali",
+                fontSize: 20,
+                letterSpacing: .2),
+          ),
+          onPressed: () {
+            Navigator.of(context).pushNamed("/endcredits");
+          },
+        ),
+      ],
+    );
+
+    Dialog alert = Dialog(
+      backgroundColor: Colors.green,
+      insetPadding: EdgeInsets.all(10),
+      child: Container(
+        width: MediaQuery.of(context).size.width / 2,
+        height: 200,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15), color: Colors.green),
+        padding: EdgeInsets.fromLTRB(20, 50, 20, 20),
+        child: Column(
+          children: <Widget>[
+            Text("You have reached the end of the demo.",
+                style: TextStyle(
+                    fontSize: 28, fontFamily: "Mali", color: Colors.white),
+                textAlign: TextAlign.center),
+            Text("Thanks for playing!",
+                style: TextStyle(
+                    fontSize: 24, fontFamily: "Mali", color: Colors.white),
+                textAlign: TextAlign.center),
+            Spacer(),
+            continueButton,
+          ],
+        ),
+      ),
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+  /*showAlertDialog(BuildContext context) {
     Widget continueButton = Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -139,5 +195,5 @@ class _VNState extends State<Naoki20> {
         return alert;
       },
     );
-  }
+  }*/
 }

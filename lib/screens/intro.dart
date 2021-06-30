@@ -1,7 +1,3 @@
-//
-// NAME TEST
-//
-
 import 'package:fablesofdesire/global/will_pop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -203,8 +199,7 @@ class _Intro extends State<Intro> {
                                                                     .white))),
                                                     onPressed: () {
                                                       Navigator.of(context)
-                                                          .pushNamed(
-                                                              '/naokiroutelists');
+                                                          .pushNamed('/naoki1');
                                                       // Navigator.push(
                                                       //   context,
                                                       //   MaterialPageRoute(
@@ -264,8 +259,7 @@ class _Intro extends State<Intro> {
                                                                     .white))),
                                                     onPressed: () {
                                                       Navigator.of(context)
-                                                          .pushNamed(
-                                                              '/naokiroutelists');
+                                                          .pushNamed('/naoki1');
                                                       // Navigator.push(
                                                       //   context,
                                                       //   MaterialPageRoute(

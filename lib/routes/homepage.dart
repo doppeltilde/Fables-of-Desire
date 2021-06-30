@@ -155,7 +155,7 @@ class _WildfyreState extends State<HomePage> {
                                         GlobalAudio.playAudio.stopAudio();
                                         GlobalAudio.playAudio.isPlaying = true;
                                         Navigator.of(context)
-                                            .pushNamed('/naoki1');
+                                            .pushNamed('/intro');
                                       },
                                     ),
                                   ),
@@ -320,7 +320,7 @@ class _WildfyreState extends State<HomePage> {
                                         GlobalAudio.playAudio.stopAudio();
                                         GlobalAudio.playAudio.isPlaying = true;
                                         Navigator.of(context)
-                                            .pushNamed('/naoki1');
+                                            .pushNamed('/intro');
                                       },
                                     ),
                                   ),

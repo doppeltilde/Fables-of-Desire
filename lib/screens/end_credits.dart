@@ -1,8 +1,11 @@
 import 'dart:async';
+import 'package:fablesofdesire/global/audio/game_audio.dart';
 import 'package:fablesofdesire/global/audio/global_audio.dart';
 import 'package:fablesofdesire/global/end_credits_comp.dart';
+import 'package:fablesofdesire/global/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:universal_platform/universal_platform.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EndCredits2 extends StatefulWidget {
@@ -58,10 +61,13 @@ class _BaseScreenState extends State<EndCredits> with TickerProviderStateMixin {
   late AnimationController animation;
   late Animation<double> _fadeInFadeOut;
   SharedPreferences? sharedPreferences;
-  double? vol = 1.0;
+  double? vol;
   @override
   void initState() {
     super.initState();
+    setState(() {
+      vol = 1.0;
+    });
     cc = AnimationController(
       duration: Duration(seconds: 1),
       vsync: this,
@@ -71,13 +77,7 @@ class _BaseScreenState extends State<EndCredits> with TickerProviderStateMixin {
       parent: cc,
       curve: Curves.easeInOutCubic,
     ).drive(Tween(begin: 0, end: 2));
-    SharedPreferences.getInstance().then((SharedPreferences sp) {
-      sharedPreferences = sp;
-      vol = sharedPreferences!.getDouble("volValue");
 
-      vol = 1.0;
-      persistVol(vol!);
-    });
     GlobalAudio.playAudio.getBGM("placeholder");
 
     animation = AnimationController(
@@ -87,13 +87,6 @@ class _BaseScreenState extends State<EndCredits> with TickerProviderStateMixin {
     _fadeInFadeOut = Tween<double>(begin: 0.0, end: 0.4).animate(animation);
 
     animation.forward();
-  }
-
-  void persistVol(double value) {
-    setState(() {
-      vol = value;
-    });
-    sharedPreferences?.setDouble("volValue", value);
   }
 
   @override
@@ -409,8 +402,8 @@ But that's a story for another time...
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white.withOpacity(0.7),
                           ),
                           padding:
                               EdgeInsets.symmetric(vertical: 5, horizontal: 10),
@@ -435,11 +428,11 @@ But that's a story for another time...
                             ..forward();
                         },
                         child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          width: 170,
+                          padding: EdgeInsets.symmetric(horizontal: 0),
+                          width: 150,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white.withOpacity(0.7),
                           ),
                           child: RotationTransition(
                             turns: anim,
@@ -515,7 +508,50 @@ But that's a story for another time...
                     ],
                   ),
                 ),
-              )
+              ),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: EdgeInsets.only(right: 20, bottom: 20),
+                  child: SettingsClip(),
+                ),
+              ),
+              /*
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: EdgeInsets.only(right: 20, bottom: 20),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (GlobalAudio.playAudio.isPlaying == true) {
+                        print("HI");
+                        GameAudio.bgm.pause();
+                        GameAudioDesktop.playAudio.pause();
+                      } else {
+                        print("NO");
+                        setState(() {
+                          if (UniversalPlatform.isWindows ||
+                              UniversalPlatform.isLinux) {
+                            GameAudioDesktop.playAudio.player?.setVolume(1.3);
+                          } else {
+                            GameAudio.bgm.audioPlayer!.setVolume(1.3);
+                            GameAudio.bgm.resume();
+                          }
+                        });
+                      }
+                    },
+                    child: Builder(
+                      builder: (context) {
+                        if (vol! >= 0.5) {
+                          return Icon(Icons.volume_up_outlined);
+                        } else {
+                          return Icon(Icons.volume_off_outlined);
+                        }
+                      },
+                    ),
+                  ),
+                ),
+              ),*/
             ])));
   }
 }
