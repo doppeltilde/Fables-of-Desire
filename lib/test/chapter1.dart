@@ -16,7 +16,7 @@ class _VNState extends State<VN1> {
 
   @override
   Widget build(BuildContext context) {
-    GlobalAudio.playAudio.getBGM("thousandyearoldforest");
+    GlobalAudio.playAudio.getBGM("Sakura_in_full_bloom");
     return WillPopScope(
       onWillPop: () => getOnWillPop(),
       child: VNScaffold(

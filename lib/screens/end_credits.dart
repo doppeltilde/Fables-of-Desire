@@ -34,7 +34,7 @@ class _BaseScreenState extends State<EndCredits> with TickerProviderStateMixin {
       curve: Curves.easeInOutCubic,
     ).drive(Tween(begin: 0, end: 2));
 
-    //GlobalAudio.playAudio.getBGM("placeholder");
+    GlobalAudio.playAudio.getBGM("Sakura_in_full_bloom");
 
     animation = AnimationController(
       vsync: this,
@@ -79,21 +79,22 @@ class _BaseScreenState extends State<EndCredits> with TickerProviderStateMixin {
     //   "name": "Neeka",
     // },
     {
+      "roleName": "Route Outlining",
+      "name": "Empy",
+    },
+    {
       "roleName": "Naoki Writer",
       "name": "Destini Islands",
     },
-    // {
-    //   "roleName": "Tomiichi Writer",
-    //   "name": "Neeka",
-    // },
+
     // {
     //   "roleName": "Character Art",
     //   "name": "Neeka",
     // },
-    // {
-    //   "roleName": "Chibi Art",
-    //   "name": "Neeka",
-    // },
+    {
+      "roleName": "Chibi Art",
+      "name": "SHatsuyuki",
+    },
     // {
     //   "roleName": "Background Art",
     //   "name": "Neeka",
@@ -146,6 +147,7 @@ class _BaseScreenState extends State<EndCredits> with TickerProviderStateMixin {
                       SizedBox(
                         height: MediaQuery.of(context).size.height / 2,
                       ),
+
 //                       new Padding(
 //                         padding: EdgeInsets.only(
 //                             top: 100.0, bottom: 5, left: 30, right: 30),
@@ -268,12 +270,15 @@ class _BaseScreenState extends State<EndCredits> with TickerProviderStateMixin {
 //                       SizedBox(
 //                         height: MediaQuery.of(context).size.height / 2,
 //                       ),
-                      Text(
-                        "Credits",
-                        style: new TextStyle(
-                          fontSize: 32.0,
-                          color: Colors.white,
-                          fontFamily: "Nunito",
+                      Padding(
+                        padding: EdgeInsets.only(top: 110),
+                        child: Text(
+                          "Credits",
+                          style: new TextStyle(
+                            fontSize: 32.0,
+                            color: Colors.white,
+                            fontFamily: "Nunito",
+                          ),
                         ),
                       ),
                       for (var i in roles)
