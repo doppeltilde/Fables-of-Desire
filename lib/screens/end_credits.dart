@@ -1,53 +1,9 @@
 import 'dart:async';
-import 'package:fablesofdesire/global/audio/game_audio.dart';
 import 'package:fablesofdesire/global/audio/global_audio.dart';
-import 'package:fablesofdesire/global/end_credits_comp.dart';
 import 'package:fablesofdesire/global/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:universal_platform/universal_platform.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-class EndCredits2 extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<EndCredits2> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: EndCreditsScene([
-      Section(title: 'Cast', roles: [
-        Role(name: 'Role 1', crew: [Responsable('John Doe')]),
-        Role(name: 'Role 2', crew: [Responsable('John Doe')]),
-        Role(name: 'Role 3', crew: [Responsable('John Doe')]),
-        Role(name: 'Role 4', crew: [Responsable('John Doe')]),
-        Role(name: 'Role 5', crew: [Responsable('John Doe')]),
-      ]),
-      Section(title: 'Producers', roles: [
-        Role(name: 'Executive producer', crew: [
-          Responsable('John Doe'),
-          Responsable('John Doe'),
-          Responsable('John Doe')
-        ]),
-        Role(name: 'Producer', crew: [
-          Responsable('John Doe'),
-          Responsable('John Doe'),
-          Responsable('John Doe')
-        ])
-      ]),
-      Section(title: 'Other', roles: [
-        Role(name: 'Role', crew: [
-          Responsable('John Doe'),
-          Responsable('John Doe'),
-          Responsable('John Doe'),
-          Responsable('John Doe')
-        ])
-      ])
-    ]));
-  }
-}
 
 class EndCredits extends StatefulWidget {
   @override
@@ -78,7 +34,7 @@ class _BaseScreenState extends State<EndCredits> with TickerProviderStateMixin {
       curve: Curves.easeInOutCubic,
     ).drive(Tween(begin: 0, end: 2));
 
-    GlobalAudio.playAudio.getBGM("placeholder");
+    //GlobalAudio.playAudio.getBGM("placeholder");
 
     animation = AnimationController(
       vsync: this,
@@ -118,34 +74,34 @@ class _BaseScreenState extends State<EndCredits> with TickerProviderStateMixin {
       "roleName": "Executive Producer",
       "name": "Neeka",
     },
-    {
-      "roleName": "Hidetake Writer",
-      "name": "Neeka",
-    },
+    // {
+    //   "roleName": "Hidetake Writer",
+    //   "name": "Neeka",
+    // },
     {
       "roleName": "Naoki Writer",
       "name": "Destini Islands",
     },
-    {
-      "roleName": "Tomiichi Writer",
-      "name": "Neeka",
-    },
-    {
-      "roleName": "Character Art",
-      "name": "Neeka",
-    },
-    {
-      "roleName": "Chibi Art",
-      "name": "Neeka",
-    },
-    {
-      "roleName": "Background Art",
-      "name": "Neeka",
-    },
-    {
-      "roleName": "Music",
-      "name": "Neeka",
-    },
+    // {
+    //   "roleName": "Tomiichi Writer",
+    //   "name": "Neeka",
+    // },
+    // {
+    //   "roleName": "Character Art",
+    //   "name": "Neeka",
+    // },
+    // {
+    //   "roleName": "Chibi Art",
+    //   "name": "Neeka",
+    // },
+    // {
+    //   "roleName": "Background Art",
+    //   "name": "Neeka",
+    // },
+    // {
+    //   "roleName": "Music",
+    //   "name": "Neeka",
+    // },
     {
       "roleName": "Developer",
       "name": "Jona T. Feucht",
@@ -190,135 +146,128 @@ class _BaseScreenState extends State<EndCredits> with TickerProviderStateMixin {
                       SizedBox(
                         height: MediaQuery.of(context).size.height / 2,
                       ),
-                      new Padding(
-                        padding: EdgeInsets.only(
-                            top: 100.0, bottom: 5, left: 30, right: 30),
-                        child: new Text(
-                          "Credits:",
-                          style: new TextStyle(
-                              fontSize: 45.0,
-                              fontFamily: "NanumBrush",
-                              color: Colors.white),
-                        ),
-                      ),
-                      new Padding(
-                        padding: EdgeInsets.only(
-                            top: 30.0, bottom: 5, left: 30, right: 30),
-                        child: new Text(
-                          "A note from the author:",
-                          style: new TextStyle(
-                              fontSize: 25.0,
-                              fontFamily: "IndieFlower",
-                              color: Colors.white),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: MediaQuery.of(context).size.width / 3.2,
-                            vertical: 10),
-                        child: new Text(
-                          """One story ends, another one begins.
-Perhaps some day I'll tell someone about my story, perhaps I achieved this goal today...
+//                       new Padding(
+//                         padding: EdgeInsets.only(
+//                             top: 100.0, bottom: 5, left: 30, right: 30),
+//                         child: new Text(
+//                           "Credits:",
+//                           style: new TextStyle(
+//                               fontSize: 45.0,
+//                               fontFamily: "NanumBrush",
+//                               color: Colors.white),
+//                         ),
+//                       ),
+//                       new Padding(
+//                         padding: EdgeInsets.only(
+//                             top: 30.0, bottom: 5, left: 30, right: 30),
+//                         child: new Text(
+//                           "A note from the author:",
+//                           style: new TextStyle(
+//                               fontSize: 25.0,
+//                               fontFamily: "IndieFlower",
+//                               color: Colors.white),
+//                         ),
+//                       ),
+//                       Padding(
+//                         padding: EdgeInsets.symmetric(
+//                             horizontal: MediaQuery.of(context).size.width / 3.2,
+//                             vertical: 10),
+//                         child: new Text(
+//                           """One story ends, another one begins.
+// Perhaps some day I'll tell someone about my story, perhaps I achieved this goal today...
 
-In the end I think this story had a happy ending.
+// In the end I think this story had a happy ending.
 
-There is an old saying:
-”Dance like nobody is watching”.
+// There is an old saying:
+// ”Dance like nobody is watching”.
 
-I would like to add ”Don't just dance like nobody is watching, dance your Dance of Love, your Dance of Life”.
+// I would like to add ”Don't just dance like nobody is watching, dance your Dance of Love, your Dance of Life”.
 
-Turn off your device, take a deep breath and go for a walk. Look around yourself and you will see the beauty in the simple things.
+// Turn off your device, take a deep breath and go for a walk. Look around yourself and you will see the beauty in the simple things.
 
-The trees, the animals, the stars, all of creation made to be seen by your eyes.
+// The trees, the animals, the stars, all of creation made to be seen by your eyes.
 
-Learn to embrace every minute of your life. The good, the bad. Embrace it, for it is your past, but don't let it define you.
+// Learn to embrace every minute of your life. The good, the bad. Embrace it, for it is your past, but don't let it define you.
 
-Go out and write your own story, your own dance under the stars.
+// Go out and write your own story, your own dance under the stars.
 
+// She was afraid of time, I used to be too, but not anymore. We need to push through, no matter if we fail or not.
 
-She was afraid of time, I used to be too, but not anymore. We need to push through, no matter if we fail or not.
+// The choices you have made and even others have made for you should not define the tomorrow you should become.
 
-The choices you have made and even others have made for you should not define the tomorrow you should become.
+// Don't dwell on the ”what-ifs”. The past should be left in the past, otherwise it will destroy your future.
 
-Don't dwell on the ”what-ifs”. The past should be left in the past, otherwise it will destroy your future.
+// Live life for what tomorrow has to offer, not for what yesterday has taken away.
 
-Live life for what tomorrow has to offer, not for what yesterday has taken away.
+// Crap, I'm already late!
 
+// I better get going.
 
-Crap, I'm already late!
+// Wait, what's that?
 
-I better get going.
+// Under a sheet of paper...
 
+// Oh, there you are.
 
-Wait, what's that?
+// The necklace I gave to Tea a few years ago.
 
+// I should take it with me...""",
+//                           textAlign: TextAlign.justify,
+//                           style: new TextStyle(
+//                               fontSize: 21.0,
+//                               fontFamily: "Mali",
+//                               color: Colors.white),
+//                         ),
+//                       ),
+//                       SizedBox(
+//                         height: MediaQuery.of(context).size.height / 2,
+//                       ),
+//                       Padding(
+//                         padding:
+//                             EdgeInsets.only(bottom: 5, left: 30, right: 30),
+//                         child: new Text(
+//                           "But what happened after ever after?",
+//                           style: new TextStyle(
+//                               fontSize: 25.0,
+//                               fontFamily: "IndieFlower",
+//                               color: Colors.white),
+//                         ),
+//                       ),
+//                       new Padding(
+//                         padding: EdgeInsets.symmetric(
+//                             horizontal: MediaQuery.of(context).size.width / 3.2,
+//                             vertical: 10),
+//                         child: Text(
+//                           """
+// In 6121 Alvin and Clara would move back to the Martian Technocracy.
+// Alvin would go on in following in his fathers footsteps and become Ambassador to the United Republic. Darian, their first son would be born not long after.
 
-Under a sheet of paper...
+// Jacob and Elaine with little Tea would stay in Republic City, where Jacob would take over the ”Valerian Trading Company”.
 
+// After winning the ”second Unification War”, the United Republic would go on and once again reach for the stars.
 
-Oh, there you are.
+// After loosing the first ”Sol-Conflict” against the exiled ”Tamazgha Empire”, the Martian Technocracy retreats from the outer planets and in 6125 it becomes a protectorate of the United Republic.
 
+// In 6129 the ”Tamazgha Empire” would develop the first true quantum drive, replacing the ”gravitational slingshot maneuver” and ”Magellan-Drive”, pulling the stars ever so more closer.
 
-The necklace I gave to Tea a few years ago.
+// In late 6129 they start a blitz attack on the major republic outpost and colony on Pluto starting the second ”Sol-Conflict”.
+// And through hit-and-run tactics the Empire decisivly wins the first battle of Titan. Soon after the colonies on Europa and Ganymede would fall.
 
+// The great ”Sol-Conflict” would escalate into all out war and would bring the great Republic to the brink of capitulation...
 
-I should take it with me...""",
-                          textAlign: TextAlign.justify,
-                          style: new TextStyle(
-                              fontSize: 21.0,
-                              fontFamily: "Mali",
-                              color: Colors.white),
-                        ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 2,
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.only(bottom: 5, left: 30, right: 30),
-                        child: new Text(
-                          "But what happened after ever after?",
-                          style: new TextStyle(
-                              fontSize: 25.0,
-                              fontFamily: "IndieFlower",
-                              color: Colors.white),
-                        ),
-                      ),
-                      new Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: MediaQuery.of(context).size.width / 3.2,
-                            vertical: 10),
-                        child: Text(
-                          """
-In 6121 Alvin and Clara would move back to the Martian Technocracy.
-Alvin would go on in following in his fathers footsteps and become Ambassador to the United Republic. Darian, their first son would be born not long after.
+// But that's a story for another time...
 
-Jacob and Elaine with little Tea would stay in Republic City, where Jacob would take over the ”Valerian Trading Company”.
-
-After winning the ”second Unification War”, the United Republic would go on and once again reach for the stars.
-
-After loosing the first ”Sol-Conflict” against the exiled ”Tamazgha Empire”, the Martian Technocracy retreats from the outer planets and in 6125 it becomes a protectorate of the United Republic.
-
-In 6129 the ”Tamazgha Empire” would develop the first true quantum drive, replacing the ”gravitational slingshot maneuver” and ”Magellan-Drive”, pulling the stars ever so more closer.
-
-In late 6129 they start a blitz attack on the major republic outpost and colony on Pluto starting the second ”Sol-Conflict”.
-And through hit-and-run tactics the Empire decisivly wins the first battle of Titan. Soon after the colonies on Europa and Ganymede would fall.
-
-The great ”Sol-Conflict” would escalate into all out war and would bring the great Republic to the brink of capitulation...
-
-But that's a story for another time...
-
-                          """,
-                          textAlign: TextAlign.justify,
-                          style: new TextStyle(
-                              fontSize: 21.0,
-                              fontFamily: "Mali",
-                              color: Colors.white),
-                        ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 2,
-                      ),
+//                           """,
+//                           textAlign: TextAlign.justify,
+//                           style: new TextStyle(
+//                               fontSize: 21.0,
+//                               fontFamily: "Mali",
+//                               color: Colors.white),
+//                         ),
+//                       ),
+//                       SizedBox(
+//                         height: MediaQuery.of(context).size.height / 2,
+//                       ),
                       Text(
                         "Credits",
                         style: new TextStyle(
